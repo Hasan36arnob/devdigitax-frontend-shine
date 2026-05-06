@@ -1,9 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import {
-  ArrowRight, Code2, Search, Megaphone, ShoppingBag, PenTool, BarChart3,
-  CheckCircle2, Sparkles, Star, Globe, Layout, ShoppingCart, MousePointerClick,
-  TrendingUp, Share2,
+  ArrowRight, Code2, Search, CheckCircle2, Sparkles, Star, Globe, Layout,
+  ShoppingCart, MousePointerClick, TrendingUp, Share2,
 } from "lucide-react";
 import logo from "@/assets/devdigitax-logo.jpeg";
 
