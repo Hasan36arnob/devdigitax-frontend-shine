@@ -34,9 +34,9 @@ export function Footer() {
         <div>
           <h4 className="font-semibold mb-4">Contact</h4>
           <ul className="space-y-3 text-sm text-muted-foreground">
-            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-primary" /> hello@devdigitax.com</li>
-            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 text-primary" /> +92 300 0000000</li>
-            <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary" /> Lahore, Pakistan</li>
+            <li className="flex gap-2"><Mail className="h-4 w-4 mt-0.5 text-primary" /> devdigitax@gmail.com</li>
+            <li className="flex gap-2"><Phone className="h-4 w-4 mt-0.5 text-primary" /> +880 1974-527507</li>
+            <li className="flex gap-2"><MapPin className="h-4 w-4 mt-0.5 text-primary" /> Dhaka, Bangladesh</li>
           </ul>
         </div>
       </div>

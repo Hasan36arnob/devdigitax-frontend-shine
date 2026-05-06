@@ -28,9 +28,9 @@ function ContactPage() {
       <section className="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-5 gap-10">
         <div className="md:col-span-2 space-y-6">
           {[
-            { Icon: Mail, t: "Email", v: "hello@devdigitax.com" },
-            { Icon: Phone, t: "Phone", v: "+92 300 0000000" },
-            { Icon: MapPin, t: "Office", v: "Lahore, Pakistan" },
+            { Icon: Mail, t: "Email", v: "devdigitax@gmail.com" },
+            { Icon: Phone, t: "WhatsApp", v: "+880 1974-527507" },
+            { Icon: MapPin, t: "Office", v: "Dhaka, Bangladesh" },
           ].map(({ Icon, t, v }) => (
             <div key={t} className="p-6 rounded-2xl border border-border bg-card flex items-start gap-4">
               <div className="h-11 w-11 grid place-items-center rounded-xl text-primary-foreground" style={{ background: "var(--gradient-primary)" }}>
