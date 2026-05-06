@@ -73,10 +73,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "DevdigitaX — Web Development & Digital Marketing Agency" },
-      { name: "description", content: "DevdigitaX — Web development, SEO and digital marketing agency that turns your online presence into your most powerful sales channel." },
+      {
+        name: "description",
+        content:
+          "DevdigitaX — Web development, SEO and digital marketing agency that turns your online presence into your most powerful sales channel.",
+      },
       { name: "author", content: "DevdigitaX" },
       { property: "og:title", content: "DevdigitaX — Web Development & Digital Marketing Agency" },
-      { property: "og:description", content: "Results-driven web development, SEO, and digital marketing built for businesses that demand real growth." },
+      {
+        property: "og:description",
+        content:
+          "Results-driven web development, SEO, and digital marketing built for businesses that demand real growth.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
