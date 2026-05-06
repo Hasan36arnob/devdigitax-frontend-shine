@@ -72,7 +72,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
+      { title: "DevdigitaX — Web Development & Digital Marketing Agency" },
       { name: "description", content: "DevdigitaX — Web development, SEO and digital marketing agency that turns your online presence into your most powerful sales channel." },
       { name: "author", content: "DevdigitaX" },
       { property: "og:title", content: "DevdigitaX — Web Development & Digital Marketing Agency" },
