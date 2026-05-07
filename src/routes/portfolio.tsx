@@ -17,97 +17,98 @@ export const Route = createFileRoute("/portfolio")({
 
 const projects = [
   {
-    t: "Bloomly Skincare",
-    c: "E-Commerce",
-    cat: "fullstack",
-    r: "+312% revenue in 6 months",
-    g: "linear-gradient(135deg, oklch(0.55 0.24 262), oklch(0.7 0.2 320))",
-  },
-  {
-    t: "NorthGear Outdoors",
-    c: "Web + Paid Media",
-    cat: "fullstack",
-    r: "4.8× ROAS on Meta Ads",
-    g: "linear-gradient(135deg, oklch(0.5 0.2 200), oklch(0.7 0.18 260))",
-  },
-  {
-    t: "Lumora Studio",
-    c: "SEO / Content",
+    t: "WordPress Business Website",
+    c: "Corporate WordPress site",
     cat: "wordpress",
-    r: "Top 3 for 47 keywords",
-    g: "linear-gradient(135deg, oklch(0.55 0.22 280), oklch(0.7 0.2 200))",
+    r: "Custom WordPress theme development with responsive design",
+    tech: "WordPress, PHP, MySQL, Elementor",
+    img: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=800&h=600&fit=crop",
   },
   {
-    t: "Vault Finance",
-    c: "Web App",
-    cat: "fullstack",
-    r: "1.1s LCP, 99 Lighthouse",
-    g: "linear-gradient(135deg, oklch(0.45 0.2 240), oklch(0.65 0.22 280))",
-  },
-  {
-    t: "Mira Furniture",
-    c: "Shopify Store",
+    t: "E-commerce Dashboard",
+    c: "Admin panel for online store",
     cat: "ecommerce",
-    r: "+187% conversion uplift",
-    g: "linear-gradient(135deg, oklch(0.6 0.18 30), oklch(0.55 0.22 262))",
+    r: "Complete e-commerce admin dashboard with analytics and inventory management",
+    tech: "Next.js, MongoDB, Chart.js, TailwindCSS",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&h=600&fit=crop",
   },
   {
-    t: "Pulse Fitness",
-    c: "Brand + App",
+    t: "Brand Identity Design",
+    c: "Logo & brand package",
+    cat: "design",
+    r: "Complete brand identity including logo, business card, and social media kit",
+    tech: "Adobe Illustrator, Photoshop, Figma",
+    img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&h=600&fit=crop",
+  },
+  {
+    t: "Data Analytics Dashboard",
+    c: "Climate data visualization",
+    cat: "data",
+    r: "Interactive dashboard for climate data analysis using Python and visualization libraries",
+    tech: "Python, Pandas, NumPy, Plotly, Jupyter",
+    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&h=600&fit=crop",
+  },
+  {
+    t: "DialogueStream",
+    c: "Real-time group chat app",
     cat: "fullstack",
-    r: "12k MAU in 90 days",
-    g: "linear-gradient(135deg, oklch(0.55 0.24 262), oklch(0.7 0.2 160))",
+    r: "Group chat application for multiple users in real-time",
+    tech: "Node.js, Socket.io, React, Render",
+    img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=800&h=600&fit=crop",
+    live: "https://dialoguestream-1.onrender.com/",
+    github: "https://github.com/Hasan36arnob/DialogueStream",
   },
   {
-    t: "Creative Agency",
-    c: "Brand Identity",
-    cat: "graphic",
-    r: "Complete visual identity",
-    g: "linear-gradient(135deg, oklch(0.65 0.25 340), oklch(0.75 0.2 20))",
+    t: "GitHub User Finder",
+    c: "GitHub user search tool",
+    cat: "frontend",
+    r: "Web application to find and display GitHub user profiles",
+    tech: "React, GitHub API, Netlify",
+    img: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=800&h=600&fit=crop",
+    live: "https://ghlens.netlify.app/",
+    github: "https://github.com/Hasan36arnob/GhUserFinder",
+  },
+  // Update the Satota EV BD project in your projects array to:
+
+{
+  t: "Satota EV BD",
+  c: "Electric vehicle website",
+  cat: "frontend",
+  r: "Website for Satota electric vehicles in Bangladesh",
+  tech: "HTML, CSS, JavaScript, Netlify",
+  img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&h=600&fit=crop", // New EV/battery themed image
+  live: null, // Temporarily disabled - link broken
+  github: null, // Temporarily disabled - link broken
+},
+  {
+    t: "Descharge",
+    c: "Payment & billing platform",
+    cat: "frontend",
+    r: "Digital payment and billing solution platform",
+    tech: "React, TailwindCSS, Netlify",
+    img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&h=600&fit=crop",
+    live: "https://deshcharge.netlify.app/",
   },
   {
-    t: "Tech Blog Pro",
-    c: "WordPress Site",
-    cat: "wordpress",
-    r: "Custom theme & plugins",
-    g: "linear-gradient(135deg, oklch(0.5 0.15 250), oklch(0.65 0.2 220))",
-  },
-  {
-    t: "Fitness App UI",
-    c: "Mobile Design",
-    cat: "graphic",
-    r: "100+ screens designed",
-    g: "linear-gradient(135deg, oklch(0.6 0.2 160), oklch(0.7 0.18 140))",
-  },
-  {
-    t: "Eco Shop",
-    c: "Shopify Store",
-    cat: "ecommerce",
-    r: "Custom theme development",
-    g: "linear-gradient(135deg, oklch(0.55 0.18 120), oklch(0.65 0.15 100))",
-  },
-  {
-    t: "Startup Landing",
-    c: "Landing Page",
-    cat: "fullstack",
-    r: "Conversion focused design",
-    g: "linear-gradient(135deg, oklch(0.5 0.22 280), oklch(0.65 0.2 260))",
-  },
-  {
-    t: "Blog Magazine",
-    c: "WordPress",
-    cat: "wordpress",
-    r: "Multi-author platform",
-    g: "linear-gradient(135deg, oklch(0.55 0.18 200), oklch(0.65 0.15 220))",
+    t: "ClimateTech & Green Solutions",
+    c: "Climate technology website",
+    cat: "frontend",
+    r: "Website showcasing climate tech and green solutions",
+    tech: "HTML, CSS, JavaScript, Netlify",
+    img: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=800&h=600&fit=crop",
+    live: "https://climatetechandgreensolutions.netlify.app/",
+    github: "https://github.com/Hasan36arnob/climate-tech",
   },
 ];
 
 const categories = [
   { id: "all", label: "All Works" },
-  { id: "fullstack", label: "Fullstack" },
+  { id: "fullstack", label: "Full Stack Development" },
+  { id: "frontend", label: "Frontend Development" },
   { id: "wordpress", label: "WordPress" },
-  { id: "ecommerce", label: "E-Commerce" },
-  { id: "graphic", label: "Graphic Design" },
+  { id: "ecommerce", label: "E-commerce" },
+  { id: "design", label: "Graphic Design" },
+  { id: "data", label: "Data Analysis" },
 ];
 
 function PortfolioPage() {
@@ -123,7 +124,8 @@ function PortfolioPage() {
             Portfolio
           </span>
           <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight">
-            Selected work that moved the needle.
+            DevdigitaX build custom development to brand your business and also marketing ideas to
+            grow any business
           </h1>
         </div>
       </section>
@@ -151,7 +153,13 @@ function PortfolioPage() {
             className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition"
             style={{ transition: "var(--transition-smooth)" }}
           >
-            <div className="aspect-[4/3] relative" style={{ background: p.g }}>
+            <div className="aspect-[4/3] relative">
+              <img
+                src={p.img}
+                alt={p.t}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                loading="lazy"
+              />
               <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition" />
               <span className="absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-wider text-white/90">
                 {p.c}
@@ -160,6 +168,29 @@ function PortfolioPage() {
             <div className="p-6">
               <h3 className="text-xl font-semibold">{p.t}</h3>
               <p className="mt-1 text-sm text-primary">{p.r}</p>
+              <p className="mt-2 text-xs text-muted-foreground">{p.tech}</p>
+              <div className="mt-4 flex gap-3">
+                {p.live && (
+                  <a
+                    href={p.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs px-3 py-1 rounded-full bg-primary text-primary-foreground hover:opacity-90 transition"
+                  >
+                    Live Demo
+                  </a>
+                )}
+                {p.github && (
+                  <a
+                    href={p.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs px-3 py-1 rounded-full border border-border hover:bg-accent transition"
+                  >
+                    GitHub
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         ))}

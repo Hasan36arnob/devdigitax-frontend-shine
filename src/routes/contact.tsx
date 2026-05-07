@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { Mail, Phone, MapPin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
 
 export const Route = createFileRoute("/contact")({
@@ -17,7 +17,40 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactPage() {
-  const [sent, setSent] = useState(false);
+  const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus("sending");
+    setErrorMessage("");
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("https://formspree.io/f/xjgloavo", {
+        method: "POST",
+        body: formData,
+        headers: {
+          Accept: "application/json",
+        },
+      });
+
+      if (response.ok) {
+        setStatus("success");
+        form.reset();
+      } else {
+        const data = await response.json();
+        setErrorMessage(data.error || "Something went wrong. Please try again.");
+        setStatus("error");
+      }
+    } catch (error) {
+      setErrorMessage("Network error. Please check your connection and try again.");
+      setStatus("error");
+    }
+  };
+
   return (
     <SiteLayout>
       <section className="relative" style={{ background: "var(--gradient-hero)" }}>
@@ -60,14 +93,11 @@ function ContactPage() {
         </div>
 
         <form
-          onSubmit={(e) => {
-            e.preventDefault();
-            setSent(true);
-          }}
+          onSubmit={handleSubmit}
           className="md:col-span-3 p-8 rounded-2xl border border-border bg-card space-y-5"
           style={{ boxShadow: "var(--shadow-elegant)" }}
         >
-          {sent ? (
+          {status === "success" ? (
             <div className="text-center py-12">
               <div
                 className="h-14 w-14 mx-auto grid place-items-center rounded-full text-primary-foreground"
@@ -77,6 +107,13 @@ function ContactPage() {
               </div>
               <h3 className="mt-4 text-2xl font-bold">Message sent!</h3>
               <p className="mt-2 text-muted-foreground">We'll be in touch within 24 hours.</p>
+              <button
+                type="button"
+                onClick={() => setStatus("idle")}
+                className="mt-6 text-sm text-primary hover:underline"
+              >
+                Send another message
+              </button>
             </div>
           ) : (
             <>
@@ -88,7 +125,11 @@ function ContactPage() {
                 <Field label="Phone" name="phone" />
                 <div>
                   <label className="text-sm font-medium">Service</label>
-                  <select className="mt-2 w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary outline-none">
+                  <select
+                    name="service"
+                    className="mt-2 w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary outline-none"
+                  >
+                    <option value="">Select a service...</option>
                     <option>Web Development</option>
                     <option>SEO</option>
                     <option>Paid Media</option>
@@ -100,17 +141,33 @@ function ContactPage() {
               <div>
                 <label className="text-sm font-medium">Message</label>
                 <textarea
+                  name="message"
                   rows={5}
                   required
                   className="mt-2 w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary outline-none resize-none"
                 />
               </div>
+              {status === "error" && (
+                <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 text-sm">
+                  {errorMessage}
+                </div>
+              )}
               <button
                 type="submit"
-                className="w-full py-3.5 rounded-full font-semibold text-primary-foreground inline-flex items-center justify-center gap-2"
+                disabled={status === "sending"}
+                className="w-full py-3.5 rounded-full font-semibold text-primary-foreground inline-flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
                 style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
               >
-                Send Message <Send className="h-4 w-4" />
+                {status === "sending" ? (
+                  <>
+                    <Loader2 className="h-4 w-4 animate-spin" />
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    Send Message <Send className="h-4 w-4" />
+                  </>
+                )}
               </button>
             </>
           )}

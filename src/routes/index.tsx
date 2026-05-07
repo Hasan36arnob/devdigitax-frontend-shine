@@ -262,21 +262,21 @@ function Index() {
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
                   <div
-                    key={i}
-                    className="h-9 w-9 rounded-full border-2 border-background"
-                    style={{
-                      background: `linear-gradient(135deg, oklch(0.55 0.24 ${240 + i * 15}), oklch(0.7 0.2 ${260 + i * 10}))`,
-                    }}
+                  // key={i}
+                  // className="h-9 w-9 rounded-full border-2 border-background"
+                  // style={{
+                  //   background: `linear-gradient(135deg, oklch(0.55 0.24 ${240 + i * 15}), oklch(0.7 0.2 ${260 + i * 10}))`,
+                  // }}
                   />
                 ))}
               </div>
               <div>
                 <div className="flex gap-0.5 text-primary">
-                  {Array.from({ length: 5 }).map((_, i) => (
+                  {/* {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                  ))}
+                  ))} */}
                 </div>
-                <span>Trusted by 200+ growing brands across Bangladesh</span>
+                {/* <span>Trusted by 200+ growing brands across Bangladesh</span> */}
               </div>
             </div>
           </div>
