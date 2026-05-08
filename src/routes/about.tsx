@@ -4,6 +4,7 @@ import { Target, Heart, Lightbulb, Users, Award, Rocket, TrendingUp, Zap, CheckC
 import { useEffect, useState } from "react";
 import arnobJoy from "@/assets/h.jpeg";
 import shahriar from "@/assets/sv.jpeg";
+import hafiz from "@/assets/hafiz.jpeg";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -52,20 +53,26 @@ const stats = [
   { number: "24/7", label: "Support Availability", icon: Zap },
 ];
 
-const teamMembers = [
-  {
-    name: "Md Arnob Hasan Joy",
-    role: "Software Developer",
-    bio: "Passionate software engineer specializing in modern web technologies and scalable backend solutions.",
-    image: arnobJoy,
-  },
-  {
-    name: "Shahriar Mahmud",
-    role: "WordPress Developer",
-    bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions.",
-    image: shahriar,
-  },
-];
+ const teamMembers = [
+   {
+     name: "Shahriar Mahmud",
+     role: "CEO & Founder | WordPress Developer & Marketer",
+     bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions.",
+     image: shahriar,
+   },
+   {
+     name: "Md Arnob Hasan Joy",
+     role: "Co-Founder | Software Developer",
+     bio: "Passionate software engineer specializing in modern web technologies and scalable backend solutions.",
+     image: arnobJoy,
+   },
+   {
+     name: "Hafiz Muhammad Leghari",
+     role: "SEO Expert (2 years)",
+     bio: "SEO specialist from Pakistan with expertise in search engine optimization, keyword research, and organic growth strategies.",
+     image: hafiz,
+   },
+ ];
 
 function AboutPage() {
   const [isVisible, setIsVisible] = useState(false);
@@ -195,24 +202,24 @@ function AboutPage() {
             A collective of passionate experts dedicated to your success.
           </p>
         </div>
-        <div className="mt-16 flex flex-wrap justify-center gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-4">
           {teamMembers.map((member, idx) => (
             <div
               key={member.name}
-              className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:scale-105 w-full max-w-sm"
+              className="group relative rounded-xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-300"
               style={{ transitionDelay: `${idx * 100}ms` }}
             >
-              <div className="aspect-square overflow-hidden">
+              <div className="flex items-center justify-center h-40 bg-muted/10">
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="max-h-full max-w-full object-contain"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold">{member.name}</h3>
-                <p className="text-sm text-primary mt-1 font-medium">{member.role}</p>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
+              <div className="p-3">
+                <h3 className="text-base font-semibold">{member.name}</h3>
+                <p className="text-xs text-primary mt-0.5 font-medium">{member.role}</p>
+                <p className="mt-1.5 text-xs text-muted-foreground line-clamp-2">{member.bio}</p>
               </div>
             </div>
           ))}

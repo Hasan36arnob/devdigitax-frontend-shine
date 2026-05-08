@@ -13,6 +13,7 @@ import {
   MousePointerClick,
   TrendingUp,
   Share2,
+  Phone,
 } from "lucide-react";
 import logo from "@/assets/devdigitax-logo.jpeg";
 
@@ -20,18 +21,18 @@ export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "DevdigitaX — Bangladesh's Trusted Web Development & Digital Marketing Agency" },
+      { title: "DevdigitaX — Trusted Web Development & Digital Marketing Agency" },
       {
         name: "description",
         content:
-          "DevdigitaX is a results-driven web development and digital marketing agency in Bangladesh — built to turn your online presence into your most powerful sales channel.",
+          "DevdigitaX is a results-driven web development and digital marketing agency — built to turn your online presence into your most powerful sales channel.",
       },
     ],
   }),
 });
 
 const stats = [
-  { v: "7+", l: "Years of digital marketing & web development experience in Bangladesh" },
+  { v: "7+", l: "Years of digital marketing & web development experience" },
   { v: "200+", l: "Projects delivered across web, SEO, paid media and ecommerce" },
   { v: "15+", l: "Industries served — healthcare, real estate, retail and logistics" },
   { v: "98%", l: "Client retention rate — your growth is our accountability" },
@@ -102,7 +103,7 @@ const services = [
   {
     icon: Layout,
     t: "Professional Web Design & Development",
-    d: "Your website isn't a brochure — it's your top salesperson. We build fast, conversion-focused websites designed around how Bangladeshi buyers think.",
+     d: "Your website isn't a brochure — it's your top salesperson. We build fast, conversion-focused websites designed around how local buyers think.",
   },
   {
     icon: Code2,
@@ -115,20 +116,20 @@ const services = [
     d: "High-converting product pages, frictionless checkout, and systems that turn first-time buyers into repeat customers.",
   },
   {
-    icon: MousePointerClick,
-    t: "Pay Per Click Advertising",
-    d: "PPC campaigns across Google and Meta built around real buyer intent — every click tracked, every weak point improved.",
+    icon: Palette,
+    t: "Graphics Design",
+    d: "Beautiful logos, banners, flyers, posters, and everything in between. We create stunning visuals that capture your brand's essence and connect with your audience.",
   },
   {
     icon: Search,
     t: "Search Engine Optimization",
-    d: "Technical optimisation, structured content and authority building — aligned with how your customers actually search in Bangladesh.",
+     d: "Technical optimisation, structured content and authority building — aligned with how your customers actually search.",
   },
-  {
-    icon: TrendingUp,
-    t: "Digital Marketing",
-    d: "Integrated strategies where paid, organic and content all work together — every decision backed by real data.",
-  },
+   {
+     icon: TrendingUp,
+     t: "Digital Marketing",
+     d: "Facebook Ads campaigns targeting audiences who actually need your service. Comprehensive Google Ads marketing across search, display, and video. Strategic audience targeting that converts.",
+   },
 ];
 
 const why = [
@@ -141,8 +142,8 @@ const why = [
     d: "No off-the-shelf SEO or templated ads. Every engagement starts with understanding your market, buyers and competition.",
   },
   {
-    t: "We Understand the Bangladesh Market",
-    d: "Buyer behaviour in Dhaka, Chattogram and Sylhet isn't the same as Dubai or London. Local trust signals, Bangla-English content, and platform preferences — we operate inside this market daily.",
+    t: "We Understand the Market Strategy",
+    d: "Targeted Facebook Ads campaigns reaching audiences who actually need your service. Comprehensive Google Ads marketing across search, display, and video. Strategic audience targeting that converts.",
   },
   {
     t: "Transparent Communication",
@@ -161,10 +162,10 @@ const faqs = [
   },
   {
     q: "Do you work with small businesses and startups, or only large companies?",
-    a: "Both. We work with ambitious startups, growing SMEs and established brands across Bangladesh. What matters is the commitment to growth — not the company size.",
+     a: "Both. We work with ambitious startups, growing SMEs and established brands. What matters is the commitment to growth — not the company size.",
   },
   {
-    q: "What makes you different from other digital agencies in Bangladesh?",
+     q: "What makes you different from other digital agencies?",
     a: "Senior-only team, revenue-first strategy, transparent reporting, and a 98% retention rate. We don't sell deliverables — we deliver outcomes.",
   },
   {
@@ -186,7 +187,7 @@ const testimonials = [
     name: "Tanvir Ahmed",
     role: "Founder, Bloomly Dhaka",
     quote:
-      "One of the most interactive digital teams operating in Bangladesh. Very professional and cooperative attitude.",
+       "One of the most interactive digital teams. Very professional and cooperative attitude.",
   },
   {
     name: "Sumaiya Karim",
@@ -203,7 +204,7 @@ const testimonials = [
   {
     name: "Nadia Rahman",
     role: "Director, Pulse Fitness",
-    quote: "Best digital marketing agency in Bangladesh. The strategy and execution are top-tier.",
+     quote: "Best digital marketing agency. The strategy and execution are top-tier.",
   },
   {
     name: "Imran Chowdhury",
@@ -213,7 +214,7 @@ const testimonials = [
   {
     name: "Sadia Islam",
     role: "Head of Growth, Vault",
-    quote: "Truly a great SEO and growth partner in Bangladesh. They understand the local market.",
+     quote: "Truly a great SEO and growth partner. They understand the local market.",
   },
 ];
 
@@ -225,11 +226,14 @@ function Index() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,oklch(0.55_0.24_262/0.25),transparent_50%)]" />
         <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 grid md:grid-cols-2 gap-12 items-center">
           <div>
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
-              <Sparkles className="h-3.5 w-3.5" /> Bangladesh's results-driven digital agency
-            </span>
-            <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Bangladesh's Trusted Web Development &{" "}
+             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
+               <Sparkles className="h-3.5 w-3.5" /> Trusted Web Development & Digital Marketing Agency
+             </span>
+             <p className="mt-4 text-lg text-muted-foreground">
+               DevdigitaX build custom development to brand your business and also marketing ideas to grow any business.
+             </p>
+             <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
+               Your Trusted Web Development &{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: "var(--gradient-primary)" }}
@@ -257,8 +261,19 @@ function Index() {
               >
                 Explore Services
               </Link>
-            </div>
-            <div className="mt-10 flex items-center gap-6 text-sm text-muted-foreground">
+             </div>
+             <div className="mt-6">
+               <a
+                 href="https://wa.me/8801837692110"
+                 target="_blank"
+                 rel="noopener noreferrer"
+                 className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card hover:bg-accent transition-all text-sm font-medium"
+               >
+                 <Phone className="h-4 w-4" />
+                 +880 1837-692110
+               </a>
+             </div>
+             <div className="mt-10 flex items-center gap-6 text-sm text-muted-foreground">
               <div className="flex -space-x-2">
                 {[1, 2, 3, 4].map((i) => (
                   <div
@@ -276,7 +291,7 @@ function Index() {
                     <Star key={i} className="h-3.5 w-3.5 fill-current" />
                   ))} */}
                 </div>
-                {/* <span>Trusted by 200+ growing brands across Bangladesh</span> */}
+                 {/* <span>Trusted by 200+ growing brands</span> */}
               </div>
             </div>
           </div>
@@ -307,11 +322,11 @@ function Index() {
           </span>
         </h2>
         <p className="mt-6 text-muted-foreground text-lg">
-          DevdigitaX is a results-driven digital marketing and web development agency in Bangladesh
+           DevdigitaX is a results-driven digital marketing and web development agency
           — built to turn your online presence into your most powerful sales channel.
         </p>
         <p className="mt-4 text-muted-foreground">
-          Every business in Bangladesh deserves a digital presence that actually works. Not a
+           Every business deserves a digital presence that actually works. Not a
           website that sits there — but a system that attracts the right audience, communicates your
           value, and converts traffic into real revenue. We've been building those systems for
           businesses across every major industry.
@@ -326,7 +341,7 @@ function Index() {
               200+ Businesses Grew With Us. Yours Can Be Next.
             </h2>
             <p className="mt-3 text-muted-foreground">
-              We're not the cheapest agency in Bangladesh. We're the agency that makes your
+               We're not the cheapest agency. We're the agency that makes your
               investment pay back — measurably, consistently, and at scale.
             </p>
           </div>
@@ -433,12 +448,12 @@ function Index() {
           {
             Icon: Globe,
             t: "Our Mission",
-            d: "To deliver web development and digital marketing solutions that generate real, measurable business growth for companies across Bangladesh — without compromise on quality, transparency, or partnership.",
+             d: "To deliver web development and digital marketing solutions that generate real, measurable business growth — without compromise on quality, transparency, or partnership.",
           },
           {
             Icon: Share2,
             t: "Expert Team",
-            d: "Designers who build with conversion psychology in mind. Developers who write clean, scalable code. SEO strategists who understand Bangladesh's search landscape. Paid ads experts who treat every taka of your budget like their own.",
+             d: "Designers who build with conversion psychology in mind. Developers who write clean, scalable code. SEO strategists who understand local search landscape. Paid ads experts who treat every dollar of your budget like their own.",
           },
           {
             Icon: CheckCircle2,
@@ -509,10 +524,10 @@ function Index() {
             Why DevdigitaX
           </span>
           <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
-            Why Bangladesh's Most Ambitious Businesses Choose Us — And Stay Year After Year
+             Why The Most Ambitious Businesses Choose Us — And Stay Year After Year
           </h2>
           <p className="mt-4 text-muted-foreground">
-            There's no shortage of digital agencies in Bangladesh. Here's what actually sets us
+             There's no shortage of digital agencies. Here's what actually sets us
             apart:
           </p>
         </div>

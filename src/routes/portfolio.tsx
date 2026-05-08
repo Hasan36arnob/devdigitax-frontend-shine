@@ -74,7 +74,7 @@ const projects = [
   t: "Satota EV BD",
   c: "Electric vehicle website",
   cat: "frontend",
-  r: "Website for Satota electric vehicles in Bangladesh",
+   r: "Website for Satota electric vehicles",
   tech: "HTML, CSS, JavaScript, Netlify",
   img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&h=600&fit=crop", // New EV/battery themed image
   live: null, // Temporarily disabled - link broken
@@ -153,7 +153,7 @@ function PortfolioPage() {
             className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition"
             style={{ transition: "var(--transition-smooth)" }}
           >
-            <div className="aspect-[4/3] relative">
+            <div className="aspect-video relative">
               <img
                 src={p.img}
                 alt={p.t}

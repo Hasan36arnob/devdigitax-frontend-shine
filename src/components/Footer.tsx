@@ -13,9 +13,12 @@ export function Footer() {
               Devdigita<span className="text-primary">X</span>
             </span>
           </div>
-          <p className="mt-4 text-muted-foreground max-w-md">
-            We design, build, and scale digital products that turn traffic into measurable revenue.
-          </p>
+           <p className="mt-4 text-muted-foreground max-w-md">
+             DevdigitaX build custom development to brand your business and also marketing ideas to grow any business.
+           </p>
+           <p className="mt-3 text-muted-foreground max-w-md">
+             We design, build, and scale digital products that turn traffic into measurable revenue.
+           </p>
           <div className="flex gap-3 mt-6">
             {[Twitter, Linkedin, Github].map((Icon, i) => (
               <a
@@ -47,10 +50,20 @@ export function Footer() {
               </Link>
             </li>
             <li>
+              <Link to="/blog" className="hover:text-foreground">
+                Blog
+              </Link>
+            </li>
+            <li>
               <Link to="/contact" className="hover:text-foreground">
                 Contact
               </Link>
             </li>
+             <li>
+               <Link to="/admin" className="hover:text-foreground">
+                 Admin
+               </Link>
+             </li>
           </ul>
         </div>
         <div>
@@ -60,10 +73,10 @@ export function Footer() {
               <Mail className="h-4 w-4 mt-0.5 text-primary" /> devdigitax@gmail.com
             </li>
             <li className="flex gap-2">
-              <Phone className="h-4 w-4 mt-0.5 text-primary" /> +880 1974-527507
+               <Phone className="h-4 w-4 mt-0.5 text-primary" /> +880 1837-692110
             </li>
             <li className="flex gap-2">
-              <MapPin className="h-4 w-4 mt-0.5 text-primary" /> Dhaka, Bangladesh
+               <MapPin className="h-4 w-4 mt-0.5 text-primary" /> Dhaka
             </li>
           </ul>
         </div>
