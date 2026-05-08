@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
+import { WhatsAppIcon } from "@/components/Icons";
 import { useState } from "react";
 
 export const Route = createFileRoute("/contact")({
@@ -15,6 +16,7 @@ export const Route = createFileRoute("/contact")({
     ],
   }),
 });
+
 
 function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
@@ -71,8 +73,8 @@ function ContactPage() {
         <div className="md:col-span-2 space-y-6">
           {[
             { Icon: Mail, t: "Email", v: "devdigitax@gmail.com" },
-            { Icon: Phone, t: "Call/Text", v: "+880 9638-474596" },
-            { Icon: Phone, t: "WhatsApp", v: "+880 1837-692110" },
+            { Icon: Phone, t: "Call Only", v: "+880 9638-474596" },
+            { Icon: WhatsAppIcon, t: "WhatsApp & Call", v: "+880 1837-692110" },
             { Icon: MapPin, t: "Office", v: "Savar 1340, Dhaka, Bangladesh" },
           ].map(({ Icon, t, v }) => (
             <div

@@ -283,11 +283,11 @@ function AboutPage() {
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-primary" />
-                <span className="text-sm">50+ Happy Clients</span>
+                <span className="text-sm">300+ Happy Clients</span>
               </div>
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-primary" />
-                <span className="text-sm">100+ Projects</span>
+                <span className="text-sm">400+ Projects</span>
               </div>
             </div>
           </div>

@@ -16,6 +16,7 @@ import {
   Phone,
 } from "lucide-react";
 import logo from "@/assets/devdigitax-logo.jpeg";
+import { WhatsAppIcon } from "@/components/Icons";
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -247,8 +248,7 @@ function Index() {
             </span>
             <p className="mt-4 text-lg text-muted-foreground">
               DevdigitaX creates custom development solutions to brand your business and marketing
-              strategies to grow any business. We specialize in React, Node.js, MongoDB, PHP,
-              JavaScript, and E-commerce development.
+              strategies to grow any business.
             </p>
             <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
               Your trusted Development &{" "}
@@ -262,7 +262,8 @@ function Index() {
             <p className="mt-6 text-lg text-muted-foreground max-w-xl">
               Built for businesses that demand real results. We create high-performance websites
               that convert visitors into customers, and execute strategic marketing campaigns that
-              drive sustained revenue growth — from development to delivery.
+              drive sustained revenue growth — from development to delivery. We specialize in React, Node.js, MongoDB, PHP,
+              JavaScript, and E-commerce development.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
@@ -293,7 +294,7 @@ function Index() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
                 >
-                  <Phone className="h-4 w-4 text-primary" />
+                  <WhatsAppIcon className="h-4 w-4 text-primary" />
                   +880 1837-692110
                 </a>
               </div>
@@ -343,7 +344,7 @@ function Index() {
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
-              200+ Businesses Grew With Us. Yours Can Be Next.
+              400+ Businesses Grew With Us. Yours Can Be Next.
             </h2>
             <p className="mt-3 text-muted-foreground">
               We're not the cheapest agency. We're the agency that makes your investment pay back —
