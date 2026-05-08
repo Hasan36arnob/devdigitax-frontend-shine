@@ -256,7 +256,7 @@ function Index() {
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: "var(--gradient-primary)" }}
               >
-                marketing agency since 2018
+                marketing agency
               </span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl">
