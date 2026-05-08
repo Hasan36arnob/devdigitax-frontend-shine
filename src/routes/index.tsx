@@ -251,12 +251,12 @@ function Index() {
               JavaScript, and E-commerce development.
             </p>
             <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Your Trusted Web Development &{" "}
+              Your trusted Development &{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: "var(--gradient-primary)" }}
               >
-                Digital Marketing Company
+                marketing agency since 2018
               </span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl">
@@ -264,7 +264,7 @@ function Index() {
               that convert visitors into customers, and execute strategic marketing campaigns that
               drive sustained revenue growth — from development to delivery.
             </p>
-            <div className="mt-8 flex flex-wrap gap-4">
+            <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
                 to="/contact"
                 className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-primary-foreground"
@@ -279,46 +279,26 @@ function Index() {
               >
                 Explore Services
               </Link>
-              <a
-                href="tel:+8809638474596"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold border border-border hover:border-primary transition"
-              >
-                <Phone className="h-4 w-4" />
-                +880 9638-474596
-              </a>
-            </div>
-            <div className="mt-6">
-              <a
-                href="https://wa.me/8801837692110"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card hover:bg-accent transition-all text-sm font-medium"
-              >
-                <Phone className="h-4 w-4" />
-                +880 1837-692110
-              </a>
-            </div>
-            <div className="mt-10 flex items-center gap-6 text-sm text-muted-foreground">
-              <div className="flex -space-x-2">
-                {[1, 2, 3, 4].map((i) => (
-                  <div
-                    key={i}
-                    className="h-9 w-9 rounded-full border-2 border-background"
-                    style={{
-                      background: `linear-gradient(135deg, oklch(0.55 0.24 ${240 + i * 15}), oklch(0.7 0.2 ${260 + i * 10}))`,
-                    }}
-                  />
-                ))}
-              </div>
-              <div>
-                <div className="flex gap-0.5 text-primary">
-                  {/* {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                  ))} */}
-                </div>
-                {/* <span>Trusted by 200+ growing brands</span> */}
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="tel:+8809638474596"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
+                >
+                  <Phone className="h-4 w-4 text-primary" />
+                  +880 9638-474596
+                </a>
+                <a
+                  href="https://wa.me/8801837692110"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
+                >
+                  <Phone className="h-4 w-4 text-primary" />
+                  +880 1837-692110
+                </a>
               </div>
             </div>
+
           </div>
           <div className="relative">
             <div

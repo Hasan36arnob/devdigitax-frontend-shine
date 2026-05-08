@@ -152,9 +152,8 @@ function AboutPage() {
             return (
               <div
                 key={stat.label}
-                className={`bg-card border border-border rounded-2xl p-6 text-center hover:border-primary/50 transition-all duration-500 hover:scale-105 group ${
-                  isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                }`}
+                className={`bg-card border border-border rounded-2xl p-6 text-center hover:border-primary/50 transition-all duration-500 hover:scale-105 group ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                  }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
                 <Icon className="h-8 w-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
