@@ -1,10 +1,23 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { Target, Heart, Lightbulb, Users, Award, Rocket, TrendingUp, Zap, CheckCircle, ExternalLink } from "lucide-react";
+import {
+  Target,
+  Heart,
+  Lightbulb,
+  Users,
+  Award,
+  Rocket,
+  TrendingUp,
+  Zap,
+  CheckCircle,
+  ExternalLink,
+} from "lucide-react";
 import { useEffect, useState } from "react";
 import arnobJoy from "@/assets/h.jpeg";
 import shahriar from "@/assets/sv.jpeg";
 import hafiz from "@/assets/hafiz.jpeg";
+import giasU from "@/assets/giasU.jpeg";
+import sz from "@/assets/sz.jpeg";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -13,7 +26,8 @@ export const Route = createFileRoute("/about")({
       { title: "About — DevdigitaX" },
       {
         name: "description",
-        content: "DevdigitaX is a senior team of designers, engineers and marketers building digital growth systems.",
+        content:
+          "DevdigitaX is a senior team of designers, engineers and marketers building digital growth systems.",
       },
     ],
   }),
@@ -47,17 +61,23 @@ const values = [
 ];
 
 const stats = [
-  { number: "150+", label: "Projects Delivered", icon: Award },
+  { number: "400+", label: "Projects Delivered", icon: Award },
   { number: "98%", label: "Client Retention", icon: Heart },
-  { number: "5+", label: "Years Average Team Experience", icon: Users },
+  { number: "8+", label: "Years Average Team Experience", icon: Users },
   { number: "24/7", label: "Support Availability", icon: Zap },
 ];
 
 const teamMembers = [
   {
+    name: "Md Gias Uddin",
+    role: "Advisor & Managing Director",
+    bio: "Expert in business management solutions and strategic direction. Leads the company's vision and long-term growth strategy.",
+    image: giasU,
+  },
+  {
     name: "Shahriar Mahmud",
     role: "CEO & Founder | WordPress Developer & Marketer",
-    bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions.",
+    bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions Create unique business ideas and client support & team management expert",
     image: shahriar,
   },
   {
@@ -71,6 +91,12 @@ const teamMembers = [
     role: "SEO Expert (2 years)",
     bio: "SEO specialist from Pakistan with expertise in search engine optimization, keyword research, and organic growth strategies.",
     image: hafiz,
+  },
+  {
+    name: "Shahriar Zaman",
+    role: "Marketing Specialist",
+    bio: "Expert in Meta business marketing and target audience strategies for business growth. Specializes in data-driven campaigns.",
+    image: sz,
   },
 ];
 
@@ -103,10 +129,14 @@ function AboutPage() {
           <span className="text-primary text-sm font-semibold uppercase tracking-wider animate-fade-in">
             About us
           </span>
-          <h1 className={`mt-3 text-4xl md:text-6xl font-bold tracking-tight transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <h1
+            className={`mt-3 text-4xl md:text-6xl font-bold tracking-tight transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+          >
             Built to help ambitious brands win online.
           </h1>
-          <p className={`mt-6 text-lg text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-200 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
+          <p
+            className={`mt-6 text-lg text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-200 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
+          >
             DevdigitaX was founded on a simple belief: digital growth shouldn't be a black box. We
             bring senior strategists, designers, engineers and marketers together to build
             measurable systems for businesses that demand real results.
@@ -123,7 +153,7 @@ function AboutPage() {
               <div
                 key={stat.label}
                 className={`bg-card border border-border rounded-2xl p-6 text-center hover:border-primary/50 transition-all duration-500 hover:scale-105 group ${
-                  isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'
+                  isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
                 }`}
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
@@ -159,7 +189,10 @@ function AboutPage() {
       </section>
 
       {/* Company Section */}
-      <section id="company" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl my-8">
+      <section
+        id="company"
+        className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl my-8"
+      >
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
             <TrendingUp className="h-4 w-4" />
@@ -167,7 +200,9 @@ function AboutPage() {
           </div>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight">About Our Company</h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            Founded in 2020 with a vision to redefine digital agency partnerships, DevdigitaX has grown into a trusted partner for businesses across the globe. We combine strategic thinking with technical excellence to deliver measurable results.
+            Founded in 2018 with a vision to redefine digital agency partnerships, DevdigitaX has
+            grown into a trusted partner for businesses across the globe. We combine strategic
+            thinking with technical excellence to deliver measurable results.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-4 text-left">
             <div className="flex items-start gap-3">
@@ -239,8 +274,8 @@ function AboutPage() {
               We operate on a few clear principles that guide every decision and deliverable.
             </p>
             <p className="mt-4 text-muted-foreground">
-              Today we partner with brands across the globe, helping them launch products,
-              dominate search, and scale paid acquisition.
+              Today we partner with brands across the globe, helping them launch products, dominate
+              search, and scale paid acquisition.
             </p>
             <div className="mt-8 flex gap-4">
               <div className="flex items-center gap-2">
@@ -264,7 +299,9 @@ function AboutPage() {
                 className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:scale-105 cursor-pointer"
                 style={{ transitionDelay: `${idx * 100}ms` }}
               >
-                <div className={`h-12 w-12 rounded-xl bg-gradient-to-r ${color} p-2.5 text-white mb-4 group-hover:scale-110 transition-transform`}>
+                <div
+                  className={`h-12 w-12 rounded-xl bg-gradient-to-r ${color} p-2.5 text-white mb-4 group-hover:scale-110 transition-transform`}
+                >
                   <Icon className="h-full w-full" />
                 </div>
                 <h3 className="font-semibold text-lg">{t}</h3>

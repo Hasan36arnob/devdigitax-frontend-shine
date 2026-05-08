@@ -70,16 +70,16 @@ const projects = [
   },
   // Update the Satota EV BD project in your projects array to:
 
-{
-  t: "Satota EV BD",
-  c: "Electric vehicle website",
-  cat: "frontend",
-   r: "Website for Satota electric vehicles",
-  tech: "HTML, CSS, JavaScript, Netlify",
-  img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&h=600&fit=crop", // New EV/battery themed image
-  live: null, // Temporarily disabled - link broken
-  github: null, // Temporarily disabled - link broken
-},
+  {
+    t: "Satota EV BD",
+    c: "Electric vehicle website",
+    cat: "frontend",
+    r: "Website for Satota electric vehicles",
+    tech: "HTML, CSS, JavaScript, Netlify",
+    img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&h=600&fit=crop", // New EV/battery themed image
+    live: null, // Temporarily disabled - link broken
+    github: null, // Temporarily disabled - link broken
+  },
   {
     t: "Descharge",
     c: "Payment & billing platform",
@@ -124,8 +124,7 @@ function PortfolioPage() {
             Portfolio
           </span>
           <h1 className="mt-3 text-4xl md:text-6xl font-bold tracking-tight">
-            DevdigitaX build custom development to brand your business and also marketing ideas to
-            grow any business
+           Our Past works
           </h1>
         </div>
       </section>

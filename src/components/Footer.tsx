@@ -13,12 +13,12 @@ export function Footer() {
               Devdigita<span className="text-primary">X</span>
             </span>
           </div>
-           <p className="mt-4 text-muted-foreground max-w-md">
-             DevdigitaX build custom development to brand your business and also marketing ideas to grow any business.
-           </p>
-           <p className="mt-3 text-muted-foreground max-w-md">
-             We design, build, and scale digital products that turn traffic into measurable revenue.
-           </p>
+          <p className="mt-4 text-muted-foreground max-w-md">
+            Built for businesses that demand real results. We create high-performance websites that
+            convert visitors into customers, and execute strategic marketing campaigns that drive
+            sustained revenue growth — from development to delivery. Specializing in React, Node.js,
+            MongoDB, PHP, JavaScript, and E-commerce development.
+          </p>
           <div className="flex gap-3 mt-6">
             {[Twitter, Linkedin, Github].map((Icon, i) => (
               <a
@@ -59,11 +59,11 @@ export function Footer() {
                 Contact
               </Link>
             </li>
-             <li>
-               <Link to="/admin" className="hover:text-foreground">
-                 Admin
-               </Link>
-             </li>
+            <li>
+              <Link to="/admin" className="hover:text-foreground">
+                Admin
+              </Link>
+            </li>
           </ul>
         </div>
         <div>
@@ -73,16 +73,20 @@ export function Footer() {
               <Mail className="h-4 w-4 mt-0.5 text-primary" /> devdigitax@gmail.com
             </li>
             <li className="flex gap-2">
-               <Phone className="h-4 w-4 mt-0.5 text-primary" /> +880 1837-692110
+              <Phone className="h-4 w-4 mt-0.5 text-primary" /> +880 9638-474596
             </li>
             <li className="flex gap-2">
-               <MapPin className="h-4 w-4 mt-0.5 text-primary" /> Savar 1340, Dhaka, Bangladesh
+              <Phone className="h-4 w-4 mt-0.5 text-primary" /> +880 1837-692110
+            </li>
+            <li className="flex gap-2">
+              <MapPin className="h-4 w-4 mt-0.5 text-primary" /> Savar 1340, Dhaka, Bangladesh
             </li>
           </ul>
         </div>
       </div>
       <div className="border-t border-border py-6 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} DevdigitaX. All rights reserved.
+        © {new Date().getFullYear()} DevdigitaX. Since 2018 · Developed by DevdigitaX. All rights
+        reserved.
       </div>
     </footer>
   );

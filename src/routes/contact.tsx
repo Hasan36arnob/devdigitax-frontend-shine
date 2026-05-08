@@ -71,6 +71,7 @@ function ContactPage() {
         <div className="md:col-span-2 space-y-6">
           {[
             { Icon: Mail, t: "Email", v: "devdigitax@gmail.com" },
+            { Icon: Phone, t: "Call/Text", v: "+880 9638-474596" },
             { Icon: Phone, t: "WhatsApp", v: "+880 1837-692110" },
             { Icon: MapPin, t: "Office", v: "Savar 1340, Dhaka, Bangladesh" },
           ].map(({ Icon, t, v }) => (

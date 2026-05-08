@@ -95,30 +95,26 @@ export function Navbar() {
               </Link>
             </li>
           ))}
-          
+
           {/* About Dropdown - FIXED HOVER */}
-          <li
-            className="relative"
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-          >
+          <li className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
             <button
               className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all rounded-md hover:bg-accent/50 flex items-center gap-1.5 cursor-pointer"
               onClick={() => !isMobile && setAboutOpen(!aboutOpen)}
             >
               {aboutItem.label}
-              <ChevronDown 
+              <ChevronDown
                 className={`h-3.5 w-3.5 transition-all duration-300 ${
                   aboutOpen ? "rotate-180" : ""
-                }`} 
+                }`}
               />
             </button>
-            
+
             {/* Dropdown Menu */}
             <div
               className={`absolute top-full left-0 mt-2 w-56 rounded-xl border border-border bg-background/95 backdrop-blur-md shadow-xl py-2 z-50 transition-all duration-200 origin-top ${
-                aboutOpen 
-                  ? "opacity-100 visible scale-100 translate-y-0" 
+                aboutOpen
+                  ? "opacity-100 visible scale-100 translate-y-0"
                   : "opacity-0 invisible scale-95 -translate-y-2 pointer-events-none"
               }`}
             >
@@ -135,7 +131,7 @@ export function Navbar() {
               ))}
             </div>
           </li>
-          
+
           {navItems.slice(1).map((i) => (
             <li key={i.to}>
               <Link
@@ -180,10 +176,10 @@ export function Navbar() {
                 className="w-full text-left px-4 py-3 text-foreground font-medium rounded-lg hover:bg-accent/50 transition-all flex items-center justify-between"
               >
                 {aboutItem.label}
-                <ChevronDown 
+                <ChevronDown
                   className={`h-4 w-4 transition-transform duration-300 ${
                     aboutOpen ? "rotate-180" : ""
-                  }`} 
+                  }`}
                 />
               </button>
               {aboutOpen && (
