@@ -13,6 +13,7 @@ import {
   MousePointerClick,
   TrendingUp,
   Share2,
+  Palette,
   Phone,
 } from "lucide-react";
 import logo from "@/assets/devdigitax-logo.jpeg";

@@ -2,6 +2,9 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Target, Heart, Lightbulb, Users, Award, Rocket, TrendingUp, Zap, CheckCircle, ExternalLink } from "lucide-react";
 import { useEffect, useState } from "react";
+import arnobJoy from "@/assets/h.jpeg";
+import shahriar from "@/assets/sv.jpeg";
+import hafiz from "@/assets/hafiz.jpeg";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -52,16 +55,22 @@ const stats = [
 
 const teamMembers = [
   {
-    name: "Md Arnob Hasan Joy",
-    role: "Software Developer",
-    bio: "Passionate software engineer specializing in modern web technologies and scalable backend solutions.",
-    image: "h.jpeg",
+    name: "Shahriar Mahmud",
+    role: "CEO & Founder | WordPress Developer & Marketer",
+    bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions.",
+    image: shahriar,
   },
   {
-    name: "Shahriar Mahmud",
-    role: "CEO & founder, WordPress developer & Marketer.",
-    bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions.",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=400&h=400&fit=crop",
+    name: "Md Arnob Hasan Joy",
+    role: "Co-Founder | Software Developer",
+    bio: "Passionate software engineer specializing in modern web technologies and scalable backend solutions.",
+    image: arnobJoy,
+  },
+  {
+    name: "Hafiz Muhammad Leghari",
+    role: "SEO Expert (2 years)",
+    bio: "SEO specialist from Pakistan with expertise in search engine optimization, keyword research, and organic growth strategies.",
+    image: hafiz,
   },
 ];
 
@@ -181,7 +190,7 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section - Only Two Developers */}
+      {/* Team Section */}
       <section id="team" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24">
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
@@ -193,18 +202,18 @@ function AboutPage() {
             A collective of passionate experts dedicated to your success.
           </p>
         </div>
-        <div className="mt-16 flex flex-wrap justify-center gap-8">
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
           {teamMembers.map((member, idx) => (
             <div
               key={member.name}
-              className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:scale-105 w-full max-w-sm"
+              className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:scale-105"
               style={{ transitionDelay: `${idx * 100}ms` }}
             >
-              <div className="aspect-square overflow-hidden">
+              <div className="aspect-square overflow-hidden bg-muted/10">
                 <img
                   src={member.image}
                   alt={member.name}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  className="w-full h-full object-contain"
                 />
               </div>
               <div className="p-6">

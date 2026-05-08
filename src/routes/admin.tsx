@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useState } from "react";
-import { Article, Eye, Edit3, Trash2, Plus, Save, X, LogOut, LayoutDashboard } from "lucide-react";
+import { FileText, Eye, Edit3, Trash2, Plus, Save, X, LogOut, LayoutDashboard } from "lucide-react";
 
 interface Article {
   id: number;
@@ -54,7 +54,7 @@ function AdminPage() {
   });
 
   const stats = [
-    { label: "Total Articles", value: articles.length, icon: Article },
+    { label: "Total Articles", value: articles.length, icon: FileText },
     { label: "Published", value: articles.filter((a) => a.status === "published").length, icon: Eye },
     { label: "Drafts", value: articles.filter((a) => a.status === "draft").length, icon: Edit3 },
   ];
