@@ -75,6 +75,11 @@ const lifecycle = [
     t: "Launching",
     d: "We ship to production, monitor and iterate based on real user feedback.",
   },
+  {
+    n: "08",
+    t: "Support & Maintenance",
+    d: "We provide ongoing technical support, security updates, and performance monitoring to keep your site running at its peak.",
+  },
 ];
 
 const path = [
@@ -159,6 +164,10 @@ const why = [
   {
     t: "We Stay. We Grow With You.",
     d: "Our 98% retention rate is the result of treating every relationship as a long-term partnership.",
+  },
+  {
+    t: "Senior-Level Execution",
+    d: "Direct access to the experts doing the work. No junior account managers or offshore outsourcing. You work with a senior team committed to your success.",
   },
 ];
 

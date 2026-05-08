@@ -1,4 +1,4 @@
-const PHONE = "8801974527507";
+const PHONE = "8801837692110";
 const MESSAGE = "Hi DevdigitaX! I'd like to discuss a project.";
 
 export function WhatsAppButton() {
