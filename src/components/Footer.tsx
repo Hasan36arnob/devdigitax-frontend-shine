@@ -86,8 +86,7 @@ export function Footer() {
         </div>
       </div>
       <div className="border-t border-border py-6 text-center text-sm text-muted-foreground">
-        © {new Date().getFullYear()} DevdigitaX. Since 2018 · Developed by DevdigitaX. All rights
-        reserved.
+        © DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX.
       </div>
     </footer>
   );
