@@ -76,7 +76,7 @@ export function Footer() {
                <Phone className="h-4 w-4 mt-0.5 text-primary" /> +880 1837-692110
             </li>
             <li className="flex gap-2">
-               <MapPin className="h-4 w-4 mt-0.5 text-primary" /> Dhaka
+               <MapPin className="h-4 w-4 mt-0.5 text-primary" /> Savar 1340, Dhaka, Bangladesh
             </li>
           </ul>
         </div>
