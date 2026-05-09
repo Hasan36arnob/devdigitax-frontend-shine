@@ -282,7 +282,7 @@ function Index() {
                 className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-primary-foreground"
                 style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
               >
-                Get a Free Audit{" "}
+                Claim a Free Website & Marketing Assessmentt{" "}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
               </Link>
               <Link
