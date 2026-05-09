@@ -18,6 +18,7 @@ import shahriar from "@/assets/sv.jpeg";
 import hafiz from "@/assets/hafiz.jpeg";
 import giasU from "@/assets/giasU.jpeg";
 import sz from "@/assets/sz.jpeg";
+import mo from "@/assets/mo.jpeg";
 
 export const Route = createFileRoute("/about")({
   component: AboutPage,
@@ -97,6 +98,12 @@ const teamMembers = [
     role: "Marketing Specialist",
     bio: "Expert in Meta business marketing and target audience strategies for business growth. Specializes in data-driven campaigns.",
     image: sz,
+  },
+  {
+    name: "Moin Uddin",
+    role: "WordPress Elementor Developer",
+    bio: "Skilled Pakistani WordPress Elementor developer specializing in modern, responsive, and user-friendly websites. Experienced in custom website design, speed optimization, bug fixing, and creating professional business websites with clean UI/UX.",
+    image: mo,
   },
 ];
 
