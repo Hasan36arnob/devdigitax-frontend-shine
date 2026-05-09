@@ -3,7 +3,10 @@ import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from "lucide-react";
 import logo from "@/assets/devdigitax-logo.jpeg";
 import { WhatsAppIcon } from "@/components/Icons";
 
+import { getSiteConfig } from "@/utils/data";
+
 export function Footer() {
+  const config = getSiteConfig();
   return (
     <footer className="border-t border-border bg-card/40 mt-24">
       <div className="max-w-7xl mx-auto px-6 py-16 grid md:grid-cols-4 gap-10">
@@ -71,22 +74,22 @@ export function Footer() {
           <h4 className="font-semibold mb-4">Contact</h4>
           <ul className="space-y-3 text-sm text-muted-foreground">
             <li className="flex gap-2">
-              <Mail className="h-4 w-4 mt-0.5 text-primary" /> devdigitax@gmail.com
+              <Mail className="h-4 w-4 mt-0.5 text-primary" /> {config.email}
             </li>
             <li className="flex gap-2">
-              <Phone className="h-4 w-4 mt-0.5 text-primary" /> +880 9638-474596
+              <Phone className="h-4 w-4 mt-0.5 text-primary" /> {config.phone}
             </li>
             <li className="flex gap-2">
-              <WhatsAppIcon className="h-4 w-4 mt-0.5 text-primary" /> +880 1837-692110
+              <WhatsAppIcon className="h-4 w-4 mt-0.5 text-primary" /> {config.whatsapp}
             </li>
             <li className="flex gap-2">
-              <MapPin className="h-4 w-4 mt-0.5 text-primary" /> Savar 1340, Dhaka, Bangladesh
+              <MapPin className="h-4 w-4 mt-0.5 text-primary" /> {config.address}
             </li>
           </ul>
         </div>
       </div>
       <div className="border-t border-border py-6 text-center text-sm text-muted-foreground">
-        © DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX.
+        {config.footerText}
       </div>
     </footer>
   );

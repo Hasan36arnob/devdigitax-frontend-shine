@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import { getServices } from "@/utils/data";
 import {
   ArrowRight,
   Code2,
@@ -17,6 +18,7 @@ import {
 } from "lucide-react";
 import logo from "@/assets/devdigitax-logo.jpeg";
 import { WhatsAppIcon } from "@/components/Icons";
+
 
 export const Route = createFileRoute("/")({
   component: Index,
@@ -506,28 +508,32 @@ function Index() {
             </p>
           </div>
           <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map(({ icon: Icon, t, d, slug }) => (
-              <div
-                key={t}
-                className="group p-8 rounded-2xl border border-border bg-background hover:border-primary/50 hover:-translate-y-1 transition-all"
-                style={{ transition: "var(--transition-smooth)" }}
-              >
+            {getServices().map(({ icon, title, description, slug }) => {
+              const Icon = ({ Layout, Code2, ShoppingCart, Palette, Search, TrendingUp } as any)[icon] || Layout;
+              return (
                 <div
-                  className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
-                  style={{ background: "var(--gradient-primary)" }}
+                  key={slug}
+                  className="group p-8 rounded-2xl border border-border bg-background hover:border-primary/50 hover:-translate-y-1 transition-all"
+                  style={{ transition: "var(--transition-smooth)" }}
                 >
-                  <Icon className="h-6 w-6" />
+                  <div
+                    className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
+                    style={{ background: "var(--gradient-primary)" }}
+                  >
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <h3 className="mt-5 text-xl font-semibold">{title}</h3>
+                  <p className="mt-2 text-muted-foreground text-sm">{description}</p>
+                  <Link
+                    to="/services/$serviceId"
+                    params={{ serviceId: slug }}
+                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
+                  >
+                    Learn more <ArrowRight className="h-4 w-4" />
+                  </Link>
                 </div>
-                <h3 className="mt-5 text-xl font-semibold">{t}</h3>
-                <p className="mt-2 text-muted-foreground text-sm">{d}</p>
-                <Link
-                  to={`/services/${slug}`}
-                  className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
-                >
-                  Learn more <ArrowRight className="h-4 w-4" />
-                </Link>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>

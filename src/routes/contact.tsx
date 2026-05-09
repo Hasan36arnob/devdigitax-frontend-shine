@@ -18,9 +18,19 @@ export const Route = createFileRoute("/contact")({
 });
 
 
+import { getSiteConfig } from "@/utils/data";
+
 function ContactPage() {
   const [status, setStatus] = useState<"idle" | "sending" | "success" | "error">("idle");
   const [errorMessage, setErrorMessage] = useState("");
+  const config = getSiteConfig();
+
+  const contactInfo = [
+    { Icon: Mail, t: "Email", v: config.email },
+    { Icon: Phone, t: "Call Only", v: config.phone },
+    { Icon: WhatsAppIcon, t: "WhatsApp & Call", v: config.whatsapp },
+    { Icon: MapPin, t: "Office", v: config.address },
+  ];
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -31,6 +41,20 @@ function ContactPage() {
     const formData = new FormData(form);
 
     try {
+      // Save to localStorage for Admin Panel access
+      const savedMessages = JSON.parse(localStorage.getItem("devdigitax_messages") || "[]");
+      const newMessage = {
+        id: Date.now(),
+        name: formData.get("name"),
+        email: formData.get("email"),
+        phone: formData.get("phone"),
+        service: formData.get("service"),
+        message: formData.get("message"),
+        date: new Date().toISOString().split("T")[0],
+        status: "new"
+      };
+      localStorage.setItem("devdigitax_messages", JSON.stringify([newMessage, ...savedMessages]));
+
       const response = await fetch("https://formspree.io/f/xojrnpab", {
         method: "POST",
         body: formData,
@@ -71,12 +95,7 @@ function ContactPage() {
 
       <section className="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-5 gap-10">
         <div className="md:col-span-2 space-y-6">
-          {[
-            { Icon: Mail, t: "Email", v: "devdigitax@gmail.com" },
-            { Icon: Phone, t: "Call Only", v: "+880 9638-474596" },
-            { Icon: WhatsAppIcon, t: "WhatsApp & Call", v: "+880 1837-692110" },
-            { Icon: MapPin, t: "Office", v: "Savar 1340, Dhaka, Bangladesh" },
-          ].map(({ Icon, t, v }) => (
+          {contactInfo.map(({ Icon, t, v }) => (
             <div
               key={t}
               className="p-6 rounded-2xl border border-border bg-card flex items-start gap-4"

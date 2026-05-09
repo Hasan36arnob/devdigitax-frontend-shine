@@ -16,7 +16,6 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
-import { Route as ServicesChar91slugChar93RouteImport } from './routes/services/[slug]'
 import { Route as ServicesServiceIdRouteImport } from './routes/services.$serviceId'
 
 const PortfolioRoute = PortfolioRouteImport.update({
@@ -54,12 +53,6 @@ const ServicesIndexRoute = ServicesIndexRouteImport.update({
   path: '/services/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ServicesChar91slugChar93Route =
-  ServicesChar91slugChar93RouteImport.update({
-    id: '/services/slug',
-    path: '/services/slug',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ServicesServiceIdRoute = ServicesServiceIdRouteImport.update({
   id: '/services/$serviceId',
   path: '/services/$serviceId',
@@ -74,7 +67,6 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/portfolio': typeof PortfolioRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
-  '/services/slug': typeof ServicesChar91slugChar93Route
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
@@ -85,7 +77,6 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/portfolio': typeof PortfolioRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
-  '/services/slug': typeof ServicesChar91slugChar93Route
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
@@ -97,7 +88,6 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/portfolio': typeof PortfolioRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
-  '/services/slug': typeof ServicesChar91slugChar93Route
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -110,7 +100,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/portfolio'
     | '/services/$serviceId'
-    | '/services/slug'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -121,7 +110,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/portfolio'
     | '/services/$serviceId'
-    | '/services/slug'
     | '/services'
   id:
     | '__root__'
@@ -132,7 +120,6 @@ export interface FileRouteTypes {
     | '/contact'
     | '/portfolio'
     | '/services/$serviceId'
-    | '/services/slug'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
@@ -144,7 +131,6 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   PortfolioRoute: typeof PortfolioRoute
   ServicesServiceIdRoute: typeof ServicesServiceIdRoute
-  ServicesChar91slugChar93Route: typeof ServicesChar91slugChar93Route
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
@@ -199,13 +185,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/services/slug': {
-      id: '/services/slug'
-      path: '/services/slug'
-      fullPath: '/services/slug'
-      preLoaderRoute: typeof ServicesChar91slugChar93RouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/services/$serviceId': {
       id: '/services/$serviceId'
       path: '/services/$serviceId'
@@ -224,7 +203,6 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   PortfolioRoute: PortfolioRoute,
   ServicesServiceIdRoute: ServicesServiceIdRoute,
-  ServicesChar91slugChar93Route: ServicesChar91slugChar93Route,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport

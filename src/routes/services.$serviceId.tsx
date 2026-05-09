@@ -242,9 +242,26 @@ const serviceContent: Record<
   },
 };
 
+import { getServices } from "@/utils/data";
+
 function ServiceDetailPage() {
   const { serviceId } = Route.useParams();
-  const service = serviceContent[serviceId];
+  const dynamicServices = getServices();
+  const dynamicService = dynamicServices.find(s => s.slug === serviceId);
+  const staticContent = serviceContent[serviceId];
+
+  // Merge dynamic data with static content if it exists
+  const service = dynamicService ? {
+    ...(staticContent || {
+      features: [],
+      technologies: [],
+      process: [],
+      heroImage: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&h=600&fit=crop",
+      callToAction: "Contact us to learn more about this service."
+    }),
+    title: dynamicService.title,
+    description: dynamicService.description,
+  } : staticContent;
 
   if (!service) {
     return (

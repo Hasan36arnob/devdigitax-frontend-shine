@@ -1,3 +1,5 @@
+import { Layout, Code2, ShoppingCart, Palette, Search, TrendingUp } from "lucide-react";
+
 export const services = [
   {
     icon: Layout,

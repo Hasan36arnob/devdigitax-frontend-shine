@@ -68,47 +68,44 @@ const stats = [
   { number: "24/7", label: "Support Availability", icon: Zap },
 ];
 
-const teamMembers = [
-  {
-    name: "Md Gias Uddin",
-    role: "Advisor & Managing Director",
-    bio: "Expert in business management solutions and strategic direction. Leads the company's vision and long-term growth strategy.",
-    image: giasU,
-  },
-  {
-    name: "Shahriar Mahmud",
-    role: "CEO & Founder | WordPress Developer & Marketer",
-    bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions Create unique business ideas and client support & team management expert",
-    image: shahriar,
-  },
-  {
-    name: "Md Arnob Hasan Joy",
-    role: "Co-Founder | Software Developer",
-    bio: "Passionate software engineer specializing in modern web technologies and scalable backend solutions.",
-    image: arnobJoy,
-  },
-  {
-    name: "Hafiz Muhammad Leghari",
-    role: "SEO Expert (2 years)",
-    bio: "SEO specialist from Pakistan with expertise in search engine optimization, keyword research, and organic growth strategies.",
-    image: hafiz,
-  },
-  {
-    name: "Shahriar Zaman",
-    role: "Marketing Specialist",
-    bio: "Expert in Meta business marketing and target audience strategies for business growth. Specializes in data-driven campaigns.",
-    image: sz,
-  },
-  {
-    name: "Moin Uddin",
-    role: "WordPress Elementor Developer",
-    bio: "Skilled Pakistani WordPress Elementor developer specializing in modern, responsive, and user-friendly websites. Experienced in custom website design, speed optimization, bug fixing, and creating professional business websites with clean UI/UX.",
-    image: mo,
-  },
-];
+import { getTeam } from "@/utils/data";
 
 function AboutPage() {
   const [isVisible, setIsVisible] = useState(false);
+  const dynamicTeam = getTeam().filter(m => !m.status || m.status === 'published');
+
+  const teamMembers = dynamicTeam.length > 0 ? dynamicTeam : [
+    {
+      name: "Md Gias Uddin",
+      role: "Advisor & Managing Director",
+      bio: "Expert in business management solutions and strategic direction. Leads the company's vision and long-term growth strategy.",
+      image: giasU,
+    },
+    {
+      name: "Shahriar Mahmud",
+      role: "CEO & Founder | WordPress Developer & Marketer",
+      bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions Create unique business ideas and client support & team management expert",
+      image: shahriar,
+    },
+    {
+      name: "Md Arnob Hasan Joy",
+      role: "Co-Founder | Software Developer",
+      bio: "Passionate software engineer specializing in modern web technologies and scalable backend solutions.",
+      image: arnobJoy,
+    },
+    {
+      name: "Hafiz Muhammad Leghari",
+      role: "SEO Expert (2 years)",
+      bio: "SEO specialist from Pakistan with expertise in search engine optimization, keyword research, and organic growth strategies.",
+      image: hafiz,
+    },
+    {
+      name: "Moin Uddin",
+      role: "WordPress Elementor Developer",
+      bio: "Skilled Pakistani WordPress Elementor developer specializing in modern, responsive, and user-friendly websites. Experienced in custom website design, speed optimization, bug fixing, and creating professional business websites with clean UI/UX.",
+      image: mo,
+    },
+  ];
 
   useEffect(() => {
     setIsVisible(true);

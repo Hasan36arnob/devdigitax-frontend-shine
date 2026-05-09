@@ -23,7 +23,7 @@ export function Navbar() {
   const [open, setOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout>();
+  const timeoutRef = useRef<any>(null);
   const router = useRouter();
 
   useEffect(() => {

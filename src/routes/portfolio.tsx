@@ -15,106 +15,78 @@ export const Route = createFileRoute("/portfolio")({
   }),
 });
 
-const projects = [
-  {
-    t: "WordPress Business Website",
-    c: "Corporate WordPress site",
-    cat: "wordpress",
-    r: "Custom WordPress theme development with responsive design",
-    tech: "WordPress, PHP, MySQL, Elementor",
-    img: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=800&h=600&fit=crop",
-  },
-  {
-    t: "E-commerce Dashboard",
-    c: "Admin panel for online store",
-    cat: "ecommerce",
-    r: "Complete e-commerce admin dashboard with analytics and inventory management",
-    tech: "Next.js, MongoDB, Chart.js, TailwindCSS",
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&h=600&fit=crop",
-  },
-  {
-    t: "Brand Identity Design",
-    c: "Logo & brand package",
-    cat: "design",
-    r: "Complete brand identity including logo, business card, and social media kit",
-    tech: "Adobe Illustrator, Photoshop, Figma",
-    img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&h=600&fit=crop",
-  },
-  {
-    t: "Data Analytics Dashboard",
-    c: "Climate data visualization",
-    cat: "data",
-    r: "Interactive dashboard for climate data analysis using Python and visualization libraries",
-    tech: "Python, Pandas, NumPy, Plotly, Jupyter",
-    img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&h=600&fit=crop",
-  },
-  {
-    t: "DialogueStream",
-    c: "Real-time group chat app",
-    cat: "fullstack",
-    r: "Group chat application for multiple users in real-time",
-    tech: "Node.js, Socket.io, React, Render",
-    img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=800&h=600&fit=crop",
-    live: "https://dialoguestream-1.onrender.com/",
-    github: "https://github.com/Hasan36arnob/DialogueStream",
-  },
-  {
-    t: "GitHub User Finder",
-    c: "GitHub user search tool",
-    cat: "frontend",
-    r: "Web application to find and display GitHub user profiles",
-    tech: "React, GitHub API, Netlify",
-    img: "https://images.unsplash.com/photo-1618401471353-b98afee0b2eb?q=80&w=800&h=600&fit=crop",
-    live: "https://ghlens.netlify.app/",
-    github: "https://github.com/Hasan36arnob/GhUserFinder",
-  },
-  // Update the Satota EV BD project in your projects array to:
-
-  {
-    t: "Satota EV BD",
-    c: "Electric vehicle website",
-    cat: "frontend",
-    r: "Website for Satota electric vehicles",
-    tech: "HTML, CSS, JavaScript, Netlify",
-    img: "https://images.unsplash.com/photo-1617788138017-80ad40651399?q=80&w=800&h=600&fit=crop", // New EV/battery themed image
-    live: null, // Temporarily disabled - link broken
-    github: null, // Temporarily disabled - link broken
-  },
-  {
-    t: "Descharge",
-    c: "Payment & billing platform",
-    cat: "frontend",
-    r: "Digital payment and billing solution platform",
-    tech: "React, TailwindCSS, Netlify",
-    img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&h=600&fit=crop",
-    live: "https://deshcharge.netlify.app/",
-  },
-  {
-    t: "ClimateTech & Green Solutions",
-    c: "Climate technology website",
-    cat: "frontend",
-    r: "Website showcasing climate tech and green solutions",
-    tech: "HTML, CSS, JavaScript, Netlify",
-    img: "https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?q=80&w=800&h=600&fit=crop",
-    live: "https://climatetechandgreensolutions.netlify.app/",
-    github: "https://github.com/Hasan36arnob/climate-tech",
-  },
-];
-
-const categories = [
-  { id: "all", label: "All Works" },
-  { id: "fullstack", label: "Full Stack Development" },
-  { id: "frontend", label: "Frontend Development" },
-  { id: "wordpress", label: "WordPress" },
-  { id: "ecommerce", label: "E-commerce" },
-  { id: "design", label: "Graphic Design" },
-  { id: "data", label: "Data Analysis" },
-];
+import { getPortfolio } from "@/utils/data";
 
 function PortfolioPage() {
   const [activeCat, setActiveCat] = useState("all");
+  const dynamicPortfolio = getPortfolio().filter(p => !p.status || p.status === 'published');
 
-  const filtered = activeCat === "all" ? projects : projects.filter((p) => p.cat === activeCat);
+  const allProjects = dynamicPortfolio.length > 0 ? dynamicPortfolio.map(p => ({
+    t: p.title,
+    c: p.client,
+    cat: p.category,
+    r: p.result,
+    tech: p.tech,
+    img: p.image,
+    live: p.live,
+    github: p.github
+  })) : [
+    {
+      t: "WordPress Business Website",
+      c: "Corporate WordPress site",
+      cat: "wordpress",
+      r: "Custom WordPress theme development with responsive design",
+      tech: "WordPress, PHP, MySQL, Elementor",
+      img: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=800&h=600&fit=crop",
+    },
+    {
+      t: "E-commerce Dashboard",
+      c: "Admin panel for online store",
+      cat: "ecommerce",
+      r: "Complete e-commerce admin dashboard with analytics and inventory management",
+      tech: "Next.js, MongoDB, Chart.js, TailwindCSS",
+      img: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&h=600&fit=crop",
+    },
+    {
+      t: "Brand Identity Design",
+      c: "Logo & brand package",
+      cat: "design",
+      r: "Complete brand identity including logo, business card, and social media kit",
+      tech: "Adobe Illustrator, Photoshop, Figma",
+      img: "https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=800&h=600&fit=crop",
+    },
+    {
+      t: "DialogueStream",
+      c: "Real-time group chat app",
+      cat: "fullstack",
+      r: "Group chat application for multiple users in real-time",
+      tech: "Node.js, Socket.io, React, Render",
+      img: "https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?q=80&w=800&h=600&fit=crop",
+      live: "https://dialoguestream-1.onrender.com/",
+      github: "https://github.com/Hasan36arnob/DialogueStream",
+    },
+    {
+      t: "Descharge",
+      c: "Payment & billing platform",
+      cat: "frontend",
+      r: "Digital payment and billing solution platform",
+      tech: "React, TailwindCSS, Netlify",
+      img: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?q=80&w=800&h=600&fit=crop",
+      live: "https://deshcharge.netlify.app/",
+    }
+  ];
+
+  const filtered = activeCat === "all" ? allProjects : allProjects.filter((p) => p.cat === activeCat);
+
+  const categories = [
+    { id: "all", label: "All Works" },
+    { id: "fullstack", label: "Full Stack Development" },
+    { id: "frontend", label: "Frontend Development" },
+    { id: "wordpress", label: "WordPress" },
+    { id: "ecommerce", label: "E-commerce" },
+    { id: "design", label: "Graphic Design" },
+    { id: "data", label: "Data Analysis" },
+  ];
 
   return (
     <SiteLayout>
@@ -150,7 +122,6 @@ function PortfolioPage() {
           <div
             key={p.t}
             className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition"
-            style={{ transition: "var(--transition-smooth)" }}
           >
             <div className="aspect-video relative">
               <img

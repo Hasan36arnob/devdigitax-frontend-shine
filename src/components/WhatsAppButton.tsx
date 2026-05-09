@@ -1,7 +1,10 @@
-const PHONE = "8801837692110";
+import { getSiteConfig } from "@/utils/data";
+
 const MESSAGE = "Hi DevdigitaX! I'd like to discuss a project.";
 
 export function WhatsAppButton() {
+  const config = getSiteConfig();
+  const PHONE = config.whatsapp.replace(/\D/g, "");
   const href = `https://wa.me/${PHONE}?text=${encodeURIComponent(MESSAGE)}`;
   return (
     <a

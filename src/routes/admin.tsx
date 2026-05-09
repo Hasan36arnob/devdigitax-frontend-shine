@@ -1,164 +1,292 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect, useMemo, useRef } from "react";
+import "@/styles/premium.css";
+import { 
+  getServices, saveServices, 
+  getPortfolio, savePortfolio,
+  getTeam, saveTeam,
+  getSiteConfig, saveSiteConfig,
+  getArticles,
+  ServiceItem, PortfolioItem, TeamMember, SiteConfig 
+} from "@/utils/data";
 import {
   FileText,
-  Eye,
   Edit3,
   Trash2,
   Plus,
   Save,
   X,
-  Calendar,
-  Tag,
-  Image,
-  Upload,
-  Bold,
-  Italic,
-  List,
-  Link as LinkIcon,
-  BarChart3,
-  Clock,
-  CheckCircle,
-  Lock,
-  LayoutDashboard,
   Briefcase,
+  Users,
+  Settings as SettingsIcon,
+  Globe,
+  LayoutDashboard,
+  Shield,
+  Menu,
+  Image as ImageIcon,
+  Link as LinkIcon,
+  Phone,
   Mail,
-  Settings,
+  MapPin,
+  CheckCircle,
+  Activity,
+  Zap,
+  TrendingUp,
   Search,
   Bell,
   ChevronRight,
-  TrendingUp,
+  Maximize2,
+  Cpu,
+  Server,
+  Database,
   ArrowUpRight,
-  User,
-  LogOut,
-  Menu,
-  ChevronDown,
-  Globe,
-  Terminal,
-  Activity,
-  Shield,
-  HelpCircle,
-  MoreVertical,
-  Filter,
+  Eye,
   Download,
-  Share2,
+  Upload,
+  Filter,
+  MoreVertical,
+  Check,
+  AlertCircle,
+  Clock,
+  LogOut
 } from "lucide-react";
-
-interface Article {
-  id: number;
-  title: string;
-  excerpt: string;
-  content: string;
-  category: string;
-  tags: string[];
-  image: string;
-  date: string;
-  status: "draft" | "published";
-  readTime: string;
-}
-
-interface Message {
-  id: number;
-  name: string;
-  email: string;
-  service: string;
-  message: string;
-  date: string;
-  status: "new" | "read" | "replied";
-}
 
 export const Route = createFileRoute("/admin")({
   component: function AdminPage() {
-    const STORAGE_KEY_ARTICLES = "devdigitax_articles";
-    const STORAGE_KEY_MESSAGES = "devdigitax_messages";
+    const ADMIN_USERNAME = "admin";
     const ADMIN_PASSWORD = "devdigitax2026";
 
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
-    const [loginError, setLoginError] = useState("");
-    const [activeTab, setActiveTab] = useState<"dashboard" | "articles" | "services" | "messages" | "settings">(
-      "dashboard",
-    );
+    
+    const [activeTab, setActiveTab] = useState<"dashboard" | "articles" | "services" | "portfolio" | "team" | "config">("dashboard");
     const [activeView, setActiveView] = useState<"list" | "create" | "edit">("list");
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+    const [searchQuery, setSearchQuery] = useState("");
 
-    const [articles, setArticles] = useState<Article[]>([]);
-    const [messages, setMessages] = useState<Message[]>([]);
-    const [formData, setFormData] = useState<Article>({
-      id: 0,
-      title: "",
-      excerpt: "",
-      content: "",
-      category: "",
-      tags: [],
-      image: "",
-      date: "",
-      status: "draft",
-      readTime: "",
-    });
-    const [editingArticle, setEditingArticle] = useState<Article | null>(null);
+    const [articles, setArticles] = useState<any[]>([]);
+    const [services, setServices] = useState<ServiceItem[]>([]);
+    const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
+    const [team, setTeam] = useState<TeamMember[]>([]);
+    const [config, setConfig] = useState<SiteConfig>(getSiteConfig());
+    
+    const [editingItem, setEditingItem] = useState<any>(null);
+    const [formData, setFormData] = useState<any>({});
+    const [notification, setNotification] = useState<{msg: string, type: 'success' | 'error' | 'info'} | null>(null);
+    const [selectedIds, setSelectedIds] = useState<Set<any>>(new Set());
+
+    const fileInputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
       if (isAuthenticated) {
-        const savedArticles = localStorage.getItem(STORAGE_KEY_ARTICLES);
-        const savedMessages = localStorage.getItem(STORAGE_KEY_MESSAGES);
-        
-        if (savedArticles) setArticles(JSON.parse(savedArticles));
-        if (savedMessages) setMessages(JSON.parse(savedMessages));
+        loadData();
       }
     }, [isAuthenticated]);
 
+    const loadData = () => {
+        setArticles(getArticles());
+        setServices(getServices());
+        setPortfolio(getPortfolio());
+        setTeam(getTeam());
+        setConfig(getSiteConfig());
+    };
+
     const handleLogin = (e: React.FormEvent) => {
       e.preventDefault();
-      if (passwordInput === ADMIN_PASSWORD) {
+      if (usernameInput === ADMIN_USERNAME && passwordInput === ADMIN_PASSWORD) {
         setIsAuthenticated(true);
-        setLoginError("");
       } else {
-        setLoginError("Incorrect password.");
+        notify("Incorrect username or password", "error");
       }
     };
 
+    const notify = (msg: string, type: 'success' | 'error' | 'info' = 'success') => {
+      setNotification({msg, type});
+      setTimeout(() => setNotification(null), 3000);
+    };
+
+    const handleSave = () => {
+      if (activeTab !== 'config' && (!formData.title && !formData.name)) {
+          notify("Please enter a title or name", "error");
+          return;
+      }
+
+      if (activeTab === 'articles') {
+        const n = activeView === 'create' ? [{ ...formData, id: Date.now(), date: new Date().toISOString().split('T')[0], status: formData.status || 'published' }, ...articles] : articles.map(a => a.id === editingItem.id ? { ...a, ...formData } : a);
+        setArticles(n);
+        localStorage.setItem("devdigitax_articles", JSON.stringify(n));
+      } else if (activeTab === 'services') {
+        const n = activeView === 'create' ? [{ ...formData, id: Date.now().toString() }, ...services] : services.map(s => s.id === editingItem.id ? { ...s, ...formData } : s);
+        setServices(n);
+        saveServices(n);
+      } else if (activeTab === 'portfolio') {
+        const n = activeView === 'create' ? [{ ...formData, id: Date.now().toString(), status: formData.status || 'published' }, ...portfolio] : portfolio.map(p => p.id === editingItem.id ? { ...p, ...formData } : p);
+        setPortfolio(n);
+        savePortfolio(n);
+      } else if (activeTab === 'team') {
+        const n = activeView === 'create' ? [{ ...formData, id: Date.now().toString(), status: formData.status || 'published' }, ...team] : team.map(t => t.id === editingItem.id ? { ...t, ...formData } : t);
+        setTeam(n);
+        saveTeam(n);
+      } else if (activeTab === 'config') {
+        saveSiteConfig(config);
+      }
+      setActiveView('list');
+      notify("Saved successfully");
+    };
+
+    const handleDelete = (id: any) => {
+        if (!confirm("Are you sure you want to delete this item?")) return;
+        
+        if (activeTab === 'articles') {
+            const n = articles.filter(a => a.id !== id);
+            setArticles(n);
+            localStorage.setItem("devdigitax_articles", JSON.stringify(n));
+        } else if (activeTab === 'services') {
+            const n = services.filter(s => s.id !== id);
+            setServices(n);
+            saveServices(n);
+        } else if (activeTab === 'portfolio') {
+            const n = portfolio.filter(p => p.id !== id);
+            setPortfolio(n);
+            savePortfolio(n);
+        } else if (activeTab === 'team') {
+            const n = team.filter(t => t.id !== id);
+            setTeam(n);
+            saveTeam(n);
+        }
+        notify("Deleted successfully", "info");
+    };
+
+    const handleBulkDelete = () => {
+        if (!confirm(`Are you sure you want to delete ${selectedIds.size} items?`)) return;
+        const idsToDelete = Array.from(selectedIds);
+        
+        if (activeTab === 'articles') {
+            const n = articles.filter(a => !idsToDelete.includes(a.id));
+            setArticles(n);
+            localStorage.setItem("devdigitax_articles", JSON.stringify(n));
+        } else if (activeTab === 'services') {
+            const n = services.filter(s => !idsToDelete.includes(s.id));
+            setServices(n);
+            saveServices(n);
+        } else if (activeTab === 'portfolio') {
+            const n = portfolio.filter(p => !idsToDelete.includes(p.id));
+            setPortfolio(n);
+            savePortfolio(n);
+        } else if (activeTab === 'team') {
+            const n = team.filter(t => !idsToDelete.includes(t.id));
+            setTeam(n);
+            saveTeam(n);
+        }
+        setSelectedIds(new Set());
+        notify("Selected items deleted", "info");
+    };
+
+    const toggleSelect = (id: any) => {
+        const n = new Set(selectedIds);
+        if (n.has(id)) n.delete(id);
+        else n.add(id);
+        setSelectedIds(n);
+    };
+
+    const exportData = () => {
+        const data = {
+            articles,
+            services,
+            portfolio,
+            team,
+            config,
+            timestamp: new Date().toISOString()
+        };
+        const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `devdigitax_backup_${new Date().toISOString().split('T')[0]}.json`;
+        a.click();
+        notify("Backup file downloaded", "success");
+    };
+
+    const importData = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = (ev) => {
+            try {
+                const data = JSON.parse(ev.target?.result as string);
+                if (data.articles) {
+                    setArticles(data.articles);
+                    localStorage.setItem("devdigitax_articles", JSON.stringify(data.articles));
+                }
+                if (data.services) {
+                    setServices(data.services);
+                    saveServices(data.services);
+                }
+                if (data.portfolio) {
+                    setPortfolio(data.portfolio);
+                    savePortfolio(data.portfolio);
+                }
+                if (data.team) {
+                    setTeam(data.team);
+                    saveTeam(data.team);
+                }
+                if (data.config) {
+                    setConfig(data.config);
+                    saveSiteConfig(data.config);
+                }
+                notify("Data restored successfully", "success");
+            } catch (err) {
+                notify("Failed to import. Invalid file.", "error");
+            }
+        };
+        reader.readAsText(file);
+    };
+
+    const filteredItems = useMemo(() => {
+        const query = searchQuery.toLowerCase();
+        if (activeTab === 'articles') return articles.filter(a => a.title.toLowerCase().includes(query) || a.content.toLowerCase().includes(query));
+        if (activeTab === 'services') return services.filter(s => s.title.toLowerCase().includes(query) || s.description.toLowerCase().includes(query));
+        if (activeTab === 'portfolio') return portfolio.filter(p => p.title.toLowerCase().includes(query) || p.client?.toLowerCase().includes(query));
+        if (activeTab === 'team') return team.filter(t => t.name.toLowerCase().includes(query) || t.role.toLowerCase().includes(query));
+        return [];
+    }, [activeTab, articles, services, portfolio, team, searchQuery]);
+
     const navItems = [
       { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
-      { id: "articles", label: "Content Manager", icon: FileText },
-      { id: "services", label: "Service Catalog", icon: Briefcase },
-      { id: "messages", label: "Lead Center", icon: Mail, badge: messages.filter(m => m.status === 'new').length },
-      { id: "settings", label: "System Settings", icon: Settings },
+      { id: "articles", label: "Blog Posts", icon: FileText },
+      { id: "services", label: "Services", icon: Zap },
+      { id: "portfolio", label: "Portfolio", icon: Briefcase },
+      { id: "team", label: "Team Members", icon: Users },
+      { id: "config", label: "Site Settings", icon: SettingsIcon },
     ];
 
     if (!isAuthenticated) {
       return (
         <SiteLayout>
-          <div className="min-h-screen flex items-center justify-center bg-zinc-50 dark:bg-zinc-950 p-6">
-            <div className="w-full max-w-md">
-              <div className="bg-white dark:bg-zinc-900 rounded-3xl shadow-2xl border border-zinc-200 dark:border-zinc-800 p-10">
-                <div className="text-center mb-10">
-                  <div className="h-16 w-16 bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-6 shadow-xl shadow-blue-500/20">
-                    <Shield className="h-8 w-8 text-white" />
-                  </div>
-                  <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Google Cloud Console</h1>
-                  <p className="text-zinc-500 dark:text-zinc-400 mt-2">Sign in to DevdigitaX Console</p>
-                </div>
-                <form onSubmit={handleLogin} className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Admin Password</label>
-                    <input
-                      type="password"
-                      value={passwordInput}
-                      onChange={(e) => setPasswordInput(e.target.value)}
-                      className="w-full px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 focus:ring-2 focus:ring-blue-500 outline-none transition-all dark:text-white"
-                      placeholder="••••••••"
-                      autoFocus
-                    />
-                    {loginError && <p className="text-red-500 text-sm mt-2">{loginError}</p>}
-                  </div>
-                  <button type="submit" className="w-full py-4 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/25">
-                    Next
-                  </button>
-                </form>
+          <div className="min-h-screen flex items-center justify-center bg-[#050506] p-6 font-sans">
+             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,#1e3a8a20,transparent_50%)]" />
+            <form onSubmit={handleLogin} className="relative w-full max-w-md p-12 rounded-[3.5rem] bg-white/[0.01] border border-white/5 backdrop-blur-3xl space-y-10 text-center shadow-2xl">
+              <div className="mx-auto w-20 h-20 bg-blue-600 rounded-[2rem] flex items-center justify-center shadow-[0_0_50px_-10px_#2563eb]">
+                <Shield className="h-10 w-10 text-white" />
               </div>
-            </div>
+              <div className="space-y-2">
+                <h1 className="text-3xl font-black text-white tracking-tighter uppercase">Admin Login</h1>
+                <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest">Enter your credentials to continue</p>
+              </div>
+              <div className="space-y-4">
+                <div className="relative group">
+                   <div className="absolute inset-0 bg-blue-600/10 rounded-2xl blur-xl opacity-0 group-focus-within:opacity-100 transition-all" />
+                   <input type="text" value={usernameInput} onChange={e => setUsernameInput(e.target.value)} className="relative w-full bg-black/40 border border-white/10 p-5 rounded-2xl text-white outline-none focus:border-blue-500 transition-all placeholder:text-zinc-700" placeholder="Username" />
+                </div>
+                <div className="relative group">
+                   <div className="absolute inset-0 bg-blue-600/10 rounded-2xl blur-xl opacity-0 group-focus-within:opacity-100 transition-all" />
+                   <input type="password" value={passwordInput} onChange={e => setPasswordInput(e.target.value)} className="relative w-full bg-black/40 border border-white/10 p-5 rounded-2xl text-white outline-none focus:border-blue-500 transition-all placeholder:text-zinc-700" placeholder="Password" />
+                </div>
+              </div>
+              <button type="submit" className="w-full py-5 rounded-2xl bg-blue-600 text-white font-black hover:bg-blue-500 transition-all shadow-xl shadow-blue-500/20 active:scale-95">LOG IN</button>
+            </form>
           </div>
         </SiteLayout>
       );
@@ -166,360 +294,355 @@ export const Route = createFileRoute("/admin")({
 
     return (
       <SiteLayout>
-        <div className="min-h-screen bg-zinc-50 dark:bg-[#0f1115] text-zinc-900 dark:text-zinc-100 flex flex-col font-sans">
-          {/* Top Google-style Bar */}
-          <header className="h-14 bg-white dark:bg-[#1a1c1e] border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between px-4 sticky top-0 z-[60]">
-            <div className="flex items-center gap-4">
-              <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full">
-                <Menu className="h-5 w-5 text-zinc-500" />
-              </button>
-              <div className="flex items-center gap-2">
-                <div className="h-7 w-7 bg-blue-500 rounded-lg flex items-center justify-center font-bold text-white text-xs">DX</div>
-                <span className="font-semibold text-zinc-700 dark:text-zinc-300 hidden md:block">DevdigitaX Console</span>
-              </div>
-              <div className="h-6 w-px bg-zinc-200 dark:bg-zinc-800 mx-2" />
-              <div className="flex items-center gap-2 bg-zinc-100 dark:bg-[#2c2e31] px-3 py-1.5 rounded-md cursor-pointer hover:bg-zinc-200 dark:hover:bg-zinc-700 transition-colors">
-                <span className="text-xs font-medium text-zinc-600 dark:text-zinc-300">My First Project</span>
-                <ChevronDown className="h-3 w-3 text-zinc-400" />
-              </div>
+        <div className="min-h-screen bg-[#050506] text-white flex overflow-hidden font-sans selection:bg-blue-600/30">
+          <input type="file" ref={fileInputRef} onChange={importData} className="hidden" accept=".json" />
+          
+          {notification && (
+            <div className={`fixed bottom-10 left-1/2 -translate-x-1/2 z-[100] px-10 py-5 rounded-[2rem] shadow-2xl font-black text-[10px] uppercase tracking-[0.3em] animate-in slide-in-from-bottom flex items-center gap-3 border ${
+                notification.type === 'error' ? 'bg-red-500 text-white border-red-400' : 
+                notification.type === 'info' ? 'bg-zinc-800 text-white border-zinc-700' : 
+                'bg-white text-black border-white'
+            }`}>
+                <div className={`h-2 w-2 rounded-full animate-pulse ${notification.type === 'error' ? 'bg-white' : 'bg-blue-600'}`} /> 
+                {notification.msg}
             </div>
-
-            <div className="flex-1 max-w-2xl px-8 hidden lg:block">
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
-                <input 
-                  type="text" 
-                  placeholder="Search resources, services, and docs (/) "
-                  className="w-full bg-zinc-100 dark:bg-[#2c2e31] border-none rounded-md px-10 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                />
+          )}
+          
+          <aside className={`${isSidebarOpen ? 'w-80' : 'w-0'} bg-black/40 backdrop-blur-3xl border-r border-white/5 transition-all duration-500 flex flex-col z-[60] relative overflow-hidden`}>
+            <div className="p-10">
+              <div className="flex items-center gap-4 mb-16">
+                <div className="h-12 w-12 bg-white rounded-2xl flex items-center justify-center">
+                  <div className="h-6 w-6 bg-blue-600 rounded-lg" />
+                </div>
+                <div>
+                   <div className="text-xl font-black tracking-tighter uppercase leading-none">DevdigitaX</div>
+                   <div className="text-[10px] font-black text-blue-500 uppercase tracking-widest mt-1">Admin Panel</div>
+                </div>
               </div>
-            </div>
-
-            <div className="flex items-center gap-1 md:gap-3">
-              <button className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full hidden sm:block">
-                <Terminal className="h-5 w-5 text-zinc-500" />
-              </button>
-              <button className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full">
-                <Bell className="h-5 w-5 text-zinc-500" />
-              </button>
-              <button className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full hidden sm:block">
-                <HelpCircle className="h-5 w-5 text-zinc-500" />
-              </button>
-              <div className="h-8 w-8 rounded-full bg-blue-500 flex items-center justify-center text-white font-bold text-xs cursor-pointer ml-2 border-2 border-white dark:border-zinc-800">
-                HJ
-              </div>
-            </div>
-          </header>
-
-          <div className="flex flex-1 overflow-hidden">
-            {/* Sidebar */}
-            <aside className={`${isSidebarOpen ? 'w-64' : 'w-0'} bg-white dark:bg-[#1a1c1e] border-r border-zinc-200 dark:border-zinc-800 transition-all duration-300 flex flex-col overflow-hidden`}>
-              <div className="flex-1 py-4">
+              <nav className="space-y-2">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
-                    onClick={() => {
-                      setActiveTab(item.id as any);
-                      setActiveView("list");
-                    }}
-                    className={`w-full flex items-center gap-3 px-6 py-3 text-sm font-medium transition-colors ${activeTab === item.id ? 'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border-r-4 border-blue-600' : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-800'}`}
+                    onClick={() => { setActiveTab(item.id as any); setActiveView("list"); setSelectedIds(new Set()); }}
+                    className={`w-full group flex items-center gap-4 px-6 py-4 rounded-[1.5rem] transition-all relative ${activeTab === item.id ? 'bg-white text-black' : 'text-zinc-500 hover:bg-white/5 hover:text-white'}`}
                   >
-                    <item.icon className="h-5 w-5" />
-                    <span>{item.label}</span>
-                    {item.badge ? (
-                      <span className="ml-auto bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded-full font-bold">{item.badge}</span>
-                    ) : null}
+                    <item.icon className={`h-5 w-5 ${activeTab === item.id ? 'text-blue-600' : 'group-hover:text-blue-500'} transition-colors`} />
+                    <span className="font-black text-[11px] uppercase tracking-widest">{item.label}</span>
+                    {activeTab === item.id && <ChevronRight className="ml-auto h-4 w-4 opacity-30" />}
                   </button>
                 ))}
-              </div>
-              <div className="p-4 border-t border-zinc-200 dark:border-zinc-800">
-                <div className="flex items-center gap-3 px-2 py-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
-                  <div className="h-8 w-8 rounded-lg bg-emerald-500/10 flex items-center justify-center">
-                    <Activity className="h-4 w-4 text-emerald-500" />
+              </nav>
+            </div>
+            
+            <div className="mt-auto p-10 space-y-4">
+               <button onClick={exportData} className="w-full flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all text-[10px] font-black uppercase tracking-widest">
+                  <Download className="h-4 w-4" /> Download Backup
+               </button>
+               <button onClick={() => fileInputRef.current?.click()} className="w-full flex items-center gap-4 px-6 py-4 rounded-2xl bg-white/5 text-zinc-400 hover:text-white hover:bg-white/10 transition-all text-[10px] font-black uppercase tracking-widest">
+                  <Upload className="h-4 w-4" /> Upload Backup
+               </button>
+               <div className="h-px bg-white/5 my-4" />
+               <button onClick={() => setIsAuthenticated(false)} className="w-full flex items-center gap-4 px-6 py-4 rounded-2xl text-zinc-500 hover:bg-red-500/10 hover:text-red-500 transition-all group">
+                  <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-red-500/10 group-hover:text-red-500 transition-colors"><LogOut className="h-4 w-4" /></div>
+                  <span className="text-xs font-black uppercase tracking-widest">Log Out</span>
+               </button>
+            </div>
+          </aside>
+
+          <main className="flex-1 overflow-y-auto p-16 relative">
+            <div className="absolute top-0 right-0 p-16 pointer-events-none opacity-20">
+               <div className="h-96 w-96 bg-blue-600 rounded-full blur-[120px]" />
+            </div>
+
+            <header className="flex items-center justify-between mb-20">
+               <div className="flex items-center gap-8">
+                 <button onClick={() => setIsSidebarOpen(!isSidebarOpen)} className="p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors group">
+                    <Menu className={`h-6 w-6 transition-transform ${isSidebarOpen ? 'rotate-90' : ''}`} />
+                 </button>
+                 <div>
+                    <h2 className="text-4xl font-black uppercase tracking-tighter premium-gradient-text">
+                        {navItems.find(n => n.id === activeTab)?.label}
+                    </h2>
+                    <div className="flex items-center gap-2 mt-2 text-zinc-500">
+                       <div className="h-1.5 w-1.5 rounded-full bg-blue-500" />
+                       <span className="text-[10px] font-black uppercase tracking-widest">Admin / {navItems.find(n => n.id === activeTab)?.label}</span>
+                    </div>
+                 </div>
+               </div>
+               
+               <div className="flex items-center gap-6">
+                  <div className="relative group">
+                     <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-500 group-focus-within:text-blue-500 transition-colors" />
+                     <input 
+                       value={searchQuery}
+                       onChange={e => setSearchQuery(e.target.value)}
+                       className="bg-white/5 border border-white/5 px-12 py-3 rounded-2xl outline-none focus:border-blue-500/50 w-64 transition-all text-sm font-bold placeholder:text-zinc-700" 
+                       placeholder="Search items..." 
+                     />
                   </div>
-                  <div className="flex-1">
-                    <div className="text-[10px] text-zinc-500 font-bold uppercase">System Status</div>
-                    <div className="text-xs font-bold text-emerald-500">All Systems Operational</div>
+                  <button className="p-3 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors relative">
+                     <Bell className="h-5 w-5" />
+                     <div className="absolute top-2 right-2 h-2 w-2 bg-blue-500 rounded-full border-2 border-[#050506]" />
+                  </button>
+                  <div className="flex items-center gap-4 pl-4 border-l border-white/10">
+                     <div className="h-10 w-10 rounded-2xl bg-gradient-to-br from-blue-600 to-indigo-600 flex items-center justify-center font-black">AD</div>
                   </div>
+               </div>
+            </header>
+
+            {activeTab === "dashboard" && (
+              <div className="space-y-12">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                  {[
+                    { l: "Blog Posts", v: articles.length, i: FileText, c: "bg-blue-600", t: "Total articles" },
+                    { l: "Services", v: services.length, i: Zap, c: "bg-amber-500", t: "Active services" },
+                    { l: "Portfolio", v: portfolio.length, i: Briefcase, c: "bg-purple-600", t: "Projects shown" },
+                    { l: "Team Members", v: team.length, i: Users, c: "bg-emerald-600", t: "Total staff" },
+                  ].map((s, i) => (
+                    <div key={i} className="group p-10 rounded-[3.5rem] bg-white/[0.02] border border-white/5 hover:border-blue-500/30 transition-all relative overflow-hidden">
+                      <div className="absolute top-0 right-0 p-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                         <ArrowUpRight className="h-5 w-5 text-blue-500" />
+                      </div>
+                      <div className={`h-14 w-14 ${s.c} rounded-[1.5rem] flex items-center justify-center mb-8 shadow-2xl`}>
+                        <s.i className="h-7 w-7 text-white" />
+                      </div>
+                      <div className="text-6xl font-black mb-3 tracking-tighter">{s.v}</div>
+                      <div className="text-[10px] font-black text-zinc-500 uppercase tracking-[0.3em] mb-4">{s.l}</div>
+                      <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">{s.t}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="grid lg:grid-cols-3 gap-12">
+                   <div className="lg:col-span-2 p-12 rounded-[4rem] bg-white/[0.02] border border-white/5">
+                      <div className="flex justify-between items-center mb-12">
+                         <h3 className="text-xl font-black uppercase tracking-tighter">Site Traffic</h3>
+                         <div className="flex gap-2">
+                            <div className="px-4 py-2 rounded-xl bg-blue-600/10 text-blue-500 text-[9px] font-black uppercase">Live</div>
+                            <div className="px-4 py-2 rounded-xl bg-white/5 text-zinc-500 text-[9px] font-black uppercase">Past Week</div>
+                         </div>
+                      </div>
+                      <div className="h-80 w-full flex items-end gap-3 px-4">
+                         {[40, 70, 45, 90, 65, 80, 55, 75, 40, 85, 60, 95].map((h, i) => (
+                           <div key={i} className="flex-1 group relative">
+                              <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-4 bg-white text-black text-[10px] font-black px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">{h} Visitors</div>
+                              <div className="w-full bg-blue-600/20 rounded-t-xl group-hover:bg-blue-600 transition-all cursor-pointer" style={{ height: `${h}%` }} />
+                           </div>
+                         ))}
+                      </div>
+                      <div className="mt-8 flex justify-between text-[9px] font-black text-zinc-600 uppercase tracking-widest">
+                         <span>12 AM</span>
+                         <span>6 AM</span>
+                         <span>12 PM</span>
+                         <span>6 PM</span>
+                         <span>11 PM</span>
+                      </div>
+                   </div>
+
+                   <div className="space-y-8">
+                      <div className="p-10 rounded-[3.5rem] bg-gradient-to-br from-blue-600 to-indigo-700 shadow-2xl relative overflow-hidden group">
+                         <div className="absolute -right-10 -bottom-10 h-40 w-40 bg-white/10 rounded-full blur-2xl group-hover:scale-150 transition-transform duration-1000" />
+                         <div className="relative z-10">
+                            <Cpu className="h-10 w-10 text-white/50 mb-6" />
+                            <h4 className="text-2xl font-black mb-2">System Status</h4>
+                            <p className="text-xs text-white/60 font-bold leading-relaxed mb-8">All website systems are running normally. No issues detected.</p>
+                            <button onClick={() => notify("Checking system...", "info")} className="px-8 py-3 bg-white text-black rounded-2xl font-black text-[10px] uppercase tracking-widest hover:scale-105 active:scale-95 transition-all">Check Details</button>
+                         </div>
+                      </div>
+                      <div className="p-10 rounded-[3.5rem] bg-white/[0.02] border border-white/5 space-y-6">
+                         <div className="flex justify-between items-center">
+                            <h4 className="text-xs font-black uppercase tracking-widest text-zinc-500">Recent Activity</h4>
+                            <Activity className="h-4 w-4 text-blue-500" />
+                         </div>
+                         {[1, 2, 3].map(n => (
+                           <div key={n} className="flex gap-4 items-center">
+                              <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center"><Globe className="h-4 w-4 text-blue-500" /></div>
+                              <div className="flex-1">
+                                 <div className="text-xs font-bold">New visitor from Bangladesh</div>
+                                 <div className="text-[9px] font-black text-zinc-600 uppercase mt-1">{n * 5} minutes ago</div>
+                              </div>
+                              <Eye className="h-4 w-4 text-zinc-700" />
+                           </div>
+                         ))}
+                      </div>
+                   </div>
                 </div>
               </div>
-            </aside>
+            )}
 
-            {/* Main Content */}
-            <main className="flex-1 overflow-y-auto bg-zinc-50 dark:bg-[#0f1115]">
-              {/* Dashboard */}
-              {activeTab === "dashboard" && (
-                <div className="p-8 space-y-8 animate-in fade-in duration-500">
-                  <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-                    <div>
-                      <h1 className="text-2xl font-bold text-zinc-900 dark:text-white">Welcome back, Hasan</h1>
-                      <p className="text-zinc-500 dark:text-zinc-400 text-sm mt-1">Here is what is happening with your projects today.</p>
-                    </div>
-                    <div className="flex gap-3">
-                      <button className="flex items-center gap-2 px-4 py-2 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-md text-sm font-medium hover:bg-zinc-50 transition-colors shadow-sm">
-                        <Download className="h-4 w-4" /> Export Report
-                      </button>
-                      <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-md text-sm font-medium hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20">
-                        <Plus className="h-4 w-4" /> New Deployment
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Widgets Grid */}
-                  <div className="grid lg:grid-cols-3 gap-6">
-                    {/* Status Card */}
-                    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm">
-                      <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-bold text-zinc-700 dark:text-zinc-300">Revenue Metrics</h3>
-                        <MoreVertical className="h-4 w-4 text-zinc-400 cursor-pointer" />
-                      </div>
-                      <div className="flex items-end gap-4 mb-6">
-                        <div className="text-4xl font-bold">$124,592</div>
-                        <div className="flex items-center text-emerald-500 text-sm font-bold pb-1">
-                          <TrendingUp className="h-4 w-4 mr-1" /> +14.5%
-                        </div>
-                      </div>
-                      <div className="h-2 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                        <div className="h-full bg-blue-500 w-[75%]" />
-                      </div>
-                      <div className="flex justify-between mt-3 text-[10px] font-bold text-zinc-400 uppercase tracking-widest">
-                        <span>Target: $150k</span>
-                        <span>75% Achieved</span>
-                      </div>
-                    </div>
-
-                    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm">
-                      <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-bold text-zinc-700 dark:text-zinc-300">Traffic Distribution</h3>
-                        <Filter className="h-4 w-4 text-zinc-400 cursor-pointer" />
-                      </div>
-                      <div className="space-y-4">
-                        {[
-                          { l: "Organic Search", v: "45%", c: "bg-blue-500" },
-                          { l: "Direct", v: "25%", c: "bg-emerald-500" },
-                          { l: "Social Media", v: "20%", c: "bg-purple-500" },
-                          { l: "Other", v: "10%", c: "bg-amber-500" }
-                        ].map((item, i) => (
-                          <div key={i} className="space-y-1">
-                            <div className="flex justify-between text-xs font-medium">
-                              <span className="text-zinc-600 dark:text-zinc-400">{item.l}</span>
-                              <span className="text-zinc-900 dark:text-zinc-100 font-bold">{item.v}</span>
-                            </div>
-                            <div className="h-1.5 w-full bg-zinc-100 dark:bg-zinc-800 rounded-full overflow-hidden">
-                              <div className={`h-full ${item.c}`} style={{ width: item.v }} />
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm">
-                      <div className="flex items-center justify-between mb-6">
-                        <h3 className="font-bold text-zinc-700 dark:text-zinc-300">Global Uptime</h3>
-                        <Globe className="h-4 w-4 text-zinc-400" />
-                      </div>
-                      <div className="grid grid-cols-5 gap-1 mb-6">
-                        {Array.from({ length: 45 }).map((_, i) => (
-                          <div key={i} className={`h-8 rounded-[2px] ${i === 34 ? 'bg-amber-500' : i > 40 ? 'bg-zinc-100 dark:bg-zinc-800' : 'bg-emerald-500'} opacity-80`} />
-                        ))}
-                      </div>
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-2">
-                          <div className="h-2 w-2 rounded-full bg-emerald-500" />
-                          <span className="text-xs font-bold text-emerald-500">99.98% Operational</span>
-                        </div>
-                        <span className="text-[10px] font-bold text-zinc-400 uppercase">Last 30 Days</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Resource Management Table */}
-                  <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-sm">
-                    <div className="p-6 border-b border-zinc-200 dark:border-zinc-800 flex items-center justify-between">
-                      <h3 className="font-bold text-lg">Active Services</h3>
-                      <div className="flex gap-2">
-                        <button className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors"><Search className="h-4 w-4 text-zinc-500" /></button>
-                        <button className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors"><Filter className="h-4 w-4 text-zinc-500" /></button>
-                      </div>
-                    </div>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-left text-sm">
-                        <thead className="bg-zinc-50 dark:bg-zinc-800/50 text-[10px] font-bold text-zinc-500 uppercase tracking-widest border-b border-zinc-200 dark:border-zinc-800">
-                          <tr>
-                            <th className="px-6 py-4">Resource Name</th>
-                            <th className="px-6 py-4">Status</th>
-                            <th className="px-6 py-4">Utilization</th>
-                            <th className="px-6 py-4">Last Modified</th>
-                            <th className="px-6 py-4">Actions</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-zinc-100 dark:divide-zinc-800">
-                          {[
-                            { n: "Web Core Production", s: "Healthy", u: "42%", t: "12 mins ago" },
-                            { n: "Database Cluster A", s: "Healthy", u: "18%", t: "2 hours ago" },
-                            { n: "CDN Static Assets", s: "Warning", u: "88%", t: "Just now" },
-                            { n: "Mail Delivery Node", s: "Healthy", u: "5%", t: "3 days ago" }
-                          ].map((row, i) => (
-                            <tr key={i} className="hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-colors">
-                              <td className="px-6 py-4 font-semibold text-zinc-900 dark:text-zinc-200">{row.n}</td>
-                              <td className="px-6 py-4">
-                                <span className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${row.s === 'Healthy' ? 'bg-emerald-500/10 text-emerald-500' : 'bg-amber-500/10 text-amber-500'}`}>
-                                  <div className={`h-1 w-1 rounded-full ${row.s === 'Healthy' ? 'bg-emerald-500' : 'bg-amber-500'}`} />
-                                  {row.s}
-                                </span>
-                              </td>
-                              <td className="px-6 py-4">
-                                <div className="flex items-center gap-3">
-                                  <div className="flex-1 h-1.5 bg-zinc-100 dark:bg-zinc-800 rounded-full w-24">
-                                    <div className={`h-full ${parseInt(row.u) > 80 ? 'bg-amber-500' : 'bg-blue-500'}`} style={{ width: row.u }} />
-                                  </div>
-                                  <span className="text-[10px] font-bold text-zinc-500">{row.u}</span>
+            {activeTab !== "dashboard" && activeTab !== "config" && (
+                <div className="space-y-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                    {activeView === "list" ? (
+                        <>
+                            <div className="flex justify-between items-center">
+                                <div className="flex items-center gap-6">
+                                    <div>
+                                        <h2 className="text-4xl font-black tracking-tight uppercase">{navItems.find(n => n.id === activeTab)?.label} List</h2>
+                                        <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-2">Managing {filteredItems.length} items</p>
+                                    </div>
+                                    {selectedIds.size > 0 && (
+                                        <div className="flex items-center gap-4 bg-red-500/10 border border-red-500/20 px-6 py-3 rounded-2xl animate-in zoom-in">
+                                            <span className="text-[10px] font-black text-red-500 uppercase tracking-widest">{selectedIds.size} Items Selected</span>
+                                            <button onClick={handleBulkDelete} className="p-2 bg-red-500 rounded-lg hover:bg-red-600 transition-colors"><Trash2 className="h-4 w-4 text-white" /></button>
+                                        </div>
+                                    )}
                                 </div>
-                              </td>
-                              <td className="px-6 py-4 text-zinc-500">{row.t}</td>
-                              <td className="px-6 py-4">
-                                <button className="p-1 hover:text-blue-500 transition-colors"><MoreVertical className="h-4 w-4" /></button>
-                              </td>
-                            </tr>
-                          ))}
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Content Manager Tab */}
-              {activeTab === "articles" && (
-                <div className="p-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-                  {activeView === "list" ? (
-                    <div className="space-y-6">
-                      <div className="flex items-center justify-between">
-                        <h1 className="text-2xl font-bold">Content Inventory</h1>
-                        <button 
-                          onClick={() => setActiveView('create')}
-                          className="bg-blue-600 text-white px-6 py-2.5 rounded-md text-sm font-bold flex items-center gap-2 hover:bg-blue-700 transition-all shadow-lg shadow-blue-500/20"
-                        >
-                          <Plus className="h-4 w-4" /> Create Article
-                        </button>
-                      </div>
-
-                      <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl overflow-hidden shadow-sm">
-                        <div className="p-4 border-b border-zinc-200 dark:border-zinc-800 flex items-center gap-4">
-                          <div className="relative flex-1 max-w-md">
-                            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-zinc-400" />
-                            <input type="text" placeholder="Filter articles..." className="w-full bg-zinc-100 dark:bg-zinc-800 border-none rounded-md pl-10 py-2 text-sm outline-none" />
-                          </div>
-                          <button className="p-2 border border-zinc-200 dark:border-zinc-700 rounded-md hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors"><Filter className="h-4 w-4" /></button>
-                        </div>
-                        <div className="divide-y divide-zinc-100 dark:divide-zinc-800">
-                          {articles.map((article) => (
-                            <div key={article.id} className="p-6 hover:bg-zinc-50 dark:hover:bg-zinc-800/30 transition-all group flex items-center gap-6">
-                              <div className="h-16 w-16 rounded-lg overflow-hidden bg-zinc-100 dark:bg-zinc-800 flex-shrink-0 border border-zinc-200 dark:border-zinc-700">
-                                <img src={article.image} alt="" className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-                              </div>
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2 mb-1">
-                                  <span className="text-[10px] font-bold text-blue-600 dark:text-blue-400 uppercase tracking-widest bg-blue-50 dark:bg-blue-900/20 px-2 py-0.5 rounded">{article.category}</span>
-                                  <span className={`text-[10px] font-bold uppercase ${article.status === 'published' ? 'text-emerald-500' : 'text-amber-500'}`}>{article.status}</span>
+                                <div className="flex gap-4">
+                                    <button onClick={() => { setFormData({ status: 'published' }); setActiveView('create'); }} className="px-10 py-5 rounded-[2rem] bg-white text-black font-black text-[10px] uppercase tracking-[0.2em] flex items-center gap-3 hover:bg-blue-600 hover:text-white transition-all active:scale-95"><Plus className="h-5 w-5" /> Add New Item</button>
                                 </div>
-                                <h3 className="font-bold text-zinc-900 dark:text-zinc-100 line-clamp-1">{article.title}</h3>
-                                <div className="flex items-center gap-4 mt-1 text-[10px] text-zinc-500 font-bold uppercase tracking-wider">
-                                  <span className="flex items-center gap-1"><Calendar className="h-3 w-3" /> {article.date}</span>
-                                  <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {article.readTime}</span>
-                                </div>
-                              </div>
-                              <div className="flex gap-2">
-                                <button className="p-2 hover:bg-white dark:hover:bg-zinc-700 rounded-md shadow-sm border border-transparent hover:border-zinc-200 dark:hover:border-zinc-600 transition-all"><Edit3 className="h-4 w-4" /></button>
-                                <button className="p-2 hover:bg-red-50 dark:hover:bg-red-900/20 text-zinc-400 hover:text-red-500 transition-all"><Trash2 className="h-4 w-4" /></button>
-                              </div>
                             </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="max-w-5xl mx-auto space-y-8">
-                      <div className="flex items-center justify-between border-b border-zinc-200 dark:border-zinc-800 pb-6">
-                        <div className="flex items-center gap-4">
-                          <button onClick={() => setActiveView('list')} className="p-2 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-full transition-colors">
-                            <X className="h-5 w-5" />
-                          </button>
-                          <h2 className="text-xl font-bold">{activeView === 'create' ? 'Create Deployment' : 'Edit Resource'}</h2>
-                        </div>
-                        <div className="flex gap-3">
-                          <button onClick={() => setActiveView('list')} className="px-4 py-2 text-sm font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors">Discard</button>
-                          <button className="bg-blue-600 text-white px-6 py-2 rounded-md text-sm font-bold shadow-lg shadow-blue-500/20">Apply Changes</button>
-                        </div>
-                      </div>
-                      
-                      <div className="grid lg:grid-cols-3 gap-8">
-                        <div className="lg:col-span-2 space-y-8">
-                          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-8 space-y-6 shadow-sm">
-                            <div className="space-y-2">
-                              <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Resource Identifier</label>
-                              <input type="text" className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-md px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition-all font-bold" placeholder="e.g. blog-post-01" />
-                            </div>
-                            <div className="space-y-2">
-                              <label className="text-xs font-bold text-zinc-500 uppercase tracking-widest">Article Body</label>
-                              <textarea className="w-full bg-zinc-50 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 rounded-md px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500 transition-all h-96 resize-none font-mono text-sm" placeholder="// Start composing your content here..." />
-                            </div>
-                          </div>
-                        </div>
-                        <div className="space-y-6">
-                          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm">
-                            <h4 className="font-bold mb-4 flex items-center gap-2"><Settings className="h-4 w-4" /> Configuration</h4>
-                            <div className="space-y-4">
-                              <div className="space-y-1.5">
-                                <label className="text-[10px] font-bold text-zinc-400 uppercase">Region/Category</label>
-                                <select className="w-full bg-zinc-100 dark:bg-zinc-800 border-none rounded-md px-3 py-2 text-sm outline-none">
-                                  <option>Digital Marketing</option>
-                                  <option>Web Development</option>
-                                </select>
-                              </div>
-                              <div className="space-y-1.5">
-                                <label className="text-[10px] font-bold text-zinc-400 uppercase">Featured Image</label>
-                                <input type="text" className="w-full bg-zinc-100 dark:bg-zinc-800 border-none rounded-md px-3 py-2 text-sm outline-none" placeholder="https://..." />
-                              </div>
-                            </div>
-                          </div>
-                          <div className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl p-6 shadow-sm">
-                            <h4 className="font-bold mb-4 flex items-center gap-2"><Shield className="h-4 w-4" /> Policy</h4>
-                            <div className="flex items-center gap-3 p-3 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-                              <div className="h-2 w-2 rounded-full bg-blue-500" />
-                              <span className="text-xs text-blue-700 dark:text-blue-400 font-medium">Auto-scaling enabled</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              )}
 
-              {/* Other tabs follow the same professional structure... */}
-              {(activeTab === "messages" || activeTab === "services" || activeTab === "settings") && (
-                <div className="flex flex-col items-center justify-center min-h-[60vh] text-center p-8 opacity-50">
-                  <div className="h-20 w-20 bg-zinc-200 dark:bg-zinc-800 rounded-full flex items-center justify-center mb-6">
-                    <LayoutDashboard className="h-10 w-10 text-zinc-400" />
-                  </div>
-                  <h2 className="text-xl font-bold mb-2">Module Provisioning in Progress</h2>
-                  <p className="text-sm max-w-md">This module is currently being optimized for high-performance scale. Please check back shortly for full access.</p>
+                            <div className="grid grid-cols-1 gap-4">
+                                {filteredItems.map((item) => (
+                                    <div key={item.id} className={`group p-8 rounded-[2.5rem] bg-white/[0.01] border transition-all flex items-center gap-8 ${selectedIds.has(item.id) ? 'border-blue-500/50 bg-blue-500/[0.02]' : 'border-white/5 hover:border-white/10'}`}>
+                                        <button onClick={() => toggleSelect(item.id)} className={`h-6 w-6 rounded-lg border transition-all flex items-center justify-center ${selectedIds.has(item.id) ? 'bg-blue-600 border-blue-500' : 'border-white/10 group-hover:border-white/30'}`}>
+                                            {selectedIds.has(item.id) && <Check className="h-4 w-4 text-white" />}
+                                        </button>
+                                        
+                                        {(item.image || item.img) && (
+                                            <img src={item.image || item.img} className="h-16 w-16 rounded-2xl object-cover grayscale group-hover:grayscale-0 transition-all" />
+                                        )}
+                                        
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-3 mb-1">
+                                                <h4 className="text-xl font-black uppercase tracking-tight">{item.title || item.name}</h4>
+                                                {item.status === 'draft' && <span className="text-[8px] font-black bg-zinc-800 text-zinc-500 px-2 py-0.5 rounded uppercase">Draft</span>}
+                                            </div>
+                                            <p className="text-[10px] font-black text-zinc-500 uppercase tracking-widest line-clamp-1">{item.category || item.role || item.description}</p>
+                                        </div>
+
+                                        <div className="flex items-center gap-4 opacity-0 group-hover:opacity-100 transition-opacity">
+                                            <button onClick={() => { setEditingItem(item); setFormData(item); setActiveView('edit'); }} className="p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors"><Edit3 className="h-5 w-5 text-zinc-400" /></button>
+                                            <button onClick={() => handleDelete(item.id)} className="p-4 bg-white/5 rounded-2xl hover:bg-red-500/10 hover:text-red-500 transition-colors"><Trash2 className="h-5 w-5" /></button>
+                                        </div>
+                                    </div>
+                                ))}
+                                {filteredItems.length === 0 && (
+                                    <div className="p-20 text-center border-2 border-dashed border-white/5 rounded-[4rem]">
+                                        <Search className="h-12 w-12 text-zinc-800 mx-auto mb-6" />
+                                        <h3 className="text-xl font-black text-zinc-700 uppercase tracking-widest">No items found</h3>
+                                    </div>
+                                )}
+                            </div>
+                        </>
+                    ) : (
+                        <div className="max-w-5xl mx-auto space-y-12 bg-white/[0.01] p-16 rounded-[5rem] border border-white/5 relative">
+                            <div className="flex justify-between items-center mb-8">
+                                <button onClick={() => setActiveView('list')} className="text-zinc-500 hover:text-white font-black text-[10px] uppercase tracking-widest flex items-center gap-2 transition-colors"><X className="h-5 w-5" /> Cancel</button>
+                                <div className="flex gap-4">
+                                    <button onClick={() => setFormData({...formData, status: formData.status === 'published' ? 'draft' : 'published'})} className={`px-8 py-5 rounded-[2rem] border font-black text-[10px] uppercase tracking-widest transition-all ${formData.status === 'published' ? 'border-emerald-500/20 text-emerald-500' : 'border-zinc-700 text-zinc-500'}`}>
+                                        {formData.status === 'published' ? 'Published' : 'Draft'}
+                                    </button>
+                                    <button onClick={handleSave} className="px-12 py-5 rounded-[2rem] bg-blue-600 text-white font-black text-[10px] uppercase tracking-[0.2em] shadow-xl shadow-blue-600/20 hover:scale-105 active:scale-95 transition-all">Save Changes</button>
+                                </div>
+                            </div>
+                            
+                            <div className="space-y-10">
+                                <div className="relative group">
+                                    <label className="absolute -top-3 left-8 px-2 bg-[#050506] text-[9px] font-black text-zinc-500 uppercase tracking-widest z-10">Title / Name</label>
+                                    <input value={formData.title || formData.name || ''} onChange={e => setFormData({...formData, [activeTab === 'team' ? 'name' : 'title']: e.target.value})} className="w-full bg-transparent text-5xl font-black outline-none border border-white/5 p-10 rounded-[3rem] focus:border-blue-500/50 transition-all premium-gradient-text" placeholder="Enter title here..." />
+                                </div>
+
+                                <div className="grid md:grid-cols-2 gap-8">
+                                    <div className="space-y-4">
+                                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-8">Category / Role</label>
+                                        <input value={formData.category || formData.role || ''} onChange={e => setFormData({...formData, [activeTab === 'team' ? 'role' : 'category']: e.target.value})} className="w-full bg-black/40 border border-white/5 p-8 rounded-[2.5rem] outline-none focus:border-blue-500 transition-all" placeholder="e.g. Technology" />
+                                    </div>
+                                    <div className="space-y-4">
+                                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-8">Image URL</label>
+                                        <div className="relative">
+                                            <ImageIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-600" />
+                                            <input value={formData.image || formData.img || ''} onChange={e => setFormData({...formData, [activeTab === 'portfolio' ? 'img' : 'image']: e.target.value})} className="w-full bg-black/40 border border-white/5 pl-16 pr-8 py-8 rounded-[2.5rem] outline-none focus:border-blue-500 transition-all" placeholder="Paste image link here..." />
+                                        </div>
+                                    </div>
+                                </div>
+
+                                {activeTab === 'articles' && (
+                                    <div className="space-y-4">
+                                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-8">Blog Content</label>
+                                        <textarea value={formData.content || ''} onChange={e => setFormData({...formData, content: e.target.value})} className="w-full h-[30rem] bg-black/40 border border-white/5 p-10 rounded-[3rem] outline-none focus:border-blue-500 transition-all resize-none leading-relaxed text-zinc-400 font-mono text-sm" placeholder="Write your post here..." />
+                                    </div>
+                                )}
+
+                                {activeTab === 'portfolio' && (
+                                    <div className="grid md:grid-cols-2 gap-8">
+                                        <div className="space-y-4">
+                                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-8">Results Achieved</label>
+                                            <input value={formData.result || ''} onChange={e => setFormData({...formData, result: e.target.value})} className="w-full bg-black/40 border border-white/5 p-8 rounded-[2.5rem] outline-none focus:border-blue-500 transition-all" placeholder="e.g. High Performance" />
+                                        </div>
+                                        <div className="space-y-4">
+                                            <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-8">Live Link</label>
+                                            <div className="relative">
+                                                <LinkIcon className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-600" />
+                                                <input value={formData.live || ''} onChange={e => setFormData({...formData, live: e.target.value})} className="w-full bg-black/40 border border-white/5 pl-16 pr-8 py-8 rounded-[2.5rem] outline-none focus:border-blue-500 transition-all" placeholder="https://..." />
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+                                
+                                {activeTab === 'team' && (
+                                    <div className="space-y-4">
+                                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-8">Member Bio</label>
+                                        <textarea value={formData.bio || ''} onChange={e => setFormData({...formData, bio: e.target.value})} className="w-full h-40 bg-black/40 border border-white/5 p-8 rounded-[2.5rem] outline-none focus:border-blue-500 transition-all resize-none leading-relaxed text-zinc-400" placeholder="About the team member..." />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
                 </div>
-              )}
-            </main>
-          </div>
+            )}
+
+            {activeTab === "config" && (
+               <div className="max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
+                  <div className="flex justify-between items-center mb-12">
+                     <div>
+                        <h2 className="text-4xl font-black uppercase tracking-tight">Site Settings</h2>
+                        <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-2">Manage contact info and global text</p>
+                     </div>
+                     <div className="flex gap-4">
+                         <button onClick={loadData} className="p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors"><Activity className="h-5 w-5 text-zinc-500" /></button>
+                         <div className="h-12 w-12 bg-white/5 rounded-2xl flex items-center justify-center">
+                            <SettingsIcon className="h-6 w-6 text-zinc-600" />
+                         </div>
+                     </div>
+                  </div>
+                  
+                  <div className="grid lg:grid-cols-2 gap-12 bg-white/[0.01] p-20 rounded-[6rem] border border-white/5 relative overflow-hidden">
+                     <div className="absolute top-0 right-0 p-10 opacity-5">
+                        <Globe className="h-64 w-64" />
+                     </div>
+                     <div className="space-y-4 relative z-10">
+                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-4">WhatsApp Number</label>
+                        <div className="relative group">
+                           <Phone className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
+                           <input value={config.whatsapp} onChange={e => setConfig({...config, whatsapp: e.target.value})} className="w-full pl-16 pr-8 py-6 rounded-[2.5rem] bg-black/40 border border-white/5 outline-none focus:border-blue-500 transition-all font-bold" />
+                        </div>
+                     </div>
+                     <div className="space-y-4 relative z-10">
+                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-4">Email Address</label>
+                        <div className="relative group">
+                           <Mail className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
+                           <input value={config.email} onChange={e => setConfig({...config, email: e.target.value})} className="w-full pl-16 pr-8 py-6 rounded-[2.5rem] bg-black/40 border border-white/5 outline-none focus:border-blue-500 transition-all font-bold" />
+                        </div>
+                     </div>
+                     <div className="space-y-4 md:col-span-2 relative z-10">
+                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-4">Office Address</label>
+                        <div className="relative group">
+                           <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
+                           <input value={config.address} onChange={e => setConfig({...config, address: e.target.value})} className="w-full pl-16 pr-8 py-6 rounded-[2.5rem] bg-black/40 border border-white/5 outline-none focus:border-blue-500 transition-all font-bold" />
+                        </div>
+                     </div>
+                     <div className="space-y-4 md:col-span-2 relative z-10">
+                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-4">Footer Copyright Text</label>
+                        <input value={config.footerText} onChange={e => setConfig({...config, footerText: e.target.value})} className="w-full px-8 py-6 rounded-[2.5rem] bg-black/40 border border-white/5 outline-none focus:border-blue-500 transition-all font-bold" />
+                     </div>
+                     <button onClick={handleSave} className="md:col-span-2 py-8 rounded-[3rem] bg-white text-black font-black uppercase text-xs tracking-[0.3em] hover:bg-blue-600 hover:text-white transition-all shadow-2xl active:scale-[0.98] relative z-10">Save All Settings</button>
+                  </div>
+               </div>
+            )}
+          </main>
         </div>
       </SiteLayout>
     );
   },
-  head: () => ({
-    meta: [
-      { title: "Google Cloud Console — DevdigitaX" },
-      {
-        name: "description",
-        content: "Enterprise-grade cloud management for your digital assets.",
-      },
-    ],
-  }),
 });
