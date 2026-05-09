@@ -125,7 +125,7 @@ function ServicesPage() {
             to="/contact"
             className="inline-flex items-center gap-2 mt-8 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all hover:scale-105"
           >
-            Get a Free Audit <ArrowRight className="h-4 w-4" />
+            Claim Your Growth Blueprint <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
       </section>
