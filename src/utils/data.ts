@@ -80,23 +80,19 @@ export const saveTeam = (members: TeamMember[]) => {
   localStorage.setItem("devdigitax_team", JSON.stringify(members));
 };
 
-// SITE CONFIG
+// SITE CONFIG (Hardcoded as requested)
 export const getSiteConfig = (): SiteConfig => {
-  const defaultTitle = "© DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX.";
-  const defaults: SiteConfig = {
+  return {
     whatsapp: "+880 1837-692110",
     email: "devdigitax@gmail.com",
     phone: "+880 9638-474596",
     address: "Savar 1340, Dhaka, Bangladesh",
-    footerText: defaultTitle
+    footerText: "© DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX."
   };
-  if (typeof window === "undefined") return defaults;
-  const saved = localStorage.getItem("devdigitax_config");
-  return saved ? JSON.parse(saved) : defaults;
 };
 
 export const saveSiteConfig = (config: SiteConfig) => {
-  localStorage.setItem("devdigitax_config", JSON.stringify(config));
+  // Persistence disabled as per hardcoding request
 };
 
 // ARTICLES & MESSAGES (Still useful but maybe hidden from tabs if requested)

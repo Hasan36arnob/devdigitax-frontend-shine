@@ -259,7 +259,6 @@ export const Route = createFileRoute("/admin")({
       { id: "services", label: "Services", icon: Zap },
       { id: "portfolio", label: "Portfolio", icon: Briefcase },
       { id: "team", label: "Team Members", icon: Users },
-      { id: "config", label: "Site Settings", icon: SettingsIcon },
     ];
 
     if (!isAuthenticated) {
@@ -592,54 +591,6 @@ export const Route = createFileRoute("/admin")({
                 </div>
             )}
 
-            {activeTab === "config" && (
-               <div className="max-w-5xl mx-auto animate-in fade-in slide-in-from-bottom-4 duration-700">
-                  <div className="flex justify-between items-center mb-12">
-                     <div>
-                        <h2 className="text-4xl font-black uppercase tracking-tight">Site Settings</h2>
-                        <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-2">Manage contact info and global text</p>
-                     </div>
-                     <div className="flex gap-4">
-                         <button onClick={loadData} className="p-4 bg-white/5 rounded-2xl hover:bg-white/10 transition-colors"><Activity className="h-5 w-5 text-zinc-500" /></button>
-                         <div className="h-12 w-12 bg-white/5 rounded-2xl flex items-center justify-center">
-                            <SettingsIcon className="h-6 w-6 text-zinc-600" />
-                         </div>
-                     </div>
-                  </div>
-                  
-                  <div className="grid lg:grid-cols-2 gap-12 bg-white/[0.01] p-20 rounded-[6rem] border border-white/5 relative overflow-hidden">
-                     <div className="absolute top-0 right-0 p-10 opacity-5">
-                        <Globe className="h-64 w-64" />
-                     </div>
-                     <div className="space-y-4 relative z-10">
-                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-4">WhatsApp Number</label>
-                        <div className="relative group">
-                           <Phone className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
-                           <input value={config.whatsapp} onChange={e => setConfig({...config, whatsapp: e.target.value})} className="w-full pl-16 pr-8 py-6 rounded-[2.5rem] bg-black/40 border border-white/5 outline-none focus:border-blue-500 transition-all font-bold" />
-                        </div>
-                     </div>
-                     <div className="space-y-4 relative z-10">
-                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-4">Email Address</label>
-                        <div className="relative group">
-                           <Mail className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
-                           <input value={config.email} onChange={e => setConfig({...config, email: e.target.value})} className="w-full pl-16 pr-8 py-6 rounded-[2.5rem] bg-black/40 border border-white/5 outline-none focus:border-blue-500 transition-all font-bold" />
-                        </div>
-                     </div>
-                     <div className="space-y-4 md:col-span-2 relative z-10">
-                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-4">Office Address</label>
-                        <div className="relative group">
-                           <MapPin className="absolute left-6 top-1/2 -translate-y-1/2 h-5 w-5 text-zinc-600 group-focus-within:text-blue-500 transition-colors" />
-                           <input value={config.address} onChange={e => setConfig({...config, address: e.target.value})} className="w-full pl-16 pr-8 py-6 rounded-[2.5rem] bg-black/40 border border-white/5 outline-none focus:border-blue-500 transition-all font-bold" />
-                        </div>
-                     </div>
-                     <div className="space-y-4 md:col-span-2 relative z-10">
-                        <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-4">Footer Copyright Text</label>
-                        <input value={config.footerText} onChange={e => setConfig({...config, footerText: e.target.value})} className="w-full px-8 py-6 rounded-[2.5rem] bg-black/40 border border-white/5 outline-none focus:border-blue-500 transition-all font-bold" />
-                     </div>
-                     <button onClick={handleSave} className="md:col-span-2 py-8 rounded-[3rem] bg-white text-black font-black uppercase text-xs tracking-[0.3em] hover:bg-blue-600 hover:text-white transition-all shadow-2xl active:scale-[0.98] relative z-10">Save All Settings</button>
-                  </div>
-               </div>
-            )}
           </main>
         </div>
       </SiteLayout>
