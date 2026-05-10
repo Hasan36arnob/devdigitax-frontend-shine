@@ -119,14 +119,17 @@ If asked about the Co-Founder, it is Md Arnob Hasan Joy.`;
   };
 
   return (
-    <div className="fixed bottom-28 right-4 sm:right-8 z-[100] font-sans">
+    <div className="fixed bottom-[104px] right-8 z-[100] font-sans">
       {!isOpen ? (
         <button
           onClick={() => setIsOpen(true)}
-          className="flex h-14 w-14 sm:h-16 sm:w-16 items-center justify-center rounded-2xl bg-blue-600 text-white shadow-xl transition-all hover:scale-110 active:scale-95"
+          className="group relative flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl transition-all hover:scale-110 active:scale-95"
         >
-          <MessageSquare className="h-6 w-6 sm:h-7 sm:w-7" />
-          <div className="absolute top-0 right-0 h-3 w-3 sm:h-4 sm:w-4 bg-emerald-500 rounded-full border-2 border-[#0A0A0C]" />
+          {/* Glow Effect */}
+          <div className="absolute -inset-1 bg-blue-500 rounded-full opacity-20 group-hover:opacity-40 blur-sm transition duration-500" />
+          
+          <MessageSquare className="relative h-8 w-8" />
+          <div className="absolute -top-1 -right-1 h-4 w-4 bg-emerald-500 rounded-full border-2 border-[#0A0A0C] z-10" />
         </button>
       ) : (
         <div
