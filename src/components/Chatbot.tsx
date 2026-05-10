@@ -119,7 +119,7 @@ If asked about the Co-Founder, it is Md Arnob Hasan Joy.`;
   };
 
   return (
-    <div className="fixed bottom-4 right-4 sm:bottom-8 sm:right-8 lg:right-32 z-[100] font-sans">
+    <div className="fixed bottom-28 right-4 sm:right-8 z-[100] font-sans">
       {!isOpen ? (
         <button
           onClick={() => setIsOpen(true)}
