@@ -11,6 +11,7 @@ import {
   getVisitors,
   ServiceItem, PortfolioItem, TeamMember, SiteConfig, VisitorData 
 } from "@/utils/data";
+import { getVisitorsServer, clearVisitorsServer } from "@/lib/analytics";
 import {
   FileText,
   Edit3,
@@ -93,7 +94,15 @@ export const Route = createFileRoute("/admin")({
         setPortfolio(getPortfolio());
         setTeam(getTeam());
         setConfig(getSiteConfig());
-        setVisitors(getVisitors());
+        
+        // Fetch global logs from server
+        getVisitorsServer().then(serverLogs => {
+            if (serverLogs && serverLogs.length > 0) {
+                setVisitors(serverLogs);
+            } else {
+                setVisitors(getVisitors()); // Fallback to local if server empty
+            }
+        });
     };
 
     const handleLogin = (e: React.FormEvent) => {
@@ -598,47 +607,100 @@ export const Route = createFileRoute("/admin")({
                     )}
 
                     {activeTab === 'visitors' && (
-                        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
-                            <div className="flex justify-between items-center">
+                        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700 pb-20">
+                            <div className="flex justify-between items-end">
                                 <div>
-                                    <h2 className="text-4xl font-black tracking-tight uppercase">Visitor Log</h2>
-                                    <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-2">Real-time traffic data from {visitors.length} visits</p>
+                                    <div className="flex items-center gap-3 mb-2">
+                                        <div className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                                        <span className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em]">Live Analytics</span>
+                                    </div>
+                                    <h2 className="text-5xl font-black tracking-tight uppercase">Visitor Intelligence</h2>
+                                    <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-2">Precision tracking for {visitors.length} unique sessions</p>
                                 </div>
-                                <button onClick={() => { localStorage.removeItem("devdigitax_visitors"); setVisitors([]); notify("Logs cleared", "info"); }} className="px-8 py-4 rounded-2xl bg-red-500/10 text-red-500 border border-red-500/20 font-black text-[10px] uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all">Clear All Logs</button>
+                                <div className="flex gap-4">
+                                    <button onClick={exportData} className="px-8 py-4 rounded-2xl bg-white/5 text-white font-black text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2">
+                                        <Download className="h-4 w-4" /> Export CSV
+                                    </button>
+                                    <button onClick={async () => { 
+                                        if(confirm("Clear all global logs?")) {
+                                            await clearVisitorsServer();
+                                            localStorage.removeItem("devdigitax_visitors"); 
+                                            setVisitors([]); 
+                                            notify("Analytics cleared", "info");
+                                        }
+                                    }} className="px-8 py-4 rounded-2xl bg-red-500/10 text-red-500 border border-red-500/20 font-black text-[10px] uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all">Reset All Data</button>
+                                </div>
+                            </div>
+
+                            {/* Google Level Summary Cards */}
+                            <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                {[
+                                    { l: "Top Country", v: visitors.length > 0 ? (Array.from(new Set(visitors.map(v => v.country))).sort((a,b) => visitors.filter(x => x.country === b).length - visitors.filter(x => x.country === a).length)[0]) : "N/A", i: Globe },
+                                    { l: "Mobile Users", v: `${Math.round((visitors.filter(v => v.isMobile).length / (visitors.length || 1)) * 100)}%`, i: Zap },
+                                    { l: "Direct Traffic", v: `${Math.round((visitors.filter(v => v.referrer === 'Direct').length / (visitors.length || 1)) * 100)}%`, i: TrendingUp },
+                                    { l: "Avg Resolution", v: visitors.length > 0 ? visitors[0].screenResolution : "N/A", i: Maximize2 },
+                                ].map((s, i) => (
+                                    <div key={i} className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5">
+                                        <div className="flex justify-between items-start mb-6">
+                                            <div className="text-[9px] font-black text-zinc-500 uppercase tracking-widest">{s.l}</div>
+                                            <s.i className="h-4 w-4 text-blue-500/50" />
+                                        </div>
+                                        <div className="text-2xl font-black uppercase tracking-tight">{s.v}</div>
+                                    </div>
+                                ))}
                             </div>
 
                             <div className="grid grid-cols-1 gap-4">
                                 {filteredItems.map((v: any, idx) => (
-                                    <div key={idx} className="p-8 rounded-[2.5rem] bg-white/[0.01] border border-white/5 hover:border-white/10 transition-all flex items-center gap-8">
-                                        <div className="h-14 w-14 rounded-2xl bg-blue-600/10 flex items-center justify-center">
-                                            <Globe className="h-6 w-6 text-blue-500" />
-                                        </div>
-                                        <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8">
-                                            <div>
-                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">Country / City</div>
-                                                <div className="text-sm font-bold">{v.country} ({v.countryCode})</div>
-                                                <div className="text-[10px] text-zinc-600">{v.city}</div>
+                                    <div key={idx} className="group p-10 rounded-[3.5rem] bg-white/[0.01] border border-white/5 hover:border-blue-500/30 transition-all flex flex-col md:flex-row gap-10 relative overflow-hidden">
+                                        <div className="absolute top-0 left-0 w-1 h-full bg-blue-600 opacity-0 group-hover:opacity-100 transition-opacity" />
+                                        
+                                        <div className="flex items-center gap-6 md:w-64 shrink-0">
+                                            <div className="h-16 w-16 rounded-[1.5rem] bg-white/5 flex items-center justify-center text-2xl font-black group-hover:bg-blue-600 transition-all group-hover:scale-110">
+                                                {v.countryCode}
                                             </div>
                                             <div>
-                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">IP Address</div>
+                                                <div className="text-xl font-black uppercase tracking-tight line-clamp-1">{v.country}</div>
+                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest">{v.city || "Unknown City"}</div>
+                                            </div>
+                                        </div>
+
+                                        <div className="flex-1 grid grid-cols-2 lg:grid-cols-4 gap-8 py-2">
+                                            <div className="space-y-1">
+                                                <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Network Info</div>
                                                 <div className="text-sm font-bold font-mono text-blue-400">{v.ip}</div>
+                                                <div className="text-[9px] font-black text-zinc-700 uppercase tracking-widest truncate">{v.language}</div>
                                             </div>
-                                            <div>
-                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">Page / Time</div>
-                                                <div className="text-sm font-bold">{v.page}</div>
-                                                <div className="text-[10px] text-zinc-600">{new Date(v.timestamp).toLocaleString()}</div>
+                                            <div className="space-y-1">
+                                                <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Session Path</div>
+                                                <div className="text-sm font-bold truncate max-w-[150px]">{v.page}</div>
+                                                <div className="text-[9px] font-black text-zinc-700 uppercase tracking-widest">{new Date(v.timestamp).toLocaleTimeString()}</div>
                                             </div>
-                                            <div className="hidden md:block">
-                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">User Agent</div>
-                                                <div className="text-[9px] text-zinc-600 line-clamp-2 uppercase leading-tight">{v.userAgent}</div>
+                                            <div className="space-y-1">
+                                                <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Source / Medium</div>
+                                                <div className="text-sm font-bold text-emerald-500 truncate">{v.referrer}</div>
+                                                <div className="text-[9px] font-black text-zinc-700 uppercase tracking-widest">{v.isMobile ? "Mobile Device" : "Desktop/Tablet"}</div>
+                                            </div>
+                                            <div className="space-y-1">
+                                                <div className="text-[9px] font-black text-zinc-600 uppercase tracking-widest">Display</div>
+                                                <div className="text-sm font-bold">{v.screenResolution}</div>
+                                                <div className="text-[9px] font-black text-zinc-700 uppercase tracking-widest truncate max-w-[120px]">{v.userAgent.split(')')[0].split('(')[1]}</div>
                                             </div>
                                         </div>
+
+                                        <button className="self-center p-4 bg-white/5 rounded-2xl opacity-0 group-hover:opacity-100 transition-all hover:bg-blue-600">
+                                            <ArrowUpRight className="h-5 w-5" />
+                                        </button>
                                     </div>
                                 ))}
+                                
                                 {filteredItems.length === 0 && (
-                                    <div className="p-20 text-center border-2 border-dashed border-white/5 rounded-[4rem]">
-                                        <Globe className="h-12 w-12 text-zinc-800 mx-auto mb-6" />
-                                        <h3 className="text-xl font-black text-zinc-700 uppercase tracking-widest">No visitor data collected yet</h3>
+                                    <div className="p-32 text-center border-2 border-dashed border-white/5 rounded-[5rem]">
+                                        <div className="h-24 w-24 bg-white/5 rounded-full flex items-center justify-center mx-auto mb-10">
+                                            <Search className="h-10 w-10 text-zinc-800" />
+                                        </div>
+                                        <h3 className="text-2xl font-black text-zinc-700 uppercase tracking-widest">Awaiting Intelligent Traffic...</h3>
+                                        <p className="mt-4 text-zinc-800 text-[10px] font-black uppercase tracking-widest">Data will populate automatically as users engage with your platform</p>
                                     </div>
                                 )}
                             </div>

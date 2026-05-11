@@ -39,6 +39,10 @@ export interface VisitorData {
   timestamp: string;
   userAgent: string;
   page: string;
+  referrer: string;
+  screenResolution: string;
+  language: string;
+  isMobile: boolean;
 }
 
 export interface SiteConfig {

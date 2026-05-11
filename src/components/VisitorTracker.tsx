@@ -1,38 +1,76 @@
 import { useEffect } from "react";
 import { saveVisitor, VisitorData } from "@/utils/data";
+import { logVisitServer } from "@/lib/analytics";
 
 export function VisitorTracker() {
   useEffect(() => {
     const trackVisit = async () => {
       try {
-        // Prevent multiple tracking in the same session if you want, 
-        // but for a simple "visit" count, let's track on mount.
         const hasTracked = sessionStorage.getItem("devdigitax_tracked_session");
         if (hasTracked) return;
 
-        const response = await fetch("https://ipapi.co/json/");
-        const data = await response.json();
+        // Try multiple providers for 100% accuracy (fallbacks)
+        let data: any = null;
+        const providers = [
+          "https://ipapi.co/json/",
+          "https://ip-api.com/json/",
+          "https://freeipapi.com/api/json"
+        ];
+
+        for (const url of providers) {
+          try {
+            const res = await fetch(url);
+            if (res.ok) {
+              const json = await res.json();
+              // Normalize data from different providers
+              data = {
+                ip: json.ip || json.query || "Unknown",
+                country: json.country_name || json.country || "Unknown",
+                countryCode: json.country_code || json.countryCode || "??",
+                city: json.city || "Unknown",
+              };
+              break; 
+            }
+          } catch (e) {
+            continue;
+          }
+        }
+
+        if (!data) throw new Error("All geo providers failed");
 
         const visitor: VisitorData = {
           id: Math.random().toString(36).substring(2, 15),
-          ip: data.ip || "Unknown",
-          country: data.country_name || "Unknown",
-          countryCode: data.country_code || "??",
-          city: data.city || "Unknown",
+          ip: data.ip,
+          country: data.country,
+          countryCode: data.countryCode,
+          city: data.city,
           timestamp: new Date().toISOString(),
           userAgent: navigator.userAgent,
-          page: window.location.pathname
+          page: window.location.pathname,
+          // Advanced Metadata
+          referrer: document.referrer || "Direct",
+          screenResolution: `${window.screen.width}x${window.screen.height}`,
+          language: navigator.language,
+          isMobile: /Mobi|Android/i.test(navigator.userAgent)
         };
 
         saveVisitor(visitor);
+        
+        // Sync to server for global admin visibility (Google Level)
+        try {
+          await logVisitServer(visitor);
+        } catch (serverError) {
+          console.error("Server sync failed:", serverError);
+        }
+
         sessionStorage.setItem("devdigitax_tracked_session", "true");
       } catch (error) {
-        console.error("Failed to track visitor:", error);
+        console.error("Advanced Tracking Error:", error);
       }
     };
 
     trackVisit();
   }, []);
 
-  return null; // This component doesn't render anything
+  return null;
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { MessageSquare, X, Send, Bot, User, Loader2, Minus, Maximize2, AlertTriangle, RefreshCw, Zap } from "lucide-react";
+import { MessageSquare, X, Send, Bot, User, Loader2, Minus, Maximize2, AlertTriangle, RefreshCw, Zap, Sparkles } from "lucide-react";
+import { NexusAIIcon } from "./Icons";
 import { getServices, getPortfolio, getTeam, getSiteConfig } from "@/utils/data";
 
 const API_KEY = import.meta.env.VITE_GROQ_API_KEY || "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";
@@ -123,13 +124,19 @@ If asked about the Co-Founder, it is Md Arnob Hasan Joy.`;
       {!isOpen ? (
         <button
           onClick={() => setIsOpen(true)}
-          className="group relative flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-white shadow-xl transition-all hover:scale-110 active:scale-95"
+          className="group relative flex h-16 w-16 items-center justify-center rounded-full bg-blue-600 text-white shadow-2xl transition-all hover:scale-110 active:scale-95 overflow-hidden"
+          style={{ background: "linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%)", boxShadow: "0 0 30px -5px rgba(37, 99, 235, 0.5)" }}
         >
-          {/* Glow Effect */}
-          <div className="absolute -inset-1 bg-blue-500 rounded-full opacity-20 group-hover:opacity-40 blur-sm transition duration-500" />
+          {/* Animated Background Rays */}
+          <div className="absolute inset-0 opacity-20 group-hover:opacity-40 transition-opacity">
+            <div className="absolute inset-0 bg-[conic-gradient(from_0deg,transparent,white,transparent)] animate-[spin_4s_linear_infinite]" />
+          </div>
+
+          <NexusAIIcon className="relative h-9 w-9 animate-pulse" />
           
-          <MessageSquare className="relative h-8 w-8" />
-          <div className="absolute -top-1 -right-1 h-4 w-4 bg-emerald-500 rounded-full border-2 border-[#0A0A0C] z-10" />
+          <div className="absolute -top-1 -right-1 h-4 w-4 bg-emerald-500 rounded-full border-2 border-[#0A0A0C] z-10">
+            <div className="absolute inset-0 bg-emerald-500 rounded-full animate-ping opacity-40" />
+          </div>
         </button>
       ) : (
         <div
@@ -141,8 +148,9 @@ If asked about the Co-Founder, it is Md Arnob Hasan Joy.`;
         >
           <div className="p-4 sm:p-5 border-b border-white/5 bg-white/5 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="h-9 w-9 sm:h-10 sm:w-10 bg-blue-600 rounded-xl flex items-center justify-center">
-                <Bot className="h-5 w-5 sm:h-6 sm:w-6 text-white" />
+              <div className="h-10 w-10 bg-blue-600 rounded-xl flex items-center justify-center relative overflow-hidden group">
+                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent" />
+                <NexusAIIcon className="h-6 w-6 text-white relative z-10 animate-pulse" />
               </div>
               <div>
                 <div className="text-sm font-bold text-white">DevdigitaX AI</div>
