@@ -515,10 +515,12 @@ function Index() {
                   key={slug}
                   className="group p-8 rounded-2xl border border-border bg-background hover:border-primary/50 hover:-translate-y-1 transition-all"
                   style={{ transition: "var(--transition-smooth)" }}
+                  suppressHydrationWarning
                 >
                   <div
                     className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
                     style={{ background: "var(--gradient-primary)" }}
+                    suppressHydrationWarning
                   >
                     <Icon className="h-6 w-6" />
                   </div>

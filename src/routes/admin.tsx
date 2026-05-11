@@ -88,21 +88,27 @@ export const Route = createFileRoute("/admin")({
       }
     }, [isAuthenticated]);
 
-    const loadData = () => {
+    const loadData = async () => {
         setArticles(getArticles());
         setServices(getServices());
         setPortfolio(getPortfolio());
         setTeam(getTeam());
         setConfig(getSiteConfig());
         
-        // Fetch global logs from server
-        getVisitorsServer().then(serverLogs => {
-            if (serverLogs && serverLogs.length > 0) {
+        // Fetch global logs from server - ensure it's always an array
+        try {
+            const serverLogs = await getVisitorsServer();
+            if (Array.isArray(serverLogs) && serverLogs.length > 0) {
                 setVisitors(serverLogs);
             } else {
-                setVisitors(getVisitors()); // Fallback to local if server empty
+                const localVisitors = getVisitors();
+                setVisitors(Array.isArray(localVisitors) ? localVisitors : []);
             }
-        });
+        } catch (err) {
+            console.error("Failed to fetch visitors from server:", err);
+            const localVisitors = getVisitors();
+            setVisitors(Array.isArray(localVisitors) ? localVisitors : []);
+        }
     };
 
     const handleLogin = (e: React.FormEvent) => {
@@ -262,7 +268,7 @@ export const Route = createFileRoute("/admin")({
         if (activeTab === 'services') return services.filter(s => s.title.toLowerCase().includes(query) || s.description.toLowerCase().includes(query));
         if (activeTab === 'portfolio') return portfolio.filter(p => p.title.toLowerCase().includes(query) || p.client?.toLowerCase().includes(query));
         if (activeTab === 'team') return team.filter(t => t.name.toLowerCase().includes(query) || t.role.toLowerCase().includes(query));
-        if (activeTab === 'visitors') return visitors.filter(v => v.country.toLowerCase().includes(query) || v.ip.toLowerCase().includes(query) || v.city.toLowerCase().includes(query));
+        if (activeTab === 'visitors') return Array.isArray(visitors) ? visitors.filter(v => v.country.toLowerCase().includes(query) || v.ip.toLowerCase().includes(query) || v.city.toLowerCase().includes(query)) : [];
         return [];
     }, [activeTab, articles, services, portfolio, team, visitors, searchQuery]);
 
@@ -467,7 +473,7 @@ export const Route = createFileRoute("/admin")({
                             <h4 className="text-xs font-black uppercase tracking-widest text-zinc-500">Recent Activity</h4>
                             <Activity className="h-4 w-4 text-blue-500" />
                          </div>
-                         {visitors.slice(0, 5).map((v, i) => (
+                         {Array.isArray(visitors) && visitors.slice(0, 5).map((v, i) => (
                            <div key={i} className="flex gap-4 items-center">
                               <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center"><Globe className="h-4 w-4 text-blue-500" /></div>
                               <div className="flex-1">
@@ -477,7 +483,7 @@ export const Route = createFileRoute("/admin")({
                               <div className="text-[9px] font-black text-blue-500">{v.countryCode}</div>
                            </div>
                          ))}
-                         {visitors.length === 0 && (
+                         {(!Array.isArray(visitors) || visitors.length === 0) && (
                             <p className="text-[10px] text-zinc-600 uppercase font-black text-center py-4">No recent activity</p>
                          )}
                       </div>
@@ -615,7 +621,7 @@ export const Route = createFileRoute("/admin")({
                                         <span className="text-[10px] font-black text-emerald-500 uppercase tracking-[0.2em]">Live Analytics</span>
                                     </div>
                                     <h2 className="text-5xl font-black tracking-tight uppercase">Visitor Intelligence</h2>
-                                    <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-2">Precision tracking for {visitors.length} unique sessions</p>
+                                    <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-2">Precision tracking for {Array.isArray(visitors) ? visitors.length : 0} unique sessions</p>
                                 </div>
                                 <div className="flex gap-4">
                                     <button onClick={exportData} className="px-8 py-4 rounded-2xl bg-white/5 text-white font-black text-[10px] uppercase tracking-widest hover:bg-white/10 transition-all flex items-center gap-2">
@@ -637,7 +643,7 @@ export const Route = createFileRoute("/admin")({
                                 {[
                                     { 
                                         l: "Top Country", 
-                                        v: visitors.length > 0 
+                                        v: Array.isArray(visitors) && visitors.length > 0 
                                             ? (Array.from(new Set(visitors.map(v => v.country).filter(Boolean)))
                                                 .sort((a, b) => visitors.filter(x => x.country === b).length - visitors.filter(x => x.country === a).length)[0] || "Unknown") 
                                             : "N/A", 
@@ -645,21 +651,21 @@ export const Route = createFileRoute("/admin")({
                                     },
                                     { 
                                         l: "Mobile Users", 
-                                        v: visitors.length > 0 
+                                        v: Array.isArray(visitors) && visitors.length > 0 
                                             ? `${Math.round((visitors.filter(v => v.isMobile).length / visitors.length) * 100)}%` 
                                             : "0%", 
                                         i: Zap 
                                     },
                                     { 
                                         l: "Direct Traffic", 
-                                        v: visitors.length > 0 
+                                        v: Array.isArray(visitors) && visitors.length > 0 
                                             ? `${Math.round((visitors.filter(v => v.referrer === 'Direct').length / visitors.length) * 100)}%` 
                                             : "0%", 
                                         i: TrendingUp 
                                     },
                                     { 
                                         l: "Avg Resolution", 
-                                        v: visitors.length > 0 ? (visitors[0]?.screenResolution || "N/A") : "N/A", 
+                                        v: Array.isArray(visitors) && visitors.length > 0 ? (visitors[0]?.screenResolution || "N/A") : "N/A", 
                                         i: Maximize2 
                                     },
                                 ].map((s, i) => (

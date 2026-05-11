@@ -12,9 +12,7 @@ export function VisitorTracker() {
         // Try multiple providers for 100% accuracy (fallbacks)
         let data: any = null;
         const providers = [
-          "https://ipapi.co/json/",
-          "https://ip-api.com/json/",
-          "https://freeipapi.com/api/json"
+          "https://ipwho.is/?fields=ip,country,countryCode,city"
         ];
 
         for (const url of providers) {
@@ -22,11 +20,11 @@ export function VisitorTracker() {
             const res = await fetch(url);
             if (res.ok) {
               const json = await res.json();
-              // Normalize data from different providers
+              // Normalize data from ipwho.is
               data = {
-                ip: json.ip || json.query || "Unknown",
-                country: json.country_name || json.country || "Unknown",
-                countryCode: json.country_code || json.countryCode || "??",
+                ip: json.ip || "Unknown",
+                country: json.country || "Unknown",
+                countryCode: json.countryCode || "??",
                 city: json.city || "Unknown",
               };
               break; 
