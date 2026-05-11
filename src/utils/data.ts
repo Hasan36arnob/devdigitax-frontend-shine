@@ -30,6 +30,17 @@ export interface TeamMember {
   status?: "draft" | "published";
 }
 
+export interface VisitorData {
+  id: string;
+  ip: string;
+  country: string;
+  countryCode: string;
+  city: string;
+  timestamp: string;
+  userAgent: string;
+  page: string;
+}
+
 export interface SiteConfig {
   whatsapp: string;
   email: string;
@@ -104,4 +115,18 @@ export const getMessages = () => {
 export const getArticles = () => {
   if (typeof window === "undefined") return [];
   return JSON.parse(localStorage.getItem("devdigitax_articles") || "[]");
+};
+
+// VISITORS
+export const getVisitors = (): VisitorData[] => {
+  if (typeof window === "undefined") return [];
+  return JSON.parse(localStorage.getItem("devdigitax_visitors") || "[]");
+};
+
+export const saveVisitor = (visitor: VisitorData) => {
+  if (typeof window === "undefined") return;
+  const visitors = getVisitors();
+  // Avoid duplicate tracking for the same session/page if needed, but let's keep it simple
+  const updated = [visitor, ...visitors].slice(0, 100); // Keep last 100 visitors
+  localStorage.setItem("devdigitax_visitors", JSON.stringify(updated));
 };

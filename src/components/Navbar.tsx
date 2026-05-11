@@ -16,7 +16,7 @@ const aboutItem = { to: "/about", label: "About" };
 const aboutDropdown = [
   { to: "/about#mission", label: "Our mission" },
   { to: "/about#company", label: "About our company" },
-  { to: "/about#team", label: "Our team" },
+  // { to: "/about#team", label: "Our team" },
 ];
 
 export function Navbar() {

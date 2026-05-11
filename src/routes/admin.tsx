@@ -8,7 +8,8 @@ import {
   getTeam, saveTeam,
   getSiteConfig, saveSiteConfig,
   getArticles,
-  ServiceItem, PortfolioItem, TeamMember, SiteConfig 
+  getVisitors,
+  ServiceItem, PortfolioItem, TeamMember, SiteConfig, VisitorData 
 } from "@/utils/data";
 import {
   FileText,
@@ -61,7 +62,7 @@ export const Route = createFileRoute("/admin")({
     const [usernameInput, setUsernameInput] = useState("");
     const [passwordInput, setPasswordInput] = useState("");
     
-    const [activeTab, setActiveTab] = useState<"dashboard" | "articles" | "services" | "portfolio" | "team" | "config">("dashboard");
+    const [activeTab, setActiveTab] = useState<"dashboard" | "articles" | "services" | "portfolio" | "team" | "config" | "visitors">("dashboard");
     const [activeView, setActiveView] = useState<"list" | "create" | "edit">("list");
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
     const [searchQuery, setSearchQuery] = useState("");
@@ -71,6 +72,7 @@ export const Route = createFileRoute("/admin")({
     const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
     const [team, setTeam] = useState<TeamMember[]>([]);
     const [config, setConfig] = useState<SiteConfig>(getSiteConfig());
+    const [visitors, setVisitors] = useState<VisitorData[]>([]);
     
     const [editingItem, setEditingItem] = useState<any>(null);
     const [formData, setFormData] = useState<any>({});
@@ -91,6 +93,7 @@ export const Route = createFileRoute("/admin")({
         setPortfolio(getPortfolio());
         setTeam(getTeam());
         setConfig(getSiteConfig());
+        setVisitors(getVisitors());
     };
 
     const handleLogin = (e: React.FormEvent) => {
@@ -250,11 +253,13 @@ export const Route = createFileRoute("/admin")({
         if (activeTab === 'services') return services.filter(s => s.title.toLowerCase().includes(query) || s.description.toLowerCase().includes(query));
         if (activeTab === 'portfolio') return portfolio.filter(p => p.title.toLowerCase().includes(query) || p.client?.toLowerCase().includes(query));
         if (activeTab === 'team') return team.filter(t => t.name.toLowerCase().includes(query) || t.role.toLowerCase().includes(query));
+        if (activeTab === 'visitors') return visitors.filter(v => v.country.toLowerCase().includes(query) || v.ip.toLowerCase().includes(query) || v.city.toLowerCase().includes(query));
         return [];
-    }, [activeTab, articles, services, portfolio, team, searchQuery]);
+    }, [activeTab, articles, services, portfolio, team, visitors, searchQuery]);
 
     const navItems = [
       { id: "dashboard", label: "Dashboard", icon: LayoutDashboard },
+      { id: "visitors", label: "Visitors", icon: Globe },
       { id: "articles", label: "Blog Posts", icon: FileText },
       { id: "services", label: "Services", icon: Zap },
       { id: "portfolio", label: "Portfolio", icon: Briefcase },
@@ -453,16 +458,19 @@ export const Route = createFileRoute("/admin")({
                             <h4 className="text-xs font-black uppercase tracking-widest text-zinc-500">Recent Activity</h4>
                             <Activity className="h-4 w-4 text-blue-500" />
                          </div>
-                         {[1, 2, 3].map(n => (
-                           <div key={n} className="flex gap-4 items-center">
+                         {visitors.slice(0, 5).map((v, i) => (
+                           <div key={i} className="flex gap-4 items-center">
                               <div className="h-10 w-10 rounded-xl bg-white/5 flex items-center justify-center"><Globe className="h-4 w-4 text-blue-500" /></div>
                               <div className="flex-1">
-                                 <div className="text-xs font-bold">New visitor from Bangladesh</div>
-                                 <div className="text-[9px] font-black text-zinc-600 uppercase mt-1">{n * 5} minutes ago</div>
+                                 <div className="text-xs font-bold">Visitor from {v.country}</div>
+                                 <div className="text-[9px] font-black text-zinc-600 uppercase mt-1">{new Date(v.timestamp).toLocaleTimeString()} · {v.city}</div>
                               </div>
-                              <Eye className="h-4 w-4 text-zinc-700" />
+                              <div className="text-[9px] font-black text-blue-500">{v.countryCode}</div>
                            </div>
                          ))}
+                         {visitors.length === 0 && (
+                            <p className="text-[10px] text-zinc-600 uppercase font-black text-center py-4">No recent activity</p>
+                         )}
                       </div>
                    </div>
                 </div>
@@ -583,6 +591,54 @@ export const Route = createFileRoute("/admin")({
                                     <div className="space-y-4">
                                         <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest ml-8">Member Bio</label>
                                         <textarea value={formData.bio || ''} onChange={e => setFormData({...formData, bio: e.target.value})} className="w-full h-40 bg-black/40 border border-white/5 p-8 rounded-[2.5rem] outline-none focus:border-blue-500 transition-all resize-none leading-relaxed text-zinc-400" placeholder="About the team member..." />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'visitors' && (
+                        <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-700">
+                            <div className="flex justify-between items-center">
+                                <div>
+                                    <h2 className="text-4xl font-black tracking-tight uppercase">Visitor Log</h2>
+                                    <p className="text-zinc-500 text-xs font-bold uppercase tracking-widest mt-2">Real-time traffic data from {visitors.length} visits</p>
+                                </div>
+                                <button onClick={() => { localStorage.removeItem("devdigitax_visitors"); setVisitors([]); notify("Logs cleared", "info"); }} className="px-8 py-4 rounded-2xl bg-red-500/10 text-red-500 border border-red-500/20 font-black text-[10px] uppercase tracking-widest hover:bg-red-500 hover:text-white transition-all">Clear All Logs</button>
+                            </div>
+
+                            <div className="grid grid-cols-1 gap-4">
+                                {filteredItems.map((v: any, idx) => (
+                                    <div key={idx} className="p-8 rounded-[2.5rem] bg-white/[0.01] border border-white/5 hover:border-white/10 transition-all flex items-center gap-8">
+                                        <div className="h-14 w-14 rounded-2xl bg-blue-600/10 flex items-center justify-center">
+                                            <Globe className="h-6 w-6 text-blue-500" />
+                                        </div>
+                                        <div className="flex-1 grid grid-cols-2 md:grid-cols-4 gap-8">
+                                            <div>
+                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">Country / City</div>
+                                                <div className="text-sm font-bold">{v.country} ({v.countryCode})</div>
+                                                <div className="text-[10px] text-zinc-600">{v.city}</div>
+                                            </div>
+                                            <div>
+                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">IP Address</div>
+                                                <div className="text-sm font-bold font-mono text-blue-400">{v.ip}</div>
+                                            </div>
+                                            <div>
+                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">Page / Time</div>
+                                                <div className="text-sm font-bold">{v.page}</div>
+                                                <div className="text-[10px] text-zinc-600">{new Date(v.timestamp).toLocaleString()}</div>
+                                            </div>
+                                            <div className="hidden md:block">
+                                                <div className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-1">User Agent</div>
+                                                <div className="text-[9px] text-zinc-600 line-clamp-2 uppercase leading-tight">{v.userAgent}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                                {filteredItems.length === 0 && (
+                                    <div className="p-20 text-center border-2 border-dashed border-white/5 rounded-[4rem]">
+                                        <Globe className="h-12 w-12 text-zinc-800 mx-auto mb-6" />
+                                        <h3 className="text-xl font-black text-zinc-700 uppercase tracking-widest">No visitor data collected yet</h3>
                                     </div>
                                 )}
                             </div>

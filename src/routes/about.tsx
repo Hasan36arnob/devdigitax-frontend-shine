@@ -229,6 +229,7 @@ function AboutPage() {
       </section>
 
       {/* Team Section */}
+      {/* 
       <section id="team" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24">
         <div className="text-center max-w-3xl mx-auto">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
@@ -263,6 +264,7 @@ function AboutPage() {
           ))}
         </div>
       </section>
+      */}
 
       {/* Values Section */}
       <section className="max-w-7xl mx-auto px-6 py-24">
