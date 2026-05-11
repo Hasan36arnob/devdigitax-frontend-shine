@@ -635,10 +635,33 @@ export const Route = createFileRoute("/admin")({
                             {/* Google Level Summary Cards */}
                             <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
                                 {[
-                                    { l: "Top Country", v: visitors.length > 0 ? (Array.from(new Set(visitors.map(v => v.country))).sort((a,b) => visitors.filter(x => x.country === b).length - visitors.filter(x => x.country === a).length)[0]) : "N/A", i: Globe },
-                                    { l: "Mobile Users", v: `${Math.round((visitors.filter(v => v.isMobile).length / (visitors.length || 1)) * 100)}%`, i: Zap },
-                                    { l: "Direct Traffic", v: `${Math.round((visitors.filter(v => v.referrer === 'Direct').length / (visitors.length || 1)) * 100)}%`, i: TrendingUp },
-                                    { l: "Avg Resolution", v: visitors.length > 0 ? visitors[0].screenResolution : "N/A", i: Maximize2 },
+                                    { 
+                                        l: "Top Country", 
+                                        v: visitors.length > 0 
+                                            ? (Array.from(new Set(visitors.map(v => v.country).filter(Boolean)))
+                                                .sort((a, b) => visitors.filter(x => x.country === b).length - visitors.filter(x => x.country === a).length)[0] || "Unknown") 
+                                            : "N/A", 
+                                        i: Globe 
+                                    },
+                                    { 
+                                        l: "Mobile Users", 
+                                        v: visitors.length > 0 
+                                            ? `${Math.round((visitors.filter(v => v.isMobile).length / visitors.length) * 100)}%` 
+                                            : "0%", 
+                                        i: Zap 
+                                    },
+                                    { 
+                                        l: "Direct Traffic", 
+                                        v: visitors.length > 0 
+                                            ? `${Math.round((visitors.filter(v => v.referrer === 'Direct').length / visitors.length) * 100)}%` 
+                                            : "0%", 
+                                        i: TrendingUp 
+                                    },
+                                    { 
+                                        l: "Avg Resolution", 
+                                        v: visitors.length > 0 ? (visitors[0]?.screenResolution || "N/A") : "N/A", 
+                                        i: Maximize2 
+                                    },
                                 ].map((s, i) => (
                                     <div key={i} className="p-8 rounded-[2.5rem] bg-white/[0.02] border border-white/5">
                                         <div className="flex justify-between items-start mb-6">

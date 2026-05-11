@@ -62,8 +62,17 @@ export function Navbar() {
         router.navigate({ to: path });
         setTimeout(() => {
           const element = document.getElementById(hash);
-          if (element) element.scrollIntoView({ behavior: "smooth", block: "start" });
-        }, 100);
+          if (element) {
+            const headerOffset = 100;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: "smooth"
+            });
+          }
+        }, 500);
       }
     }
   };
@@ -96,11 +105,16 @@ export function Navbar() {
             </li>
           ))}
 
-          {/* About Dropdown - FIXED HOVER */}
+          {/* About Dropdown - FIXED HOVER & NAVIGATION */}
           <li className="relative" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-            <button
+            <Link
+              to="/about"
               className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-all rounded-md hover:bg-accent/50 flex items-center gap-1.5 cursor-pointer"
-              onClick={() => !isMobile && setAboutOpen(!aboutOpen)}
+              onClick={() => {
+                setAboutOpen(false);
+                setOpen(false);
+              }}
+              activeProps={{ className: "text-foreground font-semibold bg-accent/60" }}
             >
               {aboutItem.label}
               <ChevronDown
@@ -108,7 +122,7 @@ export function Navbar() {
                   aboutOpen ? "rotate-180" : ""
                 }`}
               />
-            </button>
+            </Link>
 
             {/* Dropdown Menu */}
             <div
@@ -170,18 +184,29 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
-            <li>
-              <button
-                onClick={() => setAboutOpen(!aboutOpen)}
-                className="w-full text-left px-4 py-3 text-foreground font-medium rounded-lg hover:bg-accent/50 transition-all flex items-center justify-between"
-              >
-                {aboutItem.label}
-                <ChevronDown
-                  className={`h-4 w-4 transition-transform duration-300 ${
-                    aboutOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+            <li className="flex flex-col">
+              <div className="flex items-center justify-between px-4 py-3 rounded-lg hover:bg-accent/50 transition-all">
+                <Link
+                  to="/about"
+                  onClick={() => setOpen(false)}
+                  className="flex-1 text-foreground font-medium"
+                >
+                  {aboutItem.label}
+                </Link>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setAboutOpen(!aboutOpen);
+                  }}
+                  className="p-2 -mr-2"
+                >
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-300 ${
+                      aboutOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
+              </div>
               {aboutOpen && (
                 <ul className="ml-6 mt-1 space-y-1 border-l-2 border-primary/30 pl-3">
                   {aboutDropdown.map((item) => (
