@@ -1,4 +1,5 @@
 import { services as staticServices } from "../data/services";
+import { portfolioProjects } from "../data/portfolio";
 
 export interface ServiceItem {
   id: string;
@@ -76,7 +77,7 @@ export const getPortfolio = (): PortfolioItem[] => {
   if (typeof window === "undefined") return [];
   const saved = localStorage.getItem("devdigitax_portfolio");
   if (saved) return JSON.parse(saved);
-  return []; // Start empty or add static defaults if needed
+  return portfolioProjects; // Use portfolio projects as default
 };
 
 export const savePortfolio = (items: PortfolioItem[]) => {

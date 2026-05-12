@@ -80,12 +80,15 @@ function PortfolioPage() {
 
   const categories = [
     { id: "all", label: "All Works" },
-    { id: "fullstack", label: "Full Stack Development" },
-    { id: "frontend", label: "Frontend Development" },
-    { id: "wordpress", label: "WordPress" },
     { id: "ecommerce", label: "E-commerce" },
-    { id: "design", label: "Graphic Design" },
-    { id: "data", label: "Data Analysis" },
+    { id: "saas", label: "SAAS Platforms" },
+    { id: "fullstack", label: "Full Stack" },
+    { id: "frontend", label: "Frontend" },
+    { id: "marketplace", label: "Marketplace" },
+    { id: "dashboard", label: "Dashboard" },
+    { id: "specialized", label: "Specialized" },
+    { id: "wordpress", label: "WordPress" },
+    { id: "design", label: "Design" },
   ];
 
   return (
