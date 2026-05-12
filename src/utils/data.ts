@@ -72,11 +72,11 @@ export const saveServices = (services: ServiceItem[]) => {
   localStorage.setItem("devdigitax_services", JSON.stringify(services));
 };
 
-// PORTFOLIO
+// PORTFOLIO — no localStorage, always use source file
 export const getPortfolio = (): PortfolioItem[] => {
-  if (typeof window === "undefined") return [];
-  localStorage.removeItem("devdigitax_portfolio"); // Clear old cache
-  return portfolioProjects;
+  return portfolioProjects.filter(
+    (p) => !p.status || p.status === "published"
+  );
 };
 
 export const savePortfolio = (items: PortfolioItem[]) => {
@@ -95,7 +95,7 @@ export const saveTeam = (members: TeamMember[]) => {
   localStorage.setItem("devdigitax_team", JSON.stringify(members));
 };
 
-// SITE CONFIG (Hardcoded as requested)
+// SITE CONFIG
 export const getSiteConfig = (): SiteConfig => {
   return {
     whatsapp: "+880 1837-692110",
@@ -107,7 +107,7 @@ export const getSiteConfig = (): SiteConfig => {
 };
 
 export const saveSiteConfig = (config: SiteConfig) => {
-  // Persistence disabled as per hardcoding request
+  // Persistence disabled
 };
 
 // ARTICLES & MESSAGES
