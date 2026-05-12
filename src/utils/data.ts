@@ -75,7 +75,8 @@ export const saveServices = (services: ServiceItem[]) => {
 // PORTFOLIO
 export const getPortfolio = (): PortfolioItem[] => {
   if (typeof window === "undefined") return [];
-  return portfolioProjects; // Always use source file as single source of truth
+  localStorage.removeItem("devdigitax_portfolio"); // Clear old cache
+  return portfolioProjects;
 };
 
 export const savePortfolio = (items: PortfolioItem[]) => {
