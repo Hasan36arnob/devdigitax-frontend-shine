@@ -22,6 +22,7 @@ export const portfolioProjects: PortfolioItem[] = [
   // Laravel eCommerce Platforms
   {
     id: "1",
+    //d
     title: "AmazCart – Laravel eCommerce System CMS",
     client: "Full-featured Laravel eCommerce platform",
     category: "ecommerce",
