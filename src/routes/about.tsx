@@ -126,30 +126,8 @@ function AboutPage() {
 
   return (
     <SiteLayout>
-      {/* Hero Section */}
-      <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
-        <div className="absolute inset-0 bg-grid-white/10 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]" />
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32 text-center relative">
-          <span className="text-primary text-sm font-semibold uppercase tracking-wider animate-fade-in">
-            About us
-          </span>
-          <h1
-            className={`mt-3 text-4xl md:text-6xl font-bold tracking-tight transition-all duration-700 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-          >
-            Built to help ambitious brands win online.
-          </h1>
-          <p
-            className={`mt-6 text-lg text-muted-foreground max-w-2xl mx-auto transition-all duration-700 delay-200 ${isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"}`}
-          >
-            DevdigitaX was founded on a simple belief: digital growth shouldn't be a black box. We
-            bring senior strategists, designers, engineers and marketers together to build
-            measurable systems for businesses that demand real results.
-          </p>
-        </div>
-      </section>
-
       {/* Stats Section */}
-      <section className="max-w-7xl mx-auto px-6 -mt-12 relative z-10">
+      <section className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
@@ -194,7 +172,7 @@ function AboutPage() {
       {/* Company Section */}
       <section
         id="company"
-        className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl my-8"
+        className="max-w-7xl mx-auto px-6 py-16 scroll-mt-24 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl mt-8"
       >
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">

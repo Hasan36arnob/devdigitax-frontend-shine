@@ -1,36 +1,54 @@
-import { PortfolioItem } from "@/utils/data";
+﻿import { PortfolioItem } from "@/utils/data";
 
-// Simple placeholder images - Guaranteed no people, clean tech colors
-// Using placeholder service with appropriate colors for each category
-const images = {
-  ecommerce: "https://dummyimage.com/600x400/4F46E5/ffffff&text=eCommerce",
-  dashboard: "https://dummyimage.com/600x400/3B82F6/ffffff&text=Dashboard",
-  mobile: "https://dummyimage.com/600x400/8B5CF6/ffffff&text=Mobile+App",
-  code: "https://dummyimage.com/600x400/06B6D4/ffffff&text=Development",
-  server: "https://dummyimage.com/600x400/EC4899/ffffff&text=Server",
-  web: "https://dummyimage.com/600x400/10B981/ffffff&text=Web+App",
-  shopping: "https://dummyimage.com/600x400/F59E0B/ffffff&text=Shopping",
-  tech: "https://dummyimage.com/600x400/6366F1/ffffff&text=Technology",
-  business: "https://dummyimage.com/600x400/0EA5E9/ffffff&text=Business",
-  market: "https://dummyimage.com/600x400/D946EF/ffffff&text=Marketplace",
-  store: "https://dummyimage.com/600x400/14B8A6/ffffff&text=Store",
-  app: "https://dummyimage.com/600x400/F43F5E/ffffff&text=App",
-  payment: "https://dummyimage.com/600x400/A78BFA/ffffff&text=Payment",
-};
+// Import local images
+import amazcart from "@/assets/amazcart.png";
+import farmart from "@/assets/farmart.png";
+import nazmart from "@/assets/nazmart.png";
+import omnimart from "@/assets/omnimart.png";
+import zaika from "@/assets/zaika.png";
+import yoori from "@/assets/shoppingzone.png";
+import marketbob from "@/assets/marketbob.png";
+import dokans from "@/assets/shoppingzone.png";
+import pickbazar from "@/assets/pickbazar.png";
+import fleetcart from "@/assets/fleecart.png";
+import grostore from "@/assets/grostore.png";
+import theshop from "@/assets/activezone.png";
+import adlisting from "@/assets/chawkbazar.png";
+import cartpro from "@/assets/livelycart.png";
+import safecart from "@/assets/safecart.png";
+import isshe from "@/assets/dealshop.png";
+import wowy from "@/assets/wowy.png";
+import dealshop from "@/assets/dealshop.png";
+import ishop from "@/assets/fluxstore.png";
+import productify from "@/assets/agriwealth.png";
+import shopking from "@/assets/shopking.png";
+import vuexy from "@/assets/vuexy.png";
+import apexa from "@/assets/apexa.png";
+import sixvalley from "@/assets/6valley.png";
+import livelycart from "@/assets/livelycart.png";
+import foodbank from "@/assets/foodbank.png";
+import alasmart from "@/assets/alasmart.png";
+import shopperzz from "@/assets/shopperz.png";
+import agriwealth from "@/assets/agriwealth.png";
+import ecomapp from "@/assets/activezone.png";
+import grenmart from "@/assets/genious.png";
+import chawkbazar from "@/assets/chawkbazar.png";
+import nest from "@/assets/nest.png";
+import ready from "@/assets/readyecommerce.png";
+import fluxstore from "@/assets/fluxstore.png";
+import ninico from "@/assets/ninico.png";
 
 export const portfolioProjects: PortfolioItem[] = [
-  // Laravel eCommerce Platforms
   {
     id: "1",
-    //d
     title: "AmazCart – Laravel eCommerce System CMS",
     client: "Full-featured Laravel eCommerce platform",
     category: "ecommerce",
     result: "Complete eCommerce system with CMS, product management, order tracking, and customer dashboard",
     tech: "Laravel, MySQL, PHP, Blade, Bootstrap",
-    image: images.ecommerce,
+    image: amazcart,
     live: "https://amazcart.ischooll.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "2",
@@ -39,9 +57,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Scalable marketplace platform supporting both single vendor and multi-vendor setups with vendor dashboard",
     tech: "Laravel, MySQL, PHP, Vue.js, TailwindCSS",
-    image: images.market,
+    image: farmart,
     live: "https://farmart.botble.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "3",
@@ -50,9 +68,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "saas",
     result: "Multi-tenant architecture enabling multiple independent eCommerce stores with shared infrastructure and admin panel",
     tech: "Laravel, MySQL, PHP, Redis, Stripe API",
-    image: images.dashboard,
+    image: nazmart,
     live: "https://nazmart.net/",
-    status: "published"
+    status: "published",
   },
   {
     id: "4",
@@ -61,9 +79,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Complete eCommerce solution with inventory management, multi-channel integration, and advanced analytics",
     tech: "PHP, MySQL, JavaScript, REST API, Bootstrap",
-    image: images.ecommerce,
+    image: omnimart,
     live: "https://omnimart.geniusdevs.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "5",
@@ -72,9 +90,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Feature-rich eCommerce platform with responsive design, SEO optimization, and mobile-first approach",
     tech: "Laravel, MySQL, Vue.js, TailwindCSS, Livewire",
-    image: images.shopping,
+    image: zaika,
     live: "https://zaika.bytesed.com/land/",
-    status: "published"
+    status: "published",
   },
   {
     id: "6",
@@ -83,9 +101,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "Modern PWA eCommerce with offline support, fast loading, and native app-like experience",
     tech: "React, PWA, Service Workers, Firebase, GraphQL",
-    image: images.mobile,
+    image: yoori,
     live: "https://yoori.spagreen.net/",
-    status: "published"
+    status: "published",
   },
   {
     id: "7",
@@ -94,9 +112,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Comprehensive eCommerce system with vendor management, commission tracking, and advanced reporting",
     tech: "Laravel, PHP, MySQL, Bootstrap, jQuery",
-    image: images.market,
+    image: marketbob,
     live: "https://demo.geniusocean.com/geniuscart-2024/",
-    status: "published"
+    status: "published",
   },
   {
     id: "8",
@@ -105,9 +123,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "saas",
     result: "Multi-tenant eCommerce platform enabling entrepreneurs to launch their own online stores with shared infrastructure",
     tech: "Laravel, MySQL, PHP, Vue.js, Stripe, PayPal",
-    image: images.dashboard,
+    image: dokans,
     live: "https://dokans.website/",
-    status: "published"
+    status: "published",
   },
   {
     id: "9",
@@ -116,9 +134,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "fullstack",
     result: "Full-stack multivendor eCommerce with React frontend, Next.js, GraphQL API, and mobile app support",
     tech: "React, Next.js, GraphQL, REST API, Node.js, MongoDB",
-    image: images.web,
+    image: pickbazar,
     live: "https://pickbazar.redq.io/",
-    status: "published"
+    status: "published",
   },
   {
     id: "10",
@@ -127,9 +145,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Complete eCommerce CMS with advanced features including bulk upload, API integration, and SEO tools",
     tech: "PHP, Laravel, MySQL, Vue.js, Bootstrap",
-    image: images.ecommerce,
+    image: fleetcart,
     live: "https://demo.fleetcart.envaysoft.com/en",
-    status: "published"
+    status: "published",
   },
   {
     id: "11",
@@ -138,9 +156,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Purpose-built eCommerce for food and grocery with inventory management, delivery tracking, and subscription options",
     tech: "Laravel, PHP, MySQL, Vue.js, Google Maps API",
-    image: images.store,
+    image: grostore,
     live: "https://grostore.themetags.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "12",
@@ -149,9 +167,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "PWA-based eCommerce with push notifications, offline browsing, and app-like performance",
     tech: "React, PWA, Service Workers, Node.js, MongoDB",
-    image: images.app,
+    image: theshop,
     live: "https://activeitzone.com/the-shop",
-    status: "published"
+    status: "published",
   },
   {
     id: "13",
@@ -160,9 +178,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "marketplace",
     result: "Feature-rich classified ads platform with user profiles, messaging, verification, and payment processing",
     tech: "Laravel, PHP, MySQL, Bootstrap, Stripe",
-    image: images.market,
+    image: adlisting,
     live: "https://adlisting.templatecookie.com/dashboard",
-    status: "published"
+    status: "published",
   },
   {
     id: "14",
@@ -171,9 +189,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Multi-purpose eCommerce CMS supporting various product types with customizable storefront and admin panel",
     tech: "Laravel, PHP, MySQL, jQuery, Bootstrap",
-    image: images.shopping,
+    image: cartpro,
     live: "https://demo.lion-coders.com/soft/cartproshop/",
-    status: "published"
+    status: "published",
   },
   {
     id: "15",
@@ -182,9 +200,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Secure multi-vendor eCommerce platform with seller verification, escrow payments, and dispute resolution",
     tech: "Laravel, PHP, MySQL, Vue.js, Two-Factor Auth",
-    image: images.ecommerce,
+    image: safecart,
     live: "https://safecart.bytesed.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "16",
@@ -193,9 +211,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "saas",
     result: "SAAS-based digital marketplace for sellers with vendor portal, analytics, and automated commission handling",
     tech: "PHP, Node.js, MongoDB, React, Stripe",
-    image: images.dashboard,
+    image: marketbob,
     live: "https://marketbob.net/",
-    status: "published"
+    status: "published",
   },
   {
     id: "17",
@@ -204,9 +222,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Complete eCommerce and POS system with inventory sync, multiple store support, and sales reporting",
     tech: "PHP, MySQL, JavaScript, Bootstrap, POS Integration",
-    image: images.payment,
+    image: isshe,
     live: "https://isshue.bdtask-demo.com/isshue_v5_demo/",
-    status: "published"
+    status: "published",
   },
   {
     id: "18",
@@ -215,9 +233,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "eCommerce platform supporting multiple languages and currencies with localized content management",
     tech: "Laravel, PHP, MySQL, Vue.js, i18n",
-    image: images.web,
+    image: wowy,
     live: "https://wowy.botble.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "19",
@@ -226,9 +244,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Full-featured online shopping platform with deals management, coupon system, and customer reviews",
     tech: "PHP, MySQL, JavaScript, jQuery, Bootstrap",
-    image: images.shopping,
+    image: dealshop,
     live: "https://script.viserlab.com/dealshop",
-    status: "published"
+    status: "published",
   },
   {
     id: "20",
@@ -237,9 +255,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "Progressive Web App multivendor eCommerce combining Laravel backend with Vue.js frontend and PWA capabilities",
     tech: "Laravel, Vue.js, PWA, MySQL, PHP",
-    image: images.mobile,
+    image: ishop,
     live: "https://ishop.cholobangla.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "21",
@@ -248,9 +266,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "dashboard",
     result: "Complete production management system with workflow automation, inventory tracking, and production scheduling",
     tech: "PHP, MySQL, JavaScript, Bootstrap, Charts.js",
-    image: images.dashboard,
+    image: productify,
     live: "https://productify.codeshaper.tech/login",
-    status: "published"
+    status: "published",
   },
   {
     id: "22",
@@ -259,9 +277,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "dashboard",
     result: "Complete point-of-sale system with ERP features, inventory management, invoicing, and financial reporting",
     tech: "PHP, MySQL, JavaScript, REST API, Bootstrap",
-    image: images.payment,
+    image: shopking,
     live: "https://pos.ultimatefosters.com/login",
-    status: "published"
+    status: "published",
   },
   {
     id: "23",
@@ -270,9 +288,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "Premium admin dashboard template supporting Vue.js, Nuxt, Next.js, HTML, Laravel, and ASP.NET with extensive components",
     tech: "Vue.js, Nuxt, Next.js, React, TypeScript, TailwindCSS",
-    image: images.dashboard,
+    image: vuexy,
     live: "https://pixinvent.com/vuexy-vuetify-vuejs-admin-template/",
-    status: "published"
+    status: "published",
   },
   {
     id: "24",
@@ -281,9 +299,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "Comprehensive business consulting platform with service packages, client management, and consultation booking",
     tech: "Laravel, PHP, MySQL, Bootstrap, Vue.js",
-    image: images.business,
+    image: apexa,
     live: "https://apexa.archielite.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "25",
@@ -292,9 +310,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "saas",
     result: "Complete project management and CRM system with task tracking, team collaboration, and client management",
     tech: "PHP, MySQL, JavaScript, Bootstrap, REST API",
-    image: images.dashboard,
+    image: sixvalley,
     live: "https://rise.fairsketch.com/index.php/signin",
-    status: "published"
+    status: "published",
   },
   {
     id: "26",
@@ -303,9 +321,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "saas",
     result: "Modern project management tool with Kanban boards, team collaboration, time tracking, and project analytics",
     tech: "PHP, MySQL, JavaScript, Vue.js, Bootstrap",
-    image: images.dashboard,
+    image: sixvalley,
     live: "https://demo.workdo.io/taskly/login",
-    status: "published"
+    status: "published",
   },
   {
     id: "27",
@@ -314,9 +332,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Feature-rich eCommerce platform with advanced product management, dynamic pricing, and conversion optimization",
     tech: "Laravel, PHP, MySQL, Vue.js, Bootstrap",
-    image: images.shopping,
+    image: livelycart,
     live: "https://livelycart-pro-demo.livelyworks.net/",
-    status: "published"
+    status: "published",
   },
   {
     id: "28",
@@ -325,9 +343,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "marketplace",
     result: "Complete restaurant aggregation platform with admin panel, restaurant portal, and delivery management",
     tech: "Laravel, PHP, MySQL, React, Google Maps API",
-    image: images.market,
+    image: foodbank,
     live: "https://demo.food-bank.xyz/",
-    status: "published"
+    status: "published",
   },
   {
     id: "29",
@@ -336,9 +354,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "marketplace",
     result: "Specialized marketplace for digital products with instant download, license management, and creator dashboard",
     tech: "Laravel, PHP, MySQL, Bootstrap, Stripe",
-    image: images.market,
+    image: alasmart,
     live: "https://alasmart.mamunuiux.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "30",
@@ -347,9 +365,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "PWA eCommerce with integrated POS, WhatsApp ordering, inventory management, and multi-channel selling",
     tech: "React, PWA, Node.js, MongoDB, WhatsApp API",
-    image: images.app,
+    image: shopperzz,
     live: "https://docs.shopperz.xyz/",
-    status: "published"
+    status: "published",
   },
   {
     id: "31",
@@ -358,9 +376,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Comprehensive multivendor platform with mobile app, website, seller portal, admin panel with GraphQL and REST APIs",
     tech: "Laravel, PHP, MySQL, Vue.js, GraphQL, REST API",
-    image: images.ecommerce,
+    image: sixvalley,
     live: "https://6valley.app/",
-    status: "published"
+    status: "published",
   },
   {
     id: "32",
@@ -369,9 +387,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "specialized",
     result: "Specialized platform combining agricultural HYIP investment with eCommerce for farm products",
     tech: "PHP, MySQL, JavaScript, Bootstrap, Payment Gateway",
-    image: images.business,
+    image: agriwealth,
     live: "https://agri-wealth.bugfinder.app/",
-    status: "published"
+    status: "published",
   },
   {
     id: "33",
@@ -380,9 +398,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "Responsive eCommerce application optimized for mobile and desktop with modern UI/UX",
     tech: "React Native, Node.js, MongoDB, Firebase",
-    image: images.mobile,
+    image: ecomapp,
     live: "https://shorturl.at/zMocE",
-    status: "published"
+    status: "published",
   },
   {
     id: "34",
@@ -391,9 +409,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Complete eCommerce and retail solution with website, mobile app, admin panel, POS, and inventory management",
     tech: "Laravel, PHP, MySQL, React Native, Vue.js",
-    image: images.payment,
+    image: shopking,
     live: "https://demo.shopking.dev/",
-    status: "published"
+    status: "published",
   },
   {
     id: "35",
@@ -402,9 +420,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "saas",
     result: "Multi-tenant SAAS platform enabling users to create professional websites with drag-drop builder",
     tech: "PHP, MySQL, JavaScript, Vue.js, Docker",
-    image: images.web,
+    image: apexa,
     live: "https://botique.online/",
-    status: "published"
+    status: "published",
   },
   {
     id: "36",
@@ -413,9 +431,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Contemporary eCommerce and marketplace platform with vendor management and advanced filtering",
     tech: "Laravel, PHP, MySQL, Vue.js, Bootstrap",
-    image: images.market,
+    image: marketbob,
     live: "https://docs.botble.com/shofy",
-    status: "published"
+    status: "published",
   },
   {
     id: "37",
@@ -424,9 +442,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Premium eCommerce platform specialized for organic and grocery products with inventory and delivery management",
     tech: "Laravel, PHP, MySQL, Vue.js, TailwindCSS",
-    image: images.store,
+    image: grenmart,
     live: "https://xgenious.com/our-products/organic-grocery-laravel-ecommerce/",
-    status: "published"
+    status: "published",
   },
   {
     id: "38",
@@ -435,9 +453,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Advanced multivendor marketplace with commission management, seller analytics, and automated workflows",
     tech: "Laravel, PHP, MySQL, Vue.js, Bootstrap",
-    image: images.ecommerce,
+    image: marketbob,
     live: "https://docs.botble.com/martfury",
-    status: "published"
+    status: "published",
   },
   {
     id: "39",
@@ -446,9 +464,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "fullstack",
     result: "Complete eCommerce ecosystem with Laravel API, React/Next frontend, REST API, and multivendor support",
     tech: "Laravel, React, Next.js, REST API, MySQL",
-    image: images.web,
+    image: chawkbazar,
     live: "https://chawkbazar.redq.io/",
-    status: "published"
+    status: "published",
   },
   {
     id: "40",
@@ -457,9 +475,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "marketplace",
     result: "Specialized multivendor marketplace for digital products with instant delivery and license management",
     tech: "Laravel, PHP, MySQL, Vue.js, Bootstrap",
-    image: images.market,
+    image: marketbob,
     live: "https://laravel.kamleshyadav.com/marktify/",
-    status: "published"
+    status: "published",
   },
   {
     id: "41",
@@ -468,9 +486,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Multivendor marketplace specialized for organic and grocery products with vendor verification",
     tech: "Laravel, PHP, MySQL, Vue.js, Bootstrap",
-    image: images.store,
+    image: nest,
     live: "https://nest.botble.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "42",
@@ -479,9 +497,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "fullstack",
     result: "Complete multi-vendor solution with mobile app, customer website, store management, and POS",
     tech: "React Native, Laravel, PHP, MySQL, Firebase",
-    image: images.mobile,
+    image: ready,
     live: "https://demo.readyecommerce.app/",
-    status: "published"
+    status: "published",
   },
   {
     id: "43",
@@ -490,9 +508,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "fullstack",
     result: "Complete eCommerce application with website, admin panel, delivery boy app, and POS system",
     tech: "Flutter, Node.js, MongoDB, Firebase",
-    image: images.mobile,
+    image: ready,
     live: "https://demo.readyecommerce.app/",
-    status: "published"
+    status: "published",
   },
   {
     id: "44",
@@ -501,9 +519,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "Full-featured Flutter e-commerce app built on WooCommerce with push notifications and advanced search",
     tech: "Flutter, WooCommerce, REST API, Firebase",
-    image: images.app,
+    image: fluxstore,
     live: "https://fluxstore.app/",
-    status: "published"
+    status: "published",
   },
   {
     id: "45",
@@ -512,9 +530,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Multivendor eCommerce shopping platform with vendor management, commission tracking, and reports",
     tech: "PHP, MySQL, JavaScript, Bootstrap, jQuery",
-    image: images.market,
+    image: marketbob,
     live: "https://script.viserlab.com/ecoma",
-    status: "published"
+    status: "published",
   },
   {
     id: "46",
@@ -523,9 +541,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "frontend",
     result: "Modern eCommerce solution built with React and Next.js featuring server-side rendering and optimized performance",
     tech: "React, Next.js, Node.js, MongoDB, GraphQL",
-    image: images.web,
+    image: pickbazar,
     live: "https://kachabazar-documentation.netlify.app/",
-    status: "published"
+    status: "published",
   },
   {
     id: "47",
@@ -534,9 +552,9 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Minimalist Laravel eCommerce platform with clean interface and essential features for small businesses",
     tech: "Laravel, PHP, MySQL, Bootstrap, Blade",
-    image: images.shopping,
+    image: ninico,
     live: "https://ninico.botble.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "48",
@@ -545,19 +563,19 @@ export const portfolioProjects: PortfolioItem[] = [
     category: "ecommerce",
     result: "Multilingual Laravel eCommerce platform supporting multiple currencies and localized product information",
     tech: "Laravel, PHP, MySQL, Vue.js, i18n, Bootstrap",
-    image: images.ecommerce,
+    image: vuexy,
     live: "https://shopwise.botble.com/",
-    status: "published"
+    status: "published",
   },
   {
     id: "49",
     title: "ChatPion: AI Chatbot Platform (SaaS)",
     client: "AI-powered marketing automation",
     category: "saas",
-    result: "SaaS chatbot platform with AI support for Facebook, Instagram, eCommerce, SMS/Email and social media marketing",
+    result: "SaaS platform with AI support for Facebook, Instagram, eCommerce, SMS/Email and social media marketing",
     tech: "Node.js, React, MongoDB, AI/ML, Facebook API, Instagram API",
-    image: images.code,
+    image: marketbob,
     live: "https://demo.chatpion.com/home/login",
-    status: "published"
-  }
+    status: "published",
+  },
 ];

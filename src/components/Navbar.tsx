@@ -1,6 +1,6 @@
 import { Link, useRouter } from "@tanstack/react-router";
 import { useState, useEffect, useRef } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X, ChevronDown, MessageSquare } from "lucide-react";
 import logo from "@/assets/devdigitax-logo.jpeg";
 
 const navItems = [
@@ -78,6 +78,7 @@ export function Navbar() {
   };
 
   return (
+    <>
     <header className="sticky top-0 z-50 backdrop-blur-xl bg-background/70 border-b border-border">
       <nav className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-3 group">
@@ -126,7 +127,9 @@ export function Navbar() {
 
             {/* Dropdown Menu */}
             <div
-              className={`absolute top-full left-0 mt-2 w-56 rounded-xl border border-border bg-background/95 backdrop-blur-md shadow-xl py-2 z-50 transition-all duration-200 origin-top ${
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+              className={`absolute top-full left-0 mt-1 w-56 rounded-xl border border-border bg-background/95 backdrop-blur-md shadow-xl py-2 z-50 transition-all duration-200 origin-top ${
                 aboutOpen
                   ? "opacity-100 visible scale-100 translate-y-0"
                   : "opacity-0 invisible scale-95 -translate-y-2 pointer-events-none"
@@ -157,6 +160,8 @@ export function Navbar() {
               </Link>
             </li>
           ))}
+
+
         </ul>
 
         {/* Mobile Menu Button */}
@@ -234,9 +239,12 @@ export function Navbar() {
                 </Link>
               </li>
             ))}
+
+
           </ul>
         </div>
       )}
     </header>
+    </>
   );
 }
