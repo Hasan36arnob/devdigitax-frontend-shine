@@ -75,13 +75,11 @@ export const saveServices = (services: ServiceItem[]) => {
 // PORTFOLIO
 export const getPortfolio = (): PortfolioItem[] => {
   if (typeof window === "undefined") return [];
-  const saved = localStorage.getItem("devdigitax_portfolio");
-  if (saved) return JSON.parse(saved);
-  return portfolioProjects; // Use portfolio projects as default
+  return portfolioProjects; // Always use source file as single source of truth
 };
 
 export const savePortfolio = (items: PortfolioItem[]) => {
-  localStorage.setItem("devdigitax_portfolio", JSON.stringify(items));
+  // Disabled — portfolio.ts is the single source of truth
 };
 
 // TEAM
@@ -111,7 +109,7 @@ export const saveSiteConfig = (config: SiteConfig) => {
   // Persistence disabled as per hardcoding request
 };
 
-// ARTICLES & MESSAGES (Still useful but maybe hidden from tabs if requested)
+// ARTICLES & MESSAGES
 export const getMessages = () => {
   if (typeof window === "undefined") return [];
   return JSON.parse(localStorage.getItem("devdigitax_messages") || "[]");
@@ -131,7 +129,6 @@ export const getVisitors = (): VisitorData[] => {
 export const saveVisitor = (visitor: VisitorData) => {
   if (typeof window === "undefined") return;
   const visitors = getVisitors();
-  // Avoid duplicate tracking for the same session/page if needed, but let's keep it simple
-  const updated = [visitor, ...visitors].slice(0, 100); // Keep last 100 visitors
+  const updated = [visitor, ...visitors].slice(0, 100);
   localStorage.setItem("devdigitax_visitors", JSON.stringify(updated));
 };
