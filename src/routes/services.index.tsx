@@ -59,7 +59,9 @@ function ServicesPage() {
                     <Icon className="h-6 w-6" />
                   </div>
                   <h2 className="mt-5 text-xl font-semibold">{title}</h2>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{description}</p>
+                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
+                    {description}
+                  </p>
                   <Link
                     to="/services/$serviceId"
                     params={{ serviceId: slug }}

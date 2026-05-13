@@ -6,14 +6,5 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 
 export default defineConfig({
-  plugins: [
-    tsConfigPaths(),
-    tailwindcss(),
-    tanstackStart(),
-    netlify(),
-    react(),
-  ],
-  esbuild: {
-    jsxInject: `import React from 'react'`,
-  },
+  plugins: [tsConfigPaths(), tailwindcss(), tanstackStart(), netlify(), react()],
 });

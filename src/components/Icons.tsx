@@ -11,14 +11,19 @@ export const WhatsAppIcon = ({ className }: { className?: string }) => (
   </svg>
 );
 export const NexusAIIcon = ({ className }: { className?: string }) => (
-  <svg
-    viewBox="0 0 24 24"
-    fill="none"
-    className={className}
-    xmlns="http://www.w3.org/2000/svg"
-  >
+  <svg viewBox="0 0 24 24" fill="none" className={className} xmlns="http://www.w3.org/2000/svg">
     {/* Main Square Head */}
-    <rect x="4" y="6" width="16" height="12" rx="2" stroke="currentColor" strokeWidth="2" fill="currentColor" fillOpacity="0.1" />
+    <rect
+      x="4"
+      y="6"
+      width="16"
+      height="12"
+      rx="2"
+      stroke="currentColor"
+      strokeWidth="2"
+      fill="currentColor"
+      fillOpacity="0.1"
+    />
     {/* Large Round Eyes */}
     <circle cx="9" cy="11" r="2" fill="currentColor" />
     <circle cx="15" cy="11" r="2" fill="currentColor" />
@@ -30,7 +35,7 @@ export const NexusAIIcon = ({ className }: { className?: string }) => (
     {/* Antenna */}
     <path d="M12 6V3" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
     <circle cx="12" cy="3" r="1.5" fill="currentColor">
-       <animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" />
+      <animate attributeName="opacity" values="1;0.2;1" dur="1s" repeatCount="indefinite" />
     </circle>
   </svg>
 );

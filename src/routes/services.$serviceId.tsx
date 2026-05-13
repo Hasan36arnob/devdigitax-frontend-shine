@@ -247,21 +247,24 @@ import { getServices } from "@/utils/data";
 function ServiceDetailPage() {
   const { serviceId } = Route.useParams();
   const dynamicServices = getServices();
-  const dynamicService = dynamicServices.find(s => s.slug === serviceId);
+  const dynamicService = dynamicServices.find((s) => s.slug === serviceId);
   const staticContent = serviceContent[serviceId];
 
   // Merge dynamic data with static content if it exists
-  const service = dynamicService ? {
-    ...(staticContent || {
-      features: [],
-      technologies: [],
-      process: [],
-      heroImage: "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&h=600&fit=crop",
-      callToAction: "Contact us to learn more about this service."
-    }),
-    title: dynamicService.title,
-    description: dynamicService.description,
-  } : staticContent;
+  const service = dynamicService
+    ? {
+        ...(staticContent || {
+          features: [],
+          technologies: [],
+          process: [],
+          heroImage:
+            "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&h=600&fit=crop",
+          callToAction: "Contact us to learn more about this service.",
+        }),
+        title: dynamicService.title,
+        description: dynamicService.description,
+      }
+    : staticContent;
 
   if (!service) {
     return (
@@ -272,7 +275,8 @@ function ServiceDetailPage() {
           </div>
           <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Service Not Found</h1>
           <p className="mt-4 text-muted-foreground max-w-md mx-auto text-lg">
-            We couldn't find the service you were looking for. It might have been moved or doesn't exist.
+            We couldn't find the service you were looking for. It might have been moved or doesn't
+            exist.
           </p>
           <a
             href="/services"
@@ -304,13 +308,19 @@ function ServiceDetailPage() {
               Premium Service
             </div>
             <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.1] mb-6">
-              {service.title.split(' ').map((word, i, arr) => (
+              {service.title.split(" ").map((word, i, arr) =>
                 i === arr.length - 1 ? (
-                  <span key={i} className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600"> {word}</span>
+                  <span
+                    key={i}
+                    className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-600"
+                  >
+                    {" "}
+                    {word}
+                  </span>
                 ) : (
                   <span key={i}> {word}</span>
-                )
-              ))}
+                ),
+              )}
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed mb-10">
               {service.description}
@@ -335,11 +345,11 @@ function ServiceDetailPage() {
           <div className="relative lg:h-[600px] flex items-center justify-center">
             {/* Glowing orb behind image */}
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-primary/20 blur-[100px] rounded-full pointer-events-none" />
-            
+
             <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-auto lg:h-full rounded-3xl overflow-hidden border border-white/10 shadow-2xl shadow-primary/10 transform transition-transform duration-700 hover:scale-[1.02]">
-              <img 
-                src={service.heroImage} 
-                alt={service.title} 
+              <img
+                src={service.heroImage}
+                alt={service.title}
                 className="w-full h-full object-cover object-center"
               />
               {/* Glassmorphic overlay gradient */}
@@ -352,15 +362,16 @@ function ServiceDetailPage() {
       {/* Features Section (Bento Grid Style) */}
       <section id="features" className="relative py-24 bg-card/30 border-y border-border">
         <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]" />
-        
+
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-4">What You Get</h2>
             <p className="text-lg text-muted-foreground">
-              We deliver comprehensive, end-to-end solutions designed to give you a competitive edge.
+              We deliver comprehensive, end-to-end solutions designed to give you a competitive
+              edge.
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {service.features.map((feature, idx) => (
               <div
@@ -385,9 +396,12 @@ function ServiceDetailPage() {
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div>
-              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">Our Proven Process</h2>
+              <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+                Our Proven Process
+              </h2>
               <p className="text-lg text-muted-foreground mb-10">
-                A transparent, step-by-step approach ensuring we deliver exactly what your business needs, on time and with exceptional quality.
+                A transparent, step-by-step approach ensuring we deliver exactly what your business
+                needs, on time and with exceptional quality.
               </p>
               <a
                 href="/contact"
@@ -396,11 +410,11 @@ function ServiceDetailPage() {
                 Start the process today <ArrowRight className="h-4 w-4" />
               </a>
             </div>
-            
+
             <div className="relative">
               {/* Connecting Line */}
               <div className="absolute left-[27px] top-4 bottom-4 w-0.5 bg-gradient-to-b from-primary/50 via-border to-transparent" />
-              
+
               <div className="space-y-8 relative">
                 {service.process.map((step, idx) => (
                   <div key={idx} className="flex gap-6 relative group">
@@ -423,7 +437,9 @@ function ServiceDetailPage() {
       <section className="py-24 bg-card/30 border-t border-border overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-muted-foreground">Empowered by Modern Technology</h2>
+            <h2 className="text-2xl md:text-3xl font-bold tracking-tight mb-4 text-muted-foreground">
+              Empowered by Modern Technology
+            </h2>
           </div>
           <div className="flex flex-wrap justify-center gap-6 md:gap-12">
             {service.technologies.map((tech, idx) => (
@@ -449,13 +465,14 @@ function ServiceDetailPage() {
           {/* Decorative background elements */}
           <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-20 mix-blend-overlay" />
           <div className="absolute inset-0 bg-gradient-to-br from-primary/40 via-transparent to-purple-900/40" />
-          
+
           <div className="relative z-10 p-12 md:p-24 text-center max-w-4xl mx-auto">
             <h2 className="text-3xl md:text-5xl font-extrabold mb-6 text-white tracking-tight">
               {service.callToAction}
             </h2>
             <p className="text-lg md:text-xl text-zinc-300 mb-10 max-w-2xl mx-auto">
-              Don't let your competition outpace you. Let's build something extraordinary together with our {service.title.toLowerCase()} expertise.
+              Don't let your competition outpace you. Let's build something extraordinary together
+              with our {service.title.toLowerCase()} expertise.
             </p>
             <a
               href="/contact"
@@ -463,7 +480,9 @@ function ServiceDetailPage() {
             >
               Get a Free Consultation <ArrowRight className="h-5 w-5" />
             </a>
-            <p className="mt-6 text-sm text-zinc-400">No commitment required. We respond within 24 hours.</p>
+            <p className="mt-6 text-sm text-zinc-400">
+              No commitment required. We respond within 24 hours.
+            </p>
           </div>
         </div>
       </section>

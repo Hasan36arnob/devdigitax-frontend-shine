@@ -17,7 +17,6 @@ export const Route = createFileRoute("/contact")({
   }),
 });
 
-
 import { getSiteConfig } from "@/utils/data";
 
 function ContactPage() {
@@ -51,7 +50,7 @@ function ContactPage() {
         service: formData.get("service"),
         message: formData.get("message"),
         date: new Date().toISOString().split("T")[0],
-        status: "new"
+        status: "new",
       };
       localStorage.setItem("devdigitax_messages", JSON.stringify([newMessage, ...savedMessages]));
 

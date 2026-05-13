@@ -18,7 +18,7 @@ export const logVisitServer = createServerFn("POST", async (visitor: VisitorData
     // Add new visitor and keep last 500
     logs = [visitor, ...logs].slice(0, 500);
     await fs.writeFile(LOG_FILE, JSON.stringify(logs, null, 2));
-    
+
     return { success: true };
   } catch (error) {
     console.error("Server logging error:", error);

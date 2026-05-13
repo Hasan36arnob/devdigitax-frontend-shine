@@ -19,7 +19,6 @@ import {
 import logo from "@/assets/devdigitax-logo.jpeg";
 import { WhatsAppIcon } from "@/components/Icons";
 
-
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
@@ -273,8 +272,8 @@ function Index() {
             <p className="mt-6 text-lg text-muted-foreground max-w-xl">
               Built for businesses that demand real results. We create high-performance websites
               that convert visitors into customers, and execute strategic marketing campaigns that
-              drive sustained revenue growth — from development to delivery. We specialize in React, Node.js, MongoDB, PHP,
-              JavaScript, and E-commerce development.
+              drive sustained revenue growth — from development to delivery. We specialize in React,
+              Node.js, MongoDB, PHP, JavaScript, and E-commerce development.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
@@ -310,7 +309,6 @@ function Index() {
                 </a>
               </div>
             </div>
-
           </div>
           <div className="relative">
             <div
@@ -509,7 +507,9 @@ function Index() {
           </div>
           <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {getServices().map(({ icon, title, description, slug }) => {
-              const Icon = ({ Layout, Code2, ShoppingCart, Palette, Search, TrendingUp } as any)[icon] || Layout;
+              const Icon =
+                ({ Layout, Code2, ShoppingCart, Palette, Search, TrendingUp } as any)[icon] ||
+                Layout;
               return (
                 <div
                   key={slug}

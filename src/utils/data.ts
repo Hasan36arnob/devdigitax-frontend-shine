@@ -64,7 +64,7 @@ export const getServices = (): ServiceItem[] => {
     title: s.t,
     description: s.d,
     icon: "Layout",
-    slug: s.slug
+    slug: s.slug,
   }));
 };
 
@@ -74,15 +74,42 @@ export const saveServices = (services: ServiceItem[]) => {
 
 // PORTFOLIO — localStorage with static fallback
 export const getPortfolio = (): PortfolioItem[] => {
-  if (typeof window === "undefined") return portfolioProjects.filter(p => !p.status || p.status === "published");
+  if (typeof window === "undefined")
+    return portfolioProjects.filter((p) => !p.status || p.status === "published");
   const saved = localStorage.getItem("devdigitax_portfolio");
   if (saved) return JSON.parse(saved);
-  return portfolioProjects.filter(p => !p.status || p.status === "published");
+  return portfolioProjects.filter((p) => !p.status || p.status === "published");
 };
 
 export const savePortfolio = (items: PortfolioItem[]) => {
   localStorage.setItem("devdigitax_portfolio", JSON.stringify(items));
 };
+
+/** Public portfolio: client sites with live links first, template demos next, missing links last. */
+export function sortPortfolioForDisplay(items: PortfolioItem[]): PortfolioItem[] {
+  const hasLive = (p: PortfolioItem) => {
+    const u = typeof p.live === "string" ? p.live.trim() : "";
+    return u.length > 0 && /^https?:\/\//i.test(u);
+  };
+  const isTemplateDemo = (p: PortfolioItem) => /^\d+$/.test(p.id);
+
+  const rank = (p: PortfolioItem) => {
+    const live = hasLive(p);
+    const demo = isTemplateDemo(p);
+    if (live && !demo) return 3;
+    if (live && demo) return 2;
+    if (!live && !demo) return 1;
+    return 0;
+  };
+
+  const origIndex = new Map(items.map((p, i) => [p, i]));
+
+  return [...items].sort((a, b) => {
+    const d = rank(b) - rank(a);
+    if (d !== 0) return d;
+    return (origIndex.get(a) ?? 0) - (origIndex.get(b) ?? 0);
+  });
+}
 
 // TEAM
 export const getTeam = (): TeamMember[] => {
@@ -102,7 +129,7 @@ const defaultConfig: SiteConfig = {
   email: "devdigitax@gmail.com",
   phone: "+880 9638-474596",
   address: "Savar 1340, Dhaka, Bangladesh",
-  footerText: "© DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX."
+  footerText: "© DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX.",
 };
 
 export const getSiteConfig = (): SiteConfig => {

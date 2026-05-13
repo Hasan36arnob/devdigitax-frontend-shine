@@ -11,9 +11,7 @@ export function VisitorTracker() {
 
         // Try multiple providers for 100% accuracy (fallbacks)
         let data: any = null;
-        const providers = [
-          "https://ipwho.is/?fields=ip,country,countryCode,city"
-        ];
+        const providers = ["https://ipwho.is/?fields=ip,country,countryCode,city"];
 
         for (const url of providers) {
           try {
@@ -27,7 +25,7 @@ export function VisitorTracker() {
                 countryCode: json.countryCode || "??",
                 city: json.city || "Unknown",
               };
-              break; 
+              break;
             }
           } catch (e) {
             continue;
@@ -49,11 +47,11 @@ export function VisitorTracker() {
           referrer: document.referrer || "Direct",
           screenResolution: `${window.screen.width}x${window.screen.height}`,
           language: navigator.language,
-          isMobile: /Mobi|Android/i.test(navigator.userAgent)
+          isMobile: /Mobi|Android/i.test(navigator.userAgent),
         };
 
         saveVisitor(visitor);
-        
+
         // Sync to server for global admin visibility (Google Level)
         try {
           await logVisitServer(visitor);
