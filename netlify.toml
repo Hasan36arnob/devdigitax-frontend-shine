@@ -1,5 +1,5 @@
 [build]
-  command = "npm ci --platform=linux --arch=x64 && npm run build"
+  command = "npm install && npm run build"
   publish = ".output/public"
 
 [build.environment]
