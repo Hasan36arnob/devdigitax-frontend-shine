@@ -169,3 +169,67 @@
     animation: ping-slow 3s cubic-bezier(0, 0, 0.2, 1) infinite;
   }
 }
+
+@utility animate-in {
+  animation: enter var(--tw-animation-duration, 0.15s) ease var(--tw-animation-delay, 0s) var(--tw-animation-iteration-count, 1) var(--tw-animation-direction, normal) var(--tw-animation-fill-mode, both);
+}
+
+@utility animate-out {
+  animation: exit var(--tw-animation-duration, 0.15s) ease var(--tw-animation-delay, 0s) var(--tw-animation-iteration-count, 1) var(--tw-animation-direction, normal) var(--tw-animation-fill-mode, both);
+}
+
+@utility duration-75 {
+  --tw-animation-duration: 75ms;
+  animation-duration: 75ms;
+}
+
+@utility duration-100 {
+  --tw-animation-duration: 100ms;
+  animation-duration: 100ms;
+}
+
+@utility duration-150 {
+  --tw-animation-duration: 150ms;
+  animation-duration: 150ms;
+}
+
+@utility duration-200 {
+  --tw-animation-duration: 200ms;
+  animation-duration: 200ms;
+}
+
+@utility duration-300 {
+  --tw-animation-duration: 300ms;
+  animation-duration: 300ms;
+}
+
+@utility duration-500 {
+  --tw-animation-duration: 500ms;
+  animation-duration: 500ms;
+}
+
+@utility duration-700 {
+  --tw-animation-duration: 700ms;
+  animation-duration: 700ms;
+}
+
+@utility duration-1000 {
+  --tw-animation-duration: 1000ms;
+  animation-duration: 1000ms;
+}
+
+@keyframes enter {
+  from {
+    opacity: var(--tw-enter-opacity, 1);
+    transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0) scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));
+    filter: blur(var(--tw-enter-blur, 0));
+  }
+}
+
+@keyframes exit {
+  to {
+    opacity: var(--tw-exit-opacity, 1);
+    transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0) scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));
+    filter: blur(var(--tw-exit-blur, 0));
+  }
+}

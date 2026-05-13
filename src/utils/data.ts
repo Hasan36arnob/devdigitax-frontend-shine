@@ -72,15 +72,16 @@ export const saveServices = (services: ServiceItem[]) => {
   localStorage.setItem("devdigitax_services", JSON.stringify(services));
 };
 
-// PORTFOLIO — no localStorage, always use source file
+// PORTFOLIO — localStorage with static fallback
 export const getPortfolio = (): PortfolioItem[] => {
-  return portfolioProjects.filter(
-    (p) => !p.status || p.status === "published"
-  );
+  if (typeof window === "undefined") return portfolioProjects.filter(p => !p.status || p.status === "published");
+  const saved = localStorage.getItem("devdigitax_portfolio");
+  if (saved) return JSON.parse(saved);
+  return portfolioProjects.filter(p => !p.status || p.status === "published");
 };
 
 export const savePortfolio = (items: PortfolioItem[]) => {
-  // Disabled — portfolio.ts is the single source of truth
+  localStorage.setItem("devdigitax_portfolio", JSON.stringify(items));
 };
 
 // TEAM
@@ -96,18 +97,23 @@ export const saveTeam = (members: TeamMember[]) => {
 };
 
 // SITE CONFIG
+const defaultConfig: SiteConfig = {
+  whatsapp: "+880 1837-692110",
+  email: "devdigitax@gmail.com",
+  phone: "+880 9638-474596",
+  address: "Savar 1340, Dhaka, Bangladesh",
+  footerText: "© DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX."
+};
+
 export const getSiteConfig = (): SiteConfig => {
-  return {
-    whatsapp: "+880 1837-692110",
-    email: "devdigitax@gmail.com",
-    phone: "+880 9638-474596",
-    address: "Savar 1340, Dhaka, Bangladesh",
-    footerText: "© DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX."
-  };
+  if (typeof window === "undefined") return defaultConfig;
+  const saved = localStorage.getItem("devdigitax_config");
+  if (saved) return { ...defaultConfig, ...JSON.parse(saved) };
+  return defaultConfig;
 };
 
 export const saveSiteConfig = (config: SiteConfig) => {
-  // Persistence disabled
+  localStorage.setItem("devdigitax_config", JSON.stringify(config));
 };
 
 // ARTICLES & MESSAGES
