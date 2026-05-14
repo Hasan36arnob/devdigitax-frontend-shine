@@ -1,8 +1,8 @@
 export const companyInfo = {
   name: "DevdigitaX",
-  tagline: "Web Development & Digital Marketing Agency",
+  tagline: "Scale Your Brand Digitally with DevdigitaX",
   description:
-    "DevdigitaX is a results-driven digital marketing and web development agency — built to turn your online presence into your most powerful sales channel.",
+    "DevdigitaX is Scale Your Brand Digitally with DevdigitaX — built to turn your online presence into your most powerful sales channel.",
   services: [
     "Professional Web Design & Development",
     "WordPress Website Development",

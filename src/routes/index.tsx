@@ -16,18 +16,18 @@ import {
   Palette,
   Phone,
 } from "lucide-react";
-import logo from "@/assets/devdigitax-logo.jpeg";
+import logo from "@/assets/dv.jpeg";
 import { WhatsAppIcon } from "@/components/Icons";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "DevdigitaX — Trusted Web Development & Digital Marketing Agency" },
+      { title: "DevdigitaX — Scale Your Brand Digitally with DevdigitaX" },
       {
         name: "description",
         content:
-          "DevdigitaX is a results-driven web development and digital marketing agency — built to turn your online presence into your most powerful sales channel.",
+          "DevdigitaX is Scale Your Brand Digitally with DevdigitaX — built to turn your online presence into your most powerful sales channel.",
       },
     ],
   }),
@@ -253,20 +253,19 @@ function Index() {
         <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 grid md:grid-cols-2 gap-12 items-center">
           <div>
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
-              <Sparkles className="h-3.5 w-3.5" /> Trusted Web Development & Digital Marketing
-              Agency
+              <Sparkles className="h-3.5 w-3.5" /> Scale Your Brand Digitally with DevdigitaX
             </span>
             <p className="mt-4 text-lg text-muted-foreground">
               DevdigitaX creates custom development solutions to brand your business and marketing
               strategies to grow any business.
             </p>
             <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Your trusted Development &{" "}
+              Scale Your Brand{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: "var(--gradient-primary)" }}
               >
-                marketing agency.
+                Digitally with DevdigitaX
               </span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl">
@@ -337,8 +336,8 @@ function Index() {
           </span>
         </h2>
         <p className="mt-6 text-muted-foreground text-lg">
-          DevdigitaX is a results-driven digital marketing and web development agency — built to
-          turn your online presence into your most powerful sales channel.
+          DevdigitaX is Scale Your Brand Digitally with DevdigitaX — built to turn your online
+          presence into your most powerful sales channel.
         </p>
         <p className="mt-4 text-muted-foreground">
           Every business deserves a digital presence that actually works. Not a website that sits
