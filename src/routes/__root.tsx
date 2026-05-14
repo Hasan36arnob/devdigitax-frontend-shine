@@ -89,7 +89,42 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:site", content: "@DevdigitaX" },
+      {
+        "script:ld+json": {
+          "@context": "https://schema.org",
+          "@type": "LocalBusiness",
+          name: "DevdigitaX",
+          image: "https://devdigitax.com/favicon.svg",
+          "@id": "https://devdigitax.com",
+          url: "https://devdigitax.com",
+          telephone: "+880 9638-474596",
+          address: {
+            "@type": "PostalAddress",
+            streetAddress: "Savar 1340",
+            addressLocality: "Dhaka",
+            addressRegion: "Dhaka",
+            postalCode: "1340",
+            addressCountry: "BD",
+          },
+          geo: {
+            "@type": "GeoCoordinates",
+            latitude: 23.8583,
+            longitude: 90.2667,
+          },
+          areaServed: {
+            "@type": "Place",
+            name: "Dhaka, Bangladesh",
+          },
+          openingHoursSpecification: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+            opens: "00:00",
+            closes: "23:59",
+          },
+          sameAs: ["https://twitter.com/DevdigitaX", "https://linkedin.com/company/devdigitax"],
+        },
+      },
     ],
     links: [
       {

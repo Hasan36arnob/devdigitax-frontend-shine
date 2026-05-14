@@ -12,7 +12,7 @@ export const Route = createFileRoute("/portfolio")({
       {
         name: "description",
         content:
-          "Real client work across food & restaurant, e-commerce, WordPress, and more — built by DevdigitaX.",
+          "Explore our demo websites. Custom designs and tailored options available to match your specific vision and references.",
       },
     ],
   }),
@@ -105,8 +105,8 @@ function PortfolioPage() {
             <span className="text-primary">For Itself</span>
           </h1>
           <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Real websites. Real clients. From food & restaurant brands to enterprise e-commerce —
-            every project built to convert.
+            Here are some demo websites. If you don’t like them, we can customize the design or show
+            more options. Feel free to share any reference site you like.
           </p>
 
           {/* Stats row */}
@@ -198,6 +198,7 @@ function PortfolioPage() {
                       alt={p.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       loading="lazy"
+                      decoding="async"
                     />
                     {/* Overlay on hover */}
                     <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
@@ -230,9 +231,6 @@ function PortfolioPage() {
                       {p.title}
                     </h3>
                     <p className="mt-1 text-xs text-muted-foreground font-medium">{p.client}</p>
-                    <p className="mt-2.5 text-sm text-muted-foreground leading-relaxed line-clamp-2 flex-1">
-                      {p.result}
-                    </p>
 
                     {/* Tech stack */}
                     <div className="mt-4 flex flex-wrap gap-1.5">

@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { getServices } from "@/utils/data";
+import { getServices, getPortfolio, sortPortfolioForDisplay } from "@/utils/data";
 import {
   ArrowRight,
   Code2,
@@ -15,8 +15,13 @@ import {
   Share2,
   Palette,
   Phone,
+  ExternalLink,
 } from "lucide-react";
 import logo from "@/assets/dv.jpeg";
+import tasin from "@/assets/tasin.jpeg";
+import kudzley from "@/assets/Kudzey.jpeg";
+import tonmoy from "@/assets/tonmoy.jpeg";
+import iqram from "@/assets/iqram.png";
 import { WhatsAppIcon } from "@/components/Icons";
 
 export const Route = createFileRoute("/")({
@@ -201,50 +206,92 @@ const faqs = [
 
 const testimonials = [
   {
+    name: "Tonmay Sen",
+    role: "Founder, IT company",
+    image: tonmoy,
+    quote:
+      "Working with DevdigitaX on our E-commerce platform was a game-changer. Professional, efficient, and truly understood our vision for Kudzey Mania.",
+  },
+  {
+    name: "MD Iqramul Haque",
+    role: "Founder, Bizway",
+    image: iqram,
+    quote:
+      "The Facebook ads campaign and branding strategy DevdigitaX delivered were outstanding. Our sales targets were not just met, but exceeded through their precise audience targeting.",
+  },
+  {
+    name: "MD Tasin",
+    role: "Founder, Norbex E-commerce",
+    image: tasin,
+    quote:
+      "Expert execution and strategic growth. DevdigitaX is more than an agency; they are a true partner in building a scalable e-commerce business.",
+  },
+  {
+    name: "Kudzley",
+    role: "Entrepreneur",
+    image: kudzley,
+    quote:
+      "Highly professional team that delivers consistent quality. They've been instrumental in our digital growth strategy.",
+  },
+  {
     name: "Tanvir Ahmed",
     role: "Founder, Bloomly Dhaka",
+    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
     quote: "One of the most interactive digital teams. Very professional and cooperative attitude.",
   },
   {
     name: "Sumaiya Karim",
     role: "CEO, NorthGear BD",
+    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
     quote:
       "The best web development team in Dhaka. We worked with DevdigitaX and got incredible results.",
   },
   {
     name: "Rakib Hasan",
     role: "CMO, Lumora",
+    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
     quote:
       "DevdigitaX is the best SEO agency we've hired. 100% satisfied with the team and the results.",
   },
   {
     name: "Nadia Rahman",
     role: "Director, Pulse Fitness",
+    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
     quote: "Best digital marketing agency. The strategy and execution are top-tier.",
   },
   {
     name: "Imran Chowdhury",
     role: "Owner, Mira Furniture",
+    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop",
     quote: "We've worked with this agency and the experience has been excellent — Alhamdulillah.",
   },
   {
     name: "Sadia Islam",
     role: "Head of Growth, Vault",
+    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
     quote: "Truly a great SEO and growth partner. They understand the local market.",
   },
   {
     name: "James Wilson",
     role: "CEO, TechFlow UK",
+    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop",
     quote: "Outstanding web development and SEO services. Our traffic increased 300% in 6 months.",
   },
   {
     name: "Sarah Chen",
     role: "Founder, GlobalTrade Singapore",
+    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop",
     quote: "Professional, responsive, and delivered beyond expectations. Highly recommended!",
   },
 ];
 
 function Index() {
+  const allProjects = getPortfolio();
+  const featuredIds = ["r24", "r29", "r30", "r31", "1", "2"];
+  const featuredProjects = featuredIds
+    .map((id) => allProjects.find((p) => p.id === id))
+    .filter(Boolean);
+
   return (
     <SiteLayout>
       {/* HERO */}
@@ -318,7 +365,14 @@ function Index() {
               className="relative aspect-square rounded-3xl border border-border bg-card/60 backdrop-blur-xl p-10 grid place-items-center"
               style={{ boxShadow: "var(--shadow-elegant)" }}
             >
-              <img src={logo} alt="DevdigitaX" className="w-full max-w-sm rounded-2xl" />
+              <img
+                src={logo}
+                alt="DevdigitaX"
+                className="w-full max-w-sm rounded-2xl"
+                fetchPriority="high"
+                loading="eager"
+                decoding="sync"
+              />
             </div>
           </div>
         </div>
@@ -375,6 +429,97 @@ function Index() {
               </div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* PORTFOLIO SECTION */}
+      <section className="max-w-7xl mx-auto px-6 py-24">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+          <div className="max-w-2xl">
+            <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+              Our Work
+            </span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+              Featured Projects
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              A selection of our best work across web development, e-commerce, and digital marketing.
+            </p>
+          </div>
+          <Link
+            to="/portfolio"
+            className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+          >
+            View All Projects <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
+
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {featuredProjects.map((project) => (
+            <div
+              key={project.id}
+              className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+            >
+              <div className="aspect-[16/10] overflow-hidden relative">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
+                  {project.live && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="h-10 w-10 rounded-full bg-white text-black grid place-items-center hover:scale-110 transition"
+                    >
+                      <ExternalLink className="h-5 w-5" />
+                    </a>
+                  )}
+                </div>
+              </div>
+              <div className="p-6">
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <span className="text-xs font-medium px-2 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">
+                    {project.category}
+                  </span>
+                  <span className="text-xs text-muted-foreground">{project.client}</span>
+                </div>
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors line-clamp-1">
+                  {project.title}
+                </h3>
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {project.tech
+                    .split(",")
+                    .slice(0, 4)
+                    .map((t) => (
+                      <span
+                        key={t}
+                        className="text-[10px] px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground whitespace-nowrap"
+                      >
+                        {t.trim()}
+                      </span>
+                    ))}
+                  {project.tech.split(",").length > 4 && (
+                    <span className="text-[10px] px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground">
+                      +{project.tech.split(",").length - 4} more
+                    </span>
+                  )}
+                </div>
+                <div className="mt-4 flex items-center justify-between">
+                  <Link
+                    to="/portfolio"
+                    className="text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all"
+                  >
+                    Learn more <ArrowRight className="h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          ))}
         </div>
       </section>
 
@@ -596,10 +741,18 @@ function Index() {
                 </div>
                 <p className="mt-4 text-foreground text-sm leading-relaxed">"{t.quote}"</p>
                 <div className="mt-6 flex items-center gap-3">
-                  <div
-                    className="h-10 w-10 rounded-full"
-                    style={{ background: "var(--gradient-primary)" }}
-                  />
+                  {t.image ? (
+                    <img
+                      src={t.image}
+                      alt={t.name}
+                      className="h-10 w-10 rounded-full object-cover border border-primary/20"
+                    />
+                  ) : (
+                    <div
+                      className="h-10 w-10 rounded-full"
+                      style={{ background: "var(--gradient-primary)" }}
+                    />
+                  )}
                   <div>
                     <div className="font-semibold text-sm">{t.name}</div>
                     <div className="text-xs text-muted-foreground">{t.role}</div>

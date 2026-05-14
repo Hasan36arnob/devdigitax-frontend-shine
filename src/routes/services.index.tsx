@@ -41,34 +41,35 @@ function ServicesPage() {
         </div>
       </section>
 
-      {/* Services Grid */}
       <section className="max-w-7xl mx-auto px-6 py-24">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {services.map(({ icon, title, description, slug }) => {
             const Icon = IconMap[icon] || Layout;
+            const geoTitle = `${title} in Dhaka`;
             return (
-              <div
-                key={slug}
-                className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
-              >
-                <div className="p-8">
-                  <div
-                    className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
-                    style={{ background: "var(--gradient-primary)" }}
-                  >
-                    <Icon className="h-6 w-6" />
+              <div key={slug} className="flex flex-col">
+                <h2 className="mb-4 text-xl md:text-2xl font-bold text-foreground/90">
+                  {geoTitle}
+                </h2>
+                <div className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 flex-1">
+                  <div className="p-8">
+                    <div
+                      className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
+                      style={{ background: "var(--gradient-primary)" }}
+                    >
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <p className="mt-5 text-sm text-muted-foreground leading-relaxed">
+                      {description}
+                    </p>
+                    <Link
+                      to="/services/$serviceId"
+                      params={{ serviceId: slug }}
+                      className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
+                    >
+                      Learn more <ArrowRight className="h-4 w-4" />
+                    </Link>
                   </div>
-                  <h2 className="mt-5 text-xl font-semibold">{title}</h2>
-                  <p className="mt-2 text-sm text-muted-foreground leading-relaxed">
-                    {description}
-                  </p>
-                  <Link
-                    to="/services/$serviceId"
-                    params={{ serviceId: slug }}
-                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
-                  >
-                    Learn more <ArrowRight className="h-4 w-4" />
-                  </Link>
                 </div>
               </div>
             );

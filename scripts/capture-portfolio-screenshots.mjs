@@ -21,7 +21,6 @@ const targets = [
   { file: "pattyscheesecakes.png", url: "https://www.pattyscheesecakes.com/" },
   { file: "aascaterers.png", url: "https://aascaterers.com/" },
   { file: "sweetsandmeatsbbq.png", url: "https://sweetsandmeatsbbq.com/" },
-  { file: "alibobas.png", url: "https://alibobas.com/" },
   { file: "nayakratom.png", url: "https://nayakratom.com/" },
   { file: "healthyvibezcorp.png", url: "https://healthyvibezcorp.com/" },
   { file: "meaningfuleats.png", url: "https://meaningfuleats.com/" },

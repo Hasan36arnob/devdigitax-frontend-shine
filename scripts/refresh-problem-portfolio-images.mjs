@@ -22,7 +22,6 @@ const UA =
 /** Unsplash — scenes/objects only (no people). Used for demos + when forceStock is set. */
 const STOCK = {
   aascaterers: "https://images.unsplash.com/photo-1504754524776-8f4f37790ca0?w=1600&q=80",
-  alibobas: "https://images.unsplash.com/photo-1564890369478-c89ca6d9cde9?w=1600&q=80",
   healthyvibezcorp: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=1600&q=80",
   lgeuae: "https://images.unsplash.com/photo-1498049794561-7780e7231661?w=1600&q=80",
   simtechnologies: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600&q=80",
@@ -44,7 +43,6 @@ const STOCK = {
 /** @type {Job[]} */
 const jobs = [
   { file: "aascaterers.png", url: "https://aascaterers.com/", stockKey: "aascaterers", forceStock: true },
-  { file: "alibobas.png", url: "https://alibobas.com/", stockKey: "alibobas", forceStock: true },
   { file: "healthyvibezcorp.png", url: "https://healthyvibezcorp.com/", stockKey: "healthyvibezcorp", forceStock: true },
   { file: "lgeuae.png", url: "https://lgeuae.com/", altUrl: "http://lgeuae.com/", stockKey: "lgeuae", forceStock: true },
   { file: "simtechnologies.png", url: "https://simtechnologies.net/", stockKey: "simtechnologies", forceStock: true },
