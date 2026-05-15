@@ -327,7 +327,7 @@ function Index() {
               strategies to grow any business.
             </p>
             <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Next-Gen Development 
+              Next-Gen Development{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: "var(--gradient-primary)" }}
