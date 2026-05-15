@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { ArrowRight } from "lucide-react";
+import readyecommerce from "@/assets/readyecommerce.png";
 
 export const Route = createFileRoute("/services/$serviceId")({
   component: ServiceDetailPage,
@@ -514,7 +515,7 @@ const serviceContent: Record<
     description:
       "High-converting product pages, frictionless checkout, and systems that turn first-time buyers into repeat customers.",
     heroImage:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f7a07d?q=80&w=1200&h=600&fit=crop",
+      "https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1200&h=600&fit=crop",
     features: [
       { icon: "🛒", text: "Intuitive shopping cart and checkout flow" },
       { icon: "💳", text: "Multiple payment gateway integrations" },
@@ -1143,10 +1144,30 @@ const serviceContent: Record<
       { icon: "💰", text: "Budget management and ROI tracking" },
     ],
     technologies: [
-      { name: "Meta Ads Manager", icon: "📘" },
-      { name: "Google Ads", icon: "🔍" },
-      { name: "Google Analytics", icon: "📊" },
-      { name: "HubSpot/Mailchimp", icon: "✉️" },
+      {
+        name: "Meta Ads Manager",
+        icon: "📘",
+        bg: "bg-gradient-to-br from-blue-500/15 to-cyan-500/20",
+        text: "text-blue-500",
+      },
+      {
+        name: "Google Ads",
+        icon: "🔍",
+        bg: "bg-gradient-to-br from-emerald-500/15 via-yellow-300/20 to-sky-500/20",
+        text: "text-emerald-500",
+      },
+      {
+        name: "Google Analytics",
+        icon: "📊",
+        bg: "bg-gradient-to-br from-orange-400/15 to-amber-400/20",
+        text: "text-orange-400",
+      },
+      {
+        name: "HubSpot/Mailchimp",
+        icon: "✉️",
+        bg: "bg-gradient-to-br from-fuchsia-500/15 to-violet-500/20",
+        text: "text-fuchsia-500",
+      },
     ],
     process: [
       "Business analysis and goal setting",
@@ -1355,8 +1376,7 @@ function ServiceDetailPage() {
           features: [],
           technologies: [],
           process: [],
-          heroImage:
-            "https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1200&h=600&fit=crop",
+          heroImage: readyecommerce,
           callToAction: "Contact us to learn more about this service.",
         }),
         title: dynamicService.title,
@@ -1469,11 +1489,14 @@ function ServiceDetailPage() {
 
             <div className="relative w-full aspect-square md:aspect-[4/3] lg:aspect-auto lg:h-full rounded-[3rem] overflow-hidden border border-white/10 shadow-[0_0_100px_rgba(var(--primary-rgb),0.1)] group">
               <img
-                src={service.heroImage}
+                src={service.heroImage || readyecommerce}
                 alt={service.title}
                 fetchPriority="high"
                 loading="eager"
                 decoding="sync"
+                onError={(event) => {
+                  event.currentTarget.src = readyecommerce;
+                }}
                 className="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-[2s]"
               />
               {/* Glassmorphic overlay */}
@@ -1609,7 +1632,9 @@ function ServiceDetailPage() {
                 key={idx}
                 className="group flex flex-col items-center gap-4 transition-all duration-500"
               >
-                <div className="h-24 w-24 rounded-[2rem] bg-white/5 border border-white/10 flex items-center justify-center text-5xl grayscale group-hover:grayscale-0 group-hover:scale-110 group-hover:shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] group-hover:border-primary/50 transition-all duration-500">
+                <div
+                  className={`h-24 w-24 rounded-[2rem] ${tech.bg} border border-white/10 flex items-center justify-center text-5xl ${tech.text} group-hover:scale-110 group-hover:shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] group-hover:border-primary/50 transition-all duration-500`}
+                >
                   {tech.icon}
                 </div>
                 <span className="text-sm font-black uppercase tracking-widest text-muted-foreground group-hover:text-primary transition-colors">

@@ -21,18 +21,18 @@ import logo from "@/assets/dv.jpeg";
 import tasin from "@/assets/tasin.jpeg";
 import kudzley from "@/assets/Kudzey.jpeg";
 import tonmoy from "@/assets/tonmoy.jpeg";
-import iqram from "@/assets/iqram.png";
+import iqraam from "@/assets/iqraam.png";
 import { WhatsAppIcon } from "@/components/Icons";
 
 export const Route = createFileRoute("/")({
   component: Index,
   head: () => ({
     meta: [
-      { title: "DevdigitaX — Scale Your Brand Digitally with DevdigitaX" },
+      { title: "DevdigitaX — Scale Your Brand Digitally" },
       {
         name: "description",
         content:
-          "DevdigitaX is Scale Your Brand Digitally with DevdigitaX — built to turn your online presence into your most powerful sales channel.",
+          "DevdigitaX helps you scale your brand digitally with custom development and strategic marketing that turns your online presence into your most powerful sales channel.",
       },
     ],
   }),
@@ -179,28 +179,48 @@ const why = [
 
 const faqs = [
   {
-    q: "How long before we see real results?",
-    a: "Paid campaigns can generate leads within 7–14 days. SEO compounds — meaningful organic growth typically appears in 3–4 months and accelerates by month 6. We set honest expectations on the strategy call.",
+    q: "What is your typical project timeline?",
+    a: "Website development projects range from 4-12 weeks depending on complexity. Marketing campaigns launch within 2 weeks of strategy approval. We provide detailed timelines during our discovery phase and maintain transparent communication throughout.",
   },
   {
-    q: "Do you work with small businesses and startups, or only large companies?",
-    a: "Both. We work with ambitious startups, growing SMEs and established brands. What matters is the commitment to growth — not the company size.",
+    q: "How do you measure and report on project success?",
+    a: "We establish clear KPIs at project outset including conversion rates, traffic growth, revenue impact, and ROI. You'll receive weekly performance reports with actionable insights, and we adjust strategies based on real-time data to maximize results.",
   },
   {
-    q: "What makes you different from other digital agencies?",
-    a: "Senior-only team, revenue-first strategy, transparent reporting, and a 98% retention rate. We don't sell deliverables — we deliver outcomes.",
+    q: "What is your process for understanding our business needs?",
+    a: "Our discovery process includes in-depth stakeholder interviews, competitor analysis, audience research, and current performance audits. We spend significant time understanding your goals, challenges, and market position before proposing solutions.",
   },
   {
-    q: "What does it cost to work with DevdigitaX?",
-    a: "Pricing depends on scope. After the discovery call we share a clear proposal with deliverables, timeline and projected outcomes — no hidden fees.",
+    q: "How do you handle project communication and updates?",
+    a: "You'll have direct access to our senior team members, not account managers. We provide weekly progress updates, milestone reviews, and maintain open channels for questions. Transparency is core to our client relationships.",
   },
   {
-    q: "Can you handle web development and digital marketing together?",
-    a: "Yes — that's our core advantage. One integrated team handling strategy, design, development, traffic and conversion under one roof.",
+    q: "What happens if we're not satisfied with the results?",
+    a: "Your satisfaction is our priority. If results don't meet agreed-upon KPIs, we'll revise our approach at no additional cost. Our revenue-first strategy ensures we're invested in your success, not just project completion.",
   },
   {
-    q: "Will I have direct access to the people working on my account?",
-    a: "Always. You communicate directly with the strategists, designers and engineers building your project — not gatekeepers.",
+    q: "Do you offer custom solutions or only standard packages?",
+    a: "Every engagement is custom-tailored to your specific business needs, goals, and budget. We don't believe in one-size-fits-all solutions. Our senior team crafts strategies specifically designed for your market position and growth objectives.",
+  },
+  {
+    q: "What is your after-delivery support system?",
+    a: "We provide comprehensive post-delivery support including 30-day free maintenance, 24/7 technical assistance, performance monitoring, security updates, and strategic optimization. Our dedicated support team ensures your digital assets continue performing at peak levels with proactive maintenance and rapid issue resolution.",
+  },
+  {
+    q: "How do you stay current with the latest digital marketing and development trends?",
+    a: "Our team invests heavily in continuous learning, attending industry conferences, conducting ongoing research, and maintaining partnerships with leading technology providers. We regularly audit and update our methodologies to leverage emerging best practices.",
+  },
+  {
+    q: "What industries do you specialize in?",
+    a: "We work across healthcare, real estate, retail, logistics, and e-commerce sectors. Our expertise spans from local businesses to enterprise-level organizations, adapting our strategies to each industry's unique challenges and opportunities.",
+  },
+  {
+    q: "Do you provide ongoing maintenance and support after project completion?",
+    a: "Yes, we offer comprehensive post-launch support including technical maintenance, content updates, performance monitoring, security patches, and strategic optimization. Our 98% client retention rate reflects our commitment to long-term partnerships.",
+  },
+  {
+    q: "How do you ensure data security and client privacy?",
+    a: "We implement enterprise-grade security protocols including SSL encryption, secure hosting, regular backups, and GDPR compliance. All client data is handled with strict confidentiality, and we never share proprietary information without explicit permission.",
   },
 ];
 
@@ -210,12 +230,12 @@ const testimonials = [
     role: "Founder, IT company",
     image: tonmoy,
     quote:
-      "Working with DevdigitaX on our E-commerce platform was a game-changer. Professional, efficient, and truly understood our vision for Kudzey Mania.",
+      "Working with DevdigitaX on our E-commerce platform was a game-changer. Professional, efficient, and truly understood our vision for our business.",
   },
   {
     name: "MD Iqramul Haque",
     role: "Founder, Bizway",
-    image: iqram,
+    image: iqraam,
     quote:
       "The Facebook ads campaign and branding strategy DevdigitaX delivered were outstanding. Our sales targets were not just met, but exceeded through their precise audience targeting.",
   },
@@ -227,7 +247,7 @@ const testimonials = [
       "Expert execution and strategic growth. DevdigitaX is more than an agency; they are a true partner in building a scalable e-commerce business.",
   },
   {
-    name: "Kudzley",
+    name: "Kudzley Mania",
     role: "Entrepreneur",
     image: kudzley,
     quote:
@@ -295,10 +315,10 @@ function Index() {
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      <section className="relative overflow-hidden animate-fade-in" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,oklch(0.55_0.24_262/0.25),transparent_50%)]" />
         <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 grid md:grid-cols-2 gap-12 items-center">
-          <div>
+          <div className="animate-fade-in-up">
             <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
               <Sparkles className="h-3.5 w-3.5" /> Scale Your Brand Digitally with DevdigitaX
             </span>
@@ -307,18 +327,18 @@ function Index() {
               strategies to grow any business.
             </p>
             <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Scale Your Brand{" "}
+              Next-Gen Development 
               <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: "var(--gradient-primary)" }}
               >
-                Digitally with DevdigitaX
+                and Strategic Marketing Partner
               </span>
             </h1>
             <p className="mt-6 text-lg text-muted-foreground max-w-xl">
               Built for businesses that demand real results. We create high-performance websites
               that convert visitors into customers, and execute strategic marketing campaigns that
-              drive sustained revenue growth — from development to delivery. We specialize in React,
+              drive sustained revenue growth — from development to delivery. We specialize in Wordpress, React,
               Node.js, MongoDB, PHP, JavaScript, and E-commerce development.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
@@ -327,7 +347,7 @@ function Index() {
                 className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-primary-foreground"
                 style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
               >
-                Claim a Free Website & Marketing Assessmentt{" "}
+               Get Assessment{" "}
                 <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
               </Link>
               <Link
@@ -356,7 +376,7 @@ function Index() {
               </div>
             </div>
           </div>
-          <div className="relative">
+          <div className="relative animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
             <div
               className="absolute -inset-10 rounded-full blur-3xl opacity-50"
               style={{ background: "var(--gradient-primary)" }}
@@ -379,7 +399,7 @@ function Index() {
       </section>
 
       {/* INTRO */}
-      <section className="max-w-5xl mx-auto px-6 py-24 text-center">
+      <section className="max-w-5xl mx-auto px-6 py-24 text-center reveal">
         <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
           Your Business Is Losing Customers Online.{" "}
           <span
@@ -390,8 +410,8 @@ function Index() {
           </span>
         </h2>
         <p className="mt-6 text-muted-foreground text-lg">
-          DevdigitaX is Scale Your Brand Digitally with DevdigitaX — built to turn your online
-          presence into your most powerful sales channel.
+          DevdigitaX is your Next-Gen Development and Strategic Marketing Partner — built to turn
+          your online presence into your most powerful sales channel.
         </p>
         <p className="mt-4 text-muted-foreground">
           Every business deserves a digital presence that actually works. Not a website that sits
@@ -402,7 +422,7 @@ function Index() {
       </section>
 
       {/* STATS */}
-      <section className="border-y border-border bg-card/30">
+      <section className="border-y border-border bg-card/30 reveal">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
@@ -433,17 +453,17 @@ function Index() {
       </section>
 
       {/* PORTFOLIO SECTION */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
-              Our Work
+              Demo websites
             </span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
               Featured Projects
             </h2>
             <p className="mt-4 text-muted-foreground">
-              A selection of our best work across web development, e-commerce, and digital marketing.
+              A selection of our demo websites
             </p>
           </div>
           <Link
@@ -514,7 +534,7 @@ function Index() {
                     to="/portfolio"
                     className="text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all"
                   >
-                    Learn more <ArrowRight className="h-4 w-4" />
+                    Explore Project <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               </div>
@@ -524,7 +544,7 @@ function Index() {
       </section>
 
       {/* WEBSITE LIFECYCLE */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">
             Our process
@@ -557,7 +577,7 @@ function Index() {
       </section>
 
       {/* PATH */}
-      <section className="bg-card/30 border-y border-border">
+      <section className="bg-card/30 border-y border-border reveal">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="max-w-3xl">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
@@ -602,7 +622,7 @@ function Index() {
       </section>
 
       {/* MISSION / TEAM / VALUES */}
-      <section className="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-3 gap-6">
+      <section className="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-3 gap-6 reveal">
         {[
           {
             Icon: Globe,
@@ -634,7 +654,7 @@ function Index() {
       </section>
 
       {/* SERVICES */}
-      <section className="bg-card/30 border-y border-border">
+      <section className="bg-card/30 border-y border-border reveal">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="max-w-3xl">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
@@ -675,7 +695,7 @@ function Index() {
                     params={{ serviceId: slug }}
                     className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
                   >
-                    Learn more <ArrowRight className="h-4 w-4" />
+                    Explore Service <ArrowRight className="h-4 w-4" />
                   </Link>
                 </div>
               );
@@ -685,7 +705,7 @@ function Index() {
       </section>
 
       {/* WHY US */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
         <div className="max-w-3xl">
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">
             Why DevdigitaX
@@ -713,7 +733,7 @@ function Index() {
       </section>
 
       {/* TESTIMONIALS */}
-      <section className="bg-card/30 border-y border-border">
+      <section className="bg-card/30 border-y border-border reveal">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="text-center max-w-2xl mx-auto">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
@@ -765,7 +785,7 @@ function Index() {
       </section>
 
       {/* FAQ */}
-      <section className="max-w-4xl mx-auto px-6 py-24">
+      <section className="max-w-4xl mx-auto px-6 py-24 reveal">
         <div className="text-center">
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">FAQ</span>
           <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
@@ -792,7 +812,7 @@ function Index() {
       </section>
 
       {/* CTA */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
         <div
           className="relative overflow-hidden rounded-3xl border border-primary/30 p-12 md:p-20 text-center"
           style={{ background: "var(--gradient-hero)", boxShadow: "var(--shadow-elegant)" }}

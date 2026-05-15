@@ -129,18 +129,38 @@ function AboutPage() {
 
   return (
     <SiteLayout>
+      {/* Hero Section */}
+      <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden animate-fade-in">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,oklch(0.55_0.24_262/0.15),transparent_70%)]" />
+        <div className="relative max-w-7xl mx-auto px-6">
+          <div className="max-w-3xl animate-fade-in-up">
+            <h1 className="text-4xl md:text-7xl font-bold tracking-tight mb-8">
+              We're the team building{" "}
+              <span
+                className="bg-clip-text text-transparent"
+                style={{ backgroundImage: "var(--gradient-primary)" }}
+              >
+                Dhaka's next digital leaders.
+              </span>
+            </h1>
+            <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
+              DevdigitaX isn't just an agency. We're a senior team of designers, engineers and
+              marketers who left the big agency world to build something better: a trusted growth
+              partner that makes your success our top priority.
+            </p>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Section */}
-      <section className="max-w-7xl mx-auto px-6 relative z-10">
+      <section className="max-w-7xl mx-auto px-6 relative z-10 reveal">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
               <div
                 key={stat.label}
-                className={`bg-card border border-border rounded-2xl p-6 text-center hover:border-primary/50 transition-all duration-500 hover:scale-105 group ${
-                  isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
-                }`}
-                style={{ transitionDelay: `${idx * 100}ms` }}
+                className="bg-card border border-border rounded-2xl p-6 text-center hover:border-primary/50 transition-all duration-500 hover:scale-105 group"
               >
                 <Icon className="h-8 w-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
                 <div className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
@@ -154,7 +174,7 @@ function AboutPage() {
       </section>
 
       {/* Mission Section */}
-      <section id="mission" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24">
+      <section id="mission" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24 reveal">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
             <Rocket className="h-4 w-4" />
@@ -165,9 +185,9 @@ function AboutPage() {
           </h2>
           <div className="mt-8 p-8 rounded-2xl bg-gradient-to-br from-primary/5 via-transparent to-transparent border border-primary/10">
             <p className="text-lg text-muted-foreground leading-relaxed">
-              We believe digital growth should be transparent, measurable, and driven by actual
-              business results. Our mission is to build systems that compound over time, delivering
-              sustainable growth for our partners.
+              We believe digital growth should be transparent, measurable, and directly tied to
+              your business goals. Our mission is to build systems that compound over time,
+              turning every website, campaign, and customer touchpoint into sustainable growth.
             </p>
           </div>
         </div>
@@ -176,7 +196,7 @@ function AboutPage() {
       {/* Company Section */}
       <section
         id="company"
-        className="max-w-7xl mx-auto px-6 py-16 scroll-mt-24 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl mt-8"
+        className="max-w-7xl mx-auto px-6 py-16 scroll-mt-24 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl mt-8 reveal"
       >
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
@@ -185,9 +205,9 @@ function AboutPage() {
           </div>
           <h2 className="text-3xl md:text-5xl font-bold tracking-tight">About Our Company</h2>
           <p className="mt-6 text-lg text-muted-foreground leading-relaxed">
-            Founded in 2018 with a vision to redefine digital agency partnerships, DevdigitaX has
-            grown into a trusted partner for businesses across the globe. We combine strategic
-            thinking with technical excellence to deliver measurable results.
+            Founded in 2018 to redefine digital partnerships, DevdigitaX is a trusted partner for
+            businesses ready to scale online. We combine sharp strategy with technical excellence so
+            every website, campaign, and launch delivers measurable impact.
           </p>
           <div className="mt-8 grid grid-cols-2 gap-4 text-left">
             <div className="flex items-start gap-3">
@@ -210,46 +230,8 @@ function AboutPage() {
         </div>
       </section>
 
-      {/* Team Section */}
-      {/*
-      <section id="team" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24">
-        <div className="text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
-            <Users className="h-4 w-4" />
-            <span>Meet The Team</span>
-          </div>
-          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Our Team</h2>
-          <p className="mt-4 text-lg text-muted-foreground">
-            A collective of passionate experts dedicated to your success.
-          </p>
-        </div>
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
-          {teamMembers.map((member, idx) => (
-            <div
-              key={member.name}
-              className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:scale-105"
-              style={{ transitionDelay: `${idx * 100}ms` }}
-            >
-              <div className="aspect-square overflow-hidden bg-muted/10">
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="w-full h-full object-contain"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-semibold">{member.name}</h3>
-                <p className="text-sm text-primary mt-1 font-medium">{member.role}</p>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-      */}
-
       {/* Values Section */}
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
@@ -258,11 +240,12 @@ function AboutPage() {
             </div>
             <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Our values</h2>
             <p className="mt-4 text-muted-foreground text-lg">
-              We operate on a few clear principles that guide every decision and deliverable.
+              We operate on a few clear principles that guide every decision and deliverable,
+              keeping every project focused on real business impact.
             </p>
             <p className="mt-4 text-muted-foreground">
-              Today we partner with brands across the globe, helping them launch products, dominate
-              search, and scale paid acquisition.
+              Today, brands around the world trust us to launch products, win search, and scale paid
+              acquisition.
             </p>
             <div className="mt-8 flex gap-4">
               <div className="flex items-center gap-2">
@@ -284,7 +267,6 @@ function AboutPage() {
               <div
                 key={t}
                 className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:scale-105 cursor-pointer"
-                style={{ transitionDelay: `${idx * 100}ms` }}
               >
                 <div
                   className={`h-12 w-12 rounded-xl bg-gradient-to-r ${color} p-2.5 text-white mb-4 group-hover:scale-110 transition-transform`}
@@ -300,17 +282,17 @@ function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-6 pb-24">
+      <section className="max-w-7xl mx-auto px-6 pb-24 reveal">
         <div className="rounded-3xl bg-gradient-to-r from-primary/20 via-primary/10 to-transparent p-12 text-center border border-primary/20">
-          <h2 className="text-3xl md:text-4xl font-bold">Ready to grow together?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold">Ready to turn your online presence into reliable growth?</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
-            Let's discuss how we can help you achieve your digital goals.
+            Let's talk about the next growth chapter for your business.
           </p>
           <a
             href="/contact"
             className="inline-flex items-center gap-2 mt-8 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all hover:scale-105"
           >
-            Start a conversation
+            Start your growth conversation
             <ExternalLink className="h-4 w-4" />
           </a>
         </div>

@@ -24,9 +24,9 @@ function ServicesPage() {
   return (
     <SiteLayout>
       {/* Hero Section */}
-      <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      <section className="relative overflow-hidden animate-fade-in" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,oklch(0.55_0.24_262/0.25),transparent_50%)]" />
-        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 text-center">
+        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 text-center animate-fade-in-up">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
             Our Services
           </span>
@@ -41,7 +41,7 @@ function ServicesPage() {
         </div>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-24">
+      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {services.map(({ icon, title, description, slug }) => {
             const Icon = IconMap[icon] || Layout;
@@ -67,7 +67,7 @@ function ServicesPage() {
                       params={{ serviceId: slug }}
                       className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
                     >
-                      Learn more <ArrowRight className="h-4 w-4" />
+                      Explore Service <ArrowRight className="h-4 w-4" />
                     </Link>
                   </div>
                 </div>
@@ -78,7 +78,7 @@ function ServicesPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-card/30 border-y border-border">
+      <section className="bg-card/30 border-y border-border reveal">
         <div className="max-w-7xl mx-auto px-6 py-24 text-center">
           <h2 className="text-3xl md:text-4xl font-bold">
             Not sure which service is right for you?

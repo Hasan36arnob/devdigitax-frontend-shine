@@ -84,7 +84,7 @@ function PortfolioPage() {
   return (
     <SiteLayout>
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
+      <section className="relative overflow-hidden animate-fade-in" style={{ background: "var(--gradient-hero)" }}>
         {/* Background grid */}
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -94,168 +94,148 @@ function PortfolioPage() {
             backgroundSize: "60px 60px",
           }}
         />
-        <div className="relative max-w-5xl mx-auto px-6 py-28 md:py-36 text-center">
+        <div className="relative max-w-5xl mx-auto px-6 py-28 md:py-36 text-center animate-fade-in-up">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
             <Globe className="h-3.5 w-3.5" />
-            <span></span>
+            <span>Showcasing Excellence</span>
           </div>
-          <h1 className="text-4xl md:text-6xl font-bold tracking-tight">
-            Work That Speaks
-            <br />
-            <span className="text-primary">For Itself</span>
+          <h1 className="text-4xl md:text-7xl font-bold tracking-tight mb-8">
+            Here are some demo websites. If you don’t like them, we can{" "}
+            <span
+              className="bg-clip-text text-transparent"
+              style={{ backgroundImage: "var(--gradient-primary)" }}
+            >
+              customize the design
+            </span>{" "}
+            or show more options.
           </h1>
-          <p className="mt-6 text-lg text-muted-foreground max-w-2xl mx-auto">
-            Here are some demo websites. If you don’t like them, we can customize the design or show
-            more options. Feel free to share any reference site you like.
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Feel free to share any reference site you like. We build high-performance,
+            conversion-focused digital products across all industries.
           </p>
-
-          {/* Stats row */}
-          <div className="mt-10 flex flex-wrap justify-center gap-8">
-            {[
-              { v: "400+", l: "Projects Delivered" },
-              { v: "8+", l: "Years Experience" },
-            ].map(({ v, l }) => (
-              <div key={l} className="text-center">
-                <div className="text-2xl font-bold text-primary">{v}</div>
-                <div className="text-xs text-muted-foreground mt-0.5">{l}</div>
-              </div>
-            ))}
-          </div>
         </div>
       </section>
 
-      {/* ── Filters + Search ── */}
-      <section className="sticky top-0 z-30 bg-background/80 backdrop-blur-xl border-b border-border">
-        <div className="max-w-7xl mx-auto px-6 py-4 flex flex-col sm:flex-row gap-4 items-center justify-between">
-          {/* Category pills */}
-          <div className="flex flex-wrap gap-2 justify-center sm:justify-start">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setActiveCat(cat.id)}
-                className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 ${
-                  activeCat === cat.id
-                    ? "bg-primary text-primary-foreground shadow-md shadow-primary/20"
-                    : "bg-card border border-border hover:border-primary/40 hover:bg-accent text-muted-foreground hover:text-foreground"
-                }`}
-              >
-                {cat.label}
-                <span
-                  className={`ml-1.5 text-xs ${activeCat === cat.id ? "opacity-70" : "opacity-50"}`}
+      {/* ── Filter / Search ── */}
+      <section className="sticky top-[var(--navbar-height)] z-30 border-y border-border bg-background/80 backdrop-blur-md reveal">
+        <div className="max-w-7xl mx-auto px-6 py-4">
+          <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
+            {/* Categories */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 lg:pb-0 no-scrollbar max-w-full">
+              {categories.map((cat) => (
+                <button
+                  key={cat.id}
+                  onClick={() => setActiveCat(cat.id)}
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap flex items-center gap-2 ${
+                    activeCat === cat.id
+                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                      : "bg-card border border-border text-muted-foreground hover:border-primary/50"
+                  }`}
                 >
-                  {counts[cat.id] || 0}
-                </span>
-              </button>
-            ))}
-          </div>
+                  {cat.label}
+                  <span
+                    className={`text-[10px] px-1.5 rounded-md ${
+                      activeCat === cat.id ? "bg-white/20" : "bg-muted"
+                    }`}
+                  >
+                    {counts[cat.id] || 0}
+                  </span>
+                </button>
+              ))}
+            </div>
 
-          {/* Search */}
-          <div className="relative w-full sm:w-64 shrink-0">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <input
-              type="text"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              placeholder="Search projects…"
-              className="w-full pl-9 pr-4 py-2 rounded-full bg-card border border-border text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 focus:border-primary/50 transition"
-            />
+            {/* Search */}
+            <div className="relative w-full lg:w-80 group">
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground group-focus-within:text-primary transition-colors" />
+              <input
+                type="text"
+                placeholder="Search projects..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                className="w-full pl-10 pr-4 py-2.5 rounded-full bg-card border border-border focus:border-primary/50 focus:ring-4 focus:ring-primary/5 outline-none transition-all text-sm"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── Grid ── */}
-      <section className="max-w-7xl mx-auto px-6 py-12 pb-24">
-        {filtered.length === 0 ? (
-          <div className="text-center py-24 text-muted-foreground">
-            <p className="text-lg">No projects match your search.</p>
-            <button
-              onClick={() => {
-                setSearch("");
-                setActiveCat("all");
-              }}
-              className="mt-4 text-primary text-sm hover:underline"
-            >
-              Clear filters
-            </button>
-          </div>
-        ) : (
-          <>
-            <p className="text-sm text-muted-foreground mb-8">
-              Showing <span className="text-foreground font-medium">{filtered.length}</span>{" "}
-              projects
-            </p>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filtered.map((p, idx) => (
-                <article
-                  key={p.id}
-                  className="group relative flex flex-col rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/40 hover:shadow-xl hover:shadow-primary/5 transition-all duration-300"
-                  style={{ animationDelay: `${(idx % 9) * 50}ms` }}
-                >
-                  {/* Image */}
-                  <div className="relative aspect-video overflow-hidden bg-muted/20">
-                    <img
-                      src={p.image}
-                      alt={p.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/0 to-black/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-
-                    {/* Category badge */}
-                    <span
-                      className={`absolute top-3 left-3 text-[10px] font-semibold uppercase tracking-wider px-2.5 py-1 rounded-full border backdrop-blur-sm ${categoryColors[p.category] || "bg-muted/80 text-muted-foreground border-border"}`}
-                    >
-                      {categoryLabels[p.category] || p.category}
-                    </span>
-
-                    {/* Live link overlay button */}
-                    {p.live && (
-                      <a
-                        href={p.live}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="absolute bottom-3 right-3 flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/90 text-black text-xs font-semibold opacity-0 group-hover:opacity-100 translate-y-2 group-hover:translate-y-0 transition-all duration-300 hover:bg-white shadow-lg"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <ExternalLink className="h-3 w-3" />
-                        Visit Site
-                      </a>
-                    )}
-                  </div>
-
-                  {/* Content */}
-                  <div className="flex flex-col flex-1 p-5">
-                    <h3 className="font-semibold text-base leading-snug group-hover:text-primary transition-colors">
-                      {p.title}
-                    </h3>
-                    <p className="mt-1 text-xs text-muted-foreground font-medium">{p.client}</p>
-
-                    {/* Tech stack */}
-                    <div className="mt-4 flex flex-wrap gap-1.5">
-                      {p.tech
-                        .split(", ")
-                        .slice(0, 4)
-                        .map((t) => (
-                          <span
-                            key={t}
-                            className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground border border-border/50"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      {p.tech.split(", ").length > 4 && (
-                        <span className="text-[10px] px-2 py-0.5 rounded-full bg-muted text-muted-foreground border border-border/50">
-                          +{p.tech.split(", ").length - 4} more
-                        </span>
+      <section className="max-w-7xl mx-auto px-6 py-20 reveal">
+        {filtered.length > 0 ? (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {filtered.map((p) => (
+              <div
+                key={p.id}
+                className="group rounded-3xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 flex flex-col"
+                style={{ boxShadow: "var(--shadow-elegant)" }}
+              >
+                {/* Image Container */}
+                <div className="aspect-[16/10] overflow-hidden relative">
+                  <img
+                    src={p.image}
+                    alt={p.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-6 text-center">
+                    <p className="text-white text-sm font-medium mb-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                      {p.result}
+                    </p>
+                    <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                      {p.live && (
+                        <a
+                          href={p.live}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:scale-105 transition"
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                          Live Demo
+                        </a>
                       )}
                     </div>
                   </div>
-                </article>
-              ))}
+                </div>
+
+                {/* Content */}
+                <div className="p-8 flex-1 flex flex-col">
+                  <div className="flex items-center gap-2 mb-4">
+                    <span
+                      className={`text-[10px] font-bold px-2.5 py-1 rounded-full border uppercase tracking-widest ${
+                        categoryColors[p.category] || "bg-muted text-muted-foreground border-border"
+                      }`}
+                    >
+                      {categoryLabels[p.category] || p.category}
+                    </span>
+                    <span className="text-xs text-muted-foreground font-medium">{p.client}</span>
+                  </div>
+                  <h3 className="text-xl font-bold group-hover:text-primary transition-colors mb-4 line-clamp-1">
+                    {p.title}
+                  </h3>
+                  <div className="mt-auto pt-6 border-t border-border/50 flex flex-wrap gap-2">
+                    {p.tech.split(",").map((t) => (
+                      <span
+                        key={t}
+                        className="text-[10px] px-2.5 py-1 rounded-md bg-muted/50 text-muted-foreground font-medium border border-border/50"
+                      >
+                        {t.trim()}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-center py-40 bg-card rounded-[3rem] border border-dashed border-border">
+            <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-muted mb-6">
+              <Search className="h-10 w-10 text-muted-foreground" />
             </div>
-          </>
+            <h3 className="text-2xl font-bold mb-2">No projects found</h3>
+            <p className="text-muted-foreground">Try adjusting your filters or search terms.</p>
+          </div>
         )}
       </section>
 

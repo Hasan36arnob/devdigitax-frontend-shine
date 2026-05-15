@@ -1,8 +1,8 @@
 export const companyInfo = {
   name: "DevdigitaX",
-  tagline: "Scale Your Brand Digitally with DevdigitaX",
+  tagline: "Next-Gen Development and Strategic Marketing Partner",
   description:
-    "DevdigitaX is Scale Your Brand Digitally with DevdigitaX — built to turn your online presence into your most powerful sales channel.",
+    "DevdigitaX is your Next-Gen Development and Strategic Marketing Partner — built to turn your online presence into your most powerful sales channel.",
   services: [
     "Professional Web Design & Development",
     "WordPress Website Development",

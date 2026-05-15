@@ -74,14 +74,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "DevdigitaX — Scale Your Brand Digitally with DevdigitaX" },
+      { title: "DevdigitaX — Scale Your Brand Digitally" },
       {
         name: "description",
         content:
-          "DevdigitaX — Scale Your Brand Digitally with DevdigitaX that turns your online presence into your most powerful sales channel.",
+          "DevdigitaX helps you scale your brand digitally with custom development and strategic marketing that turns your online presence into your most powerful sales channel.",
       },
       { name: "author", content: "DevdigitaX" },
-      { property: "og:title", content: "DevdigitaX — Scale Your Brand Digitally with DevdigitaX" },
+      { property: "og:title", content: "DevdigitaX — Scale Your Brand Digitally" },
       {
         property: "og:description",
         content:
