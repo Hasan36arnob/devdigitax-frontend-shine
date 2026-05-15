@@ -135,12 +135,12 @@ function AboutPage() {
         <div className="relative max-w-7xl mx-auto px-6">
           <div className="max-w-3xl animate-fade-in-up">
             <h1 className="text-4xl md:text-7xl font-bold tracking-tight mb-8">
-              We're the team building{" "}
+              Driving global businesses forward with{" "}
               <span
                 className="bg-clip-text text-transparent"
                 style={{ backgroundImage: "var(--gradient-primary)" }}
               >
-                Dhaka's next digital leaders.
+                cutting-edge digital solutions.
               </span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
