@@ -100,7 +100,7 @@ function PortfolioPage() {
             <span>Showcasing Excellence</span>
           </div>
           <h1 className="text-4xl md:text-7xl font-bold tracking-tight mb-8">
-            Here are some demo websites. If you don’t like them, we can{" "}
+            Here are Some demo work. If you don’t like them, we can{" "}
             <span
               className="bg-clip-text text-transparent"
               style={{ backgroundImage: "var(--gradient-primary)" }}

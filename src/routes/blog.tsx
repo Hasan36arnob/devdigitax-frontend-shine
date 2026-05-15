@@ -22,6 +22,11 @@ export const Route = createFileRoute("/blog")({
 
     const [articles, setArticles] = useState<Article[]>([]);
     const [hoveredId, setHoveredId] = useState<number | null>(null);
+    const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+
+    const handleSelectArticle = (article: Article) => {
+      setSelectedArticle(article);
+    };
 
     useEffect(() => {
       const savedArticles = localStorage.getItem(STORAGE_KEY);
@@ -68,9 +73,11 @@ export const Route = createFileRoute("/blog")({
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {articles.map((post) => (
-                <article
+                <button
                   key={post.id}
-                  className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+                  type="button"
+                  className="group rounded-2xl overflow-hidden border border-border bg-card text-left hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+                  onClick={() => handleSelectArticle(post)}
                   onMouseEnter={() => setHoveredId(post.id)}
                   onMouseLeave={() => setHoveredId(null)}
                 >
@@ -109,11 +116,55 @@ export const Route = createFileRoute("/blog")({
                       </span>
                     </div>
                   </div>
-                </article>
+                </button>
               ))}
             </div>
           )}
         </section>
+
+        {selectedArticle && (
+          <section className="max-w-7xl mx-auto px-6 pb-24">
+            <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
+              <div className="flex flex-col gap-6">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div>
+                    <h2 className="text-3xl font-semibold">{selectedArticle.title}</h2>
+                    <p className="mt-3 text-muted-foreground max-w-3xl">
+                      {selectedArticle.excerpt}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="text-sm font-medium text-primary transition hover:text-primary/80"
+                    onClick={() => setSelectedArticle(null)}
+                  >
+                    Back to posts
+                  </button>
+                </div>
+                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                  <span className="flex items-center gap-2">
+                    <Calendar className="h-4 w-4" />
+                    {new Date(selectedArticle.date).toLocaleDateString("en-US", {
+                      month: "short",
+                      day: "numeric",
+                      year: "numeric",
+                    })}
+                  </span>
+                  <span className="flex items-center gap-2">
+                    <Clock className="h-4 w-4" />
+                    {selectedArticle.readTime}
+                  </span>
+                  <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
+                    {selectedArticle.category}
+                  </span>
+                </div>
+                <div className="prose prose-invert max-w-none whitespace-pre-line text-sm text-foreground">
+                  {selectedArticle.content}
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
       </SiteLayout>
     );
   },

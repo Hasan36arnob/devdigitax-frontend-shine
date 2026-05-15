@@ -339,7 +339,7 @@ function Index() {
               Built for businesses that demand real results. We create high-performance websites
               that convert visitors into customers, and execute strategic marketing campaigns that
               drive sustained revenue growth — from development to delivery. We specialize in Wordpress, React,
-              Node.js, MongoDB, PHP, JavaScript, and E-commerce development.
+              Node.js, MongoDB, PHP, Laravel, JavaScript, and E-commerce development.
             </p>
             <div className="mt-8 flex flex-wrap items-center gap-4">
               <Link
@@ -457,13 +457,13 @@ function Index() {
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
-              Demo websites
+             Our recent work
             </span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
-              Featured Projects
+           
             </h2>
             <p className="mt-4 text-muted-foreground">
-              A selection of our demo websites
+               
             </p>
           </div>
           <Link
