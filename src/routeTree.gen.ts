@@ -11,12 +11,13 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as ContactRouteImport } from './routes/contact'
-import { Route as BlogRouteImport } from './routes/blog'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ServicesIndexRouteImport } from './routes/services.index'
+import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ServicesServiceIdRouteImport } from './routes/services.$serviceId'
+import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
@@ -26,11 +27,6 @@ const PortfolioRoute = PortfolioRouteImport.update({
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BlogRoute = BlogRouteImport.update({
-  id: '/blog',
-  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -53,9 +49,19 @@ const ServicesIndexRoute = ServicesIndexRouteImport.update({
   path: '/services/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/blog/',
+  path: '/blog/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ServicesServiceIdRoute = ServicesServiceIdRouteImport.update({
   id: '/services/$serviceId',
   path: '/services/$serviceId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/blog/$slug',
+  path: '/blog/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -63,20 +69,22 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/portfolio': typeof PortfolioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
+  '/blog/': typeof BlogIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/portfolio': typeof PortfolioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
+  '/blog': typeof BlogIndexRoute
   '/services': typeof ServicesIndexRoute
 }
 export interface FileRoutesById {
@@ -84,10 +92,11 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
-  '/blog': typeof BlogRoute
   '/contact': typeof ContactRoute
   '/portfolio': typeof PortfolioRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
+  '/blog/': typeof BlogIndexRoute
   '/services/': typeof ServicesIndexRoute
 }
 export interface FileRouteTypes {
@@ -96,30 +105,33 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/admin'
-    | '/blog'
     | '/contact'
     | '/portfolio'
+    | '/blog/$slug'
     | '/services/$serviceId'
+    | '/blog/'
     | '/services/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/admin'
-    | '/blog'
     | '/contact'
     | '/portfolio'
+    | '/blog/$slug'
     | '/services/$serviceId'
+    | '/blog'
     | '/services'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/admin'
-    | '/blog'
     | '/contact'
     | '/portfolio'
+    | '/blog/$slug'
     | '/services/$serviceId'
+    | '/blog/'
     | '/services/'
   fileRoutesById: FileRoutesById
 }
@@ -127,10 +139,11 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
-  BlogRoute: typeof BlogRoute
   ContactRoute: typeof ContactRoute
   PortfolioRoute: typeof PortfolioRoute
+  BlogSlugRoute: typeof BlogSlugRoute
   ServicesServiceIdRoute: typeof ServicesServiceIdRoute
+  BlogIndexRoute: typeof BlogIndexRoute
   ServicesIndexRoute: typeof ServicesIndexRoute
 }
 
@@ -148,13 +161,6 @@ declare module '@tanstack/react-router' {
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/blog': {
-      id: '/blog'
-      path: '/blog'
-      fullPath: '/blog'
-      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -185,11 +191,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ServicesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/blog'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/services/$serviceId': {
       id: '/services/$serviceId'
       path: '/services/$serviceId'
       fullPath: '/services/$serviceId'
       preLoaderRoute: typeof ServicesServiceIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/blog/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -199,10 +219,11 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
-  BlogRoute: BlogRoute,
   ContactRoute: ContactRoute,
   PortfolioRoute: PortfolioRoute,
+  BlogSlugRoute: BlogSlugRoute,
   ServicesServiceIdRoute: ServicesServiceIdRoute,
+  BlogIndexRoute: BlogIndexRoute,
   ServicesIndexRoute: ServicesIndexRoute,
 }
 export const routeTree = rootRouteImport

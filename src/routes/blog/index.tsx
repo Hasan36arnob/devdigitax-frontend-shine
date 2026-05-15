@@ -1,9 +1,9 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Calendar, Clock } from "lucide-react";
 
-export const Route = createFileRoute("/blog")({
+export const Route = createFileRoute("/blog/")({
   component: function BlogPage() {
     interface Article {
       id: number;
@@ -20,29 +20,79 @@ export const Route = createFileRoute("/blog")({
 
     const STORAGE_KEY = "devdigitax_articles";
 
-    const [articles, setArticles] = useState<Article[]>([]);
-    const [hoveredId, setHoveredId] = useState<number | null>(null);
-    const [selectedArticle, setSelectedArticle] = useState<Article | null>(null);
+    const defaultArticles: Article[] = [
+      {
+        id: 1,
+        title: "How to Grow Your Business with SEO in 2026",
+        excerpt:
+          "A practical guide to SEO tactics that deliver measurable traffic and leads for Dhaka businesses.",
+        content:
+          "Search engine optimization is still one of the strongest long-term growth channels. In this article, we cover keyword research, site structure, local SEO, and content planning that helps your brand rank in competitive markets.",
+        category: "SEO",
+        tags: ["SEO", "marketing", "growth"],
+        image: "https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?q=80&w=800&auto=format&fit=crop",
+        date: "2026-05-15",
+        status: "published",
+        readTime: "5 min read",
+      },
+      {
+        id: 2,
+        title: "5 Web Design Trends That Convert More Customers",
+        excerpt:
+          "Learn which design patterns, micro-interactions, and layouts help convert visitors into clients in 2026.",
+        content:
+          "Great design is more than visuals—it's clarity, trust, and conversion. This post walks through the latest trends in landing pages, mobile-first UX, and user flow improvements that can boost sales and reduce bounce rates.",
+        category: "Design",
+        tags: ["design", "ux", "conversion"],
+        image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=800&auto=format&fit=crop",
+        date: "2026-05-10",
+        status: "published",
+        readTime: "4 min read",
+      },
+      {
+        id: 3,
+        title: "Why Fast Websites Matter for Local Customers",
+        excerpt:
+          "Speed, performance, and mobile experience are critical for local search and Google rankings.",
+        content:
+          "Slow pages hurt your SEO and lose customers before they even see your services. In this article, we explain core web vitals, image optimization, and practical performance fixes for small businesses.",
+        category: "Performance",
+        tags: ["performance", "web", "mobile"],
+        image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=800&auto=format&fit=crop",
+        date: "2026-05-05",
+        status: "published",
+        readTime: "3 min read",
+      },
+    ];
 
-    const handleSelectArticle = (article: Article) => {
-      setSelectedArticle(article);
-    };
+    const [articles, setArticles] = useState<Article[]>([]);
 
     useEffect(() => {
       const savedArticles = localStorage.getItem(STORAGE_KEY);
       if (savedArticles) {
-        const allArticles = JSON.parse(savedArticles);
-        const publishedArticles = allArticles.filter((a: Article) => a.status === "published");
+        const allArticles = JSON.parse(savedArticles) as Article[];
+        const publishedArticles = allArticles.filter((a) => a.status === "published");
         publishedArticles.sort(
-          (a: Article, b: Article) => new Date(b.date).getTime() - new Date(a.date).getTime(),
+          (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime(),
         );
-        setArticles(publishedArticles);
+        setArticles(publishedArticles.length ? publishedArticles : defaultArticles);
+      } else {
+        setArticles(defaultArticles);
       }
     }, []);
 
+    const slugForPost = (post: Article) => {
+      if (post.id === 1) return "how-to-grow-your-business-with-seo-in-2026";
+      if (post.id === 2) return "5-web-design-trends-that-convert-more-customers";
+      if (post.id === 3) return "why-fast-websites-matter-for-local-customers";
+      return post.title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/(^-|-$)/g, "");
+    };
+
     return (
       <SiteLayout>
-        {/* Hero Section */}
         <section
           className="relative overflow-hidden"
           style={{ background: "var(--gradient-hero)" }}
@@ -62,7 +112,6 @@ export const Route = createFileRoute("/blog")({
           </div>
         </section>
 
-        {/* Blog Grid */}
         <section className="max-w-7xl mx-auto px-6 py-24">
           {articles.length === 0 ? (
             <div className="text-center py-16">
@@ -73,13 +122,11 @@ export const Route = createFileRoute("/blog")({
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {articles.map((post) => (
-                <button
+                <Link
                   key={post.id}
-                  type="button"
+                  to="/blog/$slug"
+                  params={{ slug: slugForPost(post) }}
                   className="group rounded-2xl overflow-hidden border border-border bg-card text-left hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
-                  onClick={() => handleSelectArticle(post)}
-                  onMouseEnter={() => setHoveredId(post.id)}
-                  onMouseLeave={() => setHoveredId(null)}
                 >
                   <div className="aspect-video relative overflow-hidden">
                     <img
@@ -94,6 +141,7 @@ export const Route = createFileRoute("/blog")({
                       </span>
                     </div>
                   </div>
+
                   <div className="p-6">
                     <h2 className="text-xl font-semibold line-clamp-2 group-hover:text-primary transition-colors">
                       {post.title}
@@ -101,6 +149,7 @@ export const Route = createFileRoute("/blog")({
                     <p className="mt-3 text-sm text-muted-foreground line-clamp-3">
                       {post.excerpt}
                     </p>
+
                     <div className="mt-4 flex items-center gap-4 text-xs text-muted-foreground">
                       <span className="flex items-center gap-1">
                         <Calendar className="h-3.5 w-3.5" />
@@ -115,56 +164,16 @@ export const Route = createFileRoute("/blog")({
                         {post.readTime}
                       </span>
                     </div>
+                    
+                    <div className="mt-6 flex items-center text-sm font-semibold text-primary group-hover:text-primary/80 transition-colors">
+                      Read full article <span className="ml-1 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </div>
                   </div>
-                </button>
+                </Link>
               ))}
             </div>
           )}
         </section>
-
-        {selectedArticle && (
-          <section className="max-w-7xl mx-auto px-6 pb-24">
-            <div className="rounded-3xl border border-border bg-card p-8 shadow-sm">
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-                  <div>
-                    <h2 className="text-3xl font-semibold">{selectedArticle.title}</h2>
-                    <p className="mt-3 text-muted-foreground max-w-3xl">
-                      {selectedArticle.excerpt}
-                    </p>
-                  </div>
-                  <button
-                    type="button"
-                    className="text-sm font-medium text-primary transition hover:text-primary/80"
-                    onClick={() => setSelectedArticle(null)}
-                  >
-                    Back to posts
-                  </button>
-                </div>
-                <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
-                  <span className="flex items-center gap-2">
-                    <Calendar className="h-4 w-4" />
-                    {new Date(selectedArticle.date).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                      year: "numeric",
-                    })}
-                  </span>
-                  <span className="flex items-center gap-2">
-                    <Clock className="h-4 w-4" />
-                    {selectedArticle.readTime}
-                  </span>
-                  <span className="inline-flex items-center rounded-full bg-primary/10 px-3 py-1 text-xs font-semibold text-primary">
-                    {selectedArticle.category}
-                  </span>
-                </div>
-                <div className="prose prose-invert max-w-none whitespace-pre-line text-sm text-foreground">
-                  {selectedArticle.content}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
       </SiteLayout>
     );
   },
@@ -179,3 +188,4 @@ export const Route = createFileRoute("/blog")({
     ],
   }),
 });
+
