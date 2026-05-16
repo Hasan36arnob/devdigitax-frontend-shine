@@ -152,6 +152,14 @@ const services = [
 
 const why = [
   {
+    t: "Custom Web Development",
+    d: "We build fast, secure, and scalable websites tailored to your business needs. No bloatware or rigid templates—just clean code designed for performance and future growth.",
+  },
+  {
+    t: "Conversion-Focused Design",
+    d: "Your website is your top salesperson. We design intuitive, visually stunning interfaces rooted in user psychology to turn visitors into paying customers.",
+  },
+  {
     t: "We Start With Your Revenue, Not Your Traffic",
     d: "Every campaign, page and decision is tied to downstream revenue. If a tactic can't be connected to leads or sales, we don't do it.",
   },

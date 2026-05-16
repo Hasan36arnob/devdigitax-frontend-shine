@@ -63,10 +63,10 @@ function PortfolioPage() {
       const q = search.toLowerCase();
       list = list.filter(
         (p) =>
-          p.title.toLowerCase().includes(q) ||
-          p.client.toLowerCase().includes(q) ||
-          p.tech.toLowerCase().includes(q) ||
-          p.result.toLowerCase().includes(q),
+          (p.title || "").toLowerCase().includes(q) ||
+          (p.client || "").toLowerCase().includes(q) ||
+          (p.tech || "").toLowerCase().includes(q) ||
+          (p.result || "").toLowerCase().includes(q),
       );
     }
     return list;
