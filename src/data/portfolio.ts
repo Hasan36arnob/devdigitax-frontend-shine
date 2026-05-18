@@ -2,7 +2,6 @@ import { PortfolioItem } from "@/utils/data";
 
 // ── Real client work ──────────────────────────────────────────────────────────
 import pattyscheesecakes from "@/assets/pattyscheesecakes.png";
-import aascaterers from "@/assets/aascaterers.png";
 import sweetsandmeatsbbq from "@/assets/sweetsandmeatsbbq.png";
 import nayakratom from "@/assets/nayakratom.png";
 import healthyvibezcorp from "@/assets/healthyvibezcorp.png";
@@ -73,17 +72,7 @@ export const portfolioProjects: PortfolioItem[] = [
     live: "https://www.pattyscheesecakes.com/",
     status: "published",
   },
-  {
-    id: "r2",
-    title: "AAS Caterers",
-    client: "AAS Caterers",
-    category: "wordpress",
-    result: "",
-    tech: "WordPress, Elementor, Contact Form 7, Custom CSS",
-    image: aascaterers,
-    live: "https://aascaterers.com/",
-    status: "published",
-  },
+
   {
     id: "r3",
     title: "Sweets & Meats BBQ",

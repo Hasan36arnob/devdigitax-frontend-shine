@@ -1,5 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import { Mail, Phone, MapPin, Github, Linkedin, Twitter } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Twitter, Facebook } from "lucide-react";
 import logo from "@/assets/devdigitax-logo.jpeg";
 import { WhatsAppIcon } from "@/components/Icons";
 
@@ -20,14 +20,20 @@ export function Footer() {
           <p className="mt-4 text-muted-foreground max-w-md">
             Built for businesses that demand real results. We create high-performance websites that
             convert visitors into customers, and execute strategic marketing campaigns that drive
-            sustained revenue growth — from development to delivery. Specializing in React, Node.js,
+            sustained revenue growth — from development to delivery. Specializing in WordPress, Laravel, React, Node.js,
             MongoDB, PHP, JavaScript, and E-commerce development.
           </p>
           <div className="flex gap-3 mt-6">
-            {[Twitter, Linkedin, Github].map((Icon, i) => (
+            {[
+              { Icon: Facebook, href: "https://www.facebook.com/share/1CXqVgG9Xe/" },
+              { Icon: Twitter, href: "https://twitter.com/DevdigitaX" },
+              { Icon: Linkedin, href: "https://linkedin.com/company/devdigitax" },
+              { Icon: Github, href: "#" },
+            ].map(({ Icon, href }, i) => (
               <a
                 key={i}
-                href="#"
+                href={href}
+                {...(href !== "#" ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                 className="h-10 w-10 grid place-items-center rounded-full border border-border hover:border-primary hover:text-primary transition"
               >
                 <Icon className="h-4 w-4" />

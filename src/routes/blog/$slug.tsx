@@ -27,7 +27,7 @@ export const Route = createFileRoute("/blog/$slug")({
         id: 1,
         title: "How to Grow Your Business with SEO in 2026",
         excerpt:
-          "A practical guide to SEO tactics that deliver measurable traffic and leads for Dhaka businesses.",
+          "A practical guide to SEO tactics that deliver measurable traffic and leads for growing businesses.",
         content:
           "Search engine optimization is still one of the strongest long-term growth channels. In this article, we cover keyword research, site structure, local SEO, and content planning that helps your brand rank in competitive markets.",
         category: "SEO",

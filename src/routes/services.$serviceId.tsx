@@ -107,7 +107,7 @@ const serviceContent: Record<
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 Web Design & Development <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
-                  Services in Bangladesh
+                  Services & Solutions
                 </span>
               </h2>
               <div className="prose prose-invert prose-lg max-w-none text-muted-foreground/90 leading-relaxed">
@@ -119,7 +119,7 @@ const serviceContent: Record<
                 </p>
                 <p>
                   Our expert team specializes in delivering world-class{" "}
-                  <strong>web design and development in Dhaka</strong> and across Bangladesh,
+                  <strong>web design and development</strong>,
                   ensuring that your business stands out in an increasingly competitive market.
                 </p>
               </div>
@@ -131,7 +131,7 @@ const serviceContent: Record<
                 </div>
                 <div className="space-y-8">
                   <div>
-                    <div className="text-4xl font-black text-primary mb-1">Dhaka's Best</div>
+                    <div className="text-4xl font-black text-primary mb-1">Premium Quality</div>
                     <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-tighter">
                       Top-Rated Development Agency
                     </div>
@@ -164,12 +164,12 @@ const serviceContent: Record<
               <h3 className="text-3xl font-bold mb-6 tracking-tight">Why Choose DevdigitaX?</h3>
               <div className="space-y-6 text-muted-foreground/90 text-lg leading-relaxed">
                 <p>
-                  Choosing the right development partner in <strong>Bangladesh</strong> can be
+                  Choosing the right development partner can be
                   challenging. What sets DevdigitaX apart is our commitment to quality and our deep
-                  understanding of the local and global market dynamics.
+                  understanding of modern market dynamics.
                 </p>
                 <p>
-                  We recognize that businesses in <strong>Dhaka</strong> need websites that not only
+                  We recognize that businesses need websites that not only
                   look great but also perform exceptionally well on all devices.
                 </p>
               </div>
@@ -184,7 +184,7 @@ const serviceContent: Record<
                 </div>
                 <h3 className="text-3xl font-bold mb-6 tracking-tight">Responsive Excellence</h3>
                 <p className="text-muted-foreground/90 leading-relaxed">
-                  With the majority of internet users in <strong>Dhaka</strong> accessing the web via
+                  With the majority of internet users accessing the web via
                   smartphones, having a responsive website is no longer optional—it's essential.
                 </p>
               </div>
@@ -220,7 +220,7 @@ const serviceContent: Record<
                   often come with hidden costs: slow loading speeds and limited customization.
                 </p>
                 <p>
-                  For businesses in <strong>Dhaka</strong> looking for a long-term digital asset,
+                  For businesses looking for a long-term digital asset,
                   custom development is the way to go.
                 </p>
               </div>
@@ -255,8 +255,7 @@ const serviceContent: Record<
                 security patches, and performance monitoring.
               </p>
               <p>
-                DevdigitaX offers comprehensive support and maintenance packages for businesses in{" "}
-                <strong>Dhaka</strong> and across Bangladesh.
+                DevdigitaX offers comprehensive support and maintenance packages for businesses.
               </p>
             </div>
           </div>
@@ -335,19 +334,18 @@ const serviceContent: Record<
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 WordPress Development <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
-                  Services in Dhaka
+                  Services & Solutions
                 </span>
               </h2>
               <div className="prose prose-invert prose-lg max-w-none text-muted-foreground/90 leading-relaxed">
                 <p className="text-xl">
                   WordPress is the world's most popular CMS, powering over 40% of all websites. At
                   DevdigitaX, we specialize in delivering high-quality{" "}
-                  <strong>WordPress website development in Dhaka</strong> and throughout Bangladesh.
+                  <strong>WordPress website development</strong>.
                 </p>
                 <p>
                   We move beyond standard templates to create custom WordPress solutions that align
-                  perfectly with your brand identity and business requirements in{" "}
-                  <strong>Dhaka, Bangladesh</strong>.
+                  perfectly with your brand identity and business requirements.
                 </p>
               </div>
             </div>
@@ -389,13 +387,11 @@ const serviceContent: Record<
               <h3 className="text-3xl font-bold mb-6 tracking-tight">Why Custom WordPress?</h3>
               <div className="space-y-6 text-muted-foreground/90 text-lg leading-relaxed">
                 <p>
-                  Many agencies in <strong>Bangladesh</strong> rely on heavy themes that slow down
-                  your site. We focus on custom theme development to ensure your WordPress site is
+                  We focus on custom theme development to ensure your WordPress site is
                   fast, secure, and bloat-free.
                 </p>
                 <p>
-                  This is crucial for businesses in <strong>Dhaka</strong> where speed is key for
-                  retaining visitors.
+                  This is crucial for retaining visitors.
                 </p>
               </div>
             </div>
@@ -409,7 +405,7 @@ const serviceContent: Record<
                 </div>
                 <h3 className="text-3xl font-bold mb-6 tracking-tight">Expert Plugin Integration</h3>
                 <p className="text-muted-foreground/90 leading-relaxed">
-                  Our experts in <strong>Dhaka</strong> carefully curate and customize the plugins
+                  Our experts carefully curate and customize the plugins
                   your site needs, ensuring they integrate seamlessly and function reliably.
                 </p>
               </div>
@@ -441,12 +437,11 @@ const serviceContent: Record<
               </h3>
               <div className="space-y-6 text-muted-foreground/80 text-lg">
                 <p>
-                  In the competitive online space of <strong>Bangladesh</strong>, speed and
-                  visibility are paramount. WordPress, when optimized correctly, is an SEO
+                  Speed and visibility are paramount. WordPress, when optimized correctly, is an SEO
                   powerhouse.
                 </p>
                 <p>
-                  Our team in <strong>Dhaka</strong> implements advanced caching, image
+                  Our team implements advanced caching, image
                   optimization, and technical SEO like schema markup.
                 </p>
               </div>
@@ -473,13 +468,11 @@ const serviceContent: Record<
             </h3>
             <div className="prose prose-invert prose-lg text-muted-foreground/80 leading-relaxed">
               <p>
-                Once your site is launched, we provide comprehensive training for your team in{" "}
-                <strong>Dhaka</strong>. You'll be able to update text and images without needing
+                Once your site is launched, we provide comprehensive training for your team. You'll be able to update text and images without needing
                 technical knowledge.
               </p>
               <p>
-                This independence is vital for businesses in <strong>Bangladesh</strong> that need
-                to stay agile and responsive.
+                This independence is vital to stay agile and responsive.
               </p>
             </div>
           </div>
@@ -494,8 +487,8 @@ const serviceContent: Record<
                   </div>
                 </div>
                 <p className="text-muted-foreground/90 leading-relaxed font-medium">
-                  Our dedicated support team in <strong>Bangladesh</strong> is always available for
-                  updates and technical assistance in Dhaka.
+                  Our dedicated support team is always available for
+                  updates and technical assistance.
                 </p>
                 <div className="mt-8 pt-8 border-t border-primary/10 flex items-center gap-4">
                   <div className="h-10 w-10 rounded-full bg-primary/20 flex items-center justify-center text-primary">
@@ -555,14 +548,14 @@ const serviceContent: Record<
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 E-Commerce Website <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
-                  Development in Dhaka
+                  Development & Growth
                 </span>
               </h2>
               <div className="prose prose-invert prose-lg max-w-none text-muted-foreground/90 leading-relaxed">
                 <p className="text-xl">
-                  The e-commerce landscape in <strong>Bangladesh</strong> is booming. At DevdigitaX,
+                  The e-commerce landscape is booming. At DevdigitaX,
                   we specialize in creating high-performance{" "}
-                  <strong>e-commerce websites in Dhaka</strong> that are designed to convert
+                  <strong>e-commerce websites</strong> that are designed to convert
                   visitors into customers.
                 </p>
                 <p>
@@ -611,13 +604,12 @@ const serviceContent: Record<
               <h3 className="text-3xl font-bold mb-6 tracking-tight">Why Choose DevdigitaX?</h3>
               <div className="space-y-6 text-muted-foreground/90 text-lg leading-relaxed">
                 <p>
-                  What sets our <strong>e-commerce development in Bangladesh</strong> apart is our
+                  What sets our e-commerce development apart is our
                   focus on conversion optimization. We don't just build a store; we build a sales
                   machine.
                 </p>
                 <p>
-                  Our team in <strong>Dhaka</strong> understands local shopping behaviors,
-                  integrating payment gateways like SSLCommerz and bKash.
+                  Our team integrates popular global and local payment gateways to facilitate smooth transactions.
                 </p>
               </div>
             </div>
@@ -632,7 +624,7 @@ const serviceContent: Record<
                 <h3 className="text-3xl font-bold mb-6 tracking-tight">Custom Features</h3>
                 <p className="text-muted-foreground/90 leading-relaxed">
                   We integrate inventory management, automated shipping, and customer loyalty
-                  programs tailored for the <strong>Bangladesh</strong> market.
+                  programs tailored to your business needs.
                 </p>
               </div>
               <div className="mt-8 pt-8 border-t border-primary/10 flex items-center gap-4">
@@ -658,17 +650,16 @@ const serviceContent: Record<
           <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
             <div>
               <h3 className="text-4xl md:text-5xl font-black mb-8 tracking-tighter">
-                Local Logistics & <br />
+                Logistics & <br />
                 <span className="text-primary">Delivery Systems</span>
               </h3>
               <div className="space-y-6 text-muted-foreground/80 text-lg">
                 <p>
-                  For e-commerce in <strong>Dhaka</strong>, efficient delivery is key. We integrate
-                  local logistics providers for automated shipping and real-time tracking.
+                  Efficient delivery is key for online retail. We integrate
+                  leading logistics providers for automated shipping and real-time tracking.
                 </p>
                 <p>
-                  We also optimize for <strong>Cash-on-Delivery (COD)</strong>, providing a trusted
-                  way to pay in <strong>Bangladesh</strong>.
+                  We also optimize checkout options like Cash-on-Delivery and online payments to build trust and flexibility.
                 </p>
               </div>
             </div>
@@ -694,7 +685,7 @@ const serviceContent: Record<
           <div className="flex-1 space-y-8">
             <h3 className="text-4xl md:text-5xl font-black tracking-tighter">
               Data-Driven Growth for <br />
-              <span className="text-primary">E-Commerce in Dhaka</span>
+              <span className="text-primary">E-Commerce</span>
             </h3>
             <div className="prose prose-invert prose-lg text-muted-foreground/80 leading-relaxed">
               <p>
@@ -703,7 +694,7 @@ const serviceContent: Record<
               </p>
               <p>
                 This data allows you to make informed decisions and continuously optimize your store
-                for better results in <strong>Dhaka</strong>.
+                for better results.
               </p>
             </div>
           </div>
@@ -770,14 +761,13 @@ const serviceContent: Record<
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 Graphic Design <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
-                  Services in Dhaka
+                  Services & Brand Identity
                 </span>
               </h2>
               <div className="prose prose-invert prose-lg max-w-none text-muted-foreground/90 leading-relaxed">
                 <p className="text-xl">
                   In a world dominated by visuals, your brand's graphic identity is its face. At
-                  DevdigitaX, we provide professional <strong>graphic design in Dhaka</strong> and
-                  throughout Bangladesh.
+                  DevdigitaX, we provide professional <strong>graphic design</strong>.
                 </p>
                 <p>
                   Our mission is to deliver stunning visuals that communicate your brand's values
@@ -794,7 +784,7 @@ const serviceContent: Record<
                   <div>
                     <div className="text-4xl font-black text-primary mb-1">Creative Hub</div>
                     <div className="text-[10px] text-muted-foreground font-bold uppercase tracking-tighter">
-                      Dhaka's Leading Design Team
+                      Leading Design Team
                     </div>
                   </div>
                   <div className="pt-6 border-t border-primary/10">
@@ -943,19 +933,18 @@ const serviceContent: Record<
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 Search Engine Optimization <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
-                  (SEO) in Dhaka
+                  (SEO) Services
                 </span>
               </h2>
               <div className="prose prose-invert prose-lg max-w-none text-muted-foreground/90 leading-relaxed">
                 <p className="text-xl">
-                  In the competitive digital landscape of <strong>Bangladesh</strong>, being visible
-                  on search engines like Google is crucial for success. At DevdigitaX, we offer
-                  professional <strong>SEO services in Dhaka</strong> designed to improve your
+                  Being visible on search engines like Google is crucial for success. At DevdigitaX, we offer
+                  professional <strong>SEO services</strong> designed to improve your
                   rankings and drive organic traffic.
                 </p>
                 <p>
                   Our mission is to help your business reach the top of search results for keywords
-                  that matter most in <strong>Dhaka, Bangladesh</strong>. We don't just focus on
+                  that matter most. We don't just focus on
                   rankings; we focus on high-quality traffic that converts.
                 </p>
               </div>
@@ -997,16 +986,16 @@ const serviceContent: Record<
               <div className="h-14 w-14 rounded-2xl bg-primary/10 text-primary flex items-center justify-center text-2xl mb-8 group-hover:scale-110 transition-transform">
                 📍
               </div>
-              <h3 className="text-3xl font-bold mb-6 tracking-tight">Why Local SEO in Dhaka?</h3>
+              <h3 className="text-3xl font-bold mb-6 tracking-tight">Why Local SEO Matters?</h3>
               <div className="space-y-6 text-muted-foreground/90 text-lg leading-relaxed">
                 <p>
-                  For businesses serving <strong>Dhaka</strong>, local SEO is essential. We help you
-                  reach customers in your specific area of <strong>Bangladesh</strong> by optimizing
+                  For businesses serving local regions, local SEO is essential. We help you
+                  reach customers in your specific geographic area by optimizing
                   your Google Business Profile and building location-specific content.
                 </p>
                 <p>
-                  Our team in <strong>Dhaka</strong> understands local search behaviors, giving you a
-                  significant advantage in the <strong>Bangladesh</strong> market.
+                  Our team understands regional search behaviors, giving you a
+                  significant advantage in your target market.
                 </p>
               </div>
             </div>
@@ -1020,9 +1009,8 @@ const serviceContent: Record<
                 </div>
                 <h3 className="text-3xl font-bold mb-6 tracking-tight">Technical & Content SEO</h3>
                 <p className="text-muted-foreground/90 leading-relaxed">
-                  A strong foundation is essential for success in <strong>Dhaka</strong>. We perform
-                  in-depth audits to fix speed, broken links, and mobile-friendliness for users in{" "}
-                  <strong>Bangladesh</strong>.
+                  A strong technical foundation is essential for search success. We perform
+                  in-depth audits to optimize site speed, fix broken links, and ensure seamless mobile-friendliness.
                 </p>
               </div>
               <div className="mt-8 pt-8 border-t border-primary/10 flex items-center gap-4">
@@ -1053,13 +1041,12 @@ const serviceContent: Record<
               </h3>
               <div className="space-y-6 text-muted-foreground/80 text-lg">
                 <p>
-                  Building high-quality backlinks is key for domain authority in{" "}
-                  <strong>Bangladesh</strong>. We use ethical, white-hat strategies to acquire
-                  links from authoritative sites in Dhaka.
+                  Building high-quality backlinks is key for domain authority. We use ethical, white-hat strategies to acquire
+                  links from authoritative and relevant sites.
                 </p>
                 <p>
-                  This helps you build credibility with search engines and outrank competitors in the{" "}
-                  <strong>Bangladesh</strong> digital space.
+                  This helps you build credibility with search engines and outrank competitors in your
+                  digital space.
                 </p>
               </div>
               <div className="flex flex-wrap gap-4 mt-10">
@@ -1079,7 +1066,7 @@ const serviceContent: Record<
                 </div>
                 <div className="text-3xl font-black mb-2">99.9%</div>
                 <div className="text-[10px] font-bold text-muted-foreground uppercase tracking-[0.2em]">
-                  Success Rate in Dhaka
+                  Client Satisfaction
                 </div>
               </div>
             </div>
@@ -1090,18 +1077,18 @@ const serviceContent: Record<
         <div className="flex flex-col lg:flex-row gap-16 items-center py-12">
           <div className="flex-1 space-y-8">
             <h3 className="text-4xl md:text-5xl font-black tracking-tighter">
-              The Future of SEO in <br />
-              <span className="text-primary">Dhaka & Bangladesh</span>
+              The Future of SEO <br />
+              <span className="text-primary">& Optimization</span>
             </h3>
             <div className="prose prose-invert prose-lg text-muted-foreground/80 leading-relaxed">
               <p>
-                The SEO landscape is constantly evolving. In <strong>Dhaka</strong>, we stay ahead
+                The SEO landscape is constantly evolving. We stay ahead
                 of trends like voice search and AI-driven results to keep your business competitive
-                in <strong>Bangladesh</strong>.
+                everywhere.
               </p>
               <p>
-                We offer ongoing strategies that adapt to the changing digital landscape of{" "}
-                <strong>Dhaka, Bangladesh</strong>, ensuring sustained growth.
+                We offer ongoing strategies that adapt to the changing digital landscape,
+                ensuring sustained growth.
               </p>
             </div>
           </div>
@@ -1194,14 +1181,13 @@ const serviceContent: Record<
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 Digital Marketing <br />
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
-                  Services in Dhaka
+                  Services & Campaigns
                 </span>
               </h2>
               <div className="prose prose-invert prose-lg max-w-none text-muted-foreground/90 leading-relaxed">
                 <p className="text-xl">
                   In today's hyper-connected world, digital marketing is the key to growth. At
-                  DevdigitaX, we offer professional <strong>digital marketing in Dhaka</strong> and
-                  throughout Bangladesh.
+                  DevdigitaX, we offer professional <strong>digital marketing services</strong>.
                 </p>
                 <p>
                   Our mission is to deliver strategic campaigns that generate leads, increase sales,
@@ -1249,8 +1235,8 @@ const serviceContent: Record<
               <h3 className="text-3xl font-bold mb-6 tracking-tight">Social Media Ads</h3>
               <div className="space-y-6 text-muted-foreground/90 text-lg leading-relaxed">
                 <p>
-                  Social media is a powerful tool in <strong>Bangladesh</strong>. We manage targeted
-                  ads on Facebook and Instagram for businesses in Dhaka.
+                  Social media is a powerful growth driver. We manage highly targeted
+                  ads on Facebook, Instagram, and other major platforms to scale your business.
                 </p>
                 <p>
                   Our strategies are designed to engage your audience and drive real results,
@@ -1268,8 +1254,8 @@ const serviceContent: Record<
                 </div>
                 <h3 className="text-3xl font-bold mb-6 tracking-tight">Google Ads (SEM)</h3>
                 <p className="text-muted-foreground/90 leading-relaxed">
-                  Reach customers actively searching for your services in <strong>Dhaka</strong>. We
-                  create high-performance Google Ads campaigns.
+                  Reach customers actively searching for your products and services. We
+                  create high-performance, optimized Google Ads campaigns.
                 </p>
               </div>
               <div className="mt-8 pt-8 border-t border-primary/10 flex items-center gap-4">
@@ -1335,7 +1321,7 @@ const serviceContent: Record<
                 plans for your business.
               </p>
               <p>
-                Our team in <strong>Dhaka</strong> works closely with you to align digital marketing
+                Our expert team works closely with you to align digital marketing campaigns
                 with your vision for success.
               </p>
             </div>
@@ -1349,8 +1335,8 @@ const serviceContent: Record<
                 </div>
                 <div className="font-black text-xl mb-2">Growth Partner</div>
                 <p className="text-muted-foreground/90 text-sm leading-relaxed">
-                  Your success in <strong>Bangladesh</strong> is our primary goal. We act as an
-                  extension of your team.
+                  Your success is our primary goal. We act as an
+                  extension of your team to ensure sustained growth.
                 </p>
               </div>
             </div>

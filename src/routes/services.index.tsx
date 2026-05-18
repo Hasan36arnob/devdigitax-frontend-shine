@@ -45,11 +45,10 @@ function ServicesPage() {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {services.map(({ icon, title, description, slug }) => {
             const Icon = IconMap[icon] || Layout;
-            const geoTitle = `${title} in Dhaka`;
             return (
               <div key={slug} className="flex flex-col">
                 <h2 className="mb-4 text-xl md:text-2xl font-bold text-foreground/90">
-                  {geoTitle}
+                  {title}
                 </h2>
                 <div className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1 flex-1">
                   <div className="p-8">
