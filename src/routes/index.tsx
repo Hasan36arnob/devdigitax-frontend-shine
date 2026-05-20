@@ -399,13 +399,13 @@ function Index() {
                   style={{ background: "var(--gradient-primary)" }}
                 />
                 <div
-                  className="relative aspect-square rounded-3xl border border-border bg-card/60 backdrop-blur-xl p-10 grid place-items-center"
+                  className="relative aspect-square rounded-3xl border border-border bg-card/60 backdrop-blur-xl p-6 grid place-items-center"
                   style={{ boxShadow: "var(--shadow-elegant)" }}
                 >
                   <img
                     src={logo}
                     alt="DevdigitaX"
-                    className="w-full max-w-sm rounded-2xl hover:scale-105 transition-transform duration-700"
+                    className="w-full max-w-md rounded-2xl hover:scale-105 transition-transform duration-700"
                     fetchPriority="high"
                     loading="eager"
                     decoding="sync"
