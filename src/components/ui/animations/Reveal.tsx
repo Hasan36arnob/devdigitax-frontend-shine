@@ -20,7 +20,7 @@ export function Reveal({
   delay = 0,
   variant = "slide-up",
   className,
-  duration = 0.8,
+  duration = 0.55,
   ...props
 }: RevealProps) {
   // GSAP power3.out equivalent
@@ -41,7 +41,7 @@ export function Reveal({
         opacity: 1,
         y: 0,
         scale: 1,
-        transition: { duration: 0.85, delay, ease: easePower3Out },
+        transition: { duration: 0.6, delay, ease: easePower3Out },
       },
     },
     scale: {
@@ -58,7 +58,7 @@ export function Reveal({
     },
     image: {
       hidden: { opacity: 0, scale: 0.9, filter: "blur(10px)" },
-      visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 1, delay, ease: easePower3Out } },
+      visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 0.75, delay, ease: easePower3Out } },
     }
   };
 

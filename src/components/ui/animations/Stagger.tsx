@@ -9,7 +9,7 @@ export function cn(...inputs: ClassValue[]) {
 
 export function Stagger({
   children,
-  staggerDelay = 0.1,
+  staggerDelay = 0.07,
   delay = 0,
   className,
   ...props
@@ -56,19 +56,19 @@ export function StaggerItem({
   const variants = {
     fade: {
       hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { duration: 0.8, ease: easePower3Out } },
+      visible: { opacity: 1, transition: { duration: 0.55, ease: easePower3Out } },
     },
     "slide-up": {
       hidden: { opacity: 0, y: 40 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: easePower3Out } },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easePower3Out } },
     },
     scale: {
       hidden: { opacity: 0, scale: 0.95 },
-      visible: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: easePower3Out } },
+      visible: { opacity: 1, scale: 1, transition: { duration: 0.55, ease: easePower3Out } },
     },
     image: {
       hidden: { opacity: 0, scale: 0.9, filter: "blur(10px)" },
-      visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 1, ease: easePower3Out } },
+      visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 0.75, ease: easePower3Out } },
     },
   };
 
