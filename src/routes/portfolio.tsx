@@ -3,6 +3,9 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { useState, useMemo } from "react";
 import { getPortfolio, sortPortfolioForDisplay } from "@/utils/data";
 import { ExternalLink, Globe, Search } from "lucide-react";
+import { Reveal } from "@/components/ui/animations/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
+import { AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/portfolio")({
   component: PortfolioPage,
@@ -84,7 +87,7 @@ function PortfolioPage() {
   return (
     <SiteLayout>
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden animate-fade-in" style={{ background: "var(--gradient-hero)" }}>
+      <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         {/* Background grid */}
         <div
           className="absolute inset-0 opacity-[0.03]"
@@ -94,7 +97,7 @@ function PortfolioPage() {
             backgroundSize: "60px 60px",
           }}
         />
-        <div className="relative max-w-5xl mx-auto px-6 py-28 md:py-36 text-center animate-fade-in-up">
+        <Reveal variant="fade-in-up" className="relative max-w-5xl mx-auto px-6 py-28 md:py-36 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/20 text-primary text-sm font-medium mb-6">
             <Globe className="h-3.5 w-3.5" />
             <span>Showcasing Excellence</span>
@@ -113,11 +116,11 @@ function PortfolioPage() {
             Feel free to share any reference site you like. We build high-performance,
             conversion-focused digital products across all industries.
           </p>
-        </div>
+        </Reveal>
       </section>
 
       {/* ── Filter / Search ── */}
-      <section className="sticky top-[var(--navbar-height)] z-30 border-y border-border bg-background/80 backdrop-blur-md reveal">
+      <Reveal className="sticky top-[var(--navbar-height)] z-30 border-y border-border bg-background/80 backdrop-blur-md">
         <div className="max-w-7xl mx-auto px-6 py-4">
           <div className="flex flex-col lg:flex-row gap-6 items-center justify-between">
             {/* Categories */}
@@ -157,77 +160,84 @@ function PortfolioPage() {
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* ── Grid ── */}
-      <section className="max-w-7xl mx-auto px-6 py-20 reveal">
+      <Reveal className="max-w-7xl mx-auto px-6 py-20">
         {filtered.length > 0 ? (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filtered.map((p) => (
-              <div
-                key={p.id}
-                className="group rounded-3xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 flex flex-col"
-                style={{ boxShadow: "var(--shadow-elegant)" }}
-              >
-                {/* Image Container */}
-                <div className="aspect-[16/10] overflow-hidden relative">
-                  <img
-                    src={p.image}
-                    alt={p.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  {/* Overlay */}
-                  <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-6 text-center">
-                    <p className="text-white text-sm font-medium mb-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
-                      {p.result}
-                    </p>
-                    <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
-                      {p.live && (
-                        <a
-                          href={p.live}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:scale-105 transition"
-                        >
-                          <ExternalLink className="h-4 w-4" />
-                          Live Demo
-                        </a>
-                      )}
+          <Stagger layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((p) => (
+                <StaggerItem
+                  layout
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.9 }}
+                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                  key={p.id}
+                  className="group rounded-3xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 flex flex-col"
+                  style={{ boxShadow: "var(--shadow-elegant)" }}
+                >
+                  {/* Image Container */}
+                  <div className="aspect-[16/10] overflow-hidden relative">
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-6 text-center">
+                      <p className="text-white text-sm font-medium mb-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        {p.result}
+                      </p>
+                      <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                        {p.live && (
+                          <a
+                            href={p.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:scale-105 transition"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                            Live Demo
+                          </a>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div className="p-8 flex-1 flex flex-col">
-                  <div className="flex items-center gap-2 mb-4">
-                    <span
-                      className={`text-[10px] font-bold px-2.5 py-1 rounded-full border uppercase tracking-widest ${
-                        categoryColors[p.category] || "bg-muted text-muted-foreground border-border"
-                      }`}
-                    >
-                      {categoryLabels[p.category] || p.category}
-                    </span>
-                    <span className="text-xs text-muted-foreground font-medium">{p.client}</span>
-                  </div>
-                  <h3 className="text-xl font-bold group-hover:text-primary transition-colors mb-4 line-clamp-1">
-                    {p.title}
-                  </h3>
-                  <div className="mt-auto pt-6 border-t border-border/50 flex flex-wrap gap-2">
-                    {p.tech.split(",").map((t) => (
+                  {/* Content */}
+                  <div className="p-8 flex-1 flex flex-col">
+                    <div className="flex items-center gap-2 mb-4">
                       <span
-                        key={t}
-                        className="text-[10px] px-2.5 py-1 rounded-md bg-muted/50 text-muted-foreground font-medium border border-border/50"
+                        className={`text-[10px] font-bold px-2.5 py-1 rounded-full border uppercase tracking-widest ${
+                          categoryColors[p.category] || "bg-muted text-muted-foreground border-border"
+                        }`}
                       >
-                        {t.trim()}
+                        {categoryLabels[p.category] || p.category}
                       </span>
-                    ))}
+                      <span className="text-xs text-muted-foreground font-medium">{p.client}</span>
+                    </div>
+                    <h3 className="text-xl font-bold group-hover:text-primary transition-colors mb-4 line-clamp-1">
+                      {p.title}
+                    </h3>
+                    <div className="mt-auto pt-6 border-t border-border/50 flex flex-wrap gap-2">
+                      {p.tech.split(",").map((t) => (
+                        <span
+                          key={t}
+                          className="text-[10px] px-2.5 py-1 rounded-md bg-muted/50 text-muted-foreground font-medium border border-border/50"
+                        >
+                          {t.trim()}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
-          </div>
+                </StaggerItem>
+              ))}
+            </AnimatePresence>
+          </Stagger>
         ) : (
           <div className="text-center py-40 bg-card rounded-[3rem] border border-dashed border-border">
             <div className="inline-flex h-20 w-20 items-center justify-center rounded-full bg-muted mb-6">
@@ -237,10 +247,10 @@ function PortfolioPage() {
             <p className="text-muted-foreground">Try adjusting your filters or search terms.</p>
           </div>
         )}
-      </section>
+      </Reveal>
 
       {/* ── CTA ── */}
-      <section className="max-w-7xl mx-auto px-6 pb-24">
+      <Reveal className="max-w-7xl mx-auto px-6 pb-24">
         <div className="rounded-3xl bg-gradient-to-br from-primary/20 via-primary/5 to-transparent border border-primary/20 p-12 md:p-16 text-center">
           <h2 className="text-3xl md:text-4xl font-bold">Want results like these?</h2>
           <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
@@ -264,7 +274,7 @@ function PortfolioPage() {
             </a>
           </div>
         </div>
-      </section>
+      </Reveal>
     </SiteLayout>
   );
 }

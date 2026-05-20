@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { ArrowRight } from "lucide-react";
 import readyecommerce from "@/assets/readyecommerce.png";
+import { Reveal } from "@/components/ui/animations/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
 
 export const Route = createFileRoute("/services/$serviceId")({
   component: ServiceDetailPage,
@@ -56,7 +58,7 @@ const serviceContent: Record<
     description: string;
     heroImage: string;
     features: { icon: string; text: string }[];
-    technologies: { name: string; icon: string }[];
+    technologies: { name: string; icon: string; bg?: string; text?: string }[];
     process: string[];
     callToAction: string;
     detailedContent: React.ReactNode;
@@ -1404,7 +1406,7 @@ function ServiceDetailPage() {
 
         <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
-          <div className="max-w-2xl">
+          <Reveal variant="fade-in-up" className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm font-bold text-primary mb-6 shadow-sm">
               <span className="relative flex h-2 w-2">
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
@@ -1465,10 +1467,10 @@ function ServiceDetailPage() {
                 <span className="text-xs font-bold uppercase tracking-widest">Premium Support</span>
               </div>
             </div>
-          </div>
+          </Reveal>
 
           {/* Floating Hero Image Section */}
-          <div className="relative lg:h-[650px] flex items-center justify-center">
+          <Reveal variant="fade" className="relative lg:h-[650px] flex items-center justify-center">
             {/* Cinematic Frames */}
             <div className="absolute -top-12 -right-12 w-48 h-48 border-t-2 border-r-2 border-primary/20 rounded-tr-[4rem] pointer-events-none" />
             <div className="absolute -bottom-12 -left-12 w-48 h-48 border-b-2 border-l-2 border-primary/20 rounded-bl-[4rem] pointer-events-none" />
@@ -1503,7 +1505,7 @@ function ServiceDetailPage() {
                 </div>
               </div>
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -1512,17 +1514,17 @@ function ServiceDetailPage() {
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,var(--gradient-primary-light),transparent_70%)] opacity-5 pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="text-center max-w-3xl mx-auto mb-20">
+          <Reveal variant="fade-in-up" className="text-center max-w-3xl mx-auto mb-20">
             <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-6">What You Get</h2>
             <p className="text-lg text-muted-foreground/80 leading-relaxed">
               We deliver comprehensive, end-to-end solutions designed to give you a competitive
               edge. Every detail is crafted for performance and scale.
             </p>
-          </div>
+          </Reveal>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {service.features.map((feature, idx) => (
-              <div
+              <StaggerItem
                 key={idx}
                 className="group relative p-10 rounded-[2.5rem] border border-white/5 bg-white/5 backdrop-blur-sm overflow-hidden hover:border-primary/50 hover:bg-white/10 transition-all duration-500"
               >
@@ -1535,9 +1537,9 @@ function ServiceDetailPage() {
                     {feature.text}
                   </p>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
@@ -1547,12 +1549,12 @@ function ServiceDetailPage() {
         <div className="absolute bottom-0 left-0 w-[50%] h-[50%] bg-purple-500/5 blur-[150px] rounded-full pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="max-w-5xl mx-auto">
+          <Reveal className="max-w-5xl mx-auto">
             <div className="space-y-32">
               {/* This will render the enhanced JSX sections */}
               {service.detailedContent}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -1560,7 +1562,7 @@ function ServiceDetailPage() {
       <section className="py-32 bg-slate-950/30">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-12 gap-20 items-center">
-            <div className="lg:col-span-5">
+            <Reveal variant="fade-in-up" className="lg:col-span-5">
               <div className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 Execution
               </div>
@@ -1580,15 +1582,15 @@ function ServiceDetailPage() {
               >
                 Start the process today <ArrowRight className="h-5 w-5" />
               </a>
-            </div>
+            </Reveal>
 
-            <div className="lg:col-span-7 relative">
+            <Stagger className="lg:col-span-7 relative">
               {/* Connecting Line */}
               <div className="absolute left-[31px] top-8 bottom-8 w-px bg-gradient-to-b from-primary via-primary/20 to-transparent" />
 
               <div className="space-y-12 relative">
                 {service.process.map((step, idx) => (
-                  <div key={idx} className="flex gap-10 relative group">
+                  <StaggerItem key={idx} className="flex gap-10 relative group">
                     <div className="relative z-10 flex-shrink-0 w-16 h-16 rounded-3xl border border-white/10 bg-slate-900 shadow-2xl flex items-center justify-center font-black text-2xl text-primary group-hover:bg-primary group-hover:text-primary-foreground group-hover:scale-110 group-hover:-rotate-6 transition-all duration-500">
                       {idx + 1}
                     </div>
@@ -1596,10 +1598,10 @@ function ServiceDetailPage() {
                       <h3 className="text-2xl font-black mb-3 tracking-tight">Phase {idx + 1}</h3>
                       <p className="text-muted-foreground/70 leading-relaxed text-lg">{step}</p>
                     </div>
-                  </div>
+                  </StaggerItem>
                 ))}
               </div>
-            </div>
+            </Stagger>
           </div>
         </div>
       </section>
@@ -1607,34 +1609,34 @@ function ServiceDetailPage() {
       {/* Technologies Section (Cinematic Marquee feel) */}
       <section className="py-32 border-t border-white/5 overflow-hidden">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="text-center mb-20">
+          <Reveal variant="fade-in-up" className="text-center mb-20">
             <h2 className="text-2xl md:text-3xl font-black tracking-[0.2em] mb-4 text-muted-foreground/40 uppercase">
               Technology Stack
             </h2>
-          </div>
-          <div className="flex flex-wrap justify-center gap-8 md:gap-16">
+          </Reveal>
+          <Stagger className="flex flex-wrap justify-center gap-8 md:gap-16">
             {service.technologies.map((tech, idx) => (
-              <div
+              <StaggerItem
                 key={idx}
                 className="group flex flex-col items-center gap-4 transition-all duration-500"
               >
                 <div
-                  className={`h-24 w-24 rounded-[2rem] ${tech.bg} border border-white/10 flex items-center justify-center text-5xl ${tech.text} group-hover:scale-110 group-hover:shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] group-hover:border-primary/50 transition-all duration-500`}
+                  className={`h-24 w-24 rounded-[2rem] ${tech.bg || "bg-white/5"} border border-white/10 flex items-center justify-center text-5xl ${tech.text || "text-foreground"} group-hover:scale-110 group-hover:shadow-[0_0_50px_rgba(var(--primary-rgb),0.2)] group-hover:border-primary/50 transition-all duration-500`}
                 >
                   {tech.icon}
                 </div>
                 <span className="text-sm font-black uppercase tracking-widest text-muted-foreground group-hover:text-primary transition-colors">
                   {tech.name}
                 </span>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
       </section>
 
       {/* CTA Section (Cinematic) */}
       <section className="py-32 px-6">
-        <div className="max-w-5xl mx-auto relative p-12 md:p-24 rounded-[4rem] bg-primary overflow-hidden shadow-2xl shadow-primary/40 group">
+        <Reveal variant="scale" className="max-w-5xl mx-auto relative p-12 md:p-24 rounded-[4rem] bg-primary overflow-hidden shadow-2xl shadow-primary/40 group">
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,white,transparent)] opacity-20 pointer-events-none" />
           <div className="absolute -bottom-24 -left-24 h-96 w-96 bg-black/20 blur-[100px] rounded-full pointer-events-none" />
 
@@ -1655,7 +1657,7 @@ function ServiceDetailPage() {
               No commitment required · We respond within 24 hours
             </p>
           </div>
-        </div>
+        </Reveal>
       </section>
     </SiteLayout>
   );

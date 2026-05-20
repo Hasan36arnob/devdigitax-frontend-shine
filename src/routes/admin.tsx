@@ -1,6 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect, useMemo, useRef } from "react";
 import "@/styles/premium.css";
+import { Reveal } from "@/components/ui/animations/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
+import { motion } from "framer-motion";
 import {
   getServices,
   saveServices,
@@ -54,7 +57,7 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
 
   return (
     <div className="min-h-screen bg-[#050506] text-white font-sans flex items-center justify-center px-4">
-      <div className="w-full max-w-md">
+      <Reveal variant="fade-in-up" className="w-full max-w-md">
         {/* Logo */}
         <div className="flex items-center gap-3 mb-10 justify-center">
           <div className="h-12 w-12 bg-white rounded-xl flex items-center justify-center">
@@ -74,8 +77,8 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
             <p className="text-xs text-zinc-500 mt-1">Enter your credentials to continue</p>
           </div>
 
-          <div className="space-y-4">
-            <div>
+          <Stagger staggerDelay={0.08} className="space-y-4">
+            <StaggerItem variant="slide-up">
               <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 block">
                 Username
               </label>
@@ -91,8 +94,8 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
                 placeholder="Username"
                 autoComplete="username"
               />
-            </div>
-            <div>
+            </StaggerItem>
+            <StaggerItem variant="slide-up">
               <label className="text-[10px] font-black text-zinc-500 uppercase tracking-widest mb-2 block">
                 Password
               </label>
@@ -108,25 +111,27 @@ function LoginPage({ onLogin }: { onLogin: () => void }) {
                 placeholder="••••••••"
                 autoComplete="current-password"
               />
-            </div>
-          </div>
+            </StaggerItem>
 
-          {error && (
-            <div className="text-xs text-red-400 font-black uppercase tracking-widest bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
-              {error}
-            </div>
-          )}
+            {error && (
+              <StaggerItem variant="fade" className="text-xs text-red-400 font-black uppercase tracking-widest bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+                {error}
+              </StaggerItem>
+            )}
 
-          <button
-            type="button"
-            onClick={handleLogin}
-            disabled={loading || !username || !password}
-            className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-2xl text-xs font-black uppercase tracking-widest transition-colors"
-          >
-            {loading ? "Signing in..." : "Sign In"}
-          </button>
+            <StaggerItem variant="slide-up">
+              <button
+                type="button"
+                onClick={handleLogin}
+                disabled={loading || !username || !password}
+                className="w-full py-4 bg-blue-600 hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed text-white rounded-2xl text-xs font-black uppercase tracking-widest transition-colors"
+              >
+                {loading ? "Signing in..." : "Sign In"}
+              </button>
+            </StaggerItem>
+          </Stagger>
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }
@@ -450,30 +455,30 @@ function AdminPage() {
   // ── RENDERS ───────────────────────────────────────────────────────────────
   const renderDashboard = () => (
     <div className="space-y-8">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <Stagger staggerDelay={0.06} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {[
           { l: "Blog Posts", v: articles.length },
           { l: "Services", v: services.length },
           { l: "Portfolio", v: portfolio.length },
           { l: "Team", v: team.length },
         ].map((s, i) => (
-          <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10">
+          <StaggerItem key={i} variant="scale" className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-blue-500/30 transition-all duration-300">
             <div className="text-3xl font-black mb-1">{s.v}</div>
             <div className="text-xs font-bold uppercase tracking-widest text-zinc-500">{s.l}</div>
-          </div>
+          </StaggerItem>
         ))}
-      </div>
+      </Stagger>
       <div className="grid lg:grid-cols-3 gap-6">
-        <div className="lg:col-span-2 p-8 rounded-3xl bg-white/5 border border-white/10">
+        <Reveal variant="slide-up" className="lg:col-span-2 p-8 rounded-3xl bg-white/5 border border-white/10">
           <h3 className="text-lg font-black uppercase tracking-tighter mb-4">Site Traffic</h3>
           <div className="flex items-end gap-2 h-48">
             {[40, 70, 45, 90, 65, 80, 55, 75, 40, 85, 60, 95].map((h, i) => (
               <div key={i} className="flex-1 bg-blue-600 rounded-t" style={{ height: `${h}%` }} />
             ))}
           </div>
-        </div>
+        </Reveal>
         <div className="space-y-4">
-          <div className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
+          <Reveal variant="scale" className="p-6 rounded-2xl bg-emerald-500/10 border border-emerald-500/20">
             <h4 className="text-lg font-black mb-1">System Status</h4>
             <p className="text-xs text-zinc-500 mb-3">All systems operational</p>
             <button
@@ -483,8 +488,8 @@ function AdminPage() {
             >
               Check Details
             </button>
-          </div>
-          <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+          </Reveal>
+          <Reveal variant="fade-in-up" className="p-6 rounded-2xl bg-white/5 border border-white/10">
             <h4 className="text-xs font-black uppercase tracking-widest text-zinc-500 mb-3">
               Recent Activity
             </h4>
@@ -507,7 +512,7 @@ function AdminPage() {
             {visitors.length === 0 && (
               <p className="text-xs text-zinc-600 uppercase text-center py-2">No activity</p>
             )}
-          </div>
+          </Reveal>
         </div>
       </div>
     </div>
@@ -542,13 +547,14 @@ function AdminPage() {
             </button>
           </div>
         </div>
-        <div className="space-y-3">
+        <Stagger staggerDelay={0.04} className="space-y-3">
           {items.map((item: any) => {
             const id = item?.id;
             if (id == null) return null;
             return (
-              <div
+              <StaggerItem
                 key={id}
+                variant="slide-up"
                 className={`p-6 rounded-2xl bg-white/5 border flex items-center gap-4 ${selected.has(id) ? "border-blue-500" : "border-white/10"}`}
               >
                 <button
@@ -587,7 +593,7 @@ function AdminPage() {
                     <Trash2 className="h-4 w-4" />
                   </button>
                 </div>
-              </div>
+              </StaggerItem>
             );
           })}
           {items.length === 0 && (
@@ -595,7 +601,7 @@ function AdminPage() {
               No items found
             </div>
           )}
-        </div>
+        </Stagger>
       </div>
     );
   };
@@ -819,7 +825,7 @@ function AdminPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <Stagger staggerDelay={0.05} className="grid grid-cols-1 md:grid-cols-4 gap-4">
         {(() => {
           const topCountry = visitors.length
             ? ((
@@ -843,20 +849,21 @@ function AdminPage() {
             { l: "Direct Traffic", v: directPct },
             { l: "Top Resolution", v: resolution },
           ].map((s, i) => (
-            <div key={i} className="p-6 rounded-2xl bg-white/5 border border-white/10">
+            <StaggerItem key={i} variant="scale" className="p-6 rounded-2xl bg-white/5 border border-white/10">
               <div className="text-[9px] font-black text-zinc-500 uppercase tracking-widest mb-2">
                 {s.l}
               </div>
               <div className="text-xl font-black">{s.v}</div>
-            </div>
+            </StaggerItem>
           ));
         })()}
-      </div>
+      </Stagger>
 
-      <div className="space-y-3">
-        {filteredItems.map((v: any, i: number) => (
-          <div
+      <Stagger staggerDelay={0.02} className="space-y-3">
+        {filteredItems.slice(0, 100).map((v: any, i: number) => (
+          <StaggerItem
             key={v.id || i}
+            variant="slide-up"
             className="p-6 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-4"
           >
             <div className="h-12 w-12 rounded-xl bg-white/10 flex items-center justify-center font-black text-sm flex-shrink-0">
@@ -873,14 +880,14 @@ function AdminPage() {
             <div className="text-xs text-blue-500 font-mono flex-shrink-0">
               {v.referrer || "Direct"}
             </div>
-          </div>
+          </StaggerItem>
         ))}
         {filteredItems.length === 0 && (
           <div className="p-12 text-center border border-dashed border-white/10 rounded-3xl text-zinc-600 text-sm">
             No visitor data
           </div>
         )}
-      </div>
+      </Stagger>
     </div>
   );
 

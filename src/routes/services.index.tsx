@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Layout, Code2, ShoppingCart, Palette, Search, TrendingUp, ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/ui/animations/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
 
 export const Route = createFileRoute("/services/")({
   component: ServicesPage,
@@ -24,9 +26,9 @@ function ServicesPage() {
   return (
     <SiteLayout>
       {/* Hero Section */}
-      <section className="relative overflow-hidden animate-fade-in" style={{ background: "var(--gradient-hero)" }}>
+      <section className="relative overflow-hidden" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,oklch(0.55_0.24_262/0.25),transparent_50%)]" />
-        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 text-center animate-fade-in-up">
+        <Reveal variant="fade-in-up" className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 text-center">
           <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
             Our Services
           </span>
@@ -38,15 +40,15 @@ function ServicesPage() {
             ecosystem — strategy, design, development, traffic and conversion — so every part works
             together toward measurable growth.
           </p>
-        </div>
+        </Reveal>
       </section>
 
-      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
+      <Reveal className="max-w-7xl mx-auto px-6 py-24">
+        <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {services.map(({ icon, title, description, slug }) => {
             const Icon = IconMap[icon] || Layout;
             return (
-              <div key={slug} className="flex flex-col">
+              <StaggerItem key={slug} className="flex flex-col">
                 <h2 className="mb-4 text-xl md:text-2xl font-bold text-foreground/90">
                   {title}
                 </h2>
@@ -70,14 +72,14 @@ function ServicesPage() {
                     </Link>
                   </div>
                 </div>
-              </div>
+              </StaggerItem>
             );
           })}
-        </div>
-      </section>
+        </Stagger>
+      </Reveal>
 
       {/* CTA Section */}
-      <section className="bg-card/30 border-y border-border reveal">
+      <Reveal className="bg-card/30 border-y border-border">
         <div className="max-w-7xl mx-auto px-6 py-24 text-center">
           <h2 className="text-3xl md:text-4xl font-bold">
             Not sure which service is right for you?
@@ -88,12 +90,12 @@ function ServicesPage() {
           </p>
           <Link
             to="/contact"
-            className="inline-flex items-center gap-2 mt-8 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 mt-8 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all hover:scale-105 duration-300"
           >
             Claim Your Growth Blueprint <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
-      </section>
+      </Reveal>
     </SiteLayout>
   );
 }

@@ -1,5 +1,11 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import { Reveal } from "@/components/ui/animations/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
+import { AnimatedCounter } from "@/components/ui/animations/AnimatedCounter";
+import { SplitText } from "@/components/ui/animations/SplitText";
+import { MouseParallax } from "@/components/ui/animations/MouseParallax";
+import { TiltCard } from "@/components/ui/animations/TiltCard";
 import { getServices, getPortfolio, sortPortfolioForDisplay } from "@/utils/data";
 import {
   ArrowRight,
@@ -180,8 +186,8 @@ const why = [
     d: "Our 98% retention rate is the result of treating every relationship as a long-term partnership.",
   },
   {
-    t: "Senior-Level Execution",
-    d: "Direct access to the experts doing the work. No junior account managers or offshore outsourcing. You work with a senior team committed to your success.",
+    t: "Dedicated Execution",
+    d: "Direct access to the developers and marketers doing the work. No middle managers or outsourced templates — just dedicated people focused on your success.",
   },
 ];
 
@@ -200,7 +206,7 @@ const faqs = [
   },
   {
     q: "How do you handle project communication and updates?",
-    a: "You'll have direct access to our senior team members, not account managers. We provide weekly progress updates, milestone reviews, and maintain open channels for questions. Transparency is core to our client relationships.",
+    a: "You'll have direct access to the builders working on your project, not account managers. We provide weekly progress updates, milestone reviews, and maintain open channels for questions. Transparency is core to our client relationships.",
   },
   {
     q: "What happens if we're not satisfied with the results?",
@@ -208,7 +214,7 @@ const faqs = [
   },
   {
     q: "Do you offer custom solutions or only standard packages?",
-    a: "Every engagement is custom-tailored to your specific business needs, goals, and budget. We don't believe in one-size-fits-all solutions. Our senior team crafts strategies specifically designed for your market position and growth objectives.",
+    a: "Every engagement is custom-tailored to your specific business needs, goals, and budget. We don't believe in one-size-fits-all solutions. Our team crafts strategies specifically designed for your market position and growth objectives.",
   },
   {
     q: "What is your after-delivery support system?",
@@ -318,96 +324,101 @@ function Index() {
   const featuredIds = ["r24", "r29", "r30", "r31", "1", "2"];
   const featuredProjects = featuredIds
     .map((id) => allProjects.find((p) => p.id === id))
-    .filter(Boolean);
+    .filter((p): p is NonNullable<typeof p> => !!p);
 
   return (
     <SiteLayout>
       {/* HERO */}
-      <section className="relative overflow-hidden animate-fade-in" style={{ background: "var(--gradient-hero)" }}>
+      <section className="relative overflow-hidden min-h-[90vh] flex items-center" style={{ background: "var(--gradient-hero)" }}>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,oklch(0.55_0.24_262/0.25),transparent_50%)]" />
-        <div className="relative max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 grid md:grid-cols-2 gap-12 items-center">
-          <div className="animate-fade-in-up">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
-              <Sparkles className="h-3.5 w-3.5" /> Scale Your Brand Digitally with DevdigitaX
-            </span>
-            <p className="mt-4 text-lg text-muted-foreground">
-              DevdigitaX creates custom development solutions to brand your business and marketing
-              strategies to grow any business.
-            </p>
-            <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
-              Next-Gen Development{" "}
-              <span
-                className="bg-clip-text text-transparent"
-                style={{ backgroundImage: "var(--gradient-primary)" }}
-              >
-                and Strategic Marketing Partner
+        <MouseParallax factor={12} className="relative w-full">
+          <div className="max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 grid md:grid-cols-2 gap-12 items-center">
+            <Reveal variant="fade-in-up" className="flex flex-col justify-center">
+              <span className="self-start inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
+                <Sparkles className="h-3.5 w-3.5" /> Scale Your Brand Digitally with DevdigitaX
               </span>
-            </h1>
-            <p className="mt-6 text-lg text-muted-foreground max-w-xl">
-              Built for businesses that demand real results. We create high-performance websites
-              that convert visitors into customers, and execute strategic marketing campaigns that
-              drive sustained revenue growth — from development to delivery. We specialize in Wordpress, React,
-              Node.js, MongoDB, PHP, Laravel, JavaScript, and E-commerce development.
-            </p>
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                to="/contact"
-                className="group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-primary-foreground"
-                style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
-              >
-               Get Assessment{" "}
-                <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
-              </Link>
-              <Link
-                to="/services"
-                className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold border border-border hover:border-primary transition"
-              >
-                Explore Services
-              </Link>
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href="tel:+8809638474596"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
+              <p className="mt-4 text-lg text-muted-foreground">
+                DevdigitaX creates custom development solutions to brand your business and marketing
+                strategies to grow any business.
+              </p>
+              <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
+                <SplitText text="Next-Gen Development" type="words" delay={0.1} />
+                <br />
+                <SplitText 
+                  text="and Strategic Marketing Partner" 
+                  type="words" 
+                  delay={0.2}
+                  className="premium-gradient-text"
+                />
+              </h1>
+              <p className="mt-6 text-lg text-muted-foreground max-w-xl">
+                Built for businesses that demand real results. We create high-performance websites
+                that convert visitors into customers, and execute strategic marketing campaigns that
+                drive sustained revenue growth — from development to delivery. We specialize in Wordpress, React,
+                Node.js, MongoDB, PHP, Laravel, JavaScript, and E-commerce development.
+              </p>
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <Link
+                  to="/contact"
+                  className="btn-premium group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-primary-foreground"
+                  style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
                 >
-                  <Phone className="h-4 w-4 text-primary" />
-                  +880 9638-474596
-                </a>
-                <a
-                  href="https://wa.me/8801837692110"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
+                 Get Assessment{" "}
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
+                </Link>
+                <Link
+                  to="/services"
+                  className="btn-premium inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold border border-border hover:border-primary transition"
                 >
-                  <WhatsAppIcon className="h-4 w-4 text-primary" />
-                  +880 1837-692110
-                </a>
+                  Explore Services
+                </Link>
+                <div className="flex flex-wrap items-center gap-3">
+                  <a
+                    href="tel:+8809638474596"
+                    className="btn-premium inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
+                  >
+                    <Phone className="h-4 w-4 text-primary" />
+                    +880 9638-474596
+                  </a>
+                  <a
+                    href="https://wa.me/8801837692110"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-premium inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
+                  >
+                    <WhatsAppIcon className="h-4 w-4 text-primary" />
+                    +880 1837-692110
+                  </a>
+                </div>
               </div>
-            </div>
+            </Reveal>
+            <Reveal variant="scale" delay={0.2} className="relative z-10">
+              <TiltCard maxTilt={3}>
+                <div
+                  className="absolute -inset-10 rounded-full blur-3xl opacity-50 pointer-events-none"
+                  style={{ background: "var(--gradient-primary)" }}
+                />
+                <div
+                  className="relative aspect-square rounded-3xl border border-border bg-card/60 backdrop-blur-xl p-10 grid place-items-center"
+                  style={{ boxShadow: "var(--shadow-elegant)" }}
+                >
+                  <img
+                    src={logo}
+                    alt="DevdigitaX"
+                    className="w-full max-w-sm rounded-2xl hover:scale-105 transition-transform duration-700"
+                    fetchPriority="high"
+                    loading="eager"
+                    decoding="sync"
+                  />
+                </div>
+              </TiltCard>
+            </Reveal>
           </div>
-          <div className="relative animate-fade-in-up" style={{ animationDelay: "0.2s" }}>
-            <div
-              className="absolute -inset-10 rounded-full blur-3xl opacity-50"
-              style={{ background: "var(--gradient-primary)" }}
-            />
-            <div
-              className="relative aspect-square rounded-3xl border border-border bg-card/60 backdrop-blur-xl p-10 grid place-items-center"
-              style={{ boxShadow: "var(--shadow-elegant)" }}
-            >
-              <img
-                src={logo}
-                alt="DevdigitaX"
-                className="w-full max-w-sm rounded-2xl"
-                fetchPriority="high"
-                loading="eager"
-                decoding="sync"
-              />
-            </div>
-          </div>
-        </div>
+        </MouseParallax>
       </section>
 
       {/* INTRO */}
-      <section className="max-w-5xl mx-auto px-6 py-24 text-center reveal">
+      <Reveal variant="slide-up" className="max-w-5xl mx-auto px-6 py-24 text-center">
         <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
           Your Business Is Losing Customers Online.{" "}
           <span
@@ -427,10 +438,10 @@ function Index() {
           converts traffic into real revenue. We've been building those systems for businesses
           across every major industry.
         </p>
-      </section>
+      </Reveal>
 
       {/* STATS */}
-      <section className="border-y border-border bg-card/30 reveal">
+      <Reveal variant="fade" className="border-y border-border bg-card/30">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center max-w-3xl mx-auto">
             <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
@@ -441,37 +452,38 @@ function Index() {
               measurably, consistently, and at scale.
             </p>
           </div>
-          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Stagger className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
             {stats.map((s) => (
-              <div
+              <StaggerItem
                 key={s.l}
-                className="p-6 rounded-2xl border border-border bg-background text-center"
+                variant="scale"
+                className="p-6 rounded-2xl border border-border bg-background text-center hover:border-primary/30 transition-colors duration-300"
               >
                 <div
                   className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent"
                   style={{ backgroundImage: "var(--gradient-primary)" }}
                 >
-                  {s.v}
+                  <AnimatedCounter value={s.v} />
                 </div>
                 <div className="mt-2 text-xs text-muted-foreground">{s.l}</div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
-      </section>
+      </Reveal>
 
       {/* PORTFOLIO SECTION */}
-      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
+      <Reveal className="max-w-7xl mx-auto px-6 py-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
           <div className="max-w-2xl">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
              Our recent work
             </span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
-           
+              Crafting Digital Success Stories
             </h2>
             <p className="mt-4 text-muted-foreground">
-               
+              Explore our latest projects across web development, SEO, and digital branding.
             </p>
           </div>
           <Link
@@ -482,11 +494,12 @@ function Index() {
           </Link>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {featuredProjects.map((project) => (
-            <div
+            <StaggerItem
               key={project.id}
-              className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-300 hover:-translate-y-1"
+              variant="image"
+              className="card-lift group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50"
             >
               <div className="aspect-[16/10] overflow-hidden relative">
                 <img
@@ -546,13 +559,13 @@ function Index() {
                   </Link>
                 </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
-      </section>
+        </Stagger>
+      </Reveal>
 
       {/* WEBSITE LIFECYCLE */}
-      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
+      <Reveal className="max-w-7xl mx-auto px-6 py-24">
         <div className="text-center max-w-2xl mx-auto">
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">
             Our process
@@ -564,12 +577,11 @@ function Index() {
             A clear, repeatable process that turns ideas into shipped, profitable products.
           </p>
         </div>
-        <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <Stagger className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
           {lifecycle.map((p) => (
-            <div
+            <StaggerItem
               key={p.n}
-              className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition"
-              style={{ transition: "var(--transition-smooth)" }}
+              className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition duration-300"
             >
               <div
                 className="text-4xl font-bold opacity-30"
@@ -579,13 +591,13 @@ function Index() {
               </div>
               <h3 className="mt-2 text-lg font-semibold">{p.t}</h3>
               <p className="mt-2 text-sm text-muted-foreground">{p.d}</p>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
-      </section>
+        </Stagger>
+      </Reveal>
 
       {/* PATH */}
-      <section className="bg-card/30 border-y border-border reveal">
+      <Reveal className="bg-card/30 border-y border-border">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="max-w-3xl">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
@@ -598,11 +610,12 @@ function Index() {
               No 12-week discovery phases. No vague timelines. Here's exactly how we work:
             </p>
           </div>
-          <div className="mt-12 space-y-4">
+          <Stagger className="mt-12 space-y-4">
             {path.map((p, i) => (
-              <div
+              <StaggerItem
                 key={p.t}
-                className="p-6 rounded-2xl border border-border bg-background flex gap-5 items-start"
+                variant="slide-up"
+                className="p-6 rounded-2xl border border-border bg-background flex gap-5 items-start hover:border-primary/30 transition-colors duration-300"
               >
                 <div
                   className="h-10 w-10 shrink-0 grid place-items-center rounded-full font-bold text-primary-foreground"
@@ -614,23 +627,23 @@ function Index() {
                   <h3 className="font-semibold text-lg">{p.t}</h3>
                   <p className="mt-1 text-muted-foreground">{p.d}</p>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
           <div className="mt-12 text-center">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-primary-foreground"
+              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-primary-foreground hover:scale-105 transition-transform duration-300"
               style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
             >
               Get a Quote <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* MISSION / TEAM / VALUES */}
-      <section className="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-3 gap-6 reveal">
+      <Stagger className="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-3 gap-6">
         {[
           {
             Icon: Globe,
@@ -648,7 +661,7 @@ function Index() {
             d: "Honesty. Accountability. Excellence. We tell clients what they need to hear — not what they want to hear. We own our mistakes and fix them fast.",
           },
         ].map(({ Icon, t, d }) => (
-          <div key={t} className="p-8 rounded-2xl border border-border bg-card">
+          <StaggerItem key={t} className="p-8 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors duration-300">
             <div
               className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
               style={{ background: "var(--gradient-primary)" }}
@@ -657,12 +670,12 @@ function Index() {
             </div>
             <h3 className="mt-5 text-xl font-semibold">{t}</h3>
             <p className="mt-3 text-muted-foreground text-sm leading-relaxed">{d}</p>
-          </div>
+          </StaggerItem>
         ))}
-      </section>
+      </Stagger>
 
       {/* SERVICES */}
-      <section className="bg-card/30 border-y border-border reveal">
+      <Reveal className="bg-card/30 border-y border-border">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="max-w-3xl">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
@@ -677,16 +690,15 @@ function Index() {
               works together toward measurable growth.
             </p>
           </div>
-          <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {getServices().map(({ icon, title, description, slug }) => {
               const Icon =
                 ({ Layout, Code2, ShoppingCart, Palette, Search, TrendingUp } as any)[icon] ||
                 Layout;
               return (
-                <div
+                <StaggerItem
                   key={slug}
-                  className="group p-8 rounded-2xl border border-border bg-background hover:border-primary/50 hover:-translate-y-1 transition-all"
-                  style={{ transition: "var(--transition-smooth)" }}
+                  className="group p-8 rounded-2xl border border-border bg-background hover:border-primary/50 hover:-translate-y-1 transition-all duration-300"
                   suppressHydrationWarning
                 >
                   <div
@@ -705,15 +717,15 @@ function Index() {
                   >
                     Explore Service <ArrowRight className="h-4 w-4" />
                   </Link>
-                </div>
+                </StaggerItem>
               );
             })}
-          </div>
+          </Stagger>
         </div>
-      </section>
+      </Reveal>
 
       {/* WHY US */}
-      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
+      <Reveal className="max-w-7xl mx-auto px-6 py-24">
         <div className="max-w-3xl">
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">
             Why DevdigitaX
@@ -725,9 +737,9 @@ function Index() {
             There's no shortage of digital agencies. Here's what actually sets us apart:
           </p>
         </div>
-        <div className="mt-12 grid md:grid-cols-2 gap-6">
+        <Stagger className="mt-12 grid md:grid-cols-2 gap-6">
           {why.map((w) => (
-            <div key={w.t} className="p-8 rounded-2xl border border-border bg-card">
+            <StaggerItem key={w.t} className="p-8 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors duration-300">
               <div className="flex items-start gap-4">
                 <CheckCircle2 className="h-6 w-6 text-primary shrink-0 mt-1" />
                 <div>
@@ -735,13 +747,13 @@ function Index() {
                   <p className="mt-2 text-muted-foreground text-sm leading-relaxed">{w.d}</p>
                 </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
-      </section>
+        </Stagger>
+      </Reveal>
 
       {/* TESTIMONIALS */}
-      <section className="bg-card/30 border-y border-border reveal">
+      <Reveal className="bg-card/30 border-y border-border">
         <div className="max-w-7xl mx-auto px-6 py-24">
           <div className="text-center max-w-2xl mx-auto">
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
@@ -759,9 +771,9 @@ function Index() {
               30+ Google reviews
             </div>
           </div>
-          <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <div key={t.name} className="p-8 rounded-2xl border border-border bg-background">
+              <StaggerItem key={t.name} className="p-8 rounded-2xl border border-border bg-background hover:border-primary/30 transition-colors duration-300">
                 <div className="flex gap-0.5 text-primary">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-current" />
@@ -786,14 +798,14 @@ function Index() {
                     <div className="text-xs text-muted-foreground">{t.role}</div>
                   </div>
                 </div>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
-      </section>
+      </Reveal>
 
       {/* FAQ */}
-      <section className="max-w-4xl mx-auto px-6 py-24 reveal">
+      <Reveal className="max-w-4xl mx-auto px-6 py-24">
         <div className="text-center">
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">FAQ</span>
           <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
@@ -804,12 +816,12 @@ function Index() {
           {faqs.map((f, i) => (
             <details
               key={f.q}
-              className="group p-6 rounded-2xl border border-border bg-card open:border-primary/40 transition"
+              className="group p-6 rounded-2xl border border-border bg-card open:border-primary/40 transition duration-300"
               open={i === 0}
             >
               <summary className="flex justify-between items-center cursor-pointer list-none">
                 <h3 className="font-semibold text-base md:text-lg pr-4">{f.q}</h3>
-                <span className="h-8 w-8 grid place-items-center rounded-full border border-border text-primary group-open:rotate-45 transition-transform">
+                <span className="h-8 w-8 grid place-items-center rounded-full border border-border text-primary group-open:rotate-45 transition-transform duration-300">
                   +
                 </span>
               </summary>
@@ -817,10 +829,10 @@ function Index() {
             </details>
           ))}
         </div>
-      </section>
+      </Reveal>
 
       {/* CTA */}
-      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
+      <Reveal className="max-w-7xl mx-auto px-6 py-24">
         <div
           className="relative overflow-hidden rounded-3xl border border-primary/30 p-12 md:p-20 text-center"
           style={{ background: "var(--gradient-hero)", boxShadow: "var(--shadow-elegant)" }}
@@ -838,14 +850,14 @@ function Index() {
             </p>
             <Link
               to="/contact"
-              className="mt-8 inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-primary-foreground"
+              className="mt-8 inline-flex items-center gap-2 px-7 py-4 rounded-full font-semibold text-primary-foreground hover:scale-105 transition-transform duration-300"
               style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
             >
               Start Your Project <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
         </div>
-      </section>
+      </Reveal>
     </SiteLayout>
   );
 }

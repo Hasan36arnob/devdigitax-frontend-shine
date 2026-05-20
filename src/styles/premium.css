@@ -68,20 +68,54 @@
   left: 100%;
 }
 
-.reveal-on-scroll {
-  opacity: 0;
-  transform: translate3d(0, 24px, 0);
-  transition: opacity 0.85s cubic-bezier(0.22, 1, 0.36, 1), transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity, transform;
-}
 
-.reveal-on-scroll.active {
-  opacity: 1;
-  transform: translate3d(0, 0, 0);
-}
 
 .premium-gradient-text {
   background: linear-gradient(to right, #fff, #94a3b8);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+/* Premium Micro Interactions */
+.btn-premium {
+  transition: all 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+  box-shadow: 0 0 0 0 rgba(139, 92, 246, 0);
+}
+
+.btn-premium:hover {
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px -5px rgba(139, 92, 246, 0.4), 0 8px 10px -6px rgba(139, 92, 246, 0.1);
+}
+
+.card-lift {
+  transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.card-lift:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+}
+
+.link-underline {
+  position: relative;
+  display: inline-block;
+  text-decoration: none;
+}
+
+.link-underline::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  transform: scaleX(0);
+  height: 1px;
+  bottom: 0;
+  left: 0;
+  background-color: currentColor;
+  transform-origin: bottom right;
+  transition: transform 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
+}
+
+.link-underline:hover::after {
+  transform: scaleX(1);
+  transform-origin: bottom left;
 }

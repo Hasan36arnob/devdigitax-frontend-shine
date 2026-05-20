@@ -26,7 +26,7 @@ export const companyInfo = {
     "We Start With Your Revenue, Not Your Traffic",
     "Strategy Built Around You",
     "Transparent Communication",
-    "Senior-Level Execution",
+    "Dedicated Execution",
   ],
   process: [
     "Gathering Information",
@@ -51,7 +51,7 @@ export const companyFAQs = [
   },
   {
     q: "What makes you different from other digital agencies?",
-    a: "Senior-only team, revenue-first strategy, transparent reporting, and a 98% retention rate. We don't sell deliverables — we deliver outcomes.",
+    a: "Dedicated and skilled team, revenue-first strategy, transparent reporting, and a 98% retention rate. We don't sell deliverables — we deliver outcomes.",
   },
   {
     q: "What does it cost to work with DevdigitaX?",

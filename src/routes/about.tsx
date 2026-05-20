@@ -1,5 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
+import { Reveal } from "@/components/ui/animations/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
+import { AnimatedCounter } from "@/components/ui/animations/AnimatedCounter";
 import {
   Target,
   Heart,
@@ -28,7 +31,7 @@ export const Route = createFileRoute("/about")({
       {
         name: "description",
         content:
-          "DevdigitaX is a senior team of designers, engineers and marketers building digital growth systems.",
+          "DevdigitaX is a dedicated team of designers, engineers and marketers building digital growth systems.",
       },
     ],
   }),
@@ -55,8 +58,8 @@ const values = [
   },
   {
     icon: Users,
-    t: "Senior-only team",
-    d: "No juniors learning on your project. Real experts, every engagement.",
+    t: "Dedicated builders",
+    d: "Passionate creators committed to crafting the best solutions and growing alongside your business.",
     color: "from-purple-500 to-indigo-500",
   },
 ];
@@ -130,10 +133,10 @@ function AboutPage() {
   return (
     <SiteLayout>
       {/* Hero Section */}
-      <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden animate-fade-in">
+      <section className="relative pt-24 pb-20 md:pt-32 md:pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_30%,oklch(0.55_0.24_262/0.15),transparent_70%)]" />
         <div className="relative max-w-7xl mx-auto px-6">
-          <div className="max-w-3xl animate-fade-in-up">
+          <Reveal variant="fade-in-up" className="max-w-3xl">
             <h1 className="text-4xl md:text-7xl font-bold tracking-tight mb-8">
               Driving global businesses forward with{" "}
               <span
@@ -144,37 +147,38 @@ function AboutPage() {
               </span>
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground leading-relaxed">
-              DevdigitaX isn't just an agency. We're a senior team of designers, engineers and
-              marketers who left the big agency world to build something better: a trusted growth
+              DevdigitaX isn't just an agency. We're a dedicated team of designers, engineers and
+              marketers who came together to build something better: a trusted growth
               partner that makes your success our top priority.
             </p>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       {/* Stats Section */}
-      <section className="max-w-7xl mx-auto px-6 relative z-10 reveal">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+      <section className="max-w-7xl mx-auto px-6 relative z-10">
+        <Stagger className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {stats.map((stat, idx) => {
             const Icon = stat.icon;
             return (
-              <div
+              <StaggerItem
                 key={stat.label}
+                variant="scale"
                 className="bg-card border border-border rounded-2xl p-6 text-center hover:border-primary/50 transition-all duration-500 hover:scale-105 group"
               >
                 <Icon className="h-8 w-8 text-primary mx-auto mb-3 group-hover:scale-110 transition-transform" />
                 <div className="text-3xl font-bold bg-gradient-to-r from-primary to-primary/60 bg-clip-text text-transparent">
-                  {stat.number}
+                  <AnimatedCounter value={stat.number} />
                 </div>
                 <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-              </div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </Stagger>
       </section>
 
       {/* Mission Section */}
-      <section id="mission" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24 reveal">
+      <Reveal id="mission" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24">
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
             <Rocket className="h-4 w-4" />
@@ -191,12 +195,12 @@ function AboutPage() {
             </p>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* Company Section */}
-      <section
+      <Reveal
         id="company"
-        className="max-w-7xl mx-auto px-6 py-16 scroll-mt-24 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl mt-8 reveal"
+        className="max-w-7xl mx-auto px-6 py-16 scroll-mt-24 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-3xl mt-8"
       >
         <div className="max-w-3xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
@@ -228,10 +232,10 @@ function AboutPage() {
             </div>
           </div>
         </div>
-      </section>
+      </Reveal>
 
       {/* Values Section */}
-      <section className="max-w-7xl mx-auto px-6 py-24 reveal">
+      <Reveal className="max-w-7xl mx-auto px-6 py-24">
         <div className="grid md:grid-cols-2 gap-16 items-center">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
@@ -262,9 +266,9 @@ function AboutPage() {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <Stagger className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {values.map(({ icon: Icon, t, d, color }, idx) => (
-              <div
+              <StaggerItem
                 key={t}
                 className="group p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:scale-105 cursor-pointer"
               >
@@ -275,14 +279,14 @@ function AboutPage() {
                 </div>
                 <h3 className="font-semibold text-lg">{t}</h3>
                 <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{d}</p>
-              </div>
+              </StaggerItem>
             ))}
-          </div>
+          </Stagger>
         </div>
-      </section>
+      </Reveal>
 
       {/* CTA Section */}
-      <section className="max-w-7xl mx-auto px-6 pb-24 reveal">
+      <Reveal className="max-w-7xl mx-auto px-6 pb-24">
         <div className="rounded-3xl bg-gradient-to-r from-primary/20 via-primary/10 to-transparent p-12 text-center border border-primary/20">
           <h2 className="text-3xl md:text-4xl font-bold">Ready to turn your online presence into reliable growth?</h2>
           <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
@@ -290,13 +294,13 @@ function AboutPage() {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 mt-8 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all hover:scale-105"
+            className="inline-flex items-center gap-2 mt-8 px-8 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:opacity-90 transition-all hover:scale-105 duration-300"
           >
             Start your growth conversation
             <ExternalLink className="h-4 w-4" />
           </a>
         </div>
-      </section>
+      </Reveal>
     </SiteLayout>
   );
 }

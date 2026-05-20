@@ -3,6 +3,8 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { Mail, Phone, MapPin, Send, Loader2 } from "lucide-react";
 import { WhatsAppIcon } from "@/components/Icons";
 import { useState } from "react";
+import { Reveal } from "@/components/ui/animations/Reveal";
+import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
 
 export const Route = createFileRoute("/contact")({
   component: ContactPage,
@@ -79,7 +81,7 @@ function ContactPage() {
   return (
     <SiteLayout>
       <section className="relative" style={{ background: "var(--gradient-hero)" }}>
-        <div className="max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
+        <Reveal variant="fade-in-up" className="max-w-5xl mx-auto px-6 py-24 md:py-32 text-center">
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">
             Contact
           </span>
@@ -89,15 +91,15 @@ function ContactPage() {
           <p className="mt-6 text-lg text-muted-foreground max-w-xl mx-auto">
             Tell us about your project. We respond within one business day.
           </p>
-        </div>
+        </Reveal>
       </section>
 
       <section className="max-w-6xl mx-auto px-6 py-24 grid md:grid-cols-5 gap-10">
-        <div className="md:col-span-2 space-y-6">
+        <Stagger className="md:col-span-2 space-y-6">
           {contactInfo.map(({ Icon, t, v }) => (
-            <div
+            <StaggerItem
               key={t}
-              className="p-6 rounded-2xl border border-border bg-card flex items-start gap-4"
+              className="p-6 rounded-2xl border border-border bg-card flex items-start gap-4 hover:border-primary/50 transition-all duration-500 hover:scale-[1.02] cursor-pointer"
             >
               <div
                 className="h-11 w-11 grid place-items-center rounded-xl text-primary-foreground"
@@ -109,90 +111,92 @@ function ContactPage() {
                 <div className="text-xs uppercase text-muted-foreground tracking-wider">{t}</div>
                 <div className="font-semibold mt-1">{v}</div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </Stagger>
 
-        <form
-          onSubmit={handleSubmit}
-          className="md:col-span-3 p-8 rounded-2xl border border-border bg-card space-y-5"
-          style={{ boxShadow: "var(--shadow-elegant)" }}
-        >
-          {status === "success" ? (
-            <div className="text-center py-12">
-              <div
-                className="h-14 w-14 mx-auto grid place-items-center rounded-full text-primary-foreground"
-                style={{ background: "var(--gradient-primary)" }}
-              >
-                <Send className="h-6 w-6" />
+        <Reveal variant="fade-in-up" className="md:col-span-3">
+          <form
+            onSubmit={handleSubmit}
+            className="p-8 rounded-2xl border border-border bg-card space-y-5"
+            style={{ boxShadow: "var(--shadow-elegant)" }}
+          >
+            {status === "success" ? (
+              <div className="text-center py-12">
+                <div
+                  className="h-14 w-14 mx-auto grid place-items-center rounded-full text-primary-foreground"
+                  style={{ background: "var(--gradient-primary)" }}
+                >
+                  <Send className="h-6 w-6" />
+                </div>
+                <h3 className="mt-4 text-2xl font-bold">Message sent!</h3>
+                <p className="mt-2 text-muted-foreground">We'll be in touch within 24 hours.</p>
+                <button
+                  type="button"
+                  onClick={() => setStatus("idle")}
+                  className="mt-6 text-sm text-primary hover:underline"
+                >
+                  Send another message
+                </button>
               </div>
-              <h3 className="mt-4 text-2xl font-bold">Message sent!</h3>
-              <p className="mt-2 text-muted-foreground">We'll be in touch within 24 hours.</p>
-              <button
-                type="button"
-                onClick={() => setStatus("idle")}
-                className="mt-6 text-sm text-primary hover:underline"
-              >
-                Send another message
-              </button>
-            </div>
-          ) : (
-            <>
-              <div className="grid md:grid-cols-2 gap-5">
-                <Field label="Full Name" name="name" required />
-                <Field label="Email" name="email" type="email" required />
-              </div>
-              <div className="grid md:grid-cols-2 gap-5">
-                <Field label="Phone" name="phone" />
+            ) : (
+              <>
+                <div className="grid md:grid-cols-2 gap-5">
+                  <Field label="Full Name" name="name" required />
+                  <Field label="Email" name="email" type="email" required />
+                </div>
+                <div className="grid md:grid-cols-2 gap-5">
+                  <Field label="Phone" name="phone" />
+                  <div>
+                    <label className="text-sm font-medium">Service</label>
+                    <select
+                      name="service"
+                      className="mt-2 w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary outline-none"
+                    >
+                      <option value="">Select a service...</option>
+                      <option>Web Development</option>
+                      <option>SEO</option>
+                      <option>Paid Media</option>
+                      <option>E-Commerce</option>
+                      <option>Branding & Design</option>
+                    </select>
+                  </div>
+                </div>
                 <div>
-                  <label className="text-sm font-medium">Service</label>
-                  <select
-                    name="service"
-                    className="mt-2 w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary outline-none"
-                  >
-                    <option value="">Select a service...</option>
-                    <option>Web Development</option>
-                    <option>SEO</option>
-                    <option>Paid Media</option>
-                    <option>E-Commerce</option>
-                    <option>Branding & Design</option>
-                  </select>
+                  <label className="text-sm font-medium">Message</label>
+                  <textarea
+                    name="message"
+                    rows={5}
+                    required
+                    className="mt-2 w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary outline-none resize-none"
+                  />
                 </div>
-              </div>
-              <div>
-                <label className="text-sm font-medium">Message</label>
-                <textarea
-                  name="message"
-                  rows={5}
-                  required
-                  className="mt-2 w-full px-4 py-3 rounded-lg bg-background border border-border focus:border-primary outline-none resize-none"
-                />
-              </div>
-              {status === "error" && (
-                <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 text-sm">
-                  {errorMessage}
-                </div>
-              )}
-              <button
-                type="submit"
-                disabled={status === "sending"}
-                className="w-full py-3.5 rounded-full font-semibold text-primary-foreground inline-flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed"
-                style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
-              >
-                {status === "sending" ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                    Sending...
-                  </>
-                ) : (
-                  <>
-                    Send Message <Send className="h-4 w-4" />
-                  </>
+                {status === "error" && (
+                  <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-red-600 text-sm">
+                    {errorMessage}
+                  </div>
                 )}
-              </button>
-            </>
-          )}
-        </form>
+                <button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="w-full py-3.5 rounded-full font-semibold text-primary-foreground inline-flex items-center justify-center gap-2 disabled:opacity-70 disabled:cursor-not-allowed transition-all duration-300 hover:scale-[1.02]"
+                  style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
+                >
+                  {status === "sending" ? (
+                    <>
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message <Send className="h-4 w-4" />
+                    </>
+                  )}
+                </button>
+              </>
+            )}
+          </form>
+        </Reveal>
       </section>
     </SiteLayout>
   );

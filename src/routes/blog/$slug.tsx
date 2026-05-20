@@ -2,6 +2,7 @@ import { createFileRoute, notFound } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { Calendar, Clock } from "lucide-react";
 import { useMemo } from "react";
+import { Reveal } from "@/components/ui/animations/Reveal";
 
 export const Route = createFileRoute("/blog/$slug")({
   component: function BlogPostRoute() {
@@ -106,7 +107,7 @@ export const Route = createFileRoute("/blog/$slug")({
           style={{ background: "var(--gradient-hero)" }}
         >
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,oklch(0.55_0.24_262/0.25),transparent_50%)]" />
-          <div className="relative max-w-7xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-16">
+          <Reveal variant="fade-in-up" className="relative max-w-7xl mx-auto px-6 pt-16 pb-12 md:pt-20 md:pb-16">
             <div className="flex flex-col gap-4">
               <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
                 {article.category}
@@ -132,10 +133,10 @@ export const Route = createFileRoute("/blog/$slug")({
                 </span>
               </div>
             </div>
-          </div>
+          </Reveal>
         </section>
 
-        <section className="max-w-7xl mx-auto px-6 py-12 md:py-16">
+        <Reveal className="max-w-7xl mx-auto px-6 py-12 md:py-16">
           <div className="grid lg:grid-cols-[1.3fr_0.7fr] gap-8">
             <article className="rounded-3xl border border-border bg-card p-8 shadow-sm">
               <div className="aspect-video rounded-2xl overflow-hidden border border-border bg-background mb-6">
@@ -180,7 +181,7 @@ export const Route = createFileRoute("/blog/$slug")({
               </div>
             </aside>
           </div>
-        </section>
+        </Reveal>
       </SiteLayout>
     );
   },
