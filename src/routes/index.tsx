@@ -321,7 +321,8 @@ const testimonials = [
 
 function Index() {
   const allProjects = getPortfolio();
-  const featuredIds = ["r24", "r29", "r30", "r31", "1", "2"];
+  // Featured projects: prioritize real client work with live links
+  const featuredIds = ["r24", "r29", "r30", "r31", "r1", "r3"];
   const featuredProjects = featuredIds
     .map((id) => allProjects.find((p) => p.id === id))
     .filter((p): p is NonNullable<typeof p> => !!p);
@@ -642,37 +643,26 @@ function Index() {
         </div>
       </Reveal>
 
-      {/* MISSION / TEAM / VALUES */}
-      <Stagger className="max-w-7xl mx-auto px-6 py-24 grid md:grid-cols-3 gap-6">
-        {[
-          {
-            Icon: Globe,
-            t: "Our Mission",
-            d: "To deliver web development and digital marketing solutions that generate real, measurable business growth — without compromise on quality, transparency, or partnership.",
-          },
-          {
-            Icon: Share2,
-            t: "Expert Team",
-            d: "Designers who build with conversion psychology in mind. Developers who write clean, scalable code. SEO strategists who understand local search landscape. Paid ads experts who treat every dollar of your budget like their own.",
-          },
-          {
-            Icon: CheckCircle2,
-            t: "Our Values",
-            d: "Honesty. Accountability. Excellence. We tell clients what they need to hear — not what they want to hear. We own our mistakes and fix them fast.",
-          },
-        ].map(({ Icon, t, d }) => (
-          <StaggerItem key={t} className="p-8 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors duration-300">
-            <div
-              className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
-              style={{ background: "var(--gradient-primary)" }}
-            >
-              <Icon className="h-6 w-6" />
-            </div>
-            <h3 className="mt-5 text-xl font-semibold">{t}</h3>
-            <p className="mt-3 text-muted-foreground text-sm leading-relaxed">{d}</p>
-          </StaggerItem>
-        ))}
-      </Stagger>
+      {/* LEARN MORE ABOUT US */}
+      <Reveal className="max-w-7xl mx-auto px-6 py-24 text-center">
+        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
+          <Globe className="h-4 w-4" />
+          <span>Learn More</span>
+        </div>
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
+          Want to know more about our team, mission, and values?
+        </h2>
+        <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
+          Discover how we work, what drives us, and why 400+ businesses trust us with their digital growth.
+        </p>
+        <Link
+          to="/about"
+          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-primary-foreground hover:scale-105 transition-transform duration-300"
+          style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
+        >
+          Explore Our Story <ArrowRight className="h-4 w-4" />
+        </Link>
+      </Reveal>
 
       {/* SERVICES */}
       <Reveal className="bg-card/30 border-y border-border">
@@ -724,34 +714,6 @@ function Index() {
         </div>
       </Reveal>
 
-      {/* WHY US */}
-      <Reveal className="max-w-7xl mx-auto px-6 py-24">
-        <div className="max-w-3xl">
-          <span className="text-primary text-sm font-semibold uppercase tracking-wider">
-            Why DevdigitaX
-          </span>
-          <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
-            Why The Most Ambitious Businesses Choose Us — And Stay Year After Year
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            There's no shortage of digital agencies. Here's what actually sets us apart:
-          </p>
-        </div>
-        <Stagger className="mt-12 grid md:grid-cols-2 gap-6">
-          {why.map((w) => (
-            <StaggerItem key={w.t} className="p-8 rounded-2xl border border-border bg-card hover:border-primary/30 transition-colors duration-300">
-              <div className="flex items-start gap-4">
-                <CheckCircle2 className="h-6 w-6 text-primary shrink-0 mt-1" />
-                <div>
-                  <h3 className="font-semibold text-lg">{w.t}</h3>
-                  <p className="mt-2 text-muted-foreground text-sm leading-relaxed">{w.d}</p>
-                </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </Stagger>
-      </Reveal>
-
       {/* TESTIMONIALS */}
       <Reveal className="bg-card/30 border-y border-border">
         <div className="max-w-7xl mx-auto px-6 py-24">
@@ -801,33 +763,6 @@ function Index() {
               </StaggerItem>
             ))}
           </Stagger>
-        </div>
-      </Reveal>
-
-      {/* FAQ */}
-      <Reveal className="max-w-4xl mx-auto px-6 py-24">
-        <div className="text-center">
-          <span className="text-primary text-sm font-semibold uppercase tracking-wider">FAQ</span>
-          <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
-            Frequently asked questions
-          </h2>
-        </div>
-        <div className="mt-12 space-y-4">
-          {faqs.map((f, i) => (
-            <details
-              key={f.q}
-              className="group p-6 rounded-2xl border border-border bg-card open:border-primary/40 transition duration-300"
-              open={i === 0}
-            >
-              <summary className="flex justify-between items-center cursor-pointer list-none">
-                <h3 className="font-semibold text-base md:text-lg pr-4">{f.q}</h3>
-                <span className="h-8 w-8 grid place-items-center rounded-full border border-border text-primary group-open:rotate-45 transition-transform duration-300">
-                  +
-                </span>
-              </summary>
-              <p className="mt-4 text-muted-foreground text-sm leading-relaxed">{f.a}</p>
-            </details>
-          ))}
         </div>
       </Reveal>
 

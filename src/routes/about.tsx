@@ -73,6 +73,88 @@ const stats = [
 
 import { getTeam } from "@/utils/data";
 
+const why = [
+  {
+    t: "Custom Web Development",
+    d: "We build fast, secure, and scalable websites tailored to your business needs. No bloatware or rigid templates—just clean code designed for performance and future growth.",
+  },
+  {
+    t: "Conversion-Focused Design",
+    d: "Your website is your top salesperson. We design intuitive, visually stunning interfaces rooted in user psychology to turn visitors into paying customers.",
+  },
+  {
+    t: "We Start With Your Revenue, Not Your Traffic",
+    d: "Every campaign, page and decision is tied to downstream revenue. If a tactic can't be connected to leads or sales, we don't do it.",
+  },
+  {
+    t: "Strategy Built Around You",
+    d: "No off-the-shelf SEO or templated ads. Every engagement starts with understanding your market, buyers and competition.",
+  },
+  {
+    t: "We Understand the Market Strategy",
+    d: "Targeted Facebook Ads campaigns reaching audiences who actually need your service. Comprehensive Google Ads marketing across search, display, and video. Strategic audience targeting that converts.",
+  },
+  {
+    t: "Transparent Communication",
+    d: "You'll always know what we're working on, what results we're seeing and where your budget is going. If something isn't working, we tell you first.",
+  },
+  {
+    t: "We Stay. We Grow With You.",
+    d: "Our 98% retention rate is the result of treating every relationship as a long-term partnership.",
+  },
+  {
+    t: "Dedicated Execution",
+    d: "Direct access to the developers and marketers doing the work. No middle managers or outsourced templates — just dedicated people focused on your success.",
+  },
+];
+
+const faqs = [
+  {
+    q: "What is your typical project timeline?",
+    a: "Website development projects range from 4-12 weeks depending on complexity. Marketing campaigns launch within 2 weeks of strategy approval. We provide detailed timelines during our discovery phase and maintain transparent communication throughout.",
+  },
+  {
+    q: "How do you measure and report on project success?",
+    a: "We establish clear KPIs at project outset including conversion rates, traffic growth, revenue impact, and ROI. You'll receive weekly performance reports with actionable insights, and we adjust strategies based on real-time data to maximize results.",
+  },
+  {
+    q: "What is your process for understanding our business needs?",
+    a: "Our discovery process includes in-depth stakeholder interviews, competitor analysis, audience research, and current performance audits. We spend significant time understanding your goals, challenges, and market position before proposing solutions.",
+  },
+  {
+    q: "How do you handle project communication and updates?",
+    a: "You'll have direct access to the builders working on your project, not account managers. We provide weekly progress updates, milestone reviews, and maintain open channels for questions. Transparency is core to our client relationships.",
+  },
+  {
+    q: "What happens if we're not satisfied with the results?",
+    a: "Your satisfaction is our priority. If results don't meet agreed-upon KPIs, we'll revise our approach at no additional cost. Our revenue-first strategy ensures we're invested in your success, not just project completion.",
+  },
+  {
+    q: "Do you offer custom solutions or only standard packages?",
+    a: "Every engagement is custom-tailored to your specific business needs, goals, and budget. We don't believe in one-size-fits-all solutions. Our team crafts strategies specifically designed for your market position and growth objectives.",
+  },
+  {
+    q: "What is your after-delivery support system?",
+    a: "We provide comprehensive post-delivery support including 30-day free maintenance, 24/7 technical assistance, performance monitoring, security updates, and strategic optimization. Our dedicated support team ensures your digital assets continue performing at peak levels with proactive maintenance and rapid issue resolution.",
+  },
+  {
+    q: "How do you stay current with the latest digital marketing and development trends?",
+    a: "Our team invests heavily in continuous learning, attending industry conferences, conducting ongoing research, and maintaining partnerships with leading technology providers. We regularly audit and update our methodologies to leverage emerging best practices.",
+  },
+  {
+    q: "What industries do you specialize in?",
+    a: "We work across healthcare, real estate, retail, logistics, and e-commerce sectors. Our expertise spans from local businesses to enterprise-level organizations, adapting our strategies to each industry's unique challenges and opportunities.",
+  },
+  {
+    q: "Do you provide ongoing maintenance and support after project completion?",
+    a: "Yes, we offer comprehensive post-launch support including technical maintenance, content updates, performance monitoring, security patches, and strategic optimization. Our 98% client retention rate reflects our commitment to long-term partnerships.",
+  },
+  {
+    q: "How do you ensure data security and client privacy?",
+    a: "We implement enterprise-grade security protocols including SSL encryption, secure hosting, regular backups, and GDPR compliance. All client data is handled with strict confidentiality, and we never share proprietary information without explicit permission.",
+  },
+];
+
 function AboutPage() {
   const [isVisible, setIsVisible] = useState(false);
   const dynamicTeam = getTeam().filter((m) => !m.status || m.status === "published");
@@ -282,6 +364,71 @@ function AboutPage() {
               </StaggerItem>
             ))}
           </Stagger>
+        </div>
+      </Reveal>
+
+      {/* WHY DEVDIGITAX */}
+      <Reveal className="max-w-7xl mx-auto px-6 py-24">
+        <div className="max-w-3xl">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
+            <Award className="h-4 w-4" />
+            <span>Why DevdigitaX</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+            Why The Most Ambitious Businesses Choose Us — And Stay Year After Year
+          </h2>
+          <p className="mt-4 text-muted-foreground text-lg">
+            There's no shortage of digital agencies. Here's what actually sets us apart:
+          </p>
+        </div>
+        <Stagger className="mt-12 grid md:grid-cols-2 gap-6">
+          {why.map((w) => (
+            <StaggerItem
+              key={w.t}
+              className="p-8 rounded-2xl border border-border bg-card hover:border-primary/30 hover:scale-[1.02] transition-all duration-300"
+            >
+              <div className="flex items-start gap-4">
+                <CheckCircle className="h-6 w-6 text-primary shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold text-lg">{w.t}</h3>
+                  <p className="mt-2 text-muted-foreground text-sm leading-relaxed">{w.d}</p>
+                </div>
+              </div>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </Reveal>
+
+      {/* FAQ */}
+      <Reveal className="max-w-4xl mx-auto px-6 py-24">
+        <div className="text-center">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
+            <Lightbulb className="h-4 w-4" />
+            <span>FAQ</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+            Frequently Asked Questions
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Everything you need to know before working with us.
+          </p>
+        </div>
+        <div className="mt-12 space-y-4">
+          {faqs.map((f, i) => (
+            <details
+              key={f.q}
+              className="group p-6 rounded-2xl border border-border bg-card open:border-primary/40 transition duration-300"
+              open={i === 0}
+            >
+              <summary className="flex justify-between items-center cursor-pointer list-none">
+                <h3 className="font-semibold text-base md:text-lg pr-4">{f.q}</h3>
+                <span className="h-8 w-8 grid place-items-center rounded-full border border-border text-primary group-open:rotate-45 transition-transform duration-300 shrink-0">
+                  +
+                </span>
+              </summary>
+              <p className="mt-4 text-muted-foreground text-sm leading-relaxed">{f.a}</p>
+            </details>
+          ))}
         </div>
       </Reveal>
 
