@@ -14,6 +14,6 @@ export default defineConfig({
     include: ["gsap", "gsap/ScrollTrigger"],
   },
   ssr: {
-    external: ["gsap"],
+    external: ["gsap", "gsap/ScrollTrigger"],
   },
 });
