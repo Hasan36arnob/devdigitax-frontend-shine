@@ -1,13 +1,7 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { cn } from "./Reveal";
+import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
 import gsap from "gsap";
-import ScrollTriggerRaw from "gsap/ScrollTrigger";
-
-const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface ScrollTextProps {
   text: string;
@@ -31,9 +25,14 @@ export function ScrollText({
   const textRef = useRef<HTMLHeadingElement>(null);
   const prefersReducedMotion = useReducedMotion();
   const config = getAnimationConfig(prefersReducedMotion);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    if (!containerRef.current || !textRef.current) return;
+    setIsClient(true);
+  }, []);
+
+  useEffect(() => {
+    if (!isClient || !containerRef.current || !textRef.current) return;
 
     const container = containerRef.current;
     const textElement = textRef.current;
@@ -43,16 +42,21 @@ export function ScrollText({
       return;
     }
 
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: container,
-        start: "top center",
-        end: `+=${pinDuration * 100}`,
-        scrub: config.scrub,
-        pin: true,
-        markers: false,
-      },
-    });
+    (async () => {
+      const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
+      const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+      gsap.registerPlugin(ScrollTrigger);
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: container,
+          start: "top center",
+          end: `+=${pinDuration * 100}`,
+          scrub: config.scrub,
+          pin: true,
+          markers: false,
+        },
+      });
 
     tl.fromTo(
       textElement,
@@ -89,15 +93,16 @@ export function ScrollText({
       }
     }
 
-    return () => {
-      tl.kill();
-      ScrollTrigger.getAll().forEach((trigger: any) => {
-        if (trigger.trigger === container) {
-          trigger.kill();
-        }
-      });
-    };
-  }, [blurAmount, pinDuration, staggerLetters, prefersReducedMotion, config]);
+      return () => {
+        tl.kill();
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.trigger === container) {
+            trigger.kill();
+          }
+        });
+      };
+    })();
+  }, [isClient, blurAmount, pinDuration, staggerLetters, prefersReducedMotion, config]);
 
   const letters = text.split("").map((char, idx) => (
     <span key={idx} data-letter className="inline-block">

@@ -2,13 +2,6 @@ import { ReactNode, HTMLAttributes, useEffect, useRef, useState } from "react";
 import { cn } from "./Reveal";
 import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
 import { gsap } from "gsap";
-import ScrollTriggerRaw from "gsap/ScrollTrigger";
-
-const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface StaggerProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -79,27 +72,37 @@ export function Stagger({
         delay,
       });
     } else {
-      gsap.to(items, {
-        ...toState,
-        duration: finalDuration,
-        stagger: finalStaggerDelay,
-        delay,
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start,
-          end: "top 60%",
-          toggleActions: "play none none none",
-          markers: false,
-        },
-      });
+      (async () => {
+        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
+        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to(items, {
+          ...toState,
+          duration: finalDuration,
+          stagger: finalStaggerDelay,
+          delay,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start,
+            end: "top 60%",
+            toggleActions: "play none none none",
+            markers: false,
+          },
+        });
+      })();
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger: any) => {
-        if (trigger.trigger === containerRef.current) {
-          trigger.kill();
-        }
-      });
+      (async () => {
+        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
+        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.trigger === containerRef.current) {
+            trigger.kill();
+          }
+        });
+      })();
     };
   }, [isClient, finalStaggerDelay, delay, start, variant, finalDuration, prefersReducedMotion, config]);
 

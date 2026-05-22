@@ -3,13 +3,6 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
 import { gsap } from "gsap";
-import ScrollTriggerRaw from "gsap/ScrollTrigger";
-
-const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -90,25 +83,35 @@ export function Reveal({
         delay,
       });
     } else {
-      gsap.to(element, {
-        ...toState,
-        scrollTrigger: {
-          trigger: element,
-          start,
-          end: "top 60%",
-          toggleActions: "play none none none",
-          markers: false,
-        },
-        delay,
-      });
+      (async () => {
+        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
+        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to(element, {
+          ...toState,
+          scrollTrigger: {
+            trigger: element,
+            start,
+            end: "top 60%",
+            toggleActions: "play none none none",
+            markers: false,
+          },
+          delay,
+        });
+      })();
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger: any) => {
-        if (trigger.trigger === element) {
-          trigger.kill();
-        }
-      });
+      (async () => {
+        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
+        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.trigger === element) {
+            trigger.kill();
+          }
+        });
+      })();
     };
   }, [isClient, variant, finalDuration, start, delay, prefersReducedMotion, config]);
 

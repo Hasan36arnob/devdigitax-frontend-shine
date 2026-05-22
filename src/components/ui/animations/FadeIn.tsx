@@ -2,13 +2,6 @@ import { ReactNode, HTMLAttributes, useEffect, useRef, useState } from "react";
 import { cn } from "./Reveal";
 import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
 import { gsap } from "gsap";
-import ScrollTriggerRaw from "gsap/ScrollTrigger";
-
-const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 interface FadeInProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -74,25 +67,35 @@ export function FadeIn({
         delay,
       });
     } else {
-      gsap.to(element, {
-        ...toState,
-        delay,
-        scrollTrigger: {
-          trigger: element,
-          start,
-          end: "top 60%",
-          toggleActions: "play none none none",
-          markers: false,
-        },
-      });
+      (async () => {
+        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
+        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+        gsap.registerPlugin(ScrollTrigger);
+
+        gsap.to(element, {
+          ...toState,
+          delay,
+          scrollTrigger: {
+            trigger: element,
+            start,
+            end: "top 60%",
+            toggleActions: "play none none none",
+            markers: false,
+          },
+        });
+      })();
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach((trigger: any) => {
-        if (trigger.trigger === element) {
-          trigger.kill();
-        }
-      });
+      (async () => {
+        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
+        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.trigger === element) {
+            trigger.kill();
+          }
+        });
+      })();
     };
   }, [isClient, delay, finalDuration, start, scale, blur, prefersReducedMotion, config]);
 

@@ -1,9 +1,12 @@
 import { gsap } from "gsap";
-import ScrollTriggerRaw from "gsap/ScrollTrigger";
 
-const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+let ScrollTrigger: any = null;
 
-if (typeof window !== "undefined") {
+async function registerScrollTrigger() {
+  if (typeof window === "undefined" || ScrollTrigger) return;
+  
+  const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
+  ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
   gsap.registerPlugin(ScrollTrigger);
 }
 
@@ -14,4 +17,4 @@ export function prefersReducedMotion(): boolean {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-export { gsap, ScrollTrigger };
+export { gsap, ScrollTrigger, registerScrollTrigger };
