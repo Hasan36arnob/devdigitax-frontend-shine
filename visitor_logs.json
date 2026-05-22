@@ -1,5 +1,19 @@
 [
   {
+    "id": "fudfigjqslk",
+    "ip": "Local/Blocked",
+    "country": "Unknown",
+    "countryCode": "??",
+    "city": "Unknown",
+    "timestamp": "2026-05-22T13:38:12.195Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0",
+    "page": "/",
+    "referrer": "Direct",
+    "screenResolution": "1366x768",
+    "language": "en-GB",
+    "isMobile": false
+  },
+  {
     "id": "sdaliaf3qqo",
     "ip": "Local/Blocked",
     "country": "Unknown",
