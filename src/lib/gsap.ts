@@ -1,7 +1,11 @@
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTriggerRaw from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export const EASE_POWER3 = "power3.out";
 
