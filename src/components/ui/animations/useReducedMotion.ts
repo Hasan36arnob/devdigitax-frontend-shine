@@ -29,8 +29,8 @@ export function useReducedMotion(): boolean {
  */
 export function getAnimationConfig(prefersReducedMotion: boolean) {
   return {
-    duration: prefersReducedMotion ? 0.3 : 0.8,
-    staggerAmount: prefersReducedMotion ? 0.05 : 0.15,
+    duration: prefersReducedMotion ? 0.2 : 0.4,
+    staggerAmount: prefersReducedMotion ? 0.02 : 0.05,
     ease: prefersReducedMotion ? "linear" : "power3.out",
     scrub: prefersReducedMotion ? false : 1,
   };
