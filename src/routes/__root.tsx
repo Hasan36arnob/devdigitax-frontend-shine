@@ -74,6 +74,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "color-scheme", content: "dark" },
       { title: "DevdigitaX — Scale Your Brand Digitally" },
       {
         name: "description",
@@ -158,6 +159,22 @@ function RootShell({ children }: { children: React.ReactNode }) {
     <html lang="en" suppressHydrationWarning>
       <head>
         <HeadContent />
+        {/* Critical CSS fallback — ensures dark background renders before external CSS loads */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          :root {
+            --background: #0f1117;
+            --foreground: #f5f6fa;
+            --primary: #4f6ef7;
+          }
+          html, body {
+            background-color: #0f1117;
+            color: #f5f6fa;
+            margin: 0;
+            padding: 0;
+            -webkit-text-size-adjust: 100%;
+            text-size-adjust: 100%;
+          }
+        `}} />
       </head>
       <body>
         {children}

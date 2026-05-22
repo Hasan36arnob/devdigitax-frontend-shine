@@ -1,6 +1,8 @@
 @import "tailwindcss" source(none);
 @source "../src";
 @import "tw-animate-css";
+@import "./styles/premium.css";
+@import "./styles/animations.css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -64,31 +66,58 @@
 :root {
   --radius: 0.625rem;
   /* DevdigitaX — deep midnight + electric blue */
+  /* oklch fallbacks for older mobile browsers (Android < Chrome 111) */
+  --background: #0f1117;
   --background: oklch(0.13 0.02 265);
+  --foreground: #f5f6fa;
   --foreground: oklch(0.97 0.01 250);
+  --card: #161a24;
   --card: oklch(0.17 0.025 265);
+  --card-foreground: #f5f6fa;
   --card-foreground: oklch(0.97 0.01 250);
+  --popover: #161a24;
   --popover: oklch(0.17 0.025 265);
+  --popover-foreground: #f5f6fa;
   --popover-foreground: oklch(0.97 0.01 250);
+  --primary: #4f6ef7;
   --primary: oklch(0.55 0.24 262);
+  --primary-foreground: #f9faff;
   --primary-foreground: oklch(0.98 0.01 250);
+  --primary-glow: #7b9cf5;
   --primary-glow: oklch(0.7 0.2 255);
+  --secondary: #1a1f2e;
   --secondary: oklch(0.22 0.03 265);
+  --secondary-foreground: #f5f6fa;
   --secondary-foreground: oklch(0.97 0.01 250);
+  --muted: #181d2b;
   --muted: oklch(0.2 0.025 265);
+  --muted-foreground: #8b93b0;
   --muted-foreground: oklch(0.7 0.02 260);
+  --accent: #4f6ef7;
   --accent: oklch(0.55 0.24 262);
+  --accent-foreground: #f9faff;
   --accent-foreground: oklch(0.98 0.01 250);
+  --destructive: #e05252;
   --destructive: oklch(0.62 0.24 27);
+  --destructive-foreground: #f9faff;
   --destructive-foreground: oklch(0.98 0.01 250);
+  --border: rgba(255, 255, 255, 0.08);
   --border: oklch(1 0 0 / 8%);
+  --input: rgba(255, 255, 255, 0.12);
   --input: oklch(1 0 0 / 12%);
+  --ring: #4f6ef7;
   --ring: oklch(0.55 0.24 262);
+  --gradient-primary: linear-gradient(135deg, #4f6ef7, #7b9cf5);
   --gradient-primary: linear-gradient(135deg, oklch(0.55 0.24 262), oklch(0.7 0.2 255));
+  --gradient-hero:
+    radial-gradient(ellipse at top, rgba(79, 110, 247, 0.35), transparent 60%),
+    linear-gradient(180deg, #0f1117, #090c14);
   --gradient-hero:
     radial-gradient(ellipse at top, oklch(0.55 0.24 262 / 0.35), transparent 60%),
     linear-gradient(180deg, oklch(0.13 0.02 265), oklch(0.09 0.02 265));
+  --shadow-glow: 0 0 60px rgba(79, 110, 247, 0.4);
   --shadow-glow: 0 0 60px oklch(0.55 0.24 262 / 0.4);
+  --shadow-elegant: 0 20px 60px -20px rgba(79, 110, 247, 0.4);
   --shadow-elegant: 0 20px 60px -20px oklch(0.55 0.24 262 / 0.4);
   --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   --chart-1: oklch(0.646 0.222 41.116);
