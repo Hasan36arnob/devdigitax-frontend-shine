@@ -101,14 +101,13 @@ const serviceContent: Record<
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 99% Performance
               </div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 Web Design & Development <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
+                <span className="text-primary">
                   Services & Solutions
                 </span>
               </h2>
@@ -141,7 +140,7 @@ const serviceContent: Record<
                   <div className="pt-6 border-t border-primary/10">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary w-[99%] animate-pulse" />
+                        <div className="h-full bg-primary w-[99%]" />
                       </div>
                       <span className="text-xs font-bold text-primary">99%</span>
                     </div>
@@ -328,14 +327,13 @@ const serviceContent: Record<
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 World's #1 CMS
               </div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 WordPress Development <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
+                <span className="text-primary">
                   Services & Solutions
                 </span>
               </h2>
@@ -366,7 +364,7 @@ const serviceContent: Record<
                   <div className="pt-6 border-t border-primary/10">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary w-[40%] animate-pulse" />
+                        <div className="h-full bg-primary w-[40%]" />
                       </div>
                       <span className="text-xs font-bold text-primary">40%</span>
                     </div>
@@ -483,7 +481,7 @@ const serviceContent: Record<
               <div className="absolute top-0 right-0 w-32 h-32 bg-primary/20 blur-3xl group-hover:bg-primary/40 transition-colors" />
               <div className="relative z-10">
                 <div className="flex items-center gap-4 mb-8">
-                  <div className="h-3 w-3 rounded-full bg-green-500 animate-pulse shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+                  <div className="h-3 w-3 rounded-full bg-green-500" />
                   <div className="font-black text-primary uppercase tracking-widest text-xs">
                     Live Support
                   </div>
@@ -542,14 +540,13 @@ const serviceContent: Record<
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 High-Conversion Stores
               </div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 E-Commerce Website <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
+                <span className="text-primary">
                   Development & Growth
                 </span>
               </h2>
@@ -581,7 +578,7 @@ const serviceContent: Record<
                   <div className="pt-6 border-t border-primary/10">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary w-[35%] animate-pulse" />
+                        <div className="h-full bg-primary w-[35%]" />
                       </div>
                       <span className="text-xs font-bold text-primary">35%</span>
                     </div>
@@ -755,14 +752,13 @@ const serviceContent: Record<
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 Visual Storytelling
               </div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 Graphic Design <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
+                <span className="text-primary">
                   Services & Brand Identity
                 </span>
               </h2>
@@ -792,7 +788,7 @@ const serviceContent: Record<
                   <div className="pt-6 border-t border-primary/10">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary w-[100%] animate-pulse" />
+                        <div className="h-full bg-primary w-[100%]" />
                       </div>
                       <span className="text-xs font-bold text-primary">100+</span>
                     </div>
@@ -927,14 +923,14 @@ const serviceContent: Record<
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 #1 Ranking Goal
               </div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 Search Engine Optimization <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
+                <span className="text-primary">
                   (SEO) Services
                 </span>
               </h2>
@@ -966,7 +962,7 @@ const serviceContent: Record<
                   <div className="pt-6 border-t border-primary/10">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary w-[95%] animate-pulse" />
+                        <div className="h-full bg-primary w-[95%]" />
                       </div>
                       <span className="text-xs font-bold text-primary">95%</span>
                     </div>
@@ -1061,7 +1057,7 @@ const serviceContent: Record<
               </div>
             </div>
             <div className="relative aspect-square max-w-sm mx-auto w-full">
-              <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full animate-pulse" />
+              <div className="absolute inset-0 bg-primary/20 blur-3xl rounded-full" />
               <div className="relative h-full w-full rounded-[3rem] border border-white/10 bg-white/5 backdrop-blur-xl flex flex-col items-center justify-center p-12 text-center group">
                 <div className="text-7xl mb-6 group-hover:scale-110 transition-transform duration-500">
                   🚀
@@ -1175,14 +1171,14 @@ const serviceContent: Record<
             <div className="flex-1">
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-6">
                 <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                  <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
                 </span>
                 Performance Driven
               </div>
               <h2 className="text-4xl md:text-6xl font-black tracking-tighter mb-8 leading-[1.1]">
                 Digital Marketing <br />
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient">
+                <span className="text-primary">
                   Services & Campaigns
                 </span>
               </h2>
@@ -1212,7 +1208,7 @@ const serviceContent: Record<
                   <div className="pt-6 border-t border-primary/10">
                     <div className="flex items-center gap-3 mb-4">
                       <div className="h-2 w-full bg-primary/10 rounded-full overflow-hidden">
-                        <div className="h-full bg-primary w-[85%] animate-pulse" />
+                        <div className="h-full bg-primary w-[85%]" />
                       </div>
                       <span className="text-xs font-bold text-primary">5X</span>
                     </div>
@@ -1402,14 +1398,14 @@ function ServiceDetailPage() {
         {/* Background Gradients & Effects */}
         <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,var(--gradient-primary-light),transparent_50%)] opacity-20 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(circle_at_bottom_left,var(--gradient-primary-light),transparent_40%)] opacity-10 pointer-events-none" />
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full animate-pulse pointer-events-none" />
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="relative max-w-7xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
           {/* Text Content */}
           <Reveal variant="fade-in-up" className="max-w-2xl">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-primary/20 bg-primary/5 text-sm font-bold text-primary mb-6 shadow-sm">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
               Premium Solution
@@ -1419,7 +1415,7 @@ function ServiceDetailPage() {
                 i >= arr.length - 2 ? (
                   <span
                     key={i}
-                    className="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-500 to-primary bg-[length:200%_auto] animate-gradient"
+                    className="text-primary"
                   >
                     {" "}
                     {word}

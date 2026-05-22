@@ -3,7 +3,6 @@ import { useState, useEffect, useMemo, useRef } from "react";
 import "@/styles/premium.css";
 import { Reveal } from "@/components/ui/animations/Reveal";
 import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
-import { motion } from "framer-motion";
 import {
   getServices,
   saveServices,

@@ -342,14 +342,14 @@ function Index() {
                 DevdigitaX creates custom development solutions to brand your business and marketing
                 strategies to grow any business.
               </p>
-              <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05]">
+              <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-white">
                 <SplitText text="Next-Gen Development" type="words" delay={0.1} />
                 <br />
                 <SplitText 
                   text="and Strategic Marketing Partner" 
                   type="words" 
                   delay={0.2}
-                  className="premium-gradient-text"
+                  className="text-white"
                 />
               </h1>
               <p className="mt-6 text-lg text-muted-foreground max-w-xl">

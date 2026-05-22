@@ -1,0 +1,187 @@
+/* ============================================
+   GSAP & ScrollTrigger Animation Utilities
+   ============================================ */
+
+/* View Transition API Support */
+@supports (view-transition-name: auto) {
+  ::view-transition-old(root) {
+    animation: fade-out 0.4 cubic-bezier(0.4, 0, 1, 1);
+  }
+
+  ::view-transition-new(root) {
+    animation: fade-in 0.4 cubic-bezier(0, 0, 0.2, 1);
+  }
+
+  @keyframes fade-out {
+    from {
+      opacity: 1;
+    }
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+/* Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Animation Performance Optimizations */
+[data-stagger-item],
+[data-reveal-char],
+[data-char] {
+  will-change: transform, opacity;
+}
+
+/* Smooth scroll behavior for non-reduced-motion users */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Premium gradient text utility */
+.premium-gradient-text {
+  background: linear-gradient(135deg, var(--primary), var(--primary-light, #7c3aed));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Glow effect for animated elements */
+.glow-effect {
+  filter: drop-shadow(0 0 8px rgba(var(--primary-rgb, 124, 58, 237), 0.3));
+}
+
+/* Subtle blur animation */
+@keyframes blur-in {
+  from {
+    filter: blur(40px);
+    opacity: 0.3;
+  }
+  to {
+    filter: blur(0px);
+    opacity: 1;
+  }
+}
+
+/* Stagger animation helper */
+@keyframes stagger-in {
+  from {
+    opacity: 0;
+    transform: translateY(120%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Scale reveal animation */
+@keyframes scale-reveal {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Slide up animation */
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(60px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Character reveal with overflow hidden */
+.char-reveal {
+  display: inline-block;
+  overflow: hidden;
+}
+
+.char-reveal span {
+  display: inline-block;
+}
+
+/* Word reveal container */
+.word-reveal {
+  display: inline-block;
+  margin-right: 0.25em;
+  overflow: hidden;
+}
+
+.word-reveal span {
+  display: inline-block;
+}
+
+/* Cinematic text effect */
+.cinematic-text {
+  position: relative;
+  letter-spacing: 0.05em;
+}
+
+.cinematic-text::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  animation: shimmer 3s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Accessibility: Focus visible for animated elements */
+[data-stagger-item]:focus-visible,
+[data-reveal-char]:focus-visible,
+[data-char]:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+}
+
+/* Smooth transitions for interactive elements */
+button,
+a {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Disable animations during print */
+@media print {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}

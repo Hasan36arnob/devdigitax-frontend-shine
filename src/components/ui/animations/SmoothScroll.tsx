@@ -1,33 +1,5 @@
-import { useEffect, ReactNode } from 'react';
-import Lenis from 'lenis';
+import { ReactNode } from "react";
 
-interface SmoothScrollProps {
-  children: ReactNode;
-}
-
-export function SmoothScroll({ children }: SmoothScrollProps) {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 0.9,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Custom easing for premium feel
-      orientation: 'vertical',
-      gestureOrientation: 'vertical',
-      smoothWheel: true,
-      wheelMultiplier: 1.1,
-      touchMultiplier: 1.5,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-
-    requestAnimationFrame(raf);
-
-    return () => {
-      lenis.destroy();
-    };
-  }, []);
-
+export function SmoothScroll({ children }: { children: ReactNode }) {
   return <>{children}</>;
 }

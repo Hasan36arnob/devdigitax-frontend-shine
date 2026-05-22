@@ -18,7 +18,7 @@ export function WhatsAppButton() {
         <div className="absolute -inset-1 rounded-full bg-gradient-to-r from-[#25D366] to-[#128C7E] blur opacity-20 group-hover:opacity-40 transition duration-500" />
         <span className="relative flex items-center gap-2 px-5 py-2.5 rounded-2xl text-sm font-semibold bg-background/80 backdrop-blur-xl border border-border/50 text-foreground shadow-2xl translate-y-1 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 transition-all duration-500">
           <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
+            <span className="absolute inline-flex h-full w-full rounded-full bg-[#25D366] opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2 w-2 bg-[#25D366]"></span>
           </span>
           How can we help?
@@ -27,7 +27,7 @@ export function WhatsAppButton() {
 
       <div className="relative group/btn">
         {/* Outer Glow Ring */}
-        <div className="absolute -inset-1 bg-gradient-to-tr from-[#25D366] via-white to-[#128C7E] rounded-full opacity-20 group-hover/btn:opacity-100 blur-sm group-hover/btn:blur transition duration-1000 group-hover/btn:duration-200 animate-spin-slow" />
+        <div className="absolute -inset-1 bg-gradient-to-tr from-[#25D366] via-white to-[#128C7E] rounded-full opacity-20 group-hover/btn:opacity-100 blur-sm group-hover/btn:blur transition duration-1000 group-hover/btn:duration-200" />
 
         {/* The Button */}
         <div
@@ -37,7 +37,7 @@ export function WhatsAppButton() {
           }}
         >
           {/* Internal Pulse */}
-          <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-0 group-hover/btn:animate-ping-slow" />
+          <span className="absolute inset-0 rounded-full bg-[#25D366] opacity-0 group-hover/btn:opacity-50" />
 
           <svg
             viewBox="0 0 32 32"
@@ -48,7 +48,7 @@ export function WhatsAppButton() {
           </svg>
 
           {/* Notification Badge */}
-          <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-lg border-2 border-white ring-1 ring-red-500 animate-bounce">
+          <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-lg border-2 border-white ring-1 ring-red-500">
             1
           </span>
         </div>

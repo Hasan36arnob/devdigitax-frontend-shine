@@ -1,80 +1,140 @@
-import { motion, HTMLMotionProps } from "framer-motion";
-import { ReactNode } from "react";
-import { clsx, type ClassValue } from "clsx";
-import { twMerge } from "tailwind-merge";
+import { ReactNode, HTMLAttributes, useEffect, useRef, useState } from "react";
+import { cn } from "./Reveal";
+import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
 
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs));
+// Dynamic imports for GSAP (client-side only)
+let gsap: any = null;
+let ScrollTrigger: any = null;
+let isInitialized = false;
+
+const initGSAP = async () => {
+  if (isInitialized || typeof window === "undefined") return;
+  try {
+    const gsapModule = await import("gsap");
+    const scrollTriggerModule = await import("gsap/ScrollTrigger");
+    gsap = gsapModule.default;
+    ScrollTrigger = scrollTriggerModule.default;
+    if (gsap && ScrollTrigger) {
+      gsap.registerPlugin(ScrollTrigger);
+      isInitialized = true;
+    }
+  } catch (error) {
+    console.error("Failed to load GSAP:", error);
+  }
+};
+
+interface StaggerProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+  staggerDelay?: number;
+  delay?: number;
+  start?: string;
+  variant?: "fade" | "scale" | "slide-up" | "image";
+  duration?: number;
+}
+
+interface StaggerItemProps extends HTMLAttributes<HTMLDivElement> {
+  children: ReactNode;
+  variant?: "fade" | "scale" | "slide-up" | "image";
 }
 
 export function Stagger({
   children,
-  staggerDelay = 0.07,
+  staggerDelay,
   delay = 0,
+  start = "top 80%",
+  variant = "fade",
+  duration,
   className,
   ...props
-}: {
-  children: ReactNode;
-  staggerDelay?: number;
-  delay?: number;
-  className?: string;
-} & HTMLMotionProps<"div">) {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-10% 0px" }}
-      variants={{
-        hidden: {},
-        visible: {
-          transition: {
-            staggerChildren: staggerDelay,
-            delayChildren: delay,
-          },
+}: StaggerProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  const config = getAnimationConfig(prefersReducedMotion);
+  const [isClient, setIsClient] = useState(false);
+
+  const finalStaggerDelay = staggerDelay ?? config.staggerAmount;
+  const finalDuration = duration ?? config.duration;
+
+  useEffect(() => {
+    setIsClient(true);
+    initGSAP();
+  }, []);
+
+  useEffect(() => {
+    if (!isClient || !containerRef.current || !gsap) return;
+
+    const items = containerRef.current.querySelectorAll("[data-stagger-item]");
+    if (items.length === 0) return;
+
+    const variants: Record<string, Record<string, unknown>> = {
+      fade: { opacity: 0 },
+      scale: { opacity: 0, scale: 0.9 },
+      "slide-up": { opacity: 0, y: 40 },
+      image: { opacity: 0, scale: 1.05 },
+    };
+
+    const toVars: Record<string, Record<string, unknown>> = {
+      fade: { opacity: 1, ease: config.ease },
+      scale: { opacity: 1, scale: 1, ease: config.ease },
+      "slide-up": { opacity: 1, y: 0, ease: config.ease },
+      image: { opacity: 1, scale: 1, ease: config.ease },
+    };
+
+    const fromState = variants[variant] || variants.fade;
+    const toState = toVars[variant] || toVars.fade;
+
+    gsap.set(items, { ...fromState, willChange: "transform, opacity" });
+
+    if (prefersReducedMotion) {
+      gsap.to(items, {
+        ...toState,
+        duration: finalDuration,
+        stagger: finalStaggerDelay,
+        delay,
+      });
+    } else {
+      gsap.to(items, {
+        ...toState,
+        duration: finalDuration,
+        stagger: finalStaggerDelay,
+        delay,
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start,
+          end: "top 60%",
+          toggleActions: "play none none none",
+          markers: false,
         },
-      }}
-      className={cn(className)}
-      {...props}
-    >
+      });
+    }
+
+    return () => {
+      if (ScrollTrigger) {
+        ScrollTrigger.getAll().forEach((trigger: any) => {
+          if (trigger.trigger === containerRef.current) {
+            trigger.kill();
+          }
+        });
+      }
+    };
+  }, [isClient, finalStaggerDelay, delay, start, variant, finalDuration, prefersReducedMotion, config]);
+
+  return (
+    <div ref={containerRef} className={cn(className)} {...props}>
       {children}
-    </motion.div>
+    </div>
   );
 }
 
 export function StaggerItem({
   children,
-  variant = "slide-up",
+  variant,
   className,
   ...props
-}: {
-  children: ReactNode;
-  variant?: "fade" | "slide-up" | "scale" | "image";
-  className?: string;
-} & HTMLMotionProps<"div">) {
-  const easePower3Out = [0.215, 0.61, 0.355, 1] as const;
-
-  const variants = {
-    fade: {
-      hidden: { opacity: 0 },
-      visible: { opacity: 1, transition: { duration: 0.55, ease: easePower3Out } },
-    },
-    "slide-up": {
-      hidden: { opacity: 0, y: 40 },
-      visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: easePower3Out } },
-    },
-    scale: {
-      hidden: { opacity: 0, scale: 0.95 },
-      visible: { opacity: 1, scale: 1, transition: { duration: 0.55, ease: easePower3Out } },
-    },
-    image: {
-      hidden: { opacity: 0, scale: 0.9, filter: "blur(10px)" },
-      visible: { opacity: 1, scale: 1, filter: "blur(0px)", transition: { duration: 0.75, ease: easePower3Out } },
-    },
-  };
-
+}: StaggerItemProps) {
   return (
-    <motion.div variants={variants[variant]} className={cn(className)} {...props}>
+    <div data-stagger-item className={cn(className)} {...props}>
       {children}
-    </motion.div>
+    </div>
   );
 }

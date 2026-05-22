@@ -5,7 +5,6 @@ import { getPortfolio, sortPortfolioForDisplay } from "@/utils/data";
 import { ExternalLink, Globe, Search } from "lucide-react";
 import { Reveal } from "@/components/ui/animations/Reveal";
 import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
-import { AnimatePresence } from "framer-motion";
 
 export const Route = createFileRoute("/portfolio")({
   component: PortfolioPage,
@@ -165,15 +164,9 @@ function PortfolioPage() {
       {/* ── Grid ── */}
       <Reveal className="max-w-7xl mx-auto px-6 py-20">
         {filtered.length > 0 ? (
-          <Stagger layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            <AnimatePresence mode="popLayout">
+          <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filtered.map((p) => (
                 <StaggerItem
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
                   key={p.id}
                   className="group rounded-3xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:-translate-y-2 flex flex-col"
                   style={{ boxShadow: "var(--shadow-elegant)" }}
@@ -236,7 +229,6 @@ function PortfolioPage() {
                   </div>
                 </StaggerItem>
               ))}
-            </AnimatePresence>
           </Stagger>
         ) : (
           <div className="text-center py-40 bg-card rounded-[3rem] border border-dashed border-border">

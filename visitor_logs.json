@@ -1,5 +1,47 @@
 [
   {
+    "id": "sdaliaf3qqo",
+    "ip": "Local/Blocked",
+    "country": "Unknown",
+    "countryCode": "??",
+    "city": "Unknown",
+    "timestamp": "2026-05-22T03:05:06.551Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "page": "/",
+    "referrer": "Direct",
+    "screenResolution": "1366x768",
+    "language": "en-US",
+    "isMobile": false
+  },
+  {
+    "id": "qtp6s1d0hu",
+    "ip": "Local/Blocked",
+    "country": "Unknown",
+    "countryCode": "??",
+    "city": "Unknown",
+    "timestamp": "2026-05-22T01:56:16.426Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "page": "/",
+    "referrer": "Direct",
+    "screenResolution": "1366x768",
+    "language": "en-US",
+    "isMobile": false
+  },
+  {
+    "id": "dy44jd49vzt",
+    "ip": "Local/Blocked",
+    "country": "Unknown",
+    "countryCode": "??",
+    "city": "Unknown",
+    "timestamp": "2026-05-22T01:53:27.534Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+    "page": "/",
+    "referrer": "http://localhost:5173/",
+    "screenResolution": "1366x768",
+    "language": "en-US",
+    "isMobile": false
+  },
+  {
     "id": "vz5yz0ofwmn",
     "ip": "Local/Blocked",
     "country": "Unknown",
