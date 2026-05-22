@@ -1,27 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { cn } from "./Reveal";
 import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Dynamic imports for GSAP (client-side only)
-let gsap: any = null;
-let ScrollTrigger: any = null;
-let isInitialized = false;
-
-const initGSAP = async () => {
-  if (isInitialized || typeof window === "undefined") return;
-  try {
-    const gsapModule = await import("gsap");
-    const scrollTriggerModule = await import("gsap/ScrollTrigger");
-    gsap = gsapModule.default;
-    ScrollTrigger = scrollTriggerModule.default;
-    if (gsap && ScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-      isInitialized = true;
-    }
-  } catch (error) {
-    console.error("Failed to load GSAP:", error);
-  }
-};
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface SplitTextProps {
   text: string;
@@ -41,10 +26,10 @@ export function SplitText({
   className,
   as = "span",
   delay = 0,
-  staggerAmount = 0.08,
-  duration = 0.6,
-  triggerStart = "top 80%",
-  triggerEnd = "bottom 20%",
+  staggerAmount = 0.03,
+  duration = 0.7,
+  triggerStart = "top 90%",
+  triggerEnd = "bottom 10%",
   type = "words",
 }: SplitTextProps) {
   const containerRef = useRef<HTMLElement>(null);
@@ -52,56 +37,46 @@ export function SplitText({
   const config = getAnimationConfig(prefersReducedMotion);
   const [isClient, setIsClient] = useState(false);
 
-  const finalStaggerAmount = staggerAmount;
-  const finalDuration = duration;
-
   useEffect(() => {
     setIsClient(true);
-    initGSAP();
   }, []);
 
   useEffect(() => {
-    if (!isClient || !containerRef.current || !gsap) return;
+    if (!isClient || !containerRef.current) return;
 
     const container = containerRef.current;
     
-    // Skip if already animated
-    if (container.getAttribute('data-split-animated') === 'true') {
+    if (container.getAttribute("data-split-animated") === "true") {
       return;
     }
 
     const spans = container.querySelectorAll("span[data-char]");
-
     if (spans.length === 0) return;
 
-    // Mark as animated
-    container.setAttribute('data-split-animated', 'true');
+    container.setAttribute("data-split-animated", "true");
 
-    // Set initial state - hide for animation
     gsap.set(spans, {
       opacity: 0,
-      y: 20,
+      y: 15,
       willChange: "transform, opacity",
     });
 
-    // Skip scroll trigger if reduced motion
     if (prefersReducedMotion) {
       gsap.to(spans, {
         opacity: 1,
         y: 0,
         duration: 0.3,
         ease: "linear",
-        stagger: 0.05,
+        stagger: 0.02,
         delay,
       });
     } else {
-      // Create scroll trigger animation
       gsap.to(spans, {
         opacity: 1,
         y: 0,
-        duration: finalDuration,
+        duration,
         ease: "power2.out",
-        stagger: finalStaggerAmount,
+        stagger: staggerAmount,
         delay,
         scrollTrigger: {
           trigger: container,
@@ -114,23 +89,19 @@ export function SplitText({
     }
 
     return () => {
-      if (ScrollTrigger) {
-        ScrollTrigger.getAll().forEach((trigger: any) => {
-          if (trigger.trigger === container) {
-            trigger.kill();
-          }
-        });
-      }
+      ScrollTrigger.getAll().forEach((trigger: any) => {
+        if (trigger.trigger === container) {
+          trigger.kill();
+        }
+      });
     };
-  }, [isClient, delay, finalStaggerAmount, finalDuration, triggerStart, triggerEnd, prefersReducedMotion, config]);
+  }, [isClient, delay, staggerAmount, duration, triggerStart, triggerEnd, prefersReducedMotion, config]);
 
   const Component = as as any;
-
-  // Split text into words or characters
   const words = text.split(" ");
   const splitContent = type === "words" 
     ? words.map((word, idx) => (
-        <span key={idx} className="inline-block mr-[0.25em] overflow-hidden">
+        <span key={idx} className="inline-block mr-[0.25em] overflow-hidden whitespace-nowrap">
           {word.split("").map((char, charIdx) => (
             <span key={charIdx} data-char className="inline-block">
               {char}
@@ -140,7 +111,7 @@ export function SplitText({
       ))
     : text.split("").map((char, idx) => (
         <span key={idx} data-char className="inline-block">
-          {char}
+          {char === " " ? "\u00A0" : char}
         </span>
       ));
 

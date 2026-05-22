@@ -1,27 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "./Reveal";
 import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Dynamic imports for GSAP (client-side only)
-let gsap: any = null;
-let ScrollTrigger: any = null;
-let isInitialized = false;
-
-const initGSAP = async () => {
-  if (isInitialized || typeof window === "undefined") return;
-  try {
-    const gsapModule = await import("gsap");
-    const scrollTriggerModule = await import("gsap/ScrollTrigger");
-    gsap = gsapModule.default;
-    ScrollTrigger = scrollTriggerModule.default;
-    if (gsap && ScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-      isInitialized = true;
-    }
-  } catch (error) {
-    console.error("Failed to load GSAP:", error);
-  }
-};
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface RevealTextProps {
   text: string;
@@ -35,20 +20,15 @@ interface RevealTextProps {
   splitType?: "words" | "characters" | "lines";
 }
 
-/**
- * Premium heading animation component
- * Splits text into words/characters and animates with stagger
- * Respects reduced motion preferences
- */
 export function RevealText({
   text,
   className,
   as = "h2",
   delay = 0,
-  staggerAmount = 0.08,
-  duration = 0.6,
-  triggerStart = "top 80%",
-  triggerEnd = "bottom 20%",
+  staggerAmount = 0.04,
+  duration = 0.8,
+  triggerStart = "top 90%",
+  triggerEnd = "bottom 10%",
   splitType = "words",
 }: RevealTextProps) {
   const containerRef = useRef<HTMLElement>(null);
@@ -56,55 +36,46 @@ export function RevealText({
   const config = getAnimationConfig(prefersReducedMotion);
   const [isClient, setIsClient] = useState(false);
 
-  const finalStaggerAmount = staggerAmount;
-  const finalDuration = duration;
-
   useEffect(() => {
     setIsClient(true);
-    initGSAP();
   }, []);
 
   useEffect(() => {
-    if (!isClient || !containerRef.current || !gsap) return;
+    if (!isClient || !containerRef.current) return;
 
     const container = containerRef.current;
     
-    // Skip if already animated
-    if (container.getAttribute('data-reveal-text-animated') === 'true') {
+    if (container.getAttribute("data-reveal-text-animated") === "true") {
       return;
     }
 
     const spans = container.querySelectorAll("span[data-reveal-char]");
-
     if (spans.length === 0) return;
 
-    // Mark as animated
-    container.setAttribute('data-reveal-text-animated', 'true');
+    container.setAttribute("data-reveal-text-animated", "true");
 
-    // Set initial state
     gsap.set(spans, {
       opacity: 0,
-      y: 20,
+      y: 24,
       willChange: "transform, opacity",
     });
 
-    // Skip scroll trigger if reduced motion
     if (prefersReducedMotion) {
       gsap.to(spans, {
         opacity: 1,
         y: 0,
         duration: 0.3,
         ease: "linear",
-        stagger: 0.05,
+        stagger: 0.02,
         delay,
       });
     } else {
       gsap.to(spans, {
         opacity: 1,
         y: 0,
-        duration: finalDuration,
-        ease: "power2.out",
-        stagger: finalStaggerAmount,
+        duration,
+        ease: "power3.out",
+        stagger: staggerAmount,
         delay,
         scrollTrigger: {
           trigger: container,
@@ -117,25 +88,21 @@ export function RevealText({
     }
 
     return () => {
-      if (ScrollTrigger) {
-        ScrollTrigger.getAll().forEach((trigger: any) => {
-          if (trigger.trigger === container) {
-            trigger.kill();
-          }
-        });
-      }
+      ScrollTrigger.getAll().forEach((trigger: any) => {
+        if (trigger.trigger === container) {
+          trigger.kill();
+        }
+      });
     };
-  }, [isClient, delay, finalStaggerAmount, finalDuration, triggerStart, triggerEnd, prefersReducedMotion, config]);
+  }, [isClient, delay, staggerAmount, duration, triggerStart, triggerEnd, prefersReducedMotion, config]);
 
   const Component = as as any;
-
-  // Split text based on type
   let splitContent: React.ReactNode;
 
   if (splitType === "words") {
     const words = text.split(" ");
     splitContent = words.map((word, idx) => (
-      <span key={idx} className="inline-block mr-[0.25em] overflow-hidden">
+      <span key={idx} className="inline-block mr-[0.25em] overflow-hidden whitespace-nowrap">
         {word.split("").map((char, charIdx) => (
           <span key={charIdx} data-reveal-char className="inline-block">
             {char}
@@ -150,9 +117,8 @@ export function RevealText({
       </span>
     ));
   } else {
-    // lines
     splitContent = text.split("\n").map((line, idx) => (
-      <div key={idx} className="overflow-hidden">
+      <div key={idx} className="overflow-hidden block">
         {line.split("").map((char, charIdx) => (
           <span key={charIdx} data-reveal-char className="inline-block">
             {char === " " ? "\u00A0" : char}

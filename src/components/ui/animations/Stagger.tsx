@@ -1,27 +1,12 @@
 import { ReactNode, HTMLAttributes, useEffect, useRef, useState } from "react";
 import { cn } from "./Reveal";
 import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-// Dynamic imports for GSAP (client-side only)
-let gsap: any = null;
-let ScrollTrigger: any = null;
-let isInitialized = false;
-
-const initGSAP = async () => {
-  if (isInitialized || typeof window === "undefined") return;
-  try {
-    const gsapModule = await import("gsap");
-    const scrollTriggerModule = await import("gsap/ScrollTrigger");
-    gsap = gsapModule.default;
-    ScrollTrigger = scrollTriggerModule.default;
-    if (gsap && ScrollTrigger) {
-      gsap.registerPlugin(ScrollTrigger);
-      isInitialized = true;
-    }
-  } catch (error) {
-    console.error("Failed to load GSAP:", error);
-  }
-};
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface StaggerProps extends HTMLAttributes<HTMLDivElement> {
   children: ReactNode;
@@ -41,7 +26,7 @@ export function Stagger({
   children,
   staggerDelay,
   delay = 0,
-  start = "top 80%",
+  start = "top 85%",
   variant = "fade",
   duration,
   className,
@@ -57,20 +42,19 @@ export function Stagger({
 
   useEffect(() => {
     setIsClient(true);
-    initGSAP();
   }, []);
 
   useEffect(() => {
-    if (!isClient || !containerRef.current || !gsap) return;
+    if (!isClient || !containerRef.current) return;
 
     const items = containerRef.current.querySelectorAll("[data-stagger-item]");
     if (items.length === 0) return;
 
     const variants: Record<string, Record<string, unknown>> = {
       fade: { opacity: 0 },
-      scale: { opacity: 0, scale: 0.9 },
-      "slide-up": { opacity: 0, y: 40 },
-      image: { opacity: 0, scale: 1.05 },
+      scale: { opacity: 0, scale: 0.96 },
+      "slide-up": { opacity: 0, y: 30 },
+      image: { opacity: 0, scale: 1.03 },
     };
 
     const toVars: Record<string, Record<string, unknown>> = {
@@ -109,13 +93,11 @@ export function Stagger({
     }
 
     return () => {
-      if (ScrollTrigger) {
-        ScrollTrigger.getAll().forEach((trigger: any) => {
-          if (trigger.trigger === containerRef.current) {
-            trigger.kill();
-          }
-        });
-      }
+      ScrollTrigger.getAll().forEach((trigger: any) => {
+        if (trigger.trigger === containerRef.current) {
+          trigger.kill();
+        }
+      });
     };
   }, [isClient, finalStaggerDelay, delay, start, variant, finalDuration, prefersReducedMotion, config]);
 

@@ -7,4 +7,7 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig({
   plugins: [tsConfigPaths(), tailwindcss(), tanstackStart(), netlify(), react()],
+  define: {
+    "process.env": {},
+  },
 });

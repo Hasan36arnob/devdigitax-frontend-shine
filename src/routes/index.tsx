@@ -3,28 +3,25 @@ import { SiteLayout } from "@/components/SiteLayout";
 import { Reveal } from "@/components/ui/animations/Reveal";
 import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
 import { AnimatedCounter } from "@/components/ui/animations/AnimatedCounter";
-import { SplitText } from "@/components/ui/animations/SplitText";
-import { MouseParallax } from "@/components/ui/animations/MouseParallax";
+import { FadeIn } from "@/components/ui/animations/FadeIn";
 import { TiltCard } from "@/components/ui/animations/TiltCard";
-import { ShatterImage } from "@/components/ui/animations/ShatterImage";
-import { getServices, getPortfolio, sortPortfolioForDisplay } from "@/utils/data";
+import { getServices, getPortfolio } from "@/utils/data";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
 import {
   ArrowRight,
-  Code2,
-  Search,
-  CheckCircle2,
   Sparkles,
   Star,
   Globe,
   Layout,
   ShoppingCart,
   TrendingUp,
-  Share2,
   Palette,
   Phone,
   ExternalLink,
+  Code2,
+  Search,
 } from "lucide-react";
-import logo from "@/assets/dv.jpeg";
 import tasin from "@/assets/tasin.jpeg";
 import kudzley from "@/assets/Kudzey.jpeg";
 import tonmoy from "@/assets/tonmoy.jpeg";
@@ -118,127 +115,6 @@ const path = [
   },
 ];
 
-const services = [
-  {
-    icon: Layout,
-    t: "Professional Web Design & Development",
-    d: "Your website isn't a brochure — it's your top salesperson. We build fast, conversion-focused websites designed around how local buyers think.",
-    slug: "web-design",
-  },
-  {
-    icon: Code2,
-    t: "WordPress Website Development",
-    d: "Clean, fast, fully customised WordPress websites that are easy to manage and built to scale. No bloat, no plugin headaches.",
-    slug: "wordpress",
-  },
-  {
-    icon: ShoppingCart,
-    t: "eCommerce Website Development",
-    d: "High-converting product pages, frictionless checkout, and systems that turn first-time buyers into repeat customers.",
-    slug: "ecommerce",
-  },
-  {
-    icon: Palette,
-    t: "Graphics Design",
-    d: "Beautiful logos, banners, flyers, posters, and everything in between. We create stunning visuals that capture your brand's essence and connect with your audience.",
-    slug: "graphics-design",
-  },
-  {
-    icon: Search,
-    t: "Search Engine Optimization",
-    d: "Technical optimisation, structured content and authority building — aligned with how your customers actually search.",
-    slug: "seo",
-  },
-  {
-    icon: TrendingUp,
-    t: "Digital Marketing",
-    d: "Facebook Ads campaigns targeting audiences who actually need your service. Comprehensive Google Ads marketing across search, display, and video. Strategic audience targeting that converts.",
-    slug: "digital-marketing",
-  },
-];
-
-const why = [
-  {
-    t: "Custom Web Development",
-    d: "We build fast, secure, and scalable websites tailored to your business needs. No bloatware or rigid templates—just clean code designed for performance and future growth.",
-  },
-  {
-    t: "Conversion-Focused Design",
-    d: "Your website is your top salesperson. We design intuitive, visually stunning interfaces rooted in user psychology to turn visitors into paying customers.",
-  },
-  {
-    t: "We Start With Your Revenue, Not Your Traffic",
-    d: "Every campaign, page and decision is tied to downstream revenue. If a tactic can't be connected to leads or sales, we don't do it.",
-  },
-  {
-    t: "Strategy Built Around You",
-    d: "No off-the-shelf SEO or templated ads. Every engagement starts with understanding your market, buyers and competition.",
-  },
-  {
-    t: "We Understand the Market Strategy",
-    d: "Targeted Facebook Ads campaigns reaching audiences who actually need your service. Comprehensive Google Ads marketing across search, display, and video. Strategic audience targeting that converts.",
-  },
-  {
-    t: "Transparent Communication",
-    d: "You'll always know what we're working on, what results we're seeing and where your budget is going. If something isn't working, we tell you first.",
-  },
-  {
-    t: "We Stay. We Grow With You.",
-    d: "Our 98% retention rate is the result of treating every relationship as a long-term partnership.",
-  },
-  {
-    t: "Dedicated Execution",
-    d: "Direct access to the developers and marketers doing the work. No middle managers or outsourced templates — just dedicated people focused on your success.",
-  },
-];
-
-const faqs = [
-  {
-    q: "What is your typical project timeline?",
-    a: "Website development projects range from 4-12 weeks depending on complexity. Marketing campaigns launch within 2 weeks of strategy approval. We provide detailed timelines during our discovery phase and maintain transparent communication throughout.",
-  },
-  {
-    q: "How do you measure and report on project success?",
-    a: "We establish clear KPIs at project outset including conversion rates, traffic growth, revenue impact, and ROI. You'll receive weekly performance reports with actionable insights, and we adjust strategies based on real-time data to maximize results.",
-  },
-  {
-    q: "What is your process for understanding our business needs?",
-    a: "Our discovery process includes in-depth stakeholder interviews, competitor analysis, audience research, and current performance audits. We spend significant time understanding your goals, challenges, and market position before proposing solutions.",
-  },
-  {
-    q: "How do you handle project communication and updates?",
-    a: "You'll have direct access to the builders working on your project, not account managers. We provide weekly progress updates, milestone reviews, and maintain open channels for questions. Transparency is core to our client relationships.",
-  },
-  {
-    q: "What happens if we're not satisfied with the results?",
-    a: "Your satisfaction is our priority. If results don't meet agreed-upon KPIs, we'll revise our approach at no additional cost. Our revenue-first strategy ensures we're invested in your success, not just project completion.",
-  },
-  {
-    q: "Do you offer custom solutions or only standard packages?",
-    a: "Every engagement is custom-tailored to your specific business needs, goals, and budget. We don't believe in one-size-fits-all solutions. Our team crafts strategies specifically designed for your market position and growth objectives.",
-  },
-  {
-    q: "What is your after-delivery support system?",
-    a: "We provide comprehensive post-delivery support including 30-day free maintenance, 24/7 technical assistance, performance monitoring, security updates, and strategic optimization. Our dedicated support team ensures your digital assets continue performing at peak levels with proactive maintenance and rapid issue resolution.",
-  },
-  {
-    q: "How do you stay current with the latest digital marketing and development trends?",
-    a: "Our team invests heavily in continuous learning, attending industry conferences, conducting ongoing research, and maintaining partnerships with leading technology providers. We regularly audit and update our methodologies to leverage emerging best practices.",
-  },
-  {
-    q: "What industries do you specialize in?",
-    a: "We work across healthcare, real estate, retail, logistics, and e-commerce sectors. Our expertise spans from local businesses to enterprise-level organizations, adapting our strategies to each industry's unique challenges and opportunities.",
-  },
-  {
-    q: "Do you provide ongoing maintenance and support after project completion?",
-    a: "Yes, we offer comprehensive post-launch support including technical maintenance, content updates, performance monitoring, security patches, and strategic optimization. Our 98% client retention rate reflects our commitment to long-term partnerships.",
-  },
-  {
-    q: "How do you ensure data security and client privacy?",
-    a: "We implement enterprise-grade security protocols including SSL encryption, secure hosting, regular backups, and GDPR compliance. All client data is handled with strict confidentiality, and we never share proprietary information without explicit permission.",
-  },
-];
-
 const testimonials = [
   {
     name: "Tonmay Sen",
@@ -268,61 +144,372 @@ const testimonials = [
     quote:
       "Highly professional team that delivers consistent quality. They've been instrumental in our digital growth strategy.",
   },
-  {
-    name: "Tanvir Ahmed",
-    role: "Founder, Bloomly Dhaka",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop",
-    quote: "One of the most interactive digital teams. Very professional and cooperative attitude.",
-  },
-  {
-    name: "Sumaiya Karim",
-    role: "CEO, NorthGear BD",
-    image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop",
-    quote:
-      "The best web development team in Dhaka. We worked with DevdigitaX and got incredible results.",
-  },
-  {
-    name: "Rakib Hasan",
-    role: "CMO, Lumora",
-    image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100&h=100&fit=crop",
-    quote:
-      "DevdigitaX is the best SEO agency we've hired. 100% satisfied with the team and the results.",
-  },
-  {
-    name: "Nadia Rahman",
-    role: "Director, Pulse Fitness",
-    image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop",
-    quote: "Best digital marketing agency. The strategy and execution are top-tier.",
-  },
-  {
-    name: "Imran Chowdhury",
-    role: "Owner, Mira Furniture",
-    image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop",
-    quote: "We've worked with this agency and the experience has been excellent — Alhamdulillah.",
-  },
-  {
-    name: "Sadia Islam",
-    role: "Head of Growth, Vault",
-    image: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop",
-    quote: "Truly a great SEO and growth partner. They understand the local market.",
-  },
-  {
-    name: "James Wilson",
-    role: "CEO, TechFlow UK",
-    image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=100&h=100&fit=crop",
-    quote: "Outstanding web development and SEO services. Our traffic increased 300% in 6 months.",
-  },
-  {
-    name: "Sarah Chen",
-    role: "Founder, GlobalTrade Singapore",
-    image: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=100&h=100&fit=crop",
-    quote: "Professional, responsive, and delivered beyond expectations. Highly recommended!",
-  },
 ];
+
+// Interactive 3D Dev & Marketing HUD Canvas Component
+function RealDevMarketingCanvas() {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
+  useEffect(() => {
+    if (typeof window === "undefined" || !canvasRef.current) return;
+
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext("2d");
+    if (!ctx) return;
+
+    let animationFrameId: number;
+    let width = (canvas.width = canvas.offsetWidth);
+    let height = (canvas.height = canvas.offsetHeight);
+
+    const handleResize = () => {
+      if (!canvas) return;
+      width = canvas.width = canvas.offsetWidth;
+      height = canvas.height = canvas.offsetHeight;
+    };
+    window.addEventListener("resize", handleResize);
+
+    // Dynamic state trackers
+    let targetRotX = 0;
+    let targetRotY = 0;
+    let curRotX = 0;
+    let curRotY = 0;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left - width / 2;
+      const y = e.clientY - rect.top - height / 2;
+      targetRotY = (x / (width / 2)) * 0.25; // max 15 deg
+      targetRotX = -(y / (height / 2)) * 0.25;
+    };
+
+    window.addEventListener("mousemove", handleMouseMove);
+
+    // Mock Code Snippets database
+    const codeLines = [
+      "const app = createServer();",
+      "app.use(analyticsTracker);",
+      "import { SEO } from 'devdigitax-seo';",
+      "import { Website } from 'react-web';",
+      "const campaign = new FacebookAds();",
+      "campaign.target({ leads: 'high-intent' });",
+      "const result = app.scaleUp({ roi: '5.4x' });",
+      "console.log('ROI Target Met!');",
+      "<Website convert={true} />"
+    ];
+
+    let codeCursor = 0;
+    let typedCode: string[] = ["", "", "", "", ""];
+    let lineIdx = 0;
+    let charIdx = 0;
+
+    // Fast typing simulation
+    const typeInterval = setInterval(() => {
+      if (lineIdx >= typedCode.length) {
+        // Shift lines up
+        typedCode.shift();
+        typedCode.push("");
+        lineIdx = typedCode.length - 1;
+        charIdx = 0;
+        codeCursor = (codeCursor + 1) % codeLines.length;
+      }
+
+      const targetLine = codeLines[codeCursor];
+      if (charIdx < targetLine.length) {
+        typedCode[lineIdx] += targetLine[charIdx];
+        charIdx++;
+      } else {
+        lineIdx++;
+      }
+    }, 45);
+
+    // Floating dynamic traffic particles
+    interface TrafficNode {
+      x: number;
+      y: number;
+      speed: number;
+      size: number;
+      opacity: number;
+    }
+    const trafficParticles: TrafficNode[] = [];
+    for (let i = 0; i < 15; i++) {
+      trafficParticles.push({
+        x: Math.random() * 260 - 130,
+        y: Math.random() * 180 - 90,
+        speed: 0.8 + Math.random() * 1.2,
+        size: 1 + Math.random() * 2,
+        opacity: 0.2 + Math.random() * 0.6
+      });
+    }
+
+    // Active render loop
+    const render = (time: number) => {
+      if (!ctx || !canvas) return;
+      ctx.clearRect(0, 0, width, height);
+
+      // Smooth rotate ease
+      curRotY += (targetRotY - curRotY) * 0.08;
+      curRotX += (targetRotX - curRotX) * 0.08;
+
+      const cx = width / 2;
+      const cy = height / 2;
+
+      // Projection projection matrix
+      const project3D = (x: number, y: number, z: number) => {
+        // Apply Y tilt
+        const cosY = Math.cos(curRotY);
+        const sinY = Math.sin(curRotY);
+        let z1 = z * cosY - x * sinY;
+        let x1 = z * sinY + x * cosY;
+
+        // Apply X tilt
+        const cosX = Math.cos(curRotX);
+        const sinX = Math.sin(curRotX);
+        let z2 = z1 * cosX - y * sinX;
+        let y2 = z1 * sinX + y * cosX;
+
+        // Perspective scaling
+        const fov = 450;
+        const scale = fov / (fov + z2);
+        return {
+          x: cx + x1 * scale,
+          y: cy + y2 * scale,
+          scale
+        };
+      };
+
+      // 1. Draw Tech-Stack Blueprint Grid Background
+      ctx.strokeStyle = "rgba(79, 110, 247, 0.03)";
+      ctx.lineWidth = 1;
+      for (let i = -200; i <= 200; i += 40) {
+        // Vertical lines
+        const p1 = project3D(i, -180, -100);
+        const p2 = project3D(i, 180, -100);
+        ctx.beginPath();
+        ctx.moveTo(p1.x, p1.y);
+        ctx.lineTo(p2.x, p2.y);
+        ctx.stroke();
+
+        // Horizontal lines
+        const p3 = project3D(-200, i, -100);
+        const p4 = project3D(200, i, -100);
+        ctx.beginPath();
+        ctx.moveTo(p3.x, p3.y);
+        ctx.lineTo(p4.x, p4.y);
+        ctx.stroke();
+      }
+
+      // 2. Draw responsive Web Dev wireframe (Browser Mockup)
+      const bLeft = -150;
+      const bRight = 150;
+      const bTop = -100;
+      const bBottom = 100;
+      const zOffset = -20;
+
+      const topLeft = project3D(bLeft, bTop, zOffset);
+      const topRight = project3D(bRight, bTop, zOffset);
+      const bottomLeft = project3D(bLeft, bBottom, zOffset);
+      const bottomRight = project3D(bRight, bBottom, zOffset);
+
+      // Main Glass Panel
+      ctx.beginPath();
+      ctx.moveTo(topLeft.x, topLeft.y);
+      ctx.lineTo(topRight.x, topRight.y);
+      ctx.lineTo(bottomRight.x, bottomRight.y);
+      ctx.lineTo(bottomLeft.x, bottomLeft.y);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(15, 17, 23, 0.75)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(79, 110, 247, 0.25)";
+      ctx.lineWidth = 2;
+      ctx.stroke();
+
+      // Browser Header Window Bar
+      const headerBarBottom = project3D(bRight, bTop + 24, zOffset);
+      const headerBarLeft = project3D(bLeft, bTop + 24, zOffset);
+      ctx.beginPath();
+      ctx.moveTo(topLeft.x, topLeft.y);
+      ctx.lineTo(topRight.x, topRight.y);
+      ctx.lineTo(headerBarBottom.x, headerBarBottom.y);
+      ctx.lineTo(headerBarLeft.x, headerBarLeft.y);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(25, 29, 41, 0.9)";
+      ctx.fill();
+      ctx.stroke();
+
+      // Browser Control Dots
+      const dot1 = project3D(bLeft + 12, bTop + 12, zOffset);
+      const dot2 = project3D(bLeft + 22, bTop + 12, zOffset);
+      const dot3 = project3D(bLeft + 32, bTop + 12, zOffset);
+
+      ctx.beginPath(); ctx.arc(dot1.x, dot1.y, 2.5 * dot1.scale, 0, Math.PI * 2); ctx.fillStyle = "rgba(224, 82, 82, 0.8)"; ctx.fill();
+      ctx.beginPath(); ctx.arc(dot2.x, dot2.y, 2.5 * dot2.scale, 0, Math.PI * 2); ctx.fillStyle = "rgba(245, 158, 11, 0.8)"; ctx.fill();
+      ctx.beginPath(); ctx.arc(dot3.x, dot3.y, 2.5 * dot3.scale, 0, Math.PI * 2); ctx.fillStyle = "rgba(16, 185, 129, 0.8)"; ctx.fill();
+
+      // Browser URL bar
+      const urlLeft = project3D(bLeft + 52, bTop + 12, zOffset);
+      const urlRight = project3D(bRight - 20, bTop + 12, zOffset);
+      ctx.beginPath();
+      ctx.moveTo(urlLeft.x, urlLeft.y);
+      ctx.lineTo(urlRight.x, urlRight.y);
+      ctx.strokeStyle = "rgba(79, 110, 247, 0.15)";
+      ctx.lineWidth = 10 * urlLeft.scale;
+      ctx.lineCap = "round";
+      ctx.stroke();
+      ctx.lineCap = "butt"; // reset
+
+      // URL text
+      ctx.fillStyle = "rgba(79, 110, 247, 0.7)";
+      ctx.font = `${Math.max(7, Math.round(7 * urlLeft.scale))}px monospace`;
+      ctx.fillText("devdigitax.com/optimize", urlLeft.x + 8, urlLeft.y + 2.5);
+
+      // Web Dev Wireframe Mock Grid
+      const wHeader = project3D(bLeft + 20, bTop + 40, zOffset);
+      ctx.fillStyle = "rgba(79, 110, 247, 0.15)";
+      ctx.fillRect(wHeader.x, wHeader.y, 260 * wHeader.scale, 15 * wHeader.scale);
+
+      // Grid Blocks representing dynamic structures
+      for (let col = 0; col < 3; col++) {
+        const gridX = bLeft + 20 + col * 90;
+        const gridP = project3D(gridX, bTop + 65, zOffset);
+        ctx.fillStyle = "rgba(79, 110, 247, 0.08)";
+        ctx.fillRect(gridP.x, gridP.y, 80 * gridP.scale, 45 * gridP.scale);
+        
+        ctx.strokeStyle = "rgba(79, 110, 247, 0.15)";
+        ctx.lineWidth = 1;
+        ctx.strokeRect(gridP.x, gridP.y, 80 * gridP.scale, 45 * gridP.scale);
+      }
+
+      // 3. Draw compiler console overlay (Web Dev)
+      const cLeft = -130;
+      const cRight = 10;
+      const cTop = 20;
+      const cBottom = 130;
+      const zOffsetCode = 40; // parallax separation depth
+
+      const cTL = project3D(cLeft, cTop, zOffsetCode);
+      const cTR = project3D(cRight, cTop, zOffsetCode);
+      const cBR = project3D(cRight, cBottom, zOffsetCode);
+      const cBL = project3D(cLeft, cBottom, zOffsetCode);
+
+      // Code console glass backplate
+      ctx.beginPath();
+      ctx.moveTo(cTL.x, cTL.y);
+      ctx.lineTo(cTR.x, cTR.y);
+      ctx.lineTo(cBR.x, cBR.y);
+      ctx.lineTo(cBL.x, cBL.y);
+      ctx.closePath();
+      ctx.fillStyle = "rgba(5, 5, 8, 0.9)";
+      ctx.fill();
+      ctx.strokeStyle = "rgba(79, 110, 247, 0.4)";
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      // IDE/Terminal Title
+      ctx.fillStyle = "rgba(255, 255, 255, 0.8)";
+      ctx.font = `bold ${Math.max(8, Math.round(9 * cTL.scale))}px monospace`;
+      ctx.fillText("engine_core.tsx", cTL.x + 10, cTL.y + 15);
+
+      // Draw typing compilers code lines
+      ctx.font = `${Math.max(7, Math.round(7.5 * cTL.scale))}px monospace`;
+      typedCode.forEach((line, index) => {
+        const lineP = project3D(cLeft + 10, cTop + 32 + index * 16, zOffsetCode);
+        
+        // Coloring syntax to simulate real IDE structure
+        if (line.includes("const") || line.includes("import")) {
+          ctx.fillStyle = "rgba(244, 63, 94, 0.9)"; // Red pink keywords
+        } else if (line.includes("<") || line.includes("ROI")) {
+          ctx.fillStyle = "rgba(16, 185, 129, 0.9)"; // Green indicators
+        } else {
+          ctx.fillStyle = "rgba(79, 110, 247, 0.9)"; // Blue identifiers
+        }
+        ctx.fillText(line, lineP.x, lineP.y);
+      });
+
+      // 4. Draw ROI/Marketing analytical growth soaring charts
+      const graphLeft = -130;
+      const graphRight = 160;
+      const graphBottom = 75;
+      const zOffsetGraph = 80; // Soars furthest forward in parallax
+
+      // Coordinates for curve
+      const pt1 = project3D(graphLeft, graphBottom, zOffsetGraph);
+      const pt2 = project3D(graphLeft + 70, graphBottom - 20, zOffsetGraph);
+      const pt3 = project3D(graphLeft + 140, graphBottom - 15, zOffsetGraph);
+      const pt4 = project3D(graphLeft + 210, graphBottom - 95, zOffsetGraph);
+      const pt5 = project3D(graphRight, graphBottom - 160, zOffsetGraph); // Peaks high
+
+      // Pulse marketing growth gradient arrow
+      ctx.beginPath();
+      ctx.moveTo(pt1.x, pt1.y);
+      ctx.bezierCurveTo(pt2.x, pt2.y, pt3.x, pt3.y, pt4.x, pt4.y);
+      ctx.lineTo(pt5.x, pt5.y);
+      
+      ctx.strokeStyle = "rgba(37, 211, 102, 0.85)"; // Vibrant neon green
+      ctx.lineWidth = 4 * pt1.scale;
+      ctx.shadowBlur = 20;
+      ctx.shadowColor = "rgba(37, 211, 102, 1)";
+      ctx.stroke();
+      ctx.shadowBlur = 0; // reset
+
+      // Flowing marketing traffic particles along the graph coordinates
+      trafficParticles.forEach((p) => {
+        p.x += p.speed;
+        if (p.x > graphRight) {
+          p.x = graphLeft;
+        }
+
+        // Interpolate Y value along bezier trajectory
+        const t = (p.x - graphLeft) / (graphRight - graphLeft);
+        // Simple cubic bezier estimation
+        const cy = graphBottom - (Math.pow(t, 2.5) * 165);
+
+        const partP = project3D(p.x, cy, zOffsetGraph);
+        ctx.beginPath();
+        ctx.arc(partP.x, partP.y, p.size * partP.scale, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255, 255, 255, ${p.opacity})`;
+        ctx.fill();
+      });
+
+      // Draw peak data point (representing big ROI conversion peak)
+      ctx.beginPath();
+      ctx.arc(pt5.x, pt5.y, 6 * pt5.scale, 0, Math.PI * 2);
+      ctx.fillStyle = "#ffffff";
+      ctx.shadowBlur = 15;
+      ctx.shadowColor = "rgba(37, 211, 102, 1)";
+      ctx.fill();
+      ctx.shadowBlur = 0;
+
+      // Real conversion metrics labels (The coolest, most money!)
+      ctx.font = `bold ${Math.max(9, Math.round(11 * pt5.scale))}px monospace`;
+      ctx.fillStyle = "#25D366";
+      ctx.fillText("ROI: +540%", pt5.x + 12, pt5.y - 12);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = `${Math.max(7, Math.round(8 * pt5.scale))}px monospace`;
+      ctx.fillText("CONVERSIONS: +320%", pt5.x + 12, pt5.y + 1);
+
+      // Low graph tag representing leads
+      ctx.font = `bold ${Math.max(8, Math.round(8.5 * pt4.scale))}px monospace`;
+      ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+      ctx.fillText("TRAFFIC: 14.2K/mo", pt4.x + 10, pt4.y + 4);
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    animationFrameId = requestAnimationFrame(render);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      clearInterval(typeInterval);
+      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
+  return <canvas ref={canvasRef} className="w-full h-full block pointer-events-none" />;
+}
 
 function Index() {
   const allProjects = getPortfolio();
-  // Featured projects: prioritize real client work with live links
   const featuredIds = ["r24", "r29", "r30", "r31", "r1", "r3"];
   const featuredProjects = featuredIds
     .map((id) => allProjects.find((p) => p.id === id))
@@ -330,98 +517,101 @@ function Index() {
 
   return (
     <SiteLayout>
-      {/* HERO */}
-      <section className="relative overflow-hidden min-h-[90vh] flex items-center" style={{ background: "var(--gradient-hero)" }}>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_20%,oklch(0.55_0.24_262/0.25),transparent_50%)]" />
-        <MouseParallax factor={12} className="relative w-full">
-          <div className="max-w-7xl mx-auto px-6 pt-20 pb-28 md:pt-28 md:pb-40 grid md:grid-cols-2 gap-12 items-center">
-            <Reveal variant="fade-in-up" className="flex flex-col justify-center">
-              <span className="self-start inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/30 bg-primary/10 text-sm text-primary">
-                <Sparkles className="h-3.5 w-3.5" /> Scale Your Brand Digitally with DevdigitaX
-              </span>
-              <p className="mt-4 text-lg text-muted-foreground">
-                DevdigitaX creates custom development solutions to brand your business and marketing
-                strategies to grow any business.
-              </p>
-              <h1 className="mt-6 text-4xl md:text-6xl font-bold tracking-tight leading-[1.05] text-white">
-                <SplitText text="Next-Gen Development" type="words" delay={0.1} />
-                <br />
-                <SplitText 
-                  text="and Strategic Marketing Partner" 
-                  type="words" 
-                  delay={0.2}
-                  className="text-white"
-                />
+      {/* HERO SECTION */}
+      <section
+        className="relative overflow-hidden min-h-[92vh] flex items-center bg-[#07080c]"
+        style={{ background: "var(--gradient-hero)" }}
+      >
+        {/* Subtle grid indicators */}
+        <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03]">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: "radial-gradient(var(--primary) 1.2px, transparent 1.2px)",
+              backgroundSize: "32px 32px",
+            }}
+          />
+        </div>
+
+        <div className="relative w-full z-10 max-w-7xl mx-auto px-6 py-20 md:py-28">
+          <div className="grid md:grid-cols-12 gap-12 items-center">
+            
+            {/* Left Content Area */}
+            <div className="md:col-span-7 flex flex-col justify-center text-left">
+              <Reveal delay={0} variant="fade-in-up" duration={0.6}>
+                <span className="self-start inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs md:text-sm font-semibold text-primary">
+                  <Sparkles className="h-3.5 w-3.5 text-primary animate-pulse" /> Scale Your Brand Digitally with DevdigitaX
+                </span>
+              </Reveal>
+
+              {/* Instant-load bold authoritative titles */}
+              <h1 className="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.1] text-white">
+                <span className="block mb-2 text-white">Next-Gen Development</span>
+                <span className="block bg-clip-text text-transparent bg-gradient-to-r from-[#4f6ef7] to-[#7b9cf5]">
+                  and Strategic
+                </span>
+                <span className="block mt-2 text-white">Marketing Partner</span>
               </h1>
-              <p className="mt-6 text-lg text-muted-foreground max-w-xl">
-                Built for businesses that demand real results. We create high-performance websites
-                that convert visitors into customers, and execute strategic marketing campaigns that
-                drive sustained revenue growth — from development to delivery. We specialize in Wordpress, React,
-                Node.js, MongoDB, PHP, Laravel, JavaScript, and E-commerce development.
-              </p>
-              <div className="mt-8 flex flex-wrap items-center gap-4">
+
+              <FadeIn delay={0.2} duration={0.8} scale={false} className="mt-6">
+                <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+                  Built for businesses that demand real results. We create high-performance websites
+                  that convert visitors into customers, and execute strategic marketing campaigns that
+                  drive sustained revenue growth — from development to delivery. We specialize in WordPress, React,
+                  Node.js, MongoDB, PHP, Laravel, JavaScript, and E-commerce development.
+                </p>
+              </FadeIn>
+
+              <Reveal delay={0.45} variant="fade-in-up" duration={0.8} className="mt-8 flex flex-wrap items-center gap-4">
                 <Link
                   to="/contact"
-                  className="btn-premium group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold text-primary-foreground"
+                  className="btn-premium group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold text-primary-foreground transform hover:scale-[1.03] transition-all duration-300"
                   style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
                 >
-                 Get Assessment{" "}
-                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition" />
+                  Get Assessment{" "}
+                  <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 <Link
                   to="/services"
-                  className="btn-premium inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-semibold border border-border hover:border-primary transition"
+                  className="btn-premium inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold border border-border bg-card/10 hover:border-primary/50 hover:bg-card/30 transition-all"
                 >
                   Explore Services
                 </Link>
-                <div className="flex flex-wrap items-center gap-3">
-                  <a
-                    href="tel:+8809638474596"
-                    className="btn-premium inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
-                  >
-                    <Phone className="h-4 w-4 text-primary" />
-                    +880 9638-474596
-                  </a>
-                  <a
-                    href="https://wa.me/8801837692110"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="btn-premium inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-border bg-card/50 hover:bg-accent transition-all text-sm font-medium"
-                  >
-                    <WhatsAppIcon className="h-4 w-4 text-primary" />
-                    +880 1837-692110
-                  </a>
-                </div>
-              </div>
-            </Reveal>
-            <div className="relative z-10">
-              <TiltCard maxTilt={3}>
-                <div
-                  className="absolute -inset-10 rounded-full blur-3xl opacity-50 pointer-events-none"
-                  style={{ background: "var(--gradient-primary)" }}
-                />
-                <div
-                  className="relative aspect-square rounded-3xl border border-border bg-card/60 backdrop-blur-xl p-6 grid place-items-center"
-                  style={{ boxShadow: "var(--shadow-elegant)" }}
+              </Reveal>
+
+              <Reveal delay={0.6} variant="fade-in-up" duration={0.8} className="mt-8 pt-6 border-t border-border/40 flex flex-wrap items-center gap-4">
+                <a
+                  href="tel:+8809638474596"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-card/30 hover:bg-accent/50 transition-all text-xs md:text-sm font-medium text-muted-foreground hover:text-white"
                 >
-                  <ShatterImage
-                    src={logo}
-                    alt="DevdigitaX"
-                    cols={7}
-                    rows={7}
-                    delay={0.3}
-                    className="w-full max-w-md rounded-2xl"
-                  />
-                </div>
-              </TiltCard>
+                  <Phone className="h-4 w-4 text-primary" />
+                  +880 9638-474596
+                </a>
+                <a
+                  href="https://wa.me/8801837692110"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-card/30 hover:bg-accent/50 transition-all text-xs md:text-sm font-medium text-muted-foreground hover:text-white"
+                >
+                  <WhatsAppIcon className="h-4 w-4 text-primary" />
+                  +880 1837-692110
+                </a>
+              </Reveal>
             </div>
+
+            {/* Right Interactive Web Dev & Marketing Canvas Column */}
+            <div className="md:col-span-5 relative h-[380px] md:h-[450px] grid place-items-center">
+              <div className="absolute -inset-10 rounded-full blur-3xl opacity-30 pointer-events-none" style={{ background: "var(--gradient-primary)" }} />
+              <RealDevMarketingCanvas />
+            </div>
+
           </div>
-        </MouseParallax>
+        </div>
       </section>
 
       {/* INTRO */}
       <Reveal variant="slide-up" className="max-w-5xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight">
+        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
           Your Business Is Losing Customers Online.{" "}
           <span
             className="bg-clip-text text-transparent"
@@ -430,11 +620,11 @@ function Index() {
             Let's Fix That — for Good.
           </span>
         </h2>
-        <p className="mt-6 text-muted-foreground text-lg">
+        <p className="mt-6 text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">
           DevdigitaX is your Next-Gen Development and Strategic Marketing Partner — built to turn
           your online presence into your most powerful sales channel.
         </p>
-        <p className="mt-4 text-muted-foreground">
+        <p className="mt-4 text-muted-foreground text-sm max-w-3xl mx-auto leading-relaxed">
           Every business deserves a digital presence that actually works. Not a website that sits
           there — but a system that attracts the right audience, communicates your value, and
           converts traffic into real revenue. We've been building those systems for businesses
@@ -443,13 +633,13 @@ function Index() {
       </Reveal>
 
       {/* STATS */}
-      <Reveal variant="fade" className="border-y border-border bg-card/30">
+      <Reveal variant="fade-in" className="border-y border-border bg-card/30">
         <div className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-3xl md:text-4xl font-bold tracking-tight">
+            <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-white">
               400+ Businesses Grew With Us. Yours Can Be Next.
             </h2>
-            <p className="mt-3 text-muted-foreground">
+            <p className="mt-3 text-muted-foreground text-sm">
               We're not the cheapest agency. We're the agency that makes your investment pay back —
               measurably, consistently, and at scale.
             </p>
@@ -459,15 +649,15 @@ function Index() {
               <StaggerItem
                 key={s.l}
                 variant="scale"
-                className="p-6 rounded-2xl border border-border bg-background text-center hover:border-primary/30 transition-colors duration-300"
+                className="p-6 rounded-2xl border border-border bg-background/50 text-center hover:border-primary/30 transition-all duration-300"
               >
                 <div
-                  className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent"
+                  className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent"
                   style={{ backgroundImage: "var(--gradient-primary)" }}
                 >
                   <AnimatedCounter value={s.v} />
                 </div>
-                <div className="mt-2 text-xs text-muted-foreground">{s.l}</div>
+                <div className="mt-3 text-xs text-muted-foreground leading-relaxed px-2">{s.l}</div>
               </StaggerItem>
             ))}
           </Stagger>
@@ -481,7 +671,7 @@ function Index() {
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
              Our recent work
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
               Crafting Digital Success Stories
             </h2>
             <p className="mt-4 text-muted-foreground">
@@ -531,7 +721,7 @@ function Index() {
                   </span>
                   <span className="text-xs text-muted-foreground">{project.client}</span>
                 </div>
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors line-clamp-1">
+                <h3 className="text-xl font-bold group-hover:text-primary transition-colors line-clamp-1 text-white">
                   {project.title}
                 </h3>
                 <div className="mt-4 flex flex-wrap gap-1.5">
@@ -546,11 +736,6 @@ function Index() {
                         {t.trim()}
                       </span>
                     ))}
-                  {project.tech.split(",").length > 4 && (
-                    <span className="text-[10px] px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground">
-                      +{project.tech.split(",").length - 4} more
-                    </span>
-                  )}
                 </div>
                 <div className="mt-4 flex items-center justify-between">
                   <Link
@@ -572,7 +757,7 @@ function Index() {
           <span className="text-primary text-sm font-semibold uppercase tracking-wider">
             Our process
           </span>
-          <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+          <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
             Website Development Life Cycle
           </h2>
           <p className="mt-4 text-muted-foreground">
@@ -583,7 +768,8 @@ function Index() {
           {lifecycle.map((p) => (
             <StaggerItem
               key={p.n}
-              className="p-6 rounded-2xl border border-border bg-card hover:border-primary/50 transition duration-300"
+              variant="slide-up"
+              className="p-6 rounded-2xl border border-border bg-card/40 hover:border-primary/50 transition duration-300"
             >
               <div
                 className="text-4xl font-bold opacity-30"
@@ -591,8 +777,8 @@ function Index() {
               >
                 {p.n}
               </div>
-              <h3 className="mt-2 text-lg font-semibold">{p.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground">{p.d}</p>
+              <h3 className="mt-2 text-lg font-semibold text-white">{p.t}</h3>
+              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
             </StaggerItem>
           ))}
         </Stagger>
@@ -605,7 +791,7 @@ function Index() {
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
               How we engage
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
               From Discovery to Growth — A Clear, Proven Path
             </h2>
             <p className="mt-4 text-muted-foreground">
@@ -617,7 +803,7 @@ function Index() {
               <StaggerItem
                 key={p.t}
                 variant="slide-up"
-                className="p-6 rounded-2xl border border-border bg-background flex gap-5 items-start hover:border-primary/30 transition-colors duration-300"
+                className="p-6 rounded-2xl border border-border bg-background/50 flex gap-5 items-start hover:border-primary/30 transition-colors duration-300"
               >
                 <div
                   className="h-10 w-10 shrink-0 grid place-items-center rounded-full font-bold text-primary-foreground"
@@ -626,8 +812,8 @@ function Index() {
                   {i + 1}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg">{p.t}</h3>
-                  <p className="mt-1 text-muted-foreground">{p.d}</p>
+                  <h3 className="font-semibold text-lg text-white">{p.t}</h3>
+                  <p className="mt-1 text-muted-foreground text-sm leading-relaxed">{p.d}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -644,27 +830,6 @@ function Index() {
         </div>
       </Reveal>
 
-      {/* LEARN MORE ABOUT US */}
-      <Reveal className="max-w-7xl mx-auto px-6 py-24 text-center">
-        <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
-          <Globe className="h-4 w-4" />
-          <span>Learn More</span>
-        </div>
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight mb-6">
-          Want to know more about our team, mission, and values?
-        </h2>
-        <p className="text-lg text-muted-foreground mb-8 max-w-2xl mx-auto">
-          Discover how we work, what drives us, and why 400+ businesses trust us with their digital growth.
-        </p>
-        <Link
-          to="/about"
-          className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full font-semibold text-primary-foreground hover:scale-105 transition-transform duration-300"
-          style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
-        >
-          Explore Our Story <ArrowRight className="h-4 w-4" />
-        </Link>
-      </Reveal>
-
       {/* SERVICES */}
       <Reveal className="bg-card/30 border-y border-border">
         <div className="max-w-7xl mx-auto px-6 py-24">
@@ -672,7 +837,7 @@ function Index() {
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
               What we do
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
               Everything Your Business Needs to Win Online — Under One Roof
             </h2>
             <p className="mt-4 text-muted-foreground">
@@ -689,18 +854,16 @@ function Index() {
               return (
                 <StaggerItem
                   key={slug}
-                  className="group p-8 rounded-2xl border border-border bg-background hover:border-primary/50 hover:-translate-y-1 transition-all duration-300"
-                  suppressHydrationWarning
+                  className="group p-8 rounded-2xl border border-border bg-background/50 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300"
                 >
                   <div
                     className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
                     style={{ background: "var(--gradient-primary)" }}
-                    suppressHydrationWarning
                   >
                     <Icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold">{title}</h3>
-                  <p className="mt-2 text-muted-foreground text-sm">{description}</p>
+                  <h3 className="mt-5 text-xl font-semibold text-white">{title}</h3>
+                  <p className="mt-2 text-muted-foreground text-sm leading-relaxed">{description}</p>
                   <Link
                     to="/services/$serviceId"
                     params={{ serviceId: slug }}
@@ -722,7 +885,7 @@ function Index() {
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
               What our clients say
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
               Real teams. Real results.
             </h2>
             <div className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
@@ -736,7 +899,7 @@ function Index() {
           </div>
           <Stagger className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {testimonials.map((t) => (
-              <StaggerItem key={t.name} className="p-8 rounded-2xl border border-border bg-background hover:border-primary/30 transition-colors duration-300">
+              <StaggerItem key={t.name} className="p-8 rounded-2xl border border-border bg-background/50 hover:border-primary/30 transition-colors duration-300">
                 <div className="flex gap-0.5 text-primary">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-current" />
@@ -757,7 +920,7 @@ function Index() {
                     />
                   )}
                   <div>
-                    <div className="font-semibold text-sm">{t.name}</div>
+                    <div className="font-semibold text-sm text-white">{t.name}</div>
                     <div className="text-xs text-muted-foreground">{t.role}</div>
                   </div>
                 </div>
@@ -778,10 +941,10 @@ function Index() {
             <span className="text-primary text-sm font-semibold uppercase tracking-wider">
               Experience real results
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight">
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
               Partner with DevdigitaX and scale your business.
             </h2>
-            <p className="mt-4 text-muted-foreground max-w-xl mx-auto">
+            <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-sm leading-relaxed">
               Tell us where you want to be in 12 months. We'll map the path — and build it with you.
             </p>
             <Link
