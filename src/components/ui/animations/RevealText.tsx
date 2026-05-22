@@ -2,7 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import { cn } from "./Reveal";
 import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTriggerRaw from "gsap/ScrollTrigger";
+
+const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -102,7 +104,7 @@ export function RevealText({
   if (splitType === "words") {
     const words = text.split(" ");
     splitContent = words.map((word, idx) => (
-      <span key={idx} className="inline-block mr-[0.25em] overflow-hidden whitespace-nowrap">
+      <span key={idx} className="inline-block mr-[0.25em] overflow-visible whitespace-nowrap">
         {word.split("").map((char, charIdx) => (
           <span key={charIdx} data-reveal-char className="inline-block">
             {char}

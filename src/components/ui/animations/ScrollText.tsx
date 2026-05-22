@@ -1,10 +1,13 @@
 import { useEffect, useRef } from "react";
 import { cn } from "./Reveal";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
+import ScrollTriggerRaw from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 interface ScrollTextProps {
   text: string;
@@ -36,12 +39,10 @@ export function ScrollText({
     const textElement = textRef.current;
 
     if (prefersReducedMotion) {
-      // Skip animations for reduced motion
       gsap.set(textElement, { filter: "blur(0px)", opacity: 1 });
       return;
     }
 
-    // Create timeline for pinned section
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: container,
@@ -53,7 +54,6 @@ export function ScrollText({
       },
     });
 
-    // Animate blur from high to 0
     tl.fromTo(
       textElement,
       { filter: `blur(${blurAmount}px)`, opacity: 0.3 },
@@ -61,7 +61,6 @@ export function ScrollText({
       0
     );
 
-    // Add subtle glow effect
     tl.fromTo(
       textElement,
       { textShadow: "0 0 0px rgba(var(--primary-rgb), 0)" },
@@ -73,7 +72,6 @@ export function ScrollText({
       0
     );
 
-    // Stagger letter color changes if enabled
     if (staggerLetters) {
       const letters = textElement.querySelectorAll("span[data-letter]");
       if (letters.length > 0) {
@@ -93,7 +91,7 @@ export function ScrollText({
 
     return () => {
       tl.kill();
-      ScrollTrigger.getAll().forEach((trigger) => {
+      ScrollTrigger.getAll().forEach((trigger: any) => {
         if (trigger.trigger === container) {
           trigger.kill();
         }
@@ -101,7 +99,6 @@ export function ScrollText({
     };
   }, [blurAmount, pinDuration, staggerLetters, prefersReducedMotion, config]);
 
-  // Split text into letters for stagger effect
   const letters = text.split("").map((char, idx) => (
     <span key={idx} data-letter className="inline-block">
       {char}

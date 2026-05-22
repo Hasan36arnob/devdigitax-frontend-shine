@@ -3,7 +3,9 @@ import { clsx, type ClassValue } from "clsx";
 import { twMerge } from "tailwind-merge";
 import { useReducedMotion, getAnimationConfig } from "./useReducedMotion";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ScrollTriggerRaw from "gsap/ScrollTrigger";
+
+const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
