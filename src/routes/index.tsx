@@ -6,6 +6,7 @@ import { AnimatedCounter } from "@/components/ui/animations/AnimatedCounter";
 import { SplitText } from "@/components/ui/animations/SplitText";
 import { MouseParallax } from "@/components/ui/animations/MouseParallax";
 import { TiltCard } from "@/components/ui/animations/TiltCard";
+import { ShatterImage } from "@/components/ui/animations/ShatterImage";
 import { getServices, getPortfolio, sortPortfolioForDisplay } from "@/utils/data";
 import {
   ArrowRight,
@@ -393,7 +394,7 @@ function Index() {
                 </div>
               </div>
             </Reveal>
-            <Reveal variant="scale" delay={0.2} className="relative z-10">
+            <div className="relative z-10">
               <TiltCard maxTilt={3}>
                 <div
                   className="absolute -inset-10 rounded-full blur-3xl opacity-50 pointer-events-none"
@@ -403,17 +404,17 @@ function Index() {
                   className="relative aspect-square rounded-3xl border border-border bg-card/60 backdrop-blur-xl p-6 grid place-items-center"
                   style={{ boxShadow: "var(--shadow-elegant)" }}
                 >
-                  <img
+                  <ShatterImage
                     src={logo}
                     alt="DevdigitaX"
-                    className="w-full max-w-md rounded-2xl hover:scale-105 transition-transform duration-700"
-                    fetchPriority="high"
-                    loading="eager"
-                    decoding="sync"
+                    cols={7}
+                    rows={7}
+                    delay={0.3}
+                    className="w-full max-w-md rounded-2xl"
                   />
                 </div>
               </TiltCard>
-            </Reveal>
+            </div>
           </div>
         </MouseParallax>
       </section>
