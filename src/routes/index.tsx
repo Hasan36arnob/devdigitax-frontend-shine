@@ -643,7 +643,8 @@ function Index() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden hidden md:block">
+      <section id="cta-section" className="relative overflow-hidden">
+        <style>{`@media (max-width: 767px) { #cta-section { display: none !important; } }`}</style>
         <AmbientCanvas variant="particles" intensity={0.8} />
         <Reveal className="relative z-10 max-w-7xl mx-auto px-6 py-24">
           <div className="relative overflow-hidden rounded-3xl border-2 border-blue-500/30 p-12 lg:p-20 text-center" style={{ background:"linear-gradient(135deg,#0a0e1a 0%,#1a1f35 100%)", boxShadow:"0 0 80px rgba(66,133,244,0.2)" }}>
