@@ -482,13 +482,20 @@ function Index() {
         </div>
 
         <div className="relative w-full z-10 max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-28">
+          {/* Mobile Badge - Above Animation */}
+          <Reveal delay={0} variant="fade-in-up" duration={0.6} className="md:hidden mb-4 text-center">
+            <span className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-[10px] font-semibold text-primary">
+              <Sparkles className="h-3 w-3 text-primary animate-pulse" /> Scale Your Brand Digitally with DevdigitaX
+            </span>
+          </Reveal>
+
           <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
 
             {/* Left Content Area */}
             <div className="md:col-span-7 flex flex-col justify-center text-left order-2 md:order-1">
-              <Reveal delay={0} variant="fade-in-up" duration={0.6}>
-                <span className="self-start inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-1.5 rounded-full border border-primary/20 bg-primary/10 text-[10px] md:text-xs lg:text-sm font-semibold text-primary">
-                  <Sparkles className="h-3 w-3 md:h-3.5 md:w-3.5 text-primary animate-pulse" /> Scale Your Brand Digitally with DevdigitaX
+              <Reveal delay={0} variant="fade-in-up" duration={0.6} className="hidden md:block">
+                <span className="self-start inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs lg:text-sm font-semibold text-primary">
+                  <Sparkles className="h-3.5 w-3.5 text-primary animate-pulse" /> Scale Your Brand Digitally with DevdigitaX
                 </span>
               </Reveal>
 
