@@ -99,6 +99,13 @@ function RealDevMarketingCanvas() {
     let height = (canvas.height = canvas.offsetHeight);
     let time   = 0;
 
+    // Detect mobile for faster animations
+    const isMobile = window.innerWidth < 768;
+    const speedMultiplier = isMobile ? 2.5 : 1;
+    const particleCount = isMobile ? 40 : 80;
+    const nodeCount = isMobile ? 10 : 20;
+    const typeSpeed = isMobile ? 15 : 35;
+
     const handleResize = () => {
       if (!canvas) return;
       width  = canvas.width  = canvas.offsetWidth;
@@ -145,22 +152,22 @@ function RealDevMarketingCanvas() {
       const target = codeSnippets[snippetIndex];
       if (charIndex < target.length) { typedLines[lineIndex] += target[charIndex]; charIndex++; }
       else { lineIndex++; }
-    }, 35);
+    }, typeSpeed);
 
     interface DataParticle { x:number;y:number;z:number;vx:number;vy:number;vz:number;size:number;color:string;opacity:number;pulse:number;pulseSpeed:number; }
     const particleColors = ["#4285F4","#34A853","#FBBC04","#EA4335","#FF9900","#146EB4","#8B5CF6","#06B6D4"];
-    const particles: DataParticle[] = Array.from({length:80}, () => ({
+    const particles: DataParticle[] = Array.from({length:particleCount}, () => ({
       x:(Math.random()-0.5)*600, y:(Math.random()-0.5)*500, z:(Math.random()-0.5)*400,
-      vx:(Math.random()-0.5)*1.5, vy:(Math.random()-0.5)*1.5, vz:(Math.random()-0.5)*1.2,
+      vx:(Math.random()-0.5)*1.5*speedMultiplier, vy:(Math.random()-0.5)*1.5*speedMultiplier, vz:(Math.random()-0.5)*1.2*speedMultiplier,
       size:1+Math.random()*4, color:particleColors[Math.floor(Math.random()*particleColors.length)],
-      opacity:0.3+Math.random()*0.7, pulse:Math.random()*Math.PI*2, pulseSpeed:0.02+Math.random()*0.04,
+      opacity:0.3+Math.random()*0.7, pulse:Math.random()*Math.PI*2, pulseSpeed:(0.02+Math.random()*0.04)*speedMultiplier,
     }));
 
-    const nodes: {x:number;y:number;z:number;connections:number[]}[] = Array.from({length:20}, () => {
+    const nodes: {x:number;y:number;z:number;connections:number[]}[] = Array.from({length:nodeCount}, () => {
       const connections: number[] = [];
       const n = 2 + Math.floor(Math.random() * 4);
       for (let j = 0; j < n; j++) {
-        const c = Math.floor(Math.random() * 20);
+        const c = Math.floor(Math.random() * nodeCount);
         if (!connections.includes(c)) connections.push(c);
       }
       return { x:(Math.random()-0.5)*400, y:(Math.random()-0.5)*300, z:(Math.random()-0.5)*250, connections };
@@ -177,7 +184,7 @@ function RealDevMarketingCanvas() {
     const render = () => {
       if (!ctx||!canvas) return;
       ctx.clearRect(0,0,width,height);
-      time += 0.016;
+      time += 0.016 * speedMultiplier;
       curRotY += (targetRotY-curRotY)*0.05;
       curRotX += (targetRotX-curRotX)*0.05;
       curZoom += (targetZoom-curZoom)*0.1;
