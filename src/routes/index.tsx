@@ -468,7 +468,7 @@ function Index() {
     <SiteLayout>
       {/* HERO SECTION */}
       <section
-        className="relative overflow-hidden min-h-[92vh] flex items-center bg-[#07080c]"
+        className="relative overflow-hidden min-h-[90vh] md:min-h-[92vh] flex items-center bg-[#07080c]"
         style={{ background: "var(--gradient-hero)" }}
       >
         <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-[0.03]">
@@ -481,27 +481,27 @@ function Index() {
           />
         </div>
 
-        <div className="relative w-full z-10 max-w-7xl mx-auto px-6 py-20 md:py-28">
-          <div className="grid md:grid-cols-12 gap-12 items-center">
-            
+        <div className="relative w-full z-10 max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-28">
+          <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-center">
+
             {/* Left Content Area */}
-            <div className="md:col-span-7 flex flex-col justify-center text-left">
+            <div className="md:col-span-7 flex flex-col justify-center text-left order-2 md:order-1">
               <Reveal delay={0} variant="fade-in-up" duration={0.6}>
-                <span className="self-start inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-primary/20 bg-primary/10 text-xs md:text-sm font-semibold text-primary">
-                  <Sparkles className="h-3.5 w-3.5 text-primary animate-pulse" /> Scale Your Brand Digitally with DevdigitaX
+                <span className="self-start inline-flex items-center gap-2 px-3 py-1.5 md:px-4 md:py-1.5 rounded-full border border-primary/20 bg-primary/10 text-[10px] md:text-xs lg:text-sm font-semibold text-primary">
+                  <Sparkles className="h-3 w-3 md:h-3.5 md:w-3.5 text-primary animate-pulse" /> Scale Your Brand Digitally with DevdigitaX
                 </span>
               </Reveal>
 
-              <h1 className="mt-6 text-4xl md:text-6xl font-extrabold tracking-tight leading-[1.1] text-white">
-                <span className="block mb-2 text-white">Next-Gen Development</span>
+              <h1 className="mt-4 md:mt-6 text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-extrabold tracking-tight leading-[1.15] md:leading-[1.1] text-white">
+                <span className="block mb-1 md:mb-2 text-white">Next-Gen Development</span>
                 <span className="block bg-clip-text text-transparent bg-gradient-to-r from-[#4f6ef7] to-[#7b9cf5]">
                   and Strategic
                 </span>
-                <span className="block mt-2 text-white">Marketing Partner</span>
+                <span className="block mt-1 md:mt-2 text-white">Marketing Partner</span>
               </h1>
 
-              <FadeIn delay={0.2} duration={0.8} scale={false} className="mt-6">
-                <p className="text-base md:text-lg text-muted-foreground max-w-xl leading-relaxed">
+              <FadeIn delay={0.2} duration={0.8} scale={false} className="mt-4 md:mt-6">
+                <p className="text-sm md:text-base lg:text-lg text-muted-foreground max-w-xl leading-relaxed">
                   Built for businesses that demand real results. We create high-performance websites
                   that convert visitors into customers, and execute strategic marketing campaigns that
                   drive sustained revenue growth — from development to delivery. We specialize in WordPress, React,
@@ -509,10 +509,10 @@ function Index() {
                 </p>
               </FadeIn>
 
-              <Reveal delay={0.45} variant="fade-in-up" duration={0.8} className="mt-8 flex flex-wrap items-center gap-4">
+              <Reveal delay={0.45} variant="fade-in-up" duration={0.8} className="mt-6 md:mt-8 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 md:gap-4">
                 <Link
                   to="/contact"
-                  className="btn-premium group inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold text-primary-foreground transform hover:scale-[1.03] transition-all duration-300"
+                  className="btn-premium group inline-flex items-center justify-center gap-2 px-6 py-3 md:px-6 md:py-3.5 rounded-full font-bold text-primary-foreground transform hover:scale-[1.03] transition-all duration-300 text-sm md:text-base"
                   style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
                 >
                   Get Assessment{" "}
@@ -520,16 +520,16 @@ function Index() {
                 </Link>
                 <Link
                   to="/services"
-                  className="btn-premium inline-flex items-center gap-2 px-6 py-3.5 rounded-full font-bold border border-border bg-card/10 hover:border-primary/50 hover:bg-card/30 transition-all"
+                  className="btn-premium inline-flex items-center justify-center gap-2 px-6 py-3 md:px-6 md:py-3.5 rounded-full font-bold border border-border bg-card/10 hover:border-primary/50 hover:bg-card/30 transition-all text-sm md:text-base"
                 >
                   Explore Services
                 </Link>
               </Reveal>
 
-              <Reveal delay={0.6} variant="fade-in-up" duration={0.8} className="mt-8 pt-6 border-t border-border/40 flex flex-wrap items-center gap-4">
+              <Reveal delay={0.6} variant="fade-in-up" duration={0.8} className="mt-6 md:mt-8 pt-4 md:pt-6 border-t border-border/40 flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 md:gap-4">
                 <a
                   href="tel:+8809638474596"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-card/30 hover:bg-accent/50 transition-all text-xs md:text-sm font-medium text-muted-foreground hover:text-white"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card/30 hover:bg-accent/50 transition-all text-xs md:text-sm font-medium text-muted-foreground hover:text-white"
                 >
                   <Phone className="h-4 w-4 text-primary" />
                   +880 9638-474596
@@ -538,7 +538,7 @@ function Index() {
                   href="https://wa.me/8801837692110"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2 rounded-xl border border-border bg-card/30 hover:bg-accent/50 transition-all text-xs md:text-sm font-medium text-muted-foreground hover:text-white"
+                  className="inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl border border-border bg-card/30 hover:bg-accent/50 transition-all text-xs md:text-sm font-medium text-muted-foreground hover:text-white"
                 >
                   <WhatsAppIcon className="h-4 w-4 text-primary" />
                   +880 1837-692110
@@ -547,8 +547,8 @@ function Index() {
             </div>
 
             {/* Right Interactive 3D Canvas */}
-            <div className="md:col-span-5 relative h-[380px] md:h-[480px] grid place-items-center">
-              <div className="absolute -inset-10 rounded-full blur-3xl opacity-30 pointer-events-none" style={{ background: "var(--gradient-primary)" }} />
+            <div className="md:col-span-5 relative h-[280px] md:h-[380px] lg:h-[480px] grid place-items-center order-1 md:order-2 mb-4 md:mb-0">
+              <div className="absolute -inset-6 md:-inset-10 rounded-full blur-3xl opacity-30 pointer-events-none" style={{ background: "var(--gradient-primary)" }} />
               <RealDevMarketingCanvas />
             </div>
 
@@ -557,8 +557,8 @@ function Index() {
       </section>
 
       {/* INTRO */}
-      <Reveal variant="slide-up" className="max-w-5xl mx-auto px-6 py-24 text-center">
-        <h2 className="text-3xl md:text-5xl font-bold tracking-tight text-white leading-tight">
+      <Reveal variant="slide-up" className="max-w-5xl mx-auto px-4 md:px-6 py-16 md:py-24 text-center">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-tight md:leading-tight">
           Your Business Is Losing Customers Online.{" "}
           <span
             className="bg-clip-text text-transparent"
@@ -567,11 +567,11 @@ function Index() {
             Let's Fix That — for Good.
           </span>
         </h2>
-        <p className="mt-6 text-muted-foreground text-lg leading-relaxed max-w-3xl mx-auto">
+        <p className="mt-4 md:mt-6 text-muted-foreground text-sm md:text-base lg:text-lg leading-relaxed max-w-3xl mx-auto">
           DevdigitaX is your Next-Gen Development and Strategic Marketing Partner — built to turn
           your online presence into your most powerful sales channel.
         </p>
-        <p className="mt-4 text-muted-foreground text-sm max-w-3xl mx-auto leading-relaxed">
+        <p className="mt-3 md:mt-4 text-muted-foreground text-xs md:text-sm max-w-3xl mx-auto leading-relaxed">
           Every business deserves a digital presence that actually works. Not a website that sits
           there — but a system that attracts the right audience, communicates your value, and
           converts traffic into real revenue. We've been building those systems for businesses
@@ -581,30 +581,30 @@ function Index() {
 
       {/* STATS */}
       <Reveal variant="fade-in" className="border-y border-border bg-card/30">
-        <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-16">
           <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-white">
+            <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-white">
               400+ Businesses Grew With Us. Yours Can Be Next.
             </h2>
-            <p className="mt-3 text-muted-foreground text-sm">
+            <p className="mt-2 md:mt-3 text-muted-foreground text-xs md:text-sm">
               We're not the cheapest agency. We're the agency that makes your investment pay back —
               measurably, consistently, and at scale.
             </p>
           </div>
-          <Stagger className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-6">
+          <Stagger className="mt-8 md:mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
             {stats.map((s) => (
               <StaggerItem
                 key={s.l}
                 variant="scale"
-                className="p-6 rounded-2xl border border-border bg-background/50 text-center hover:border-primary/30 transition-all duration-300"
+                className="p-4 md:p-6 rounded-xl md:rounded-2xl border border-border bg-background/50 text-center hover:border-primary/30 transition-all duration-300"
               >
                 <div
-                  className="text-4xl md:text-5xl font-extrabold bg-clip-text text-transparent"
+                  className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold bg-clip-text text-transparent"
                   style={{ backgroundImage: "var(--gradient-primary)" }}
                 >
                   <AnimatedCounter value={s.v} />
                 </div>
-                <div className="mt-3 text-xs text-muted-foreground leading-relaxed px-2">{s.l}</div>
+                <div className="mt-2 md:mt-3 text-[10px] md:text-xs text-muted-foreground leading-relaxed px-1 md:px-2">{s.l}</div>
               </StaggerItem>
             ))}
           </Stagger>
@@ -612,33 +612,33 @@ function Index() {
       </Reveal>
 
       {/* PORTFOLIO SECTION */}
-      <Reveal className="max-w-7xl mx-auto px-6 py-24">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+      <Reveal className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
           <div className="max-w-2xl">
-            <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+            <span className="text-primary text-xs md:text-sm font-semibold uppercase tracking-wider">
              Our recent work
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
+            <h2 className="mt-2 md:mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               Crafting Digital Success Stories
             </h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-2 md:mt-4 text-muted-foreground text-sm md:text-base">
               Explore our latest projects across web development, SEO, and digital branding.
             </p>
           </div>
           <Link
             to="/portfolio"
-            className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+            className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all text-sm md:text-base"
           >
             View All Projects <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
-        <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
           {featuredProjects.map((project) => (
             <StaggerItem
               key={project.id}
               variant="image"
-              className="card-lift group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50"
+              className="card-lift group rounded-xl md:rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50"
             >
               <div className="aspect-[16/10] overflow-hidden relative">
                 <img
@@ -661,35 +661,35 @@ function Index() {
                   )}
                 </div>
               </div>
-              <div className="p-6">
+              <div className="p-4 md:p-6">
                 <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-xs font-medium px-2 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">
+                  <span className="text-[10px] md:text-xs font-medium px-2 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">
                     {project.category}
                   </span>
-                  <span className="text-xs text-muted-foreground">{project.client}</span>
+                  <span className="text-[10px] md:text-xs text-muted-foreground">{project.client}</span>
                 </div>
-                <h3 className="text-xl font-bold group-hover:text-primary transition-colors line-clamp-1 text-white">
+                <h3 className="text-base md:text-lg lg:text-xl font-bold group-hover:text-primary transition-colors line-clamp-1 text-white">
                   {project.title}
                 </h3>
-                <div className="mt-4 flex flex-wrap gap-1.5">
+                <div className="mt-3 md:mt-4 flex flex-wrap gap-1 md:gap-1.5">
                   {project.tech
                     .split(",")
                     .slice(0, 4)
                     .map((t) => (
                       <span
                         key={t}
-                        className="text-[10px] px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground whitespace-nowrap"
+                        className="text-[9px] md:text-[10px] px-1.5 md:px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground whitespace-nowrap"
                       >
                         {t.trim()}
                       </span>
                     ))}
                 </div>
-                <div className="mt-4 flex items-center justify-between">
+                <div className="mt-3 md:mt-4 flex items-center justify-between">
                   <Link
                     to="/portfolio"
-                    className="text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all"
+                    className="text-xs md:text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all"
                   >
-                    Explore Project <ArrowRight className="h-4 w-4" />
+                    Explore Project <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </Link>
                 </div>
               </div>
@@ -699,33 +699,33 @@ function Index() {
       </Reveal>
 
       {/* WEBSITE LIFECYCLE */}
-      <Reveal className="max-w-7xl mx-auto px-6 py-24">
+      <Reveal className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
         <div className="text-center max-w-2xl mx-auto">
-          <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+          <span className="text-primary text-xs md:text-sm font-semibold uppercase tracking-wider">
             Our process
           </span>
-          <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
+          <h2 className="mt-2 md:mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
             Website Development Life Cycle
           </h2>
-          <p className="mt-4 text-muted-foreground">
+          <p className="mt-2 md:mt-4 text-muted-foreground text-sm md:text-base">
             A clear, repeatable process that turns ideas into shipped, profitable products.
           </p>
         </div>
-        <Stagger className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+        <Stagger className="mt-8 md:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5">
           {lifecycle.map((p) => (
             <StaggerItem
               key={p.n}
               variant="slide-up"
-              className="p-6 rounded-2xl border border-border bg-card/40 hover:border-primary/50 transition duration-300"
+              className="p-4 md:p-6 rounded-xl md:rounded-2xl border border-border bg-card/40 hover:border-primary/50 transition duration-300"
             >
               <div
-                className="text-4xl font-bold opacity-30"
+                className="text-2xl sm:text-3xl md:text-4xl font-bold opacity-30"
                 style={{ color: "oklch(0.55 0.24 262)" }}
               >
                 {p.n}
               </div>
-              <h3 className="mt-2 text-lg font-semibold text-white">{p.t}</h3>
-              <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{p.d}</p>
+              <h3 className="mt-2 text-sm md:text-base lg:text-lg font-semibold text-white">{p.t}</h3>
+              <p className="mt-1 md:mt-2 text-xs md:text-sm text-muted-foreground leading-relaxed">{p.d}</p>
             </StaggerItem>
           ))}
         </Stagger>
@@ -733,42 +733,42 @@ function Index() {
 
       {/* PATH */}
       <Reveal className="bg-card/30 border-y border-border">
-        <div className="max-w-7xl mx-auto px-6 py-24">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-12 md:py-24">
           <div className="max-w-3xl">
-            <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+            <span className="text-primary text-xs md:text-sm font-semibold uppercase tracking-wider">
               How we engage
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
+            <h2 className="mt-2 md:mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               From Discovery to Growth — A Clear, Proven Path
             </h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-2 md:mt-4 text-muted-foreground text-sm md:text-base">
               No 12-week discovery phases. No vague timelines. Here's exactly how we work:
             </p>
           </div>
-          <Stagger className="mt-12 space-y-4">
+          <Stagger className="mt-8 md:mt-12 space-y-3 md:space-y-4">
             {path.map((p, i) => (
               <StaggerItem
                 key={p.t}
                 variant="slide-up"
-                className="p-6 rounded-2xl border border-border bg-background/50 flex gap-5 items-start hover:border-primary/30 transition-colors duration-300"
+                className="p-4 md:p-6 rounded-xl md:rounded-2xl border border-border bg-background/50 flex gap-3 md:gap-5 items-start hover:border-primary/30 transition-colors duration-300"
               >
                 <div
-                  className="h-10 w-10 shrink-0 grid place-items-center rounded-full font-bold text-primary-foreground"
+                  className="h-8 w-8 md:h-10 md:w-10 shrink-0 grid place-items-center rounded-full font-bold text-primary-foreground text-sm md:text-base"
                   style={{ background: "var(--gradient-primary)" }}
                 >
                   {i + 1}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-lg text-white">{p.t}</h3>
-                  <p className="mt-1 text-muted-foreground text-sm leading-relaxed">{p.d}</p>
+                  <h3 className="font-semibold text-sm md:text-base lg:text-lg text-white">{p.t}</h3>
+                  <p className="mt-1 text-muted-foreground text-xs md:text-sm leading-relaxed">{p.d}</p>
                 </div>
               </StaggerItem>
             ))}
           </Stagger>
-          <div className="mt-12 text-center">
+          <div className="mt-8 md:mt-12 text-center">
             <Link
               to="/contact"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full font-semibold text-primary-foreground hover:scale-105 transition-transform duration-300"
+              className="inline-flex items-center justify-center gap-2 px-6 md:px-7 py-3 md:py-3.5 rounded-full font-semibold text-primary-foreground hover:scale-105 transition-transform duration-300 text-sm md:text-base"
               style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
             >
               Get a Quote <ArrowRight className="h-4 w-4" />
@@ -779,21 +779,21 @@ function Index() {
 
       {/* SERVICES */}
       <Reveal className="bg-card/30 border-y border-border">
-        <div className="max-w-7xl mx-auto px-6 py-24">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
           <div className="max-w-3xl">
-            <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+            <span className="text-primary text-xs md:text-sm font-semibold uppercase tracking-wider">
               What we do
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
+            <h2 className="mt-2 md:mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               Everything Your Business Needs to Win Online — Under One Roof
             </h2>
-            <p className="mt-4 text-muted-foreground">
+            <p className="mt-2 md:mt-4 text-muted-foreground text-sm md:text-base">
               Fragmented vendors create fragmented results. Our team handles your entire digital
               ecosystem — strategy, design, development, traffic and conversion — so every part
               works together toward measurable growth.
             </p>
           </div>
-          <Stagger className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="mt-8 md:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {getServices().map(({ icon, title, description, slug }) => {
               const Icon =
                 ({ Layout, Code2, ShoppingCart, Palette, Search, TrendingUp } as any)[icon] ||
@@ -801,22 +801,22 @@ function Index() {
               return (
                 <StaggerItem
                   key={slug}
-                  className="group p-8 rounded-2xl border border-border bg-background/50 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300"
+                  className="group p-5 md:p-8 rounded-xl md:rounded-2xl border border-border bg-background/50 hover:border-primary/50 hover:-translate-y-1 transition-all duration-300"
                 >
                   <div
-                    className="h-12 w-12 grid place-items-center rounded-xl text-primary-foreground"
+                    className="h-10 w-10 md:h-12 md:w-12 grid place-items-center rounded-xl text-primary-foreground"
                     style={{ background: "var(--gradient-primary)" }}
                   >
-                    <Icon className="h-6 w-6" />
+                    <Icon className="h-5 w-5 md:h-6 md:w-6" />
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold text-white">{title}</h3>
-                  <p className="mt-2 text-muted-foreground text-sm leading-relaxed">{description}</p>
+                  <h3 className="mt-3 md:mt-5 text-base md:text-lg lg:text-xl font-semibold text-white">{title}</h3>
+                  <p className="mt-2 text-muted-foreground text-xs md:text-sm leading-relaxed">{description}</p>
                   <Link
                     to="/services/$serviceId"
                     params={{ serviceId: slug }}
-                    className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:gap-2 transition-all"
+                    className="mt-3 md:mt-5 inline-flex items-center gap-1 text-xs md:text-sm font-semibold text-primary group-hover:gap-2 transition-all"
                   >
-                    Explore Service <ArrowRight className="h-4 w-4" />
+                    Explore Service <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
                   </Link>
                 </StaggerItem>
               );
@@ -827,48 +827,48 @@ function Index() {
 
       {/* TESTIMONIALS */}
       <Reveal className="bg-card/30 border-y border-border">
-        <div className="max-w-7xl mx-auto px-6 py-24">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
           <div className="text-center max-w-2xl mx-auto">
-            <span className="text-primary text-sm font-semibold uppercase tracking-wider">
+            <span className="text-primary text-xs md:text-sm font-semibold uppercase tracking-wider">
               What our clients say
             </span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-white">
+            <h2 className="mt-2 md:mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
               Real teams. Real results.
             </h2>
-            <div className="mt-4 inline-flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="mt-3 md:mt-4 inline-flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
               <div className="flex gap-0.5 text-primary">
                 {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} className="h-4 w-4 fill-current" />
+                  <Star key={i} className="h-3.5 w-3.5 md:h-4 md:w-4 fill-current" />
                 ))}
               </div>
               30+ Google reviews
             </div>
           </div>
-          <Stagger className="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <Stagger className="mt-8 md:mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             {testimonials.map((t) => (
-              <StaggerItem key={t.name} className="p-8 rounded-2xl border border-border bg-background/50 hover:border-primary/30 transition-colors duration-300">
+              <StaggerItem key={t.name} className="p-5 md:p-8 rounded-xl md:rounded-2xl border border-border bg-background/50 hover:border-primary/30 transition-colors duration-300">
                 <div className="flex gap-0.5 text-primary">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Star key={i} className="h-4 w-4 fill-current" />
+                    <Star key={i} className="h-3.5 w-3.5 md:h-4 md:w-4 fill-current" />
                   ))}
                 </div>
-                <p className="mt-4 text-foreground text-sm leading-relaxed">"{t.quote}"</p>
-                <div className="mt-6 flex items-center gap-3">
+                <p className="mt-3 md:mt-4 text-foreground text-xs md:text-sm leading-relaxed">"{t.quote}"</p>
+                <div className="mt-4 md:mt-6 flex items-center gap-3">
                   {t.image ? (
                     <img
                       src={t.image}
                       alt={t.name}
-                      className="h-10 w-10 rounded-full object-cover border border-primary/20"
+                      className="h-9 w-9 md:h-10 md:w-10 rounded-full object-cover border border-primary/20"
                     />
                   ) : (
                     <div
-                      className="h-10 w-10 rounded-full"
+                      className="h-9 w-9 md:h-10 md:w-10 rounded-full"
                       style={{ background: "var(--gradient-primary)" }}
                     />
                   )}
                   <div>
-                    <div className="font-semibold text-sm text-white">{t.name}</div>
-                    <div className="text-xs text-muted-foreground">{t.role}</div>
+                    <div className="font-semibold text-xs md:text-sm text-white">{t.name}</div>
+                    <div className="text-[10px] md:text-xs text-muted-foreground">{t.role}</div>
                   </div>
                 </div>
               </StaggerItem>
