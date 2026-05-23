@@ -21,7 +21,7 @@ export function Stagger({
   children,
   staggerDelay,
   delay = 0,
-  start = "top 85%",
+  start = "top 90%",
   variant = "fade",
   duration,
   className,
@@ -64,45 +64,15 @@ export function Stagger({
 
     gsap.set(items, { ...fromState, willChange: "transform, opacity" });
 
-    if (prefersReducedMotion) {
-      gsap.to(items, {
-        ...toState,
-        duration: finalDuration,
-        stagger: finalStaggerDelay,
-        delay,
-      });
-    } else {
-      (async () => {
-        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
-        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.to(items, {
-          ...toState,
-          duration: finalDuration,
-          stagger: finalStaggerDelay,
-          delay,
-          scrollTrigger: {
-            trigger: containerRef.current,
-            start,
-            end: "top 60%",
-            toggleActions: "play none none none",
-            markers: false,
-          },
-        });
-      })();
-    }
+    const animation = gsap.to(items, {
+      ...toState,
+      duration: finalDuration,
+      stagger: finalStaggerDelay,
+      delay,
+    });
 
     return () => {
-      (async () => {
-        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
-        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-        ScrollTrigger.getAll().forEach((trigger: any) => {
-          if (trigger.trigger === containerRef.current) {
-            trigger.kill();
-          }
-        });
-      })();
+      animation.kill();
     };
   }, [isClient, finalStaggerDelay, delay, start, variant, finalDuration, prefersReducedMotion, config]);
 

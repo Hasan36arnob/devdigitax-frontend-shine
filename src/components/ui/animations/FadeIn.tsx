@@ -16,7 +16,7 @@ export function FadeIn({
   children,
   delay = 0,
   duration,
-  start = "top 85%",
+  start = "top 90%",
   scale = false,
   blur = 0,
   className,
@@ -61,41 +61,13 @@ export function FadeIn({
 
     gsap.set(element, fromState);
 
-    if (prefersReducedMotion) {
-      gsap.to(element, {
-        ...toState,
-        delay,
-      });
-    } else {
-      (async () => {
-        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
-        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.to(element, {
-          ...toState,
-          delay,
-          scrollTrigger: {
-            trigger: element,
-            start,
-            end: "top 60%",
-            toggleActions: "play none none none",
-            markers: false,
-          },
-        });
-      })();
-    }
+    const animation = gsap.to(element, {
+      ...toState,
+      delay,
+    });
 
     return () => {
-      (async () => {
-        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
-        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-        ScrollTrigger.getAll().forEach((trigger: any) => {
-          if (trigger.trigger === element) {
-            trigger.kill();
-          }
-        });
-      })();
+      animation.kill();
     };
   }, [isClient, delay, finalDuration, start, scale, blur, prefersReducedMotion, config]);
 

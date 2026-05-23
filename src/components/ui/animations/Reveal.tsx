@@ -22,7 +22,7 @@ export function Reveal({
   delay = 0,
   variant = "fade-in-up",
   duration,
-  start = "top 85%",
+  start = "top 90%",
   tweenVars,
   className,
   ...props
@@ -74,44 +74,17 @@ export function Reveal({
     const fromState = variantConfig.from;
     const toState = variantConfig.to;
 
-    gsap.set(element, { ...fromState, willChange: "transform, opacity" });
     element.setAttribute("data-reveal-animated", "true");
 
-    if (prefersReducedMotion) {
-      gsap.to(element, {
-        ...toState,
-        delay,
-      });
-    } else {
-      (async () => {
-        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
-        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-        gsap.registerPlugin(ScrollTrigger);
+    gsap.set(element, { ...(fromState as Record<string, unknown>), willChange: "transform, opacity" });
 
-        gsap.to(element, {
-          ...toState,
-          scrollTrigger: {
-            trigger: element,
-            start,
-            end: "top 60%",
-            toggleActions: "play none none none",
-            markers: false,
-          },
-          delay,
-        });
-      })();
-    }
+    const animation = gsap.to(element, {
+      ...(toState as Record<string, unknown>),
+      delay,
+    });
 
     return () => {
-      (async () => {
-        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
-        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-        ScrollTrigger.getAll().forEach((trigger: any) => {
-          if (trigger.trigger === element) {
-            trigger.kill();
-          }
-        });
-      })();
+      animation.kill();
     };
   }, [isClient, variant, finalDuration, start, delay, prefersReducedMotion, config]);
 

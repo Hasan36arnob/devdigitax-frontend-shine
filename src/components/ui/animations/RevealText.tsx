@@ -55,49 +55,17 @@ export function RevealText({
       willChange: "transform, opacity",
     });
 
-    if (prefersReducedMotion) {
-      gsap.to(spans, {
-        opacity: 1,
-        y: 0,
-        duration: 0.3,
-        ease: "linear",
-        stagger: 0.02,
-        delay,
-      });
-    } else {
-      (async () => {
-        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
-        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-        gsap.registerPlugin(ScrollTrigger);
-
-        gsap.to(spans, {
-          opacity: 1,
-          y: 0,
-          duration,
-          ease: "power3.out",
-          stagger: staggerAmount,
-          delay,
-          scrollTrigger: {
-            trigger: container,
-            start: triggerStart,
-            end: triggerEnd,
-            toggleActions: "play none none none",
-            markers: false,
-          },
-        });
-      })();
-    }
+    const animation = gsap.to(spans, {
+      opacity: 1,
+      y: 0,
+      duration,
+      ease: "power3.out",
+      stagger: staggerAmount,
+      delay,
+    });
 
     return () => {
-      (async () => {
-        const ScrollTriggerRaw = await import("gsap/ScrollTrigger");
-        const ScrollTrigger = (ScrollTriggerRaw as any).ScrollTrigger || ScrollTriggerRaw;
-        ScrollTrigger.getAll().forEach((trigger: any) => {
-          if (trigger.trigger === container) {
-            trigger.kill();
-          }
-        });
-      })();
+      animation.kill();
     };
   }, [isClient, delay, staggerAmount, duration, triggerStart, triggerEnd, prefersReducedMotion, config]);
 
