@@ -643,19 +643,19 @@ function Index() {
       </section>
 
       {/* ── CTA ──────────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden">
+      <section className="relative overflow-hidden hidden md:block">
         <AmbientCanvas variant="particles" intensity={0.8} />
-        <Reveal className="relative z-10 max-w-7xl mx-auto px-6 py-12 md:py-24">
-          <div className="relative overflow-hidden rounded-2xl md:rounded-3xl border-2 border-blue-500/30 p-6 md:p-12 lg:p-20 text-center" style={{ background:"linear-gradient(135deg,#0a0e1a 0%,#1a1f35 100%)", boxShadow:"0 0 80px rgba(66,133,244,0.2)" }}>
+        <Reveal className="relative z-10 max-w-7xl mx-auto px-6 py-24">
+          <div className="relative overflow-hidden rounded-3xl border-2 border-blue-500/30 p-12 lg:p-20 text-center" style={{ background:"linear-gradient(135deg,#0a0e1a 0%,#1a1f35 100%)", boxShadow:"0 0 80px rgba(66,133,244,0.2)" }}>
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_0%,rgba(66,133,244,0.15),transparent_60%)]" />
-            <div className="absolute top-0 right-0 w-32 h-32 md:w-64 md:h-64 bg-blue-500/5 rounded-full blur-3xl" />
-            <div className="absolute bottom-0 left-0 w-32 h-32 md:w-64 md:h-64 bg-green-500/5 rounded-full blur-3xl" />
+            <div className="absolute top-0 right-0 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 bg-green-500/5 rounded-full blur-3xl" />
             <div className="relative">
-              <span className="text-blue-400 text-xs md:text-sm font-semibold uppercase tracking-wider">Experience real results</span>
-              <h2 className="mt-2 md:mt-3 text-xl md:text-3xl lg:text-5xl font-bold tracking-tight text-white">Partner with DevdigitaX and scale your business.</h2>
-              <p className="mt-2 md:mt-4 text-muted-foreground max-w-xl mx-auto text-xs md:text-sm leading-relaxed">Tell us where you want to be in 12 months. We'll map the path — and build it with you.</p>
-              <Link to="/contact" className="mt-4 md:mt-8 inline-flex items-center gap-2 px-6 md:px-10 py-3 md:py-5 rounded-full font-semibold text-white text-sm md:text-base hover:scale-105 transition-transform duration-300" style={{ background:"linear-gradient(135deg,#4285F4,#34A853)", boxShadow:"0 0 40px rgba(66,133,244,0.4)" }}>
-                Start Your Project <ArrowRight className="h-4 w-4 md:h-5 md:w-5" />
+              <span className="text-blue-400 text-sm font-semibold uppercase tracking-wider">Experience real results</span>
+              <h2 className="mt-3 text-3xl lg:text-5xl font-bold tracking-tight text-white">Partner with DevdigitaX and scale your business.</h2>
+              <p className="mt-4 text-muted-foreground max-w-xl mx-auto text-sm leading-relaxed">Tell us where you want to be in 12 months. We'll map the path — and build it with you.</p>
+              <Link to="/contact" className="mt-8 inline-flex items-center gap-2 px-10 py-5 rounded-full font-semibold text-white hover:scale-105 transition-transform duration-300" style={{ background:"linear-gradient(135deg,#4285F4,#34A853)", boxShadow:"0 0 40px rgba(66,133,244,0.4)" }}>
+                Start Your Project <ArrowRight className="h-5 w-5" />
               </Link>
             </div>
           </div>
