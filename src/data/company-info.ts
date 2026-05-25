@@ -14,7 +14,7 @@ export const companyInfo = {
   contact: {
     phone: "+880 9638-474596",
     whatsapp: "+880 1837-692110",
-    email: "info@devdigitax.com",
+    email: "hello.devdigitax@gmail.com",
   },
   stats: {
     experience: "8+ Years",

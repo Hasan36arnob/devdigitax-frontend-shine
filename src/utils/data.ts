@@ -126,7 +126,7 @@ export const saveTeam = (members: TeamMember[]) => {
 // SITE CONFIG
 const defaultConfig: SiteConfig = {
   whatsapp: "+880 1837-692110",
-  email: "devdigitax@gmail.com",
+  email: "hello.devdigitax@gmail.com",
   phone: "+880 9638-474596",
   address: "Savar 1340, Dhaka, Bangladesh",
   footerText: "© DevdigitaX. Since 2018 to 2026 · Developed by DevdigitaX.",
