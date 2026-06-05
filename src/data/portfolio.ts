@@ -59,6 +59,14 @@ import ninico from "@/assets/ninico.png";
 import vuexy from "@/assets/vuexy.png";
 import apexa from "@/assets/apexa.png";
 
+// ── DevDigitax Showcase Projects ──────────────────────────────────────────────
+import purifysoul from "@/assets/purifysoul.png";
+import onefitness from "@/assets/1fitness.png";
+import devdigitaxrestaurant from "@/assets/devdigitaxrestaurant.png";
+import devdigitaxfashion from "@/assets/devdigitaxfashion.png";
+import devdigitaxportfolio from "@/assets/devdigitaxportfolio.png";
+import devdigitaxecom from "@/assets/devdigitaxecom.png";
+
 export const portfolioProjects: PortfolioItem[] = [
   // ── FOOD & RESTAURANT ──────────────────────────────────────────────────────
   {
@@ -669,6 +677,74 @@ export const portfolioProjects: PortfolioItem[] = [
     tech: "Laravel, PHP, MySQL, Bootstrap, Vue.js",
     image: apexa,
     live: "https://apexa.archielite.com/",
+    status: "published",
+  },
+
+  // ── DEVDIGITAX SHOWCASE PROJECTS ──────────────────────────────────────────────
+  {
+    id: "27",
+    title: "Purify Soul – Wellness & Meditation",
+    client: "Purify Soul",
+    category: "frontend",
+    result: "",
+    tech: "React, Next.js, TailwindCSS, Animations, Responsive Design",
+    image: purifysoul,
+    live: "https://purifysoul.netlify.app/",
+    status: "published",
+  },
+  {
+    id: "28",
+    title: "1 Fitness Website – Personal Training",
+    client: "1 Fitness",
+    category: "frontend",
+    result: "",
+    tech: "React, TailwindCSS, TypeScript, Form Validation, Performance",
+    image: onefitness,
+    live: "https://1fitnesswebsite1.netlify.app/",
+    status: "published",
+  },
+  {
+    id: "29",
+    title: "DevDigitax Restaurant – Fine Dining",
+    client: "DevDigitax Restaurant",
+    category: "fullstack",
+    result: "",
+    tech: "React, Node.js, Express, MongoDB, Order Management System",
+    image: devdigitaxrestaurant,
+    live: "https://devdigitaxrestaurant.netlify.app/",
+    status: "published",
+  },
+  {
+    id: "30",
+    title: "ÉLITE – Luxury Menswear Atelier",
+    client: "DevDigitax Fashion",
+    category: "ecommerce",
+    result: "",
+    tech: "React, Next.js, TailwindCSS, E-Commerce, Bespoke Features",
+    image: devdigitaxfashion,
+    live: "https://devdigitaxfashion.netlify.app/",
+    status: "published",
+  },
+  {
+    id: "31",
+    title: "DevDigitax – Creative Portfolio",
+    client: "DevDigitax Portfolio",
+    category: "frontend",
+    result: "",
+    tech: "React, TypeScript, TailwindCSS, Animations, Showcase Design",
+    image: devdigitaxportfolio,
+    live: "https://devdigiraxportfolio.netlify.app/",
+    status: "published",
+  },
+  {
+    id: "32",
+    title: "Footcap – Premium Footwear E-Commerce",
+    client: "DevDigitax E-Commerce",
+    category: "ecommerce",
+    result: "Full-featured footwear marketplace with inventory management and payment processing",
+    tech: "React, Next.js, TypeScript, Tailwind CSS, Stripe, Product Filtering, Cart Management",
+    image: devdigitaxecom,
+    live: "https://devdigitaxecom.netlify.app/",
     status: "published",
   },
 ];

@@ -459,7 +459,7 @@ function RealDevMarketingCanvas() {
 
 function Index() {
   const allProjects = getPortfolio();
-  const featuredIds = ["r24", "r29", "r30", "r31", "r1", "r3"];
+  const featuredIds = ["27", "28", "29", "30", "31", "32"];
   const featuredProjects = featuredIds
     .map((id) => allProjects.find((p) => p.id === id))
     .filter((p): p is NonNullable<typeof p> => !!p);

@@ -161,6 +161,86 @@ function PortfolioPage() {
         </div>
       </Reveal>
 
+      {/* ── Featured Showcase ── */}
+      {activeCat === "all" && search === "" && (
+        <Reveal className="max-w-7xl mx-auto px-6 py-16">
+          <div className="mb-12">
+            <span className="text-primary text-xs font-semibold uppercase tracking-wider">Featured</span>
+            <h2 className="text-3xl md:text-4xl font-bold mt-2 mb-4">Our Latest Showcase</h2>
+            <p className="text-muted-foreground">Award-winning designs and cutting-edge digital solutions</p>
+          </div>
+          <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+            {allProjects
+              .filter((p) => ["27", "28", "29", "30", "31", "32"].includes(p.id))
+              .map((p) => (
+                <StaggerItem
+                  key={p.id}
+                  className="group rounded-3xl overflow-hidden border border-primary/30 bg-card hover:border-primary/60 transition-all duration-500 hover:-translate-y-3 flex flex-col shadow-lg shadow-primary/10"
+                  style={{ boxShadow: "var(--shadow-elegant)" }}
+                >
+                  {/* Image Container */}
+                  <div className="aspect-[16/10] overflow-hidden relative">
+                    <img
+                      src={p.image}
+                      alt={p.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                    {/* Overlay */}
+                    <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-all duration-500 flex flex-col items-center justify-center p-6 text-center">
+                      <p className="text-white text-sm font-medium mb-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
+                        {p.result || "View live demonstration"}
+                      </p>
+                      <div className="flex gap-4 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 delay-75">
+                        {p.live && (
+                          <a
+                            href={p.live}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:scale-105 transition"
+                          >
+                            <ExternalLink className="h-4 w-4" />
+                            Live Demo
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="p-6 flex-1 flex flex-col">
+                    <div className="flex items-center gap-2 mb-3">
+                      <span
+                        className={`text-[10px] font-bold px-2.5 py-1 rounded-full border uppercase tracking-widest ${
+                          categoryColors[p.category] || "bg-muted text-muted-foreground border-border"
+                        }`}
+                      >
+                        {categoryLabels[p.category] || p.category}
+                      </span>
+                      <span className="text-xs text-muted-foreground font-medium">{p.client}</span>
+                    </div>
+                    <h3 className="text-lg font-bold group-hover:text-primary transition-colors mb-3 line-clamp-2">
+                      {p.title}
+                    </h3>
+                    <div className="mt-auto pt-4 border-t border-border/50 flex flex-wrap gap-2">
+                      {p.tech.split(",").slice(0, 3).map((t) => (
+                        <span
+                          key={t}
+                          className="text-[10px] px-2 py-0.5 rounded-md bg-muted/50 text-muted-foreground font-medium border border-border/50"
+                        >
+                          {t.trim()}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </StaggerItem>
+              ))}
+          </Stagger>
+          <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-12" />
+        </Reveal>
+      )}
+
       {/* ── Grid ── */}
       <Reveal className="max-w-7xl mx-auto px-6 py-20">
         {filtered.length > 0 ? (

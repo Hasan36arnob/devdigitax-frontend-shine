@@ -1,5 +1,33 @@
 [
   {
+    "id": "zfajkmxhjce",
+    "ip": "Local/Blocked",
+    "country": "Unknown",
+    "countryCode": "??",
+    "city": "Unknown",
+    "timestamp": "2026-06-05T09:43:57.281Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36 Edg/148.0.0.0",
+    "page": "/",
+    "referrer": "Direct",
+    "screenResolution": "1366x768",
+    "language": "en-GB",
+    "isMobile": false
+  },
+  {
+    "id": "992fwq6h27o",
+    "ip": "Local/Blocked",
+    "country": "Unknown",
+    "countryCode": "??",
+    "city": "Unknown",
+    "timestamp": "2026-06-05T09:43:55.578Z",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Code/1.122.1 Chrome/142.0.7444.265 Electron/39.8.8 Safari/537.36",
+    "page": "/",
+    "referrer": "Direct",
+    "screenResolution": "1366x768",
+    "language": "en-US",
+    "isMobile": false
+  },
+  {
     "id": "ak4bjzwu0hf",
     "ip": "Local/Blocked",
     "country": "Unknown",
