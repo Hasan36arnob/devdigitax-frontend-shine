@@ -658,7 +658,7 @@ function Index() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
                   <p className="text-white text-xs md:text-sm font-medium line-clamp-2">{project.result}</p>
                 </div>
-{idx === 0 && (
+                {idx === 0 && (
                   <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 rounded-full">
                     Featured Client
                   </div>
@@ -670,7 +670,7 @@ function Index() {
                     <span className="text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">
                       {project.category}
                     </span>
-{project.section === "client" && (
+                    {project.section === "client" && (
                       <span className="text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md bg-green-500/20 text-green-400 uppercase tracking-wider">
                         Client Project
                       </span>

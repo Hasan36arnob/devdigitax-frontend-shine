@@ -1,8 +1,9 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
 import { useState, useMemo } from "react";
 import { getPortfolio } from "@/utils/data";
-import { ExternalLink, Globe, Sparkles, Award } from "lucide-react";
+import { ExternalLink, Globe, Sparkles, Award, ShoppingBag, UtensilsCrossed, ShoppingCart } from "lucide-react";
 import { Reveal } from "@/components/ui/animations/Reveal";
 import { Stagger, StaggerItem } from "@/components/ui/animations/Stagger";
 
@@ -24,21 +25,15 @@ function PortfolioPage() {
   const [view, setView] = useState<"all" | "demo" | "client">("all");
   const allProjects = useMemo(() => getPortfolio(), []);
   
-  const demoProjects = useMemo(() => 
-    allProjects.filter(p => p.section === "demo" || p.id.startsWith("demo-")),
-    [allProjects]
-  );
-  
   const clientProjects = useMemo(() => 
     allProjects.filter(p => p.section === "client" || p.id.startsWith("client-")),
     [allProjects]
   );
-
-  const visibleProjects = useMemo(() => {
-    if (view === "demo") return demoProjects;
-    if (view === "client") return clientProjects;
-    return [...demoProjects, ...clientProjects];
-  }, [view, demoProjects, clientProjects]);
+  
+  const demoProjects = useMemo(() => 
+    allProjects.filter(p => p.section === "demo" || p.id.startsWith("demo-")),
+    [allProjects]
+  );
 
   const PortfolioCard = ({ project }: { project: any }) => (
     <StaggerItem
@@ -64,6 +59,11 @@ function PortfolioPage() {
           <div className="flex items-center gap-2 mb-2">
             <span className="text-primary text-xs font-semibold uppercase tracking-wider">{project.category}</span>
             <span className="w-1 h-1 rounded-full bg-primary/40" />
+            {project.section === "client" && (
+              <span className="text-[10px] font-semibold px-2 py-1 rounded-md bg-green-500/20 text-green-400 uppercase tracking-wider">
+                Client Project
+              </span>
+            )}
           </div>
           <h3 className="text-xl md:text-2xl font-bold mb-2 group-hover:text-primary transition-colors">
             {project.title}
@@ -95,7 +95,7 @@ function PortfolioPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold text-sm hover:bg-primary/90 transition-all duration-300 group/btn"
             >
-              <span>View Live</span>
+              <span>View Live Project</span>
               <ExternalLink className="h-4 w-4 group-hover/btn:translate-x-1 transition-transform" />
             </a>
           )}
@@ -132,9 +132,20 @@ function PortfolioPage() {
               Crafted to Perfection
             </span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-10">
             Discover our curated collection of demo projects and premium client work. Each project represents excellence in design, functionality, and user experience.
           </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link to="/fashion" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-sm font-medium hover:border-primary/50 transition-colors">
+              <ShoppingBag className="h-4 w-4 text-primary" /> Fashion Stores
+            </Link>
+            <Link to="/e-commerce" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-sm font-medium hover:border-primary/50 transition-colors">
+              <ShoppingCart className="h-4 w-4 text-primary" /> E-Commerce
+            </Link>
+            <Link to="/pharmacy" className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-card border border-border text-sm font-medium hover:border-primary/50 transition-colors">
+              <UtensilsCrossed className="h-4 w-4 text-primary" /> Pharmacy
+            </Link>
+          </div>
         </Reveal>
       </section>
 
@@ -186,6 +197,21 @@ function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6">
           {view === "all" && (
             <>
+              {/* Client Section First */}
+              {clientProjects.length > 0 && (
+                <Reveal className="mb-12">
+                  <div className="flex items-center gap-3 mb-6">
+                    <Globe className="h-6 w-6 text-primary" />
+                    <h2 className="text-3xl md:text-4xl font-bold">Client Work</h2>
+                  </div>
+                  <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {clientProjects.map((project) => (
+                      <PortfolioCard key={project.id} project={project} />
+                    ))}
+                  </Stagger>
+                </Reveal>
+              )}
+
               {/* Demo Section */}
               {demoProjects.length > 0 && (
                 <Reveal className="mb-20">
@@ -195,21 +221,6 @@ function PortfolioPage() {
                   </div>
                   <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {demoProjects.map((project) => (
-                      <PortfolioCard key={project.id} project={project} />
-                    ))}
-                  </Stagger>
-                </Reveal>
-              )}
-
-              {/* Client Section */}
-              {clientProjects.length > 0 && (
-                <Reveal className="mb-12">
-                  <div className="flex items-center gap-3 mb-6">
-                    <Globe className="h-6 w-6 text-primary" />
-                    <h2 className="text-3xl md:text-4xl font-bold">Client Work</h2>
-                  </div>
-                  <Stagger className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {clientProjects.map((project) => (
                       <PortfolioCard key={project.id} project={project} />
                     ))}
                   </Stagger>

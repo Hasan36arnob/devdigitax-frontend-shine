@@ -10,6 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
+import { Route as PharmacyRouteImport } from './routes/pharmacy'
+import { Route as FashionRouteImport } from './routes/fashion'
+import { Route as ECommerceRouteImport } from './routes/e-commerce'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AboutRouteImport } from './routes/about'
@@ -22,6 +25,21 @@ import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PharmacyRoute = PharmacyRouteImport.update({
+  id: '/pharmacy',
+  path: '/pharmacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FashionRoute = FashionRouteImport.update({
+  id: '/fashion',
+  path: '/fashion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ECommerceRoute = ECommerceRouteImport.update({
+  id: '/e-commerce',
+  path: '/e-commerce',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -70,6 +88,9 @@ export interface FileRoutesByFullPath {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
+  '/e-commerce': typeof ECommerceRoute
+  '/fashion': typeof FashionRoute
+  '/pharmacy': typeof PharmacyRoute
   '/portfolio': typeof PortfolioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
@@ -81,6 +102,9 @@ export interface FileRoutesByTo {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
+  '/e-commerce': typeof ECommerceRoute
+  '/fashion': typeof FashionRoute
+  '/pharmacy': typeof PharmacyRoute
   '/portfolio': typeof PortfolioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
@@ -93,6 +117,9 @@ export interface FileRoutesById {
   '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/contact': typeof ContactRoute
+  '/e-commerce': typeof ECommerceRoute
+  '/fashion': typeof FashionRoute
+  '/pharmacy': typeof PharmacyRoute
   '/portfolio': typeof PortfolioRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
@@ -106,6 +133,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/contact'
+    | '/e-commerce'
+    | '/fashion'
+    | '/pharmacy'
     | '/portfolio'
     | '/blog/$slug'
     | '/services/$serviceId'
@@ -117,6 +147,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/contact'
+    | '/e-commerce'
+    | '/fashion'
+    | '/pharmacy'
     | '/portfolio'
     | '/blog/$slug'
     | '/services/$serviceId'
@@ -128,6 +161,9 @@ export interface FileRouteTypes {
     | '/about'
     | '/admin'
     | '/contact'
+    | '/e-commerce'
+    | '/fashion'
+    | '/pharmacy'
     | '/portfolio'
     | '/blog/$slug'
     | '/services/$serviceId'
@@ -140,6 +176,9 @@ export interface RootRouteChildren {
   AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
   ContactRoute: typeof ContactRoute
+  ECommerceRoute: typeof ECommerceRoute
+  FashionRoute: typeof FashionRoute
+  PharmacyRoute: typeof PharmacyRoute
   PortfolioRoute: typeof PortfolioRoute
   BlogSlugRoute: typeof BlogSlugRoute
   ServicesServiceIdRoute: typeof ServicesServiceIdRoute
@@ -154,6 +193,27 @@ declare module '@tanstack/react-router' {
       path: '/portfolio'
       fullPath: '/portfolio'
       preLoaderRoute: typeof PortfolioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pharmacy': {
+      id: '/pharmacy'
+      path: '/pharmacy'
+      fullPath: '/pharmacy'
+      preLoaderRoute: typeof PharmacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fashion': {
+      id: '/fashion'
+      path: '/fashion'
+      fullPath: '/fashion'
+      preLoaderRoute: typeof FashionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/e-commerce': {
+      id: '/e-commerce'
+      path: '/e-commerce'
+      fullPath: '/e-commerce'
+      preLoaderRoute: typeof ECommerceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -220,6 +280,9 @@ const rootRouteChildren: RootRouteChildren = {
   AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
   ContactRoute: ContactRoute,
+  ECommerceRoute: ECommerceRoute,
+  FashionRoute: FashionRoute,
+  PharmacyRoute: PharmacyRoute,
   PortfolioRoute: PortfolioRoute,
   BlogSlugRoute: BlogSlugRoute,
   ServicesServiceIdRoute: ServicesServiceIdRoute,
