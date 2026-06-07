@@ -459,10 +459,10 @@ function RealDevMarketingCanvas() {
 
 function Index() {
   const allProjects = getPortfolio();
-  const featuredIds = ["27", "28", "29", "30", "31", "32"];
-  const featuredProjects = featuredIds
-    .map((id) => allProjects.find((p) => p.id === id))
-    .filter((p): p is NonNullable<typeof p> => !!p);
+  // Sort to show client projects first, then demos
+  const clientProjects = allProjects.filter((p) => p.section === "client");
+  const demoProjects = allProjects.filter((p) => p.section === "demo");
+  const featuredProjects = [...clientProjects, ...demoProjects].slice(0, 6);
 
   return (
     <SiteLayout>
@@ -618,91 +618,111 @@ function Index() {
         </div>
       </Reveal>
 
-      {/* PORTFOLIO SECTION */}
+{/* PORTFOLIO SECTION - CLIENT MAGNET */}
       <Reveal className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
           <div className="max-w-2xl">
             <span className="text-primary text-xs md:text-sm font-semibold uppercase tracking-wider">
-             Our recent work
+              Real Results, Real Clients
             </span>
             <h2 className="mt-2 md:mt-3 text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-white">
-              Crafting Digital Success Stories
+              Our Work Speaks Louder Than Words
             </h2>
             <p className="mt-2 md:mt-4 text-muted-foreground text-sm md:text-base">
-              Explore our latest projects across web development, SEO, and digital branding.
+              From startups to established brands, we've delivered measurable growth through premium digital solutions.
             </p>
           </div>
           <Link
             to="/portfolio"
             className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all text-sm md:text-base"
           >
-            View All Projects <ArrowRight className="h-4 w-4" />
+            View All Work <ArrowRight className="h-4 w-4" />
           </Link>
         </div>
 
         <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-          {featuredProjects.map((project) => (
+          {featuredProjects.map((project, idx) => (
             <StaggerItem
               key={project.id}
-              variant="image"
-              className="card-lift group rounded-xl md:rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50"
+              variant="scale"
+              className="group rounded-xl md:rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500"
             >
               <div className="aspect-[16/10] overflow-hidden relative">
                 <img
                   src={project.image}
                   alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                   loading="lazy"
                   decoding="async"
                 />
-                <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-4">
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="h-10 w-10 rounded-full bg-white text-black grid place-items-center hover:scale-110 transition"
-                    >
-                      <ExternalLink className="h-5 w-5" />
-                    </a>
-                  )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+                  <p className="text-white text-xs md:text-sm font-medium line-clamp-2">{project.result}</p>
                 </div>
+{idx === 0 && (
+                  <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 rounded-full">
+                    Featured Client
+                  </div>
+                )}
               </div>
-              <div className="p-4 md:p-6">
-                <div className="flex items-center justify-between gap-2 mb-2">
-                  <span className="text-[10px] md:text-xs font-medium px-2 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">
-                    {project.category}
-                  </span>
-                  <span className="text-[10px] md:text-xs text-muted-foreground">{project.client}</span>
-                </div>
-                <h3 className="text-base md:text-lg lg:text-xl font-bold group-hover:text-primary transition-colors line-clamp-1 text-white">
-                  {project.title}
-                </h3>
-                <div className="mt-3 md:mt-4 flex flex-wrap gap-1 md:gap-1.5">
-                  {project.tech
-                    .split(",")
-                    .slice(0, 4)
-                    .map((t) => (
-                      <span
-                        key={t}
-                        className="text-[9px] md:text-[10px] px-1.5 md:px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground whitespace-nowrap"
-                      >
-                        {t.trim()}
+              <div className="p-4 md:p-6 flex flex-col justify-between min-h-[180px]">
+                <div>
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">
+                      {project.category}
+                    </span>
+{project.section === "client" && (
+                      <span className="text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md bg-green-500/20 text-green-400 uppercase tracking-wider">
+                        Client Project
                       </span>
-                    ))}
+                    )}
+                  </div>
+                  <h3 className="text-base md:text-lg lg:text-xl font-bold group-hover:text-primary transition-colors mb-1 md:mb-2 text-white">
+                    {project.title}
+                  </h3>
+                  {project.subtitle && (
+                    <p className="text-xs md:text-sm text-muted-foreground mb-2 line-clamp-1">{project.subtitle}</p>
+                  )}
+                  <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 line-clamp-2">{project.client}</p>
                 </div>
-                <div className="mt-3 md:mt-4 flex items-center justify-between">
-                  <Link
-                    to="/portfolio"
-                    className="text-xs md:text-sm font-semibold text-primary inline-flex items-center gap-1 group-hover:gap-2 transition-all"
+                
+                <div>
+                  <div className="flex flex-wrap gap-1 md:gap-1.5 mb-3 md:mb-4">
+                    {project.tech
+                      .split(",")
+                      .slice(0, 4)
+                      .map((t) => (
+                        <span
+                          key={t}
+                          className="text-[9px] md:text-[10px] px-1.5 md:px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground whitespace-nowrap"
+                        >
+                          {t.trim()}
+                        </span>
+                      ))}
+                  </div>
+                  
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-primary hover:gap-2 transition-all"
                   >
-                    Explore Project <ArrowRight className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                  </Link>
+                    View Live Project <ExternalLink className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                  </a>
                 </div>
               </div>
             </StaggerItem>
           ))}
         </Stagger>
+        
+        <div className="mt-12 md:mt-16 text-center">
+          <Link
+            to="/contact"
+            className="inline-flex items-center justify-center gap-2 px-6 md:px-8 py-3 md:py-4 rounded-full font-semibold text-primary-foreground hover:scale-105 transition-transform duration-300 text-sm md:text-base"
+            style={{ background: "var(--gradient-primary)", boxShadow: "var(--shadow-glow)" }}
+          >
+            Get Your Free Assessment <ArrowRight className="h-4 w-4" />
+          </Link>
+        </div>
       </Reveal>
 
       {/* WEBSITE LIFECYCLE */}
