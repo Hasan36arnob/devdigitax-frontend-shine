@@ -9,8 +9,11 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as WellnessRouteImport } from './routes/wellness'
+import { Route as RestaurantRouteImport } from './routes/restaurant'
 import { Route as PortfolioRouteImport } from './routes/portfolio'
 import { Route as PharmacyRouteImport } from './routes/pharmacy'
+import { Route as FitnessRouteImport } from './routes/fitness'
 import { Route as FashionRouteImport } from './routes/fashion'
 import { Route as ECommerceRouteImport } from './routes/e-commerce'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -22,6 +25,16 @@ import { Route as BlogIndexRouteImport } from './routes/blog/index'
 import { Route as ServicesServiceIdRouteImport } from './routes/services.$serviceId'
 import { Route as BlogSlugRouteImport } from './routes/blog/$slug'
 
+const WellnessRoute = WellnessRouteImport.update({
+  id: '/wellness',
+  path: '/wellness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RestaurantRoute = RestaurantRouteImport.update({
+  id: '/restaurant',
+  path: '/restaurant',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PortfolioRoute = PortfolioRouteImport.update({
   id: '/portfolio',
   path: '/portfolio',
@@ -30,6 +43,11 @@ const PortfolioRoute = PortfolioRouteImport.update({
 const PharmacyRoute = PharmacyRouteImport.update({
   id: '/pharmacy',
   path: '/pharmacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FitnessRoute = FitnessRouteImport.update({
+  id: '/fitness',
+  path: '/fitness',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FashionRoute = FashionRouteImport.update({
@@ -90,8 +108,11 @@ export interface FileRoutesByFullPath {
   '/contact': typeof ContactRoute
   '/e-commerce': typeof ECommerceRoute
   '/fashion': typeof FashionRoute
+  '/fitness': typeof FitnessRoute
   '/pharmacy': typeof PharmacyRoute
   '/portfolio': typeof PortfolioRoute
+  '/restaurant': typeof RestaurantRoute
+  '/wellness': typeof WellnessRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog/': typeof BlogIndexRoute
@@ -104,8 +125,11 @@ export interface FileRoutesByTo {
   '/contact': typeof ContactRoute
   '/e-commerce': typeof ECommerceRoute
   '/fashion': typeof FashionRoute
+  '/fitness': typeof FitnessRoute
   '/pharmacy': typeof PharmacyRoute
   '/portfolio': typeof PortfolioRoute
+  '/restaurant': typeof RestaurantRoute
+  '/wellness': typeof WellnessRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog': typeof BlogIndexRoute
@@ -119,8 +143,11 @@ export interface FileRoutesById {
   '/contact': typeof ContactRoute
   '/e-commerce': typeof ECommerceRoute
   '/fashion': typeof FashionRoute
+  '/fitness': typeof FitnessRoute
   '/pharmacy': typeof PharmacyRoute
   '/portfolio': typeof PortfolioRoute
+  '/restaurant': typeof RestaurantRoute
+  '/wellness': typeof WellnessRoute
   '/blog/$slug': typeof BlogSlugRoute
   '/services/$serviceId': typeof ServicesServiceIdRoute
   '/blog/': typeof BlogIndexRoute
@@ -135,8 +162,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/e-commerce'
     | '/fashion'
+    | '/fitness'
     | '/pharmacy'
     | '/portfolio'
+    | '/restaurant'
+    | '/wellness'
     | '/blog/$slug'
     | '/services/$serviceId'
     | '/blog/'
@@ -149,8 +179,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/e-commerce'
     | '/fashion'
+    | '/fitness'
     | '/pharmacy'
     | '/portfolio'
+    | '/restaurant'
+    | '/wellness'
     | '/blog/$slug'
     | '/services/$serviceId'
     | '/blog'
@@ -163,8 +196,11 @@ export interface FileRouteTypes {
     | '/contact'
     | '/e-commerce'
     | '/fashion'
+    | '/fitness'
     | '/pharmacy'
     | '/portfolio'
+    | '/restaurant'
+    | '/wellness'
     | '/blog/$slug'
     | '/services/$serviceId'
     | '/blog/'
@@ -178,8 +214,11 @@ export interface RootRouteChildren {
   ContactRoute: typeof ContactRoute
   ECommerceRoute: typeof ECommerceRoute
   FashionRoute: typeof FashionRoute
+  FitnessRoute: typeof FitnessRoute
   PharmacyRoute: typeof PharmacyRoute
   PortfolioRoute: typeof PortfolioRoute
+  RestaurantRoute: typeof RestaurantRoute
+  WellnessRoute: typeof WellnessRoute
   BlogSlugRoute: typeof BlogSlugRoute
   ServicesServiceIdRoute: typeof ServicesServiceIdRoute
   BlogIndexRoute: typeof BlogIndexRoute
@@ -188,6 +227,20 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/wellness': {
+      id: '/wellness'
+      path: '/wellness'
+      fullPath: '/wellness'
+      preLoaderRoute: typeof WellnessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/restaurant': {
+      id: '/restaurant'
+      path: '/restaurant'
+      fullPath: '/restaurant'
+      preLoaderRoute: typeof RestaurantRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/portfolio': {
       id: '/portfolio'
       path: '/portfolio'
@@ -200,6 +253,13 @@ declare module '@tanstack/react-router' {
       path: '/pharmacy'
       fullPath: '/pharmacy'
       preLoaderRoute: typeof PharmacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/fitness': {
+      id: '/fitness'
+      path: '/fitness'
+      fullPath: '/fitness'
+      preLoaderRoute: typeof FitnessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/fashion': {
@@ -282,8 +342,11 @@ const rootRouteChildren: RootRouteChildren = {
   ContactRoute: ContactRoute,
   ECommerceRoute: ECommerceRoute,
   FashionRoute: FashionRoute,
+  FitnessRoute: FitnessRoute,
   PharmacyRoute: PharmacyRoute,
   PortfolioRoute: PortfolioRoute,
+  RestaurantRoute: RestaurantRoute,
+  WellnessRoute: WellnessRoute,
   BlogSlugRoute: BlogSlugRoute,
   ServicesServiceIdRoute: ServicesServiceIdRoute,
   BlogIndexRoute: BlogIndexRoute,

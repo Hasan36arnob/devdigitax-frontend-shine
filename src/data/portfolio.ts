@@ -21,7 +21,7 @@ export const portfolioProjects: PortfolioItem[] = [
     result: "Modern, calming design with smooth animations and meditation content delivery",
     tech: "React, Next.js, TailwindCSS, Animations, Responsive Design",
     image: purifysoul,
-    live: "https://purifysoul.netlify.app/",
+    live: "/wellness",
     status: "published",
   },
   {
@@ -34,7 +34,7 @@ export const portfolioProjects: PortfolioItem[] = [
     result: "High-performance training website with course management and performance tracking",
     tech: "React, TailwindCSS, TypeScript, Form Validation, Performance Optimization",
     image: onefitness,
-    live: "https://1fitnesswebsite1.netlify.app/",
+    live: "/fitness",
     status: "published",
   },
   {
@@ -47,7 +47,7 @@ export const portfolioProjects: PortfolioItem[] = [
     result: "Full-featured restaurant platform with order management and reservation system",
     tech: "React, Node.js, Express, MongoDB, Order Management, Real-time Updates",
     image: devdigitaxrestaurant,
-    live: "https://devdigitaxrestaurant.netlify.app/",
+    live: "/restaurant",
     status: "published",
   },
   {
@@ -60,7 +60,7 @@ export const portfolioProjects: PortfolioItem[] = [
     result: "Premium e-commerce platform with sophisticated design and seamless checkout",
     tech: "React, Next.js, TailwindCSS, E-Commerce, Stripe Integration, Inventory Management",
     image: devdigitaxfashion,
-    live: "https://devdigitaxfashion.netlify.app/",
+    live: "/fashion",
     status: "published",
   },
   {
@@ -73,7 +73,7 @@ export const portfolioProjects: PortfolioItem[] = [
     result: "Award-winning portfolio design with interactive elements and smooth transitions",
     tech: "React, TypeScript, TailwindCSS, GSAP Animations, Responsive Showcase",
     image: devdigitaxportfolio,
-    live: "https://devdigiraxportfolio.netlify.app/",
+    live: "/portfolio",
     status: "published",
   },
   {
@@ -86,7 +86,7 @@ export const portfolioProjects: PortfolioItem[] = [
     result: "Full-featured footwear marketplace with advanced filtering and payment processing",
     tech: "React, Next.js, TypeScript, TailwindCSS, Stripe, Product Filtering, Cart Management",
     image: devdigitaxecom,
-    live: "https://devdigitaxecom.netlify.app/",
+    live: "/e-commerce",
     status: "published",
   },
 
@@ -101,7 +101,7 @@ export const portfolioProjects: PortfolioItem[] = [
     result: "Premium luxury e-commerce platform with curated collections and VIP experience",
     tech: "Next.js, React, TypeScript, TailwindCSS, Stripe, Inventory Management, Analytics",
     image: yana,
-    live: "https://yanaluxebd.com/",
+    live: "/e-commerce",
     status: "published",
   },
 ];

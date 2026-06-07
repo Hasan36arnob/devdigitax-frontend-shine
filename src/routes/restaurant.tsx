@@ -1,36 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout } from "@/components/SiteLayout";
-import { ArrowRight, ExternalLink, Briefcase } from "lucide-react";
+import { ArrowRight, ExternalLink, UtensilsCrossed } from "lucide-react";
 import { Reveal } from "@/components/ui/animations/Reveal";
 import { Link } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/portfolio")({
-  component: PortfolioPage,
+export const Route = createFileRoute("/restaurant")({
+  component: RestaurantPage,
   head: () => ({
     meta: [
-      { title: "Portfolio Showcase — DevdigitaX" },
-      { name: "description", content: "Creative portfolio showcase with interactive elements and smooth transitions." },
+      { title: "Restaurant Platform — DevdigitaX" },
+      { name: "description", content: "Fine Dining restaurant platform with order management and reservation system." },
     ],
   }),
 });
 
-function PortfolioPage() {
+function RestaurantPage() {
   return (
     <SiteLayout>
       <section className="relative py-16 bg-background">
         <Reveal className="max-w-7xl mx-auto px-6">
           <div className="flex items-center gap-2 mb-6">
-            <Briefcase className="h-5 w-5 text-primary" />
-            <span className="text-primary text-xs font-semibold uppercase tracking-wider">Portfolio Showcase</span>
+            <UtensilsCrossed className="h-5 w-5 text-primary" />
+            <span className="text-primary text-xs font-semibold uppercase tracking-wider">DevDigitax Restaurant</span>
           </div>
           <h1 className="text-3xl md:text-4xl font-bold mb-6 text-white">
-            Creative Portfolio Experience
+            Fine Dining Experience Platform
           </h1>
           <p className="text-muted-foreground mb-8 max-w-2xl">
-            Award-winning portfolio design with interactive elements and smooth transitions built with GSAP animations.
+            Full-featured restaurant platform with order management and reservation system.
           </p>
           <a
-            href="https://devdigiraxportfolio.netlify.app/"
+            href="https://devdigitaxrestaurant.netlify.app/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-primary text-primary-foreground font-semibold hover:bg-primary/90 transition-all duration-300 mb-8"
@@ -45,8 +45,8 @@ function PortfolioPage() {
         <div className="max-w-7xl mx-auto px-6 py-8">
           <div className="relative rounded-xl overflow-hidden border border-border shadow-2xl" style={{ height: "80vh", minHeight: "600px" }}>
             <iframe
-              src="https://devdigiraxportfolio.netlify.app/"
-              title="DevDigitax Portfolio"
+              src="https://devdigitaxrestaurant.netlify.app/"
+              title="DevDigitax Restaurant"
               className="w-full h-full border-0"
               loading="lazy"
             />
@@ -59,7 +59,7 @@ function PortfolioPage() {
           to="/contact"
           className="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-primary-foreground font-semibold text-lg hover:bg-primary/90 transition-all duration-300 group"
         >
-          <span>Discuss Your Project</span>
+          <span>Start Your Restaurant Project</span>
           <ArrowRight className="h-5 w-5 group-hover:translate-x-1 transition-transform" />
         </Link>
       </section>

@@ -614,11 +614,11 @@ function Index() {
                 <div className="mt-2 md:mt-3 text-[10px] md:text-xs text-muted-foreground leading-relaxed px-1 md:px-2">{s.l}</div>
               </StaggerItem>
             ))}
-          </Stagger>
+</Stagger>
         </div>
       </Reveal>
 
-{/* PORTFOLIO SECTION - CLIENT MAGNET */}
+      {/* PORTFOLIO SECTION - CLIENT MAGNET */}
       <Reveal className="max-w-7xl mx-auto px-4 md:px-6 py-16 md:py-24">
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8 md:mb-12">
           <div className="max-w-2xl">
@@ -640,79 +640,77 @@ function Index() {
           </Link>
         </div>
 
-        <Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
-          {featuredProjects.map((project, idx) => (
-            <StaggerItem
-              key={project.id}
-              variant="scale"
-              className="group rounded-xl md:rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500"
-            >
-              <div className="aspect-[16/10] overflow-hidden relative">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
-                  <p className="text-white text-xs md:text-sm font-medium line-clamp-2">{project.result}</p>
-                </div>
-                {idx === 0 && (
-                  <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 rounded-full">
-                    Featured Client
+<Stagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+            {featuredProjects.map((project, idx) => (
+              <StaggerItem
+                key={project.id}
+                variant="scale"
+                className="group rounded-xl md:rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500"
+              >
+                <div className="aspect-[16/10] overflow-hidden relative">
+                  <img
+                    src={project.image}
+                    alt={project.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    loading="lazy"
+                    decoding="async"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4 md:p-6">
+                    <p className="text-white text-xs md:text-sm font-medium line-clamp-2">{project.result}</p>
                   </div>
-                )}
-              </div>
-              <div className="p-4 md:p-6 flex flex-col justify-between min-h-[180px]">
-                <div>
-                  <div className="flex items-center gap-2 mb-2">
-                    <span className="text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">
-                      {project.category}
-                    </span>
-                    {project.section === "client" && (
-                      <span className="text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md bg-green-500/20 text-green-400 uppercase tracking-wider">
-                        Client Project
-                      </span>
-                    )}
-                  </div>
-                  <h3 className="text-base md:text-lg lg:text-xl font-bold group-hover:text-primary transition-colors mb-1 md:mb-2 text-white">
-                    {project.title}
-                  </h3>
-                  {project.subtitle && (
-                    <p className="text-xs md:text-sm text-muted-foreground mb-2 line-clamp-1">{project.subtitle}</p>
+                  {idx === 0 && (
+                    <div className="absolute top-3 right-3 bg-primary text-primary-foreground text-[10px] font-bold px-2 py-1 rounded-full">
+                      Featured Client
+                    </div>
                   )}
-                  <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 line-clamp-2">{project.client}</p>
                 </div>
-                
-                <div>
-                  <div className="flex flex-wrap gap-1 md:gap-1.5 mb-3 md:mb-4">
-                    {project.tech
-                      .split(",")
-                      .slice(0, 4)
-                      .map((t) => (
-                        <span
-                          key={t}
-                          className="text-[9px] md:text-[10px] px-1.5 md:px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground whitespace-nowrap"
-                        >
-                          {t.trim()}
+                <div className="p-4 md:p-6 flex flex-col justify-between min-h-[180px]">
+                  <div>
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md bg-primary/10 text-primary uppercase tracking-wider">
+                        {project.category}
+                      </span>
+                      {project.section === "client" && (
+                        <span className="text-[10px] md:text-xs font-semibold px-2 py-1 rounded-md bg-green-500/20 text-green-400 uppercase tracking-wider">
+                          Client Project
                         </span>
-                      ))}
+                      )}
+                    </div>
+                    <h3 className="text-base md:text-lg lg:text-xl font-bold group-hover:text-primary transition-colors mb-1 md:mb-2 text-white">
+                      {project.title}
+                    </h3>
+                    {project.subtitle && (
+                      <p className="text-xs md:text-sm text-muted-foreground mb-2 line-clamp-1">{project.subtitle}</p>
+                    )}
+                    <p className="text-xs md:text-sm text-muted-foreground mb-3 md:mb-4 line-clamp-2">{project.client}</p>
                   </div>
                   
-                  <a
-                    href={project.live}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-primary hover:gap-2 transition-all"
-                  >
-                    View Live Project <ExternalLink className="h-3.5 w-3.5 md:h-4 md:w-4" />
-                  </a>
+                  <div>
+                    <div className="flex flex-wrap gap-1 md:gap-1.5 mb-3 md:mb-4">
+                      {project.tech
+                        .split(",")
+                        .slice(0, 4)
+                        .map((t) => (
+                          <span
+                            key={t}
+                            className="text-[9px] md:text-[10px] px-1.5 md:px-2 py-0.5 rounded-md border border-border bg-muted/50 text-muted-foreground whitespace-nowrap"
+                          >
+                            {t.trim()}
+                          </span>
+                        ))}
+                    </div>
+                    
+                    <Link
+                      to={project.live}
+                      className="inline-flex items-center gap-1.5 text-xs md:text-sm font-semibold text-primary hover:gap-2 transition-all"
+                    >
+                      View Live Project <ExternalLink className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </StaggerItem>
-          ))}
-        </Stagger>
+              </StaggerItem>
+            ))}
+          </Stagger>
         
         <div className="mt-12 md:mt-16 text-center">
           <Link
