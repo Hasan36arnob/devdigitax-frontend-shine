@@ -12,8 +12,10 @@ export interface ServiceItem {
 export interface PortfolioItem {
   id: string;
   title: string;
+  subtitle?: string;
   client: string;
   category: string;
+  section?: "demo" | "client";
   result: string;
   tech: string;
   image: string;
