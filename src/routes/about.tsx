@@ -16,7 +16,6 @@ import {
   ExternalLink,
 } from "lucide-react";
 import { useEffect, useState } from "react";
-import arnobJoy from "@/assets/h.jpeg";
 import shahriar from "@/assets/sv.jpeg";
 import hafiz from "@/assets/hafiz.jpeg";
 import giasU from "@/assets/giasU.jpeg";
@@ -157,7 +156,9 @@ const faqs = [
 
 function AboutPage() {
   const [isVisible, setIsVisible] = useState(false);
-  const dynamicTeam = getTeam().filter((m) => !m.status || m.status === "published");
+  const dynamicTeam = getTeam().filter(
+    (m) => (!m.status || m.status === "published") && m.name !== "Md Arnob Hasan Joy",
+  );
 
   const teamMembers =
     dynamicTeam.length > 0
@@ -174,12 +175,6 @@ function AboutPage() {
             role: "CEO & Founder | WordPress Developer & Marketer",
             bio: "Expert WordPress developer creating custom themes, plugins, and optimized e-commerce solutions Create unique business ideas and client support & team management expert",
             image: shahriar,
-          },
-          {
-            name: "Md Arnob Hasan Joy",
-            role: "Co-Founder | Software Developer",
-            bio: "Passionate software engineer specializing in modern web technologies and scalable backend solutions.",
-            image: arnobJoy,
           },
           {
             name: "Hafiz Muhammad Leghari",
@@ -314,6 +309,41 @@ function AboutPage() {
             </div>
           </div>
         </div>
+      </Reveal>
+
+      {/* Team Section */}
+      <Reveal id="team" className="max-w-7xl mx-auto px-6 py-24 scroll-mt-24">
+        <div className="text-center max-w-3xl mx-auto">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm mb-6">
+            <Users className="h-4 w-4" />
+            <span>Meet The Team</span>
+          </div>
+          <h2 className="text-3xl md:text-5xl font-bold tracking-tight">Our Team</h2>
+          <p className="mt-4 text-lg text-muted-foreground">
+            A collective of passionate experts dedicated to your success.
+          </p>
+        </div>
+        <Stagger className="mt-16 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {teamMembers.map((member) => (
+            <StaggerItem
+              key={member.name}
+              className="group relative rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 transition-all duration-500 hover:scale-105"
+            >
+              <div className="aspect-square overflow-hidden bg-muted/10">
+                <img
+                  src={member.image}
+                  alt={member.name}
+                  className="w-full h-full object-contain"
+                />
+              </div>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold">{member.name}</h3>
+                <p className="text-sm text-primary mt-1 font-medium">{member.role}</p>
+                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{member.bio}</p>
+              </div>
+            </StaggerItem>
+          ))}
+        </Stagger>
       </Reveal>
 
       {/* Values Section */}
